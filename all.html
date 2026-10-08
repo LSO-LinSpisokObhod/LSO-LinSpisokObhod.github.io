@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📁 ALL — LinSpisokObhod</title>
+    <style>
+        :root{--bg:#0d1117;--bg-card:#161b22;--bg-hover:#1c2128;--border:#30363d;--text:#c9d1d9;--dim:#8b949e;--accent:#58a6ff;--green:#3fb950;--yellow:#d29922;--purple:#bc8cff;--red:#f85149}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;padding:20px}
+        .container{max-width:1200px;margin:0 auto}
+        header{text-align:center;padding:30px 20px;margin-bottom:30px;background:linear-gradient(135deg,#1f6feb,#0d419d);border-radius:16px;box-shadow:0 8px 32px rgba(31,111,235,.2)}
+        h1{font-size:2.2rem;color:#fff;margin-bottom:8px}
+        .subtitle{color:rgba(255,255,255,.85);font-size:1rem}
+        .last-update{margin-top:12px;font-size:.9rem;color:rgba(255,255,255,.75);background:rgba(0,0,0,.2);display:inline-block;padding:6px 14px;border-radius:20px}
+        .nav{display:flex;justify-content:center;gap:12px;margin-top:16px;flex-wrap:wrap}
+        .nav a{color:#fff;text-decoration:none;padding:8px 18px;border-radius:8px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);font-size:.9rem;transition:all .2s}
+        .nav a:hover{background:rgba(255,255,255,.25);transform:translateY(-1px)}
+        .nav a.active{background:#fff;color:#1f6feb;font-weight:600}
+        .refresh-btn{margin-top:12px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);padding:8px 20px;border-radius:8px;cursor:pointer;font-size:.9rem;transition:all .2s}
+        .refresh-btn:hover{background:rgba(255,255,255,.25)}
+        .hero-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:30px;text-align:center;position:relative;overflow:hidden}
+        .hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent)}
+        .hero-value{font-size:4rem;font-weight:700;color:var(--accent)}
+        .hero-label{font-size:1rem;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-top:8px}
+        .hero-desc{color:var(--dim);margin-top:16px;font-size:.95rem}
+        .actions{display:flex;justify-content:center;gap:12px;margin-top:24px;flex-wrap:wrap}
+        .btn{display:inline-block;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:500;transition:all .2s;border:1px solid var(--border);color:var(--accent);background:transparent}
+        .btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+        .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+        .btn.primary:hover{background:#4090e0}
+        .section-title{font-size:1.3rem;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+        .protocols-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:30px}
+        .protocol-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:20px;display:flex;align-items:center;gap:16px;transition:all .2s}
+        .protocol-card:hover{background:var(--bg-hover);border-color:var(--accent)}
+        .protocol-icon{font-size:2rem;flex-shrink:0}
+        .protocol-info{flex:1;min-width:0}
+        .protocol-name{font-size:.8rem;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+        .protocol-count{font-size:1.5rem;font-weight:700}
+        .progress-bar{height:4px;background:var(--border);border-radius:2px;margin-top:8px;overflow:hidden}
+        .progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .6s ease-out}
+        .protocol-card.vless .progress-fill{background:var(--accent)}.protocol-card.vmess .progress-fill{background:var(--green)}.protocol-card.trojan .progress-fill{background:var(--red)}.protocol-card.hysteria2 .progress-fill{background:var(--purple)}
+        .loading{text-align:center;padding:60px 20px;color:var(--dim)}
+        .spinner{border:3px solid var(--border);border-top:3px solid var(--accent);border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin:0 auto 16px}
+        @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+        .error{background:rgba(248,81,73,.1);border:1px solid var(--red);border-radius:10px;padding:20px;color:var(--red);margin-bottom:20px}
+        footer{text-align:center;padding:30px 20px;color:var(--dim);font-size:.9rem}
+        footer a{color:var(--accent);text-decoration:none}
+        @media(max-width:600px){h1{font-size:1.6rem}.hero-value{font-size:3rem}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>📁 ALL</h1>
+        <p class="subtitle">Полная подписка — все конфиги</p>
+        <div class="last-update" id="lastUpdate">Загрузка...</div>
+        <div class="nav">
+            <a href="index.html">🏠 Главная</a>
+            <a href="all.html" class="active">📁 ALL</a>
+            <a href="lte.html">📱 LTE</a>
+            <a href="wifi.html">📶 WIFI</a>
+        </div>
+        <br><button class="refresh-btn" onclick="loadStats()">🔄 Обновить</button>
+    </header>
+    <div id="errorBox" class="error" style="display:none"></div>
+    <div id="loadingBox" class="loading"><div class="spinner"></div><p>Загрузка данных...</p></div>
+    <div id="content" style="display:none">
+        <div class="hero-card">
+            <div class="hero-value" id="heroValue">0</div>
+            <div class="hero-label">Всего конфигов</div>
+            <p class="hero-desc">Все конфиги из всех источников: VLESS, VMess, Trojan, Hysteria2</p>
+            <div class="actions">
+                <a class="btn primary" href="sub/ALL.txt" target="_blank">📄 Открыть ALL.txt</a>
+                <a class="btn" href="sub/ALL.64.txt" target="_blank">🔐 Base64</a>
+            </div>
+        </div>
+        <h2 class="section-title">📡 Разбивка по протоколам</h2>
+        <div class="protocols-grid">
+            <div class="protocol-card vless"><span class="protocol-icon">🔗</span><div class="protocol-info"><div class="protocol-name">VLESS</div><div class="protocol-count" id="countVless">0</div><div class="progress-bar"><div class="progress-fill" id="barVless"></div></div></div></div>
+            <div class="protocol-card vmess"><span class="protocol-icon">📦</span><div class="protocol-info"><div class="protocol-name">VMess</div><div class="protocol-count" id="countVmess">0</div><div class="progress-bar"><div class="progress-fill" id="barVmess"></div></div></div></div>
+            <div class="protocol-card trojan"><span class="protocol-icon">🛡️</span><div class="protocol-info"><div class="protocol-name">Trojan</div><div class="protocol-count" id="countTrojan">0</div><div class="progress-bar"><div class="progress-fill" id="barTrojan"></div></div></div></div>
+            <div class="protocol-card hysteria2"><span class="protocol-icon">⚡</span><div class="protocol-info"><div class="protocol-name">Hysteria2</div><div class="protocol-count" id="countHysteria2">0</div><div class="progress-bar"><div class="progress-fill" id="barHysteria2"></div></div></div></div>
+        </div>
+    </div>
+    <footer><p>🚀 <strong>LinSpisokObhod</strong> · <a href="https://t.me/LSOVPN" target="_blank">@LSOVPN</a></p><p style="margin-top:8px;font-size:.8rem">Обновлено: <span id="footerTime">—</span></p></footer>
+</div>
+<script>
+const README_URL = 'https://raw.githubusercontent.com/LSO-LinSpisokObhod/LSO-LinSpisokObhod.github.io/refs/heads/main/README.md';
+
+async function fetchReadme() {
+    const resp = await fetch(README_URL + '?t=' + Date.now());
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    return await resp.text();
+}
+
+function parseStats(md) {
+    const r = { total: 0, lte: 0, wifi: 0, espd: 0, vless: 0, vmess: 0, trojan: 0, hysteria2: 0, updateTime: null };
+    const lines = md.split('\n');
+    for (const line of lines) {
+        if (!line.trim().startsWith('|')) continue;
+        const cells = line.split('|').map(c => c.trim()).filter(c => c);
+        if (cells.length < 2) continue;
+        const key = cells[0].toLowerCase();
+        const valMatch = cells[1].match(/(\d+)/);
+        const val = valMatch ? parseInt(valMatch[1]) : 0;
+        if (key.includes('all.txt') || key.includes('all.64')) r.total = val;
+        else if (key.includes('lte.txt')) r.lte = val;
+        else if (key.includes('wifi.txt') || key.includes('wifi.64')) r.wifi = val;
+        else if (key.includes('espd')) r.espd = val;
+        else if (key.includes('vless')) r.vless = val;
+        else if (key.includes('vmess')) r.vmess = val;
+        else if (key.includes('trojan')) r.trojan = val;
+        else if (key.includes('hysteria2') || key.includes('hy2')) r.hysteria2 = val;
+    }
+    const tm = md.match(/(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})/);
+    if (tm) r.updateTime = tm[1];
+    return r;
+}
+
+async function loadStats() {
+    const lb = document.getElementById('loadingBox'), ct = document.getElementById('content'), eb = document.getElementById('errorBox');
+    lb.style.display = 'block'; ct.style.display = 'none'; eb.style.display = 'none';
+    try {
+        const md = await fetchReadme();
+        const s = parseStats(md);
+        document.getElementById('heroValue').textContent = s.total.toLocaleString('ru-RU');
+        document.getElementById('countVless').textContent = s.vless.toLocaleString('ru-RU');
+        document.getElementById('countVmess').textContent = s.vmess.toLocaleString('ru-RU');
+        document.getElementById('countTrojan').textContent = s.trojan.toLocaleString('ru-RU');
+        document.getElementById('countHysteria2').textContent = s.hysteria2.toLocaleString('ru-RU');
+        const total = s.total || 1;
+        document.getElementById('barVless').style.width = (s.vless / total * 100) + '%';
+        document.getElementById('barVmess').style.width = (s.vmess / total * 100) + '%';
+        document.getElementById('barTrojan').style.width = (s.trojan / total * 100) + '%';
+        document.getElementById('barHysteria2').style.width = (s.hysteria2 / total * 100) + '%';
+        const time = s.updateTime || 'неизвестно';
+        document.getElementById('lastUpdate').textContent = '📅 Обновлено: ' + time;
+        document.getElementById('footerTime').textContent = time;
+        lb.style.display = 'none'; ct.style.display = 'block';
+    } catch (e) {
+        lb.style.display = 'none'; eb.style.display = 'block';
+        eb.innerHTML = '<strong>❌ Ошибка:</strong> ' + e.message;
+    }
+}
+document.addEventListener('DOMContentLoaded', loadStats);
+setInterval(loadStats, 5 * 60 * 1000);
+</script>
+</body>
+</html>
