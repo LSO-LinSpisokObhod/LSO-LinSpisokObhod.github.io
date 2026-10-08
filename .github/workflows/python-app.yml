@@ -1,0 +1,39 @@
+name: Collect & Sync Proxies
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+    - name: Checkout GitHub repo
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install Python dependencies
+      run: pip install aiohttp
+
+    - name: Run collector script
+      run: python "parser[#LSO-#LinSpisokObhod].py"
+
+    # ========== Удаляем base64 файлы перед пушем на GitHub ==========
+    - name: Remove base64 files from sub
+      run: rm -f sub/*.64.txt
+
+    # ========== Сохраняем обычные файлы на GitHub ==========
+    - name: Commit and push plain text files to GitHub
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add sub/ README.md source.txt
+        git diff --quiet && git diff --staged --quiet || git commit -m "Auto-update proxy configs [skip ci]"
+        git push
