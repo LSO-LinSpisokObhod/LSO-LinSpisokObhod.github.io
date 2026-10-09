@@ -13,18 +13,19 @@ import base64
 import socket
 from datetime import datetime, timezone, timedelta
 from urllib.parse import parse_qs, quote
-from typing import Dict, Set, Optional, List
+from typing import Dict, Set, Optional, List, Tuple
 
 # ========== НАСТРОЙКИ ==========
 GEOIP_PARALLEL = 10
 GEOIP_DELAY = 0.1
+
+# Токены IPinfo берутся ТОЛЬКО из переменной окружения.
+# Можно передать несколько через запятую: IPINFO_TOKEN=tok1,tok2
 IPINFO_TOKENS = [
-    os.environ.get("IPINFO_TOKEN"),
-    "a94d8c011ca891"
+    t.strip() for t in os.environ.get("IPINFO_TOKEN", "").split(",") if t.strip()
 ]
-IPINFO_TOKENS = [t for t in IPINFO_TOKENS if t]
 if not IPINFO_TOKENS:
-    raise ValueError("No IPINFO_TOKEN provided. Please add at least one token.")
+    raise ValueError("No IPINFO_TOKEN provided. Set env var IPINFO_TOKEN (comma-separated for multiple).")
 
 GEOIP_CACHE = {}
 GEOIP_SEMAPHORE = asyncio.Semaphore(GEOIP_PARALLEL)
@@ -37,13 +38,43 @@ LISTS_DIR = "lists"
 WHITELIST_FILE = os.path.join(LISTS_DIR, "whitelist.txt")
 CIDR_WHITELIST_FILE = os.path.join(LISTS_DIR, "cidrwhitelist.txt")
 GLOBAL_TAG = "[#LSO - #LinSpisokObhod]"
+ESPD_TAG = "[#LOESPD - #LinSpisokObhod]"
 
 PROTOCOL_PATTERNS = {
-    'vless': re.compile(r'vless://[A-Za-z0-9+/=@:;,\?&%#\.\-_~!$*()]+', re.IGNORECASE),
-    'vmess': re.compile(r'vmess://[A-Za-z0-9+/=]+', re.IGNORECASE),
-    'trojan': re.compile(r'trojan://[A-Za-z0-9+/=@:;,\?&%#\.\-_~!$*()]+', re.IGNORECASE),
+    'vless':     re.compile(r'vless://[A-Za-z0-9+/=@:;,\?&%#\.\-_~!$*()]+', re.IGNORECASE),
+    # vmess: base64 может содержать '+', '/', '=', а после — '#comment'.
+    # Берём всё до whitespace/кавычек/угловых скобок, чтобы не обрезать хвост.
+    'vmess':     re.compile(r'vmess://[^\s"\'`<>]+', re.IGNORECASE),
+    'trojan':    re.compile(r'trojan://[A-Za-z0-9+/=@:;,\?&%#\.\-_~!$*()]+', re.IGNORECASE),
     'hysteria2': re.compile(r'(?:hysteria2|hy2)://[A-Za-z0-9+/=@:;,\?&%#\.\-_~!$*()]+', re.IGNORECASE),
 }
+
+# Алиасы протоколов: 'hy2://' и 'hysteria2://' → 'hysteria2'
+PROTOCOL_PREFIXES = {
+    'vless': ('vless',),
+    'vmess': ('vmess',),
+    'trojan': ('trojan',),
+    'hysteria2': ('hysteria2', 'hy2'),
+}
+
+
+def detect_protocol(config: str) -> Optional[str]:
+    """Возвращает канонический ключ протокола ('hysteria2' для hy2:// и hysteria2://) или None."""
+    for proto, prefixes in PROTOCOL_PREFIXES.items():
+        for prefix in prefixes:
+            if config.startswith(prefix + "://"):
+                return proto
+    return None
+
+
+def strip_protocol(config: str) -> str:
+    """Убирает 'proto://' (учитывая алиасы 'hy2')."""
+    for proto, prefixes in PROTOCOL_PREFIXES.items():
+        for prefix in prefixes:
+            if config.startswith(prefix + "://"):
+                return config[len(prefix) + 3:]
+    return config
+
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -125,38 +156,144 @@ async def fetch_all_sources(sources: List[str]):
 
 
 # === ПАРСИНГ КОНФИГОВ ===
-def extract_configs_from_text(text: str, source_url: str) -> Dict[str, Set[str]]:
+def extract_configs_from_text(text: str) -> Dict[str, Set[str]]:
     configs = {proto: set() for proto in PROTOCOL_PATTERNS}
     for protocol, pattern in PROTOCOL_PATTERNS.items():
-        matches = pattern.findall(text)
-        for match in matches:
+        for match in pattern.findall(text):
             if 50 < len(match) < 5000:
                 configs[protocol].add(match)
     if not any(configs.values()):
-        tokens = re.split(r'[\s,]+', text)
-        for token in tokens:
+        for token in re.split(r'[\s,]+', text):
             token = token.strip()
+            if not token:
+                continue
             for protocol, pattern in PROTOCOL_PATTERNS.items():
-                if pattern.match(token):
-                    if 50 < len(token) < 5000:
-                        configs[protocol].add(token)
+                if pattern.match(token) and 50 < len(token) < 5000:
+                    configs[protocol].add(token)
     return configs
 
 
+# === VMESS: НАДЁЖНЫЙ ДЕКОДЕР ===
+def _vmess_b64_normalize(s: str) -> str:
+    """Приводит base64 к стандартному виду: URL-safe → стандарт, добавляет padding."""
+    s = s.strip().replace('-', '+').replace('_', '/')
+    # Убираем всё, что не из base64-алфавита (пробелы, переносы, случайные символы)
+    s = re.sub(r'[^A-Za-z0-9+/=]', '', s)
+    pad = (-len(s)) % 4
+    if pad:
+        s += '=' * pad
+    return s
+
+
+def decode_vmess_config(config: str) -> Optional[Dict]:
+    """Возвращает JSON-словарь vmess-конфига или None.
+
+    Устойчив к:
+      - '#'-комментарию после base64;
+      - '?query' после base64 (некоторые панели добавляют remarks);
+      - отсутствию padding;
+      - URL-safe алфавиту;
+      - пробелам/переносам внутри base64.
+    """
+    if not config.startswith('vmess://'):
+        return None
+    payload = config[8:]
+
+    # Отрезаем '#comment' и '?query' — они не часть base64
+    payload = payload.split('#', 1)[0]
+    payload = payload.split('?', 1)[0].strip()
+
+    if not payload:
+        return None
+
+    try:
+        decoded = base64.b64decode(
+            _vmess_b64_normalize(payload), validate=False
+        ).decode('utf-8', errors='ignore')
+    except Exception:
+        return None
+
+    try:
+        data = json.loads(decoded)
+    except Exception:
+        return None
+
+    if not isinstance(data, dict):
+        return None
+
+    # Обязательное поле: 'add' (адрес сервера)
+    add = data.get('add')
+    if not isinstance(add, str) or not add.strip():
+        return None
+
+    return data
+
+
+def _vmess_host(data: Dict) -> Optional[str]:
+    """host/ip из vmess-JSON, включая корректную обработку IPv6."""
+    host = data.get('add')
+    if not isinstance(host, str):
+        return None
+    host = host.strip().strip('[]')       # [::1] → ::1
+    return host or None
+
+
+def _vmess_port(data: Dict, default: int = 443) -> int:
+    """Порт из vmess-JSON; поле 'port' может быть строкой или числом."""
+    raw = data.get('port')
+    try:
+        port = int(raw)
+        if 1 <= port <= 65535:
+            return port
+    except (TypeError, ValueError):
+        pass
+    return default
+
+
+def _vmess_sni(data: Dict) -> Optional[str]:
+    """SNI из vmess-JSON: 'sni' → 'host' → None (НЕ 'add'!)."""
+    for key in ('sni', 'host'):
+        v = data.get(key)
+        if isinstance(v, str) and v.strip():
+            return v.strip()
+    return None
+
+
+def _vmess_transport(data: Dict) -> str:
+    """Транспорт из vmess-JSON поля 'net'."""
+    net = (data.get('net') or '').lower().strip()
+    if net == 'ws':     return 'WebSocket'
+    if net == 'grpc':   return 'GRPC'
+    if net == 'h2':     return 'HTTP2'
+    if net == 'quic':   return 'QUIC'
+    if net == 'kcp':    return 'KCP'
+    if net == 'tcp':    return 'TCP'
+    return net.upper() if net else 'unknown'
+
+
+# === ИЗВЛЕЧЕНИЕ HOST / IP / SNI ===
 def extract_host_from_config(config: str) -> Optional[str]:
-    protocol = None
-    for p in PROTOCOL_PATTERNS:
-        if config.startswith(p + "://"):
-            protocol = p
-            break
+    protocol = detect_protocol(config)
     if not protocol:
         return None
-    body = config[len(protocol)+3:]
-    if '@' in body:
-        host_part = body.split('@')[1]
-        host = host_part.split(':')[0]
-        return host
-    return None
+
+    # VMess: host в base64-JSON поле 'add'
+    if protocol == 'vmess':
+        data = decode_vmess_config(config)
+        return _vmess_host(data) if data else None
+
+    body = strip_protocol(config)
+    if '@' not in body:
+        return None
+    host_part = body.split('@', 1)[1]
+
+    # IPv6: [2001:db8::1]:443
+    if host_part.startswith('['):
+        return host_part[1:].split(']', 1)[0]
+
+    host = host_part.split(':', 1)[0]
+    host = host.split('/', 1)[0].split('?', 1)[0].split('#', 1)[0]
+    return host or None
 
 
 def extract_ip_from_config(config: str) -> Optional[str]:
@@ -171,42 +308,58 @@ def extract_ip_from_config(config: str) -> Optional[str]:
 
 
 def extract_sni_domain(config: str) -> Optional[str]:
-    protocol = None
-    for p in PROTOCOL_PATTERNS:
-        if config.startswith(p + "://"):
-            protocol = p
-            break
+    protocol = detect_protocol(config)
     if not protocol:
         return None
-    body = config[len(protocol)+3:]
-    if protocol in ('vless', 'trojan', 'hysteria2'):
-        if '?' in body:
-            query_part = body.split('?', 1)[1]
-            params = parse_qs(query_part)
-            if 'sni' in params:
-                return params['sni'][0]
-        return None
+
     if protocol == 'vmess':
-        decoded = decode_vmess_config(config)
-        if decoded and 'add' in decoded:
-            return decoded['add']
+        data = decode_vmess_config(config)
+        return _vmess_sni(data) if data else None
+
+    body = strip_protocol(config)
+    if '?' in body:
+        query_part = body.split('?', 1)[1].split('#', 1)[0]
+        params = parse_qs(query_part)
+        if 'sni' in params:
+            return params['sni'][0]
+        if 'host' in params:
+            return params['host'][0]
+    return None
+
+
+def get_endpoint(cfg: str) -> Optional[Tuple[str, int]]:
+    """Возвращает (host, port) для TCP-теста. Работает для всех протоколов, включая vmess."""
+    protocol = detect_protocol(cfg)
+    if not protocol:
         return None
-    return None
 
+    if protocol == 'vmess':
+        data = decode_vmess_config(cfg)
+        if not data:
+            return None
+        host = _vmess_host(data)
+        if not host:
+            return None
+        return host, _vmess_port(data, 443)
 
-def decode_vmess_config(config: str) -> Optional[Dict]:
-    try:
-        if config.startswith('vmess://'):
-            encoded = config[8:]
-            decoded = base64.b64decode(encoded).decode('utf-8')
-            return json.loads(decoded)
-    except Exception:
-        pass
-    return None
+    # vless / trojan / hysteria2 — user@host:port
+    host = extract_host_from_config(cfg)
+    if not host:
+        return None
+    port = 443
+    m = re.search(r'@[^:]+:(\d+)', cfg)
+    if m:
+        port = int(m.group(1))
+    else:
+        m = re.search(r'[?&]port=(\d+)', cfg)
+        if m:
+            port = int(m.group(1))
+    return host, port
 
 
 # === ДЕДУБЛИКАЦИЯ ===
 def get_config_key(config: str) -> str:
+    """Ключ для дедубликации: всё, что стоит до символа # (буква в букву)."""
     return config.split('#')[0].strip()
 
 
@@ -230,7 +383,7 @@ def deduplicate_configs(configs: List[str]) -> List[str]:
 
 
 # === ГЕОЛОКАЦИЯ (IPinfo с ротацией токенов) ===
-async def get_next_token():
+async def get_next_token() -> str:
     global TOKEN_INDEX
     async with TOKEN_LOCK:
         token = IPINFO_TOKENS[TOKEN_INDEX % len(IPINFO_TOKENS)]
@@ -238,24 +391,26 @@ async def get_next_token():
         return token
 
 
-async def resolve_country(ip: str, session: aiohttp.ClientSession) -> str:
+async def resolve_country(ip: str, session: aiohttp.ClientSession, attempt: int = 0) -> str:
+    if attempt >= max(len(IPINFO_TOKENS), 1) * 2:
+        GEOIP_CACHE[ip] = 'XX'
+        return 'XX'
+
     async with GEOIP_SEMAPHORE:
         if ip in GEOIP_CACHE:
             return GEOIP_CACHE[ip]
-        country = 'XX'
         token = await get_next_token()
+        country = 'XX'
         try:
             url = f"https://api.ipinfo.io/lite/{ip}/country?token={token}"
             async with session.get(url, timeout=5) as resp:
                 if resp.status == 200:
-                    country = (await resp.text()).strip()
-                    if not country:
-                        country = 'XX'
+                    country = (await resp.text()).strip() or 'XX'
                     if len(GEOIP_CACHE) < 5 and country != 'XX':
                         logger.info(f"✅ IPinfo (token {token[:4]}...): {ip} -> {country}")
                 elif resp.status == 429:
                     logger.warning(f"⚠️ Токен {token[:4]}... лимит, переключаюсь")
-                    return await resolve_country(ip, session)
+                    return await resolve_country(ip, session, attempt + 1)
                 else:
                     logger.debug(f"⚠️ IPinfo ошибка {resp.status} для {ip}")
         except Exception as e:
@@ -286,49 +441,41 @@ async def resolve_countries_parallel(ips: List[str]) -> Dict[str, str]:
 
 
 # === ПЕРЕИМЕНОВАНИЕ КОНФИГОВ (URL-encoded) ===
-def rename_config(config: str, country: str = '') -> str:
-    protocol = None
-    for p in PROTOCOL_PATTERNS:
-        if config.startswith(p + "://"):
-            protocol = p
-            break
+def rename_config(config: str, country: str = '', tag: str = GLOBAL_TAG) -> str:
+    protocol = detect_protocol(config)
     if not protocol:
         return config
+
     if '#' in config:
         config = config.rsplit('#', 1)[0].rstrip()
+
     sni = extract_sni_domain(config)
     host = extract_host_from_config(config)
     ip = extract_ip_from_config(config)
+
     conn_type = "unknown"
-    if protocol != 'vmess':
-        body = config[len(protocol)+3:]
+    if protocol == 'vmess':
+        data = decode_vmess_config(config)
+        if data:
+            conn_type = _vmess_transport(data)
+    else:
+        body = strip_protocol(config)
         if '?' in body:
-            query_part = body.split('?', 1)[1]
+            query_part = body.split('?', 1)[1].split('#', 1)[0]
             params = parse_qs(query_part)
             if 'type' in params:
                 t = params['type'][0].lower()
-                if t == 'ws':
-                    conn_type = "WebSocket"
-                else:
-                    conn_type = t.upper()
+                conn_type = "WebSocket" if t == 'ws' else t.upper()
     if protocol == 'hysteria2':
         conn_type = "HYSTERIA2"
-    parts = []
-    if ip and country and country != 'XX':
-        parts.append(country)
-    else:
-        parts.append("unknown")
-    if sni:
-        parts.append(sni)
-    elif host:
-        parts.append(host)
-    else:
-        parts.append("unknown")
-    parts.append(conn_type)
-    parts.append(GLOBAL_TAG)
-    comment_text = " | ".join(parts)
-    comment_encoded = quote(comment_text, safe='')
-    return config + "#" + comment_encoded
+
+    parts = [
+        country if (ip and country and country != 'XX') else "unknown",
+        sni or host or "unknown",
+        conn_type,
+        tag,
+    ]
+    return config + "#" + quote(" | ".join(parts), safe='')
 
 
 # === БЕЛЫЕ СПИСКИ ===
@@ -342,8 +489,11 @@ def load_whitelist() -> Set[str]:
     whitelist = set()
     if not os.path.exists(WHITELIST_FILE):
         with open(WHITELIST_FILE, 'w', encoding='utf-8') as f:
-            f.write("# Домены для LTE (приоритет 1)\n")
-            f.write("# Поддерживаются субдомены и зона .yandex\n")
+            f.write("# Домены/зоны для LTE (приоритет 1)\n")
+            f.write("# Формат:\n")
+            f.write("#   example.com    — домен и его субдомены\n")
+            f.write("#   .example.com   — только субдомены example.com\n")
+            f.write("#   .yandex        — любой домен, содержащий лейбл 'yandex' (yandex.ru, mail.yandex.ru, yandex.com, ...)\n")
             f.write("example.com\n")
             f.write(".yandex\n")
         logger.info(f"📝 Создан пример {WHITELIST_FILE}")
@@ -394,13 +544,21 @@ def is_domain_allowed(domain: str, whitelist: Set[str]) -> bool:
     if not domain:
         return False
     domain = domain.lower()
+    domain_labels = domain.split('.')
     for allowed in whitelist:
-        allowed_lower = allowed.lower()
-        if allowed_lower.startswith('.'):
-            if domain.endswith(allowed_lower):
-                return True
+        a = allowed.lower()
+        if a.startswith('.'):
+            tail = a[1:]
+            if '.' in tail:
+                # '.example.com' — субдомены example.com, сам example.com не матчится
+                if domain.endswith(a):
+                    return True
+            else:
+                # '.yandex' — любой домен с лейблом 'yandex'
+                if tail in domain_labels:
+                    return True
         else:
-            if domain == allowed_lower or domain.endswith('.' + allowed_lower):
+            if domain == a or domain.endswith('.' + a):
                 return True
     return False
 
@@ -415,48 +573,51 @@ def get_config_priority(config: str, whitelist: Set[str], cidr_list: List[ipaddr
     return 2
 
 
+def count_protocols(configs) -> Dict[str, int]:
+    counts = {p: 0 for p in PROTOCOL_PATTERNS}
+    for cfg in configs:
+        proto = detect_protocol(cfg)
+        if proto:
+            counts[proto] += 1
+    return counts
+
+
 # === ОСНОВНОЙ СБОР С TCP-ТЕСТИРОВАНИЕМ ===
-async def collect_configs_async(contents: Dict[str, Optional[str]]) -> Set[str]:
-    raw_configs = []
-    all_hosts = set()
-    all_ips = set()
+async def collect_configs_async(contents: Dict[str, Optional[str]]) -> Dict[str, Tuple[str, str]]:
+    """
+    Возвращает dict: {renamed_config: (original_config, country)}.
+    """
+    raw_configs: List[str] = []
+    all_ips: Set[str] = set()
+
     for url, content in contents.items():
         if not content:
             continue
-        configs_by_proto = extract_configs_from_text(content, url)
+        configs_by_proto = extract_configs_from_text(content)
         for protocol, config_set in configs_by_proto.items():
             if not config_set:
                 continue
             logger.info(f"📥 +{len(config_set)} {protocol.upper()} из {url}")
             for cfg in config_set:
                 raw_configs.append(cfg)
-                host = extract_host_from_config(cfg)
-                if host:
-                    all_hosts.add(host)
-                    ip = extract_ip_from_config(cfg)
-                    if ip:
-                        all_ips.add(ip)
+                ip = extract_ip_from_config(cfg)
+                if ip:
+                    all_ips.add(ip)
+
     total_raw = len(raw_configs)
     logger.info(f"🔄 Всего конфигов (до дедубликации): {total_raw}")
 
     raw_configs = deduplicate_configs(raw_configs)
     logger.info(f"🔄 После дедубликации: {len(raw_configs)}")
 
+    # ---- TCP-ТЕСТИРОВАНИЕ ----
     if raw_configs:
         logger.info(f"🔍 Начинаю TCP-тестирование {len(raw_configs)} конфигов (таймаут 30 сек)...")
-        unique_endpoints = {}
+        unique_endpoints: Set[Tuple[str, int]] = set()
         for cfg in raw_configs:
-            host = extract_host_from_config(cfg)
-            if host:
-                port = 443
-                match = re.search(r'@([^:]+):(\d+)', cfg)
-                if match:
-                    port = int(match.group(2))
-                elif re.search(r'[?&]port=(\d+)', cfg):
-                    match = re.search(r'[?&]port=(\d+)', cfg)
-                    if match:
-                        port = int(match.group(1))
-                unique_endpoints[(host, port)] = None
+            ep = get_endpoint(cfg)
+            if ep:
+                unique_endpoints.add(ep)
 
         if unique_endpoints:
             total_endpoints = len(unique_endpoints)
@@ -473,106 +634,155 @@ async def collect_configs_async(contents: Dict[str, Optional[str]]) -> Set[str]:
                         logger.info(f"⏳ Прогресс TCP-тестирования: {checked_count}/{total_endpoints} эндпоинтов проверено")
                     return result
 
-            tasks = [check_endpoint(host, port) for (host, port) in unique_endpoints.keys()]
+            tasks = [check_endpoint(host, port) for (host, port) in unique_endpoints]
             results = await asyncio.gather(*tasks)
-            alive_endpoints = {(host, port) for host, port, alive in results if alive}
+            alive_endpoints = {(h, p) for h, p, alive in results if alive}
             logger.info(f"✅ Рабочих эндпоинтов: {len(alive_endpoints)}")
 
-            filtered_configs = []
+            filtered_configs: List[str] = []
             for cfg in raw_configs:
-                host = extract_host_from_config(cfg)
-                if host:
-                    port = 443
-                    match = re.search(r'@([^:]+):(\d+)', cfg)
-                    if match:
-                        port = int(match.group(2))
-                    elif re.search(r'[?&]port=(\d+)', cfg):
-                        match = re.search(r'[?&]port=(\d+)', cfg)
-                        if match:
-                            port = int(match.group(1))
-                    if (host, port) in alive_endpoints:
-                        filtered_configs.append(cfg)
-                else:
-                    continue
+                ep = get_endpoint(cfg)
+                if ep and ep in alive_endpoints:
+                    filtered_configs.append(cfg)
 
             raw_configs = filtered_configs
             logger.info(f"✅ После TCP-тестирования осталось {len(raw_configs)} конфигов")
         else:
             logger.info("⚠️ Не найдено эндпоинтов для TCP-тестирования")
 
+    # ---- ГЕОЛОКАЦИЯ ----
     if all_ips:
         await resolve_countries_parallel(list(all_ips))
     else:
         logger.info("🌍 Геолокация: IP для определения не найдены")
 
-    renamed_configs = []
+    # ---- ПЕРЕИМЕНОВАНИЕ ----
+    configs_map: Dict[str, Tuple[str, str]] = {}
     for i, cfg in enumerate(raw_configs, 1):
         ip = extract_ip_from_config(cfg)
         country = GEOIP_CACHE.get(ip, '') if ip else ''
-        renamed_cfg = rename_config(cfg, country)
-        renamed_configs.append(renamed_cfg)
+        renamed_cfg = rename_config(cfg, country, tag=GLOBAL_TAG)
+        if renamed_cfg not in configs_map:
+            configs_map[renamed_cfg] = (cfg, country)
         if i % 500 == 0 or i == len(raw_configs):
             logger.info(f"⏳ Прогресс переименования: {i}/{len(raw_configs)} конфигов")
 
-    all_configs_set = set(renamed_configs)
-    logger.info(f"📊 Собрано уникальных конфигов: {len(all_configs_set)}")
-    return all_configs_set
+    logger.info(f"📊 Собрано уникальных конфигов: {len(configs_map)}")
+    return configs_map
 
 
 # === README.md ===
-def update_readme(total: int, lte: int, wifi: int, espd: int, protocols: Dict[str, int]):
+def update_readme(total: int, lte: int, wifi: int, espd: int,
+                 protocols_all: Dict[str, int],
+                 protocols_lte: Dict[str, int],
+                 protocols_wifi: Dict[str, int],
+                 protocols_espd: Dict[str, int]):
     moscow_time = get_moscow_time()
+
     readme_content = f"""# 🚀 LinSpisokObhod
 
 ## 📅 Время последнего сбора
 
 `{moscow_time} (UTC+3)`
 
-## 📊 Статистика
+---
 
-| Файл | Количество |
-|------|------------|
+## 📊 Статистика по файлам
+
+| Файл | Всего конфигов |
+|------|----------------|
 | 📁 ALL.txt / ALL.64.txt | `{total}` |
 | 📱 LTE.txt / LTE.64.txt | `{lte}` |
 | 📶 WIFI.txt / WIFI.64.txt | `{wifi}` |
 | 🏫 LinObhodESPD.txt / LinObhodESPD.64.txt | `{espd}` |
 
-## 📡 Протоколы
+---
+
+## 📡 Статистика по протоколам
+
+### 🌐 ALL.txt
 
 | Протокол | Количество |
 |----------|------------|
-| 🔗 VLESS | `{protocols.get('vless', 0)}` |
-| 📦 VMess | `{protocols.get('vmess', 0)}` |
-| 🛡️ Trojan | `{protocols.get('trojan', 0)}` |
-| ⚡ Hysteria2 | `{protocols.get('hysteria2', 0)}` |
+| 🔗 VLESS | `{protocols_all.get('vless', 0)}` |
+| 📦 VMess | `{protocols_all.get('vmess', 0)}` |
+| 🛡️ Trojan | `{protocols_all.get('trojan', 0)}` |
+| ⚡ Hysteria2 | `{protocols_all.get('hysteria2', 0)}` |
+| **ИТОГО** | **`{total}`** |
 
-## 🗂️ Логика WIFI.txt
+### 📱 LTE.txt
 
-1. **Приоритет 1**: sni домен из `whitelist.txt`
-2. **Приоритет 2**: IP сервера входит в CIDR из `cidrwhitelist.txt`
-3. **WIFI.txt**: все остальные конфиги
+| Протокол | Количество |
+|----------|------------|
+| 🔗 VLESS | `{protocols_lte.get('vless', 0)}` |
+| 📦 VMess | `{protocols_lte.get('vmess', 0)}` |
+| 🛡️ Trojan | `{protocols_lte.get('trojan', 0)}` |
+| ⚡ Hysteria2 | `{protocols_lte.get('hysteria2', 0)}` |
+| **ИТОГО** | **`{lte}`** |
 
-## 📁 Файлы
+### 📶 WIFI.txt
 
-- `sub/ALL.txt` – все конфиги (обычный текст)
-- `sub/ALL.64.txt` – все конфиги, закодированные в base64
-- `sub/LTE.txt` – отфильтрованные по whitelist/CIDR (обычный текст)
-- `sub/LTE.64.txt` – отфильтрованные, закодированные в base64
-- `sub/WIFI.txt` – остальные конфиги (обычный текст)
-- `sub/WIFI.64.txt` – остальные, закодированные в base64
-- `sub/LinObhodESPD.txt` – конфиги с SNI max.ru или api-maps.yandex.ru (обычный текст)
-- `sub/LinObhodESPD.64.txt` – конфиги с SNI max.ru или api-maps.yandex.ru (base64)
+| Протокол | Количество |
+|----------|------------|
+| 🔗 VLESS | `{protocols_wifi.get('vless', 0)}` |
+| 📦 VMess | `{protocols_wifi.get('vmess', 0)}` |
+| 🛡️ Trojan | `{protocols_wifi.get('trojan', 0)}` |
+| ⚡ Hysteria2 | `{protocols_wifi.get('hysteria2', 0)}` |
+| **ИТОГО** | **`{wifi}`** |
+
+### 🏫 LinObhodESPD.txt
+
+| Протокол | Количество |
+|----------|------------|
+| 🔗 VLESS | `{protocols_espd.get('vless', 0)}` |
+| 📦 VMess | `{protocols_espd.get('vmess', 0)}` |
+| 🛡️ Trojan | `{protocols_espd.get('trojan', 0)}` |
+| ⚡ Hysteria2 | `{protocols_espd.get('hysteria2', 0)}` |
+| **ИТОГО** | **`{espd}`** |
+
+---
+
+## 📋 Сводная таблица
+
+| Протокол | ALL | LTE | WIFI | ESPD |
+|----------|-----|-----|------|------|
+| 🔗 VLESS | `{protocols_all.get('vless', 0)}` | `{protocols_lte.get('vless', 0)}` | `{protocols_wifi.get('vless', 0)}` | `{protocols_espd.get('vless', 0)}` |
+| 📦 VMess | `{protocols_all.get('vmess', 0)}` | `{protocols_lte.get('vmess', 0)}` | `{protocols_wifi.get('vmess', 0)}` | `{protocols_espd.get('vmess', 0)}` |
+| 🛡️ Trojan | `{protocols_all.get('trojan', 0)}` | `{protocols_lte.get('trojan', 0)}` | `{protocols_wifi.get('trojan', 0)}` | `{protocols_espd.get('trojan', 0)}` |
+| ⚡ Hysteria2 | `{protocols_all.get('hysteria2', 0)}` | `{protocols_lte.get('hysteria2', 0)}` | `{protocols_wifi.get('hysteria2', 0)}` | `{protocols_espd.get('hysteria2', 0)}` |
+
+---
+
+## 🗂️ Логика фильтрации
+
+1. **LTE** — SNI домен есть в `whitelist.txt` **ИЛИ** IP входит в CIDR из `cidrwhitelist.txt`.
+2. **WIFI** — все остальные рабочие конфиги.
+3. **LinObhodESPD** — конфиги с SNI `max.ru` или `api-maps.yandex.ru`.
+4. **ALL** — все конфиги из всех источников.
+
+---
+
+## 📁 Доступные файлы
+
+- `sub/ALL.txt` — все конфиги
+- `sub/LTE.txt` — для мобильного интернета
+- `sub/WIFI.txt` — для Wi-Fi сетей
+- `sub/LinObhodESPD.txt` — для ЭСПД
+- `sub/*.64.txt` — те же файлы в base64
+
+---
 
 ## 🔄 Автообновление
 
 Скрипт запускается **каждый час**.
 
 ---
-*LinSpisokObhod v3.8*
+
+*LinSpisokObhod v3.10*
 """
     with open("README.md", 'w', encoding='utf-8') as f:
         f.write(readme_content)
-    logger.info("📄 README.md обновлён")
+    logger.info("📄 README.md обновлён (со статистикой по файлам и протоколам)")
 
 
 def get_moscow_time() -> str:
@@ -581,7 +791,7 @@ def get_moscow_time() -> str:
     return now_msk.strftime("%Y-%m-%d %H:%M:%S")
 
 
-# === ГЕНЕРАЦИЯ СТРОК-ЗАГЛУШЕК (URL-encoded) ===
+# === ГЕНЕРАЦИЯ СТРОК-ЗАГЛУШЕК ===
 def generate_extra_lines(total: int, protocols: Dict[str, int], update_time: str, sub_type: str = "ALL") -> List[str]:
     lines = []
 
@@ -609,7 +819,7 @@ def generate_extra_lines(total: int, protocols: Dict[str, int], update_time: str
     lines.append(f"trojan://trojan@trojan.about.lso:443?security=tls&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=trojan.lso#{quote(comment, safe='')}")
 
     comment = f"Подписка #LSO© Hy2: {protocols.get('hysteria2', 0)} {GLOBAL_TAG}"
-    lines.append(f"hysteria2://hy2@hy2.about.lso:443?security=tls&obfs=salamander&obfs-password=hy2&insecure=0&mport=67%2C%201488%2C%2069%2C%2052%2C%2042%2C%201337%2C%20228%2C%2025&sni=hy2.lso#{quote(comment, safe='')}")
+    lines.append(f"hysteria2://hy2@hy2.about.lso:443?security=tls&obfs=salamander&obfs-password=hy2&insecure=0&mport=67%2C1488%2C69%2C52%2C42%2C1337%2C228%2C25&sni=hy2.lso#{quote(comment, safe='')}")
 
     comment = f"Подписка #LSO© Vmess: {protocols.get('vmess', 0)} {GLOBAL_TAG}"
     lines.append(f"vless://vmess@vmess.about.lso:443?security=tls&encryption=none&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=vmess.about.lso#{quote(comment, safe='')}")
@@ -626,32 +836,32 @@ def generate_extra_lines(total: int, protocols: Dict[str, int], update_time: str
 def generate_espd_lines(total: int, protocols: Dict[str, int], update_time: str) -> List[str]:
     lines = []
 
-    comment = f"подписка #LOESPD© обновлена {update_time} {GLOBAL_TAG}"
+    comment = f"подписка #LOESPD© обновлена {update_time} {ESPD_TAG}"
     lines.append(f"vless://update@update.lso:443?security=tls&encryption=none&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=update.lso#{quote(comment, safe='')}")
 
-    comment = f"подписка #LOESPD© ЭТО: подписка с конфигами для ESPD {GLOBAL_TAG}"
+    comment = f"подписка #LOESPD© ЭТО: подписка с конфигами для ESPD {ESPD_TAG}"
     lines.append(f"vless://about@1.about.lso:443?security=tls&encryption=none&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=about.lso#{quote(comment, safe='')}")
 
-    comment = f"Подписка #LOESPD© Всего конфигов: {total} {GLOBAL_TAG}"
+    comment = f"Подписка #LOESPD© Всего конфигов: {total} {ESPD_TAG}"
     lines.append(f"vless://all@all.lso:443?security=tls&encryption=none&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=all.lso#{quote(comment, safe='')}")
 
-    comment = f"Подписка #LOESPD© Vless: {protocols.get('vless', 0)} {GLOBAL_TAG}"
+    comment = f"Подписка #LOESPD© Vless: {protocols.get('vless', 0)} {ESPD_TAG}"
     lines.append(f"vless://vless@vless.about.lso:443?security=tls&encryption=none&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=vless.about.lso#{quote(comment, safe='')}")
 
-    comment = f"Подписка #LOESPD© Trojan: {protocols.get('trojan', 0)} {GLOBAL_TAG}"
+    comment = f"Подписка #LOESPD© Trojan: {protocols.get('trojan', 0)} {ESPD_TAG}"
     lines.append(f"trojan://trojan@trojan.about.lso:443?security=tls&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=trojan.lso#{quote(comment, safe='')}")
 
-    comment = f"Подписка #LOESPD© Hy2: {protocols.get('hysteria2', 0)} {GLOBAL_TAG}"
-    lines.append(f"hysteria2://hy2@hy2.about.lso:443?security=tls&obfs=salamander&obfs-password=hy2&insecure=0&mport=67%2C%201488%2C%2069%2C%2052%2C%2042%2C%201337%2C%20228%2C%2025&sni=hy2.lso#{quote(comment, safe='')}")
+    comment = f"Подписка #LOESPD© Hy2: {protocols.get('hysteria2', 0)} {ESPD_TAG}"
+    lines.append(f"hysteria2://hy2@hy2.about.lso:443?security=tls&obfs=salamander&obfs-password=hy2&insecure=0&mport=67%2C1488%2C69%2C52%2C42%2C1337%2C228%2C25&sni=hy2.lso#{quote(comment, safe='')}")
 
-    comment = f"Подписка #LOESPD© Vmess: {protocols.get('vmess', 0)} {GLOBAL_TAG}"
+    comment = f"Подписка #LOESPD© Vmess: {protocols.get('vmess', 0)} {ESPD_TAG}"
     lines.append(f"vless://vmess@vmess.about.lso:443?security=tls&encryption=none&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=vmess.about.lso#{quote(comment, safe='')}")
 
     return lines
 
 
 # === СОХРАНЕНИЕ ===
-def save_configs(all_configs_set: Set[str]):
+def save_configs(configs_map: Dict[str, Tuple[str, str]]):
     if os.path.exists(CONFIG_DIR):
         shutil.rmtree(CONFIG_DIR)
         logger.info(f"🗑️ Папка {CONFIG_DIR} удалена (старые файлы очищены)")
@@ -659,33 +869,18 @@ def save_configs(all_configs_set: Set[str]):
     logger.info(f"📁 Папка {CONFIG_DIR} создана заново")
 
     update_time = get_moscow_time()
+    tagged_set: Set[str] = set(configs_map.keys())
 
-    # Никакой фильтрации — Shadowsocks уже не собирается
-    filtered_configs = set(all_configs_set)
-
-    tagged_set = set(filtered_configs)
-
-    espd_configs = set()
-    espd_tagged = set()
-    espd_path = None
-    for cfg in filtered_configs:
-        sni = extract_sni_domain(cfg)
+    # ---- ESPD (пере-переименование оригиналов под ESPD_TAG) ----
+    espd_configs: Set[str] = set()
+    for renamed_cfg, (orig_cfg, country) in configs_map.items():
+        sni = extract_sni_domain(orig_cfg)
         if sni and ('max.ru' in sni or 'api-maps.yandex.ru' in sni):
-            espd_cfg = cfg.replace('%23LSO%C2%A9', '%23LOESPD%C2%A9')
-            espd_configs.add(espd_cfg)
+            espd_configs.add(rename_config(orig_cfg, country, tag=ESPD_TAG))
 
-    espd_tagged = set(espd_configs)
+    protocol_counts_espd = count_protocols(espd_configs)
 
-    protocol_counts_espd = {p: 0 for p in PROTOCOL_PATTERNS}
-    for cfg in espd_configs:
-        proto = None
-        for p in PROTOCOL_PATTERNS:
-            if cfg.startswith(p + "://"):
-                proto = p
-                break
-        if proto:
-            protocol_counts_espd[proto] += 1
-
+    # ---- ЗАГОЛОВКИ ----
     header_all = """#profile-title: #LSO© ALL
 #profile-update-interval: 1
 #support-url: https://t.me/LSOVPN
@@ -715,16 +910,8 @@ def save_configs(all_configs_set: Set[str]):
 
 """
 
-    protocol_counts_all = {p: 0 for p in PROTOCOL_PATTERNS}
-    for cfg in filtered_configs:
-        proto = None
-        for p in PROTOCOL_PATTERNS:
-            if cfg.startswith(p + "://"):
-                proto = p
-                break
-        if proto:
-            protocol_counts_all[proto] += 1
-
+    # ---- ALL ----
+    protocol_counts_all = count_protocols(tagged_set)
     all_extra = generate_extra_lines(len(tagged_set), protocol_counts_all, update_time, "ALL")
     all_path = os.path.join(CONFIG_DIR, "ALL.txt")
     with open(all_path, 'w', encoding='utf-8') as f:
@@ -733,6 +920,7 @@ def save_configs(all_configs_set: Set[str]):
         f.write("\n".join(sorted(tagged_set)) + "\n")
     logger.info(f"💾 ALL.txt: {len(tagged_set)}")
 
+    # ---- LTE / WIFI ----
     whitelist = load_whitelist()
     cidr_list = load_cidr_whitelist()
 
@@ -747,25 +935,8 @@ def save_configs(all_configs_set: Set[str]):
     lte_list = sorted(lte_set, key=lambda x: get_config_priority(x, whitelist, cidr_list))
     wifi_list = sorted(wifi_set)
 
-    protocol_counts_lte = {p: 0 for p in PROTOCOL_PATTERNS}
-    for cfg in lte_set:
-        proto = None
-        for p in PROTOCOL_PATTERNS:
-            if cfg.startswith(p + "://"):
-                proto = p
-                break
-        if proto:
-            protocol_counts_lte[proto] += 1
-
-    protocol_counts_wifi = {p: 0 for p in PROTOCOL_PATTERNS}
-    for cfg in wifi_set:
-        proto = None
-        for p in PROTOCOL_PATTERNS:
-            if cfg.startswith(p + "://"):
-                proto = p
-                break
-        if proto:
-            protocol_counts_wifi[proto] += 1
+    protocol_counts_lte = count_protocols(lte_set)
+    protocol_counts_wifi = count_protocols(wifi_set)
 
     lte_extra = generate_extra_lines(len(lte_list), protocol_counts_lte, update_time, "LTE")
     lte_path = os.path.join(CONFIG_DIR, "LTE.txt")
@@ -783,17 +954,20 @@ def save_configs(all_configs_set: Set[str]):
         f.write("\n".join(wifi_list) + "\n")
     logger.info(f"📶 WIFI.txt: {len(wifi_list)}")
 
-    if espd_tagged:
-        espd_extra = generate_espd_lines(len(espd_tagged), protocol_counts_espd, update_time)
+    # ---- ESPD ----
+    espd_path = None
+    if espd_configs:
+        espd_extra = generate_espd_lines(len(espd_configs), protocol_counts_espd, update_time)
         espd_path = os.path.join(CONFIG_DIR, "LinObhodESPD.txt")
         with open(espd_path, 'w', encoding='utf-8') as f:
             f.write(header_espd)
             f.write("\n".join(espd_extra) + "\n")
-            f.write("\n".join(sorted(espd_tagged)) + "\n")
-        logger.info(f"🏫 LinObhodESPD.txt: {len(espd_tagged)} (SNI: max.ru, api-maps.yandex.ru)")
+            f.write("\n".join(sorted(espd_configs)) + "\n")
+        logger.info(f"🏫 LinObhodESPD.txt: {len(espd_configs)} (SNI: max.ru, api-maps.yandex.ru)")
     else:
-        logger.info("⚠️ Нет конфигов для LinObhodESPD.txt (SNI max.ru или api-maps.yandex.ru не найдены)")
+        logger.info("⚠️ Нет конфигов для LinObhodESPD.txt")
 
+    # ---- BASE64 ----
     def save_b64(original_path, suffix):
         b64_path = original_path.replace('.txt', f'.{suffix}.txt')
         with open(original_path, 'rb') as f:
@@ -805,16 +979,9 @@ def save_configs(all_configs_set: Set[str]):
 
     save_b64(all_path, '64')
     save_b64(lte_path, '64')
+    save_b64(wifi_path, '64')
 
-    wifi_b64_path = os.path.join(CONFIG_DIR, "WIFI.64.txt")
-    with open(wifi_path, 'rb') as f:
-        data = f.read()
-    b64_data = base64.b64encode(data).decode('ascii')
-    with open(wifi_b64_path, 'w', encoding='ascii') as f:
-        f.write(b64_data)
-    logger.info(f"🔐 WIFI.64.txt: base64 закодирован (длина {len(b64_data)})")
-
-    if espd_tagged and espd_path and os.path.exists(espd_path):
+    if espd_configs and espd_path and os.path.exists(espd_path):
         espd_b64_path = os.path.join(CONFIG_DIR, "LinObhodESPD.64.txt")
         with open(espd_path, 'rb') as f:
             data = f.read()
@@ -823,7 +990,17 @@ def save_configs(all_configs_set: Set[str]):
             f.write(b64_data)
         logger.info(f"🔐 LinObhodESPD.64.txt: base64 закодирован (длина {len(b64_data)})")
 
-    update_readme(len(tagged_set), len(lte_list), len(wifi_list), len(espd_tagged), protocol_counts_all)
+    # ---- README ----
+    update_readme(
+        total=len(tagged_set),
+        lte=len(lte_list),
+        wifi=len(wifi_list),
+        espd=len(espd_configs),
+        protocols_all=protocol_counts_all,
+        protocols_lte=protocol_counts_lte,
+        protocols_wifi=protocol_counts_wifi,
+        protocols_espd=protocol_counts_espd,
+    )
     logger.info("✅ Готово.")
 
 
@@ -831,7 +1008,7 @@ def save_configs(all_configs_set: Set[str]):
 async def main_async():
     start_time = time.time()
     print("=" * 60)
-    print("🚀 LinSpisokObhod (IPinfo, URL-encoded комментарии)")
+    print("🚀 LinSpisokObhod v3.10 (VMess-фикс, IPinfo, URL-encoded комментарии)")
     print("=" * 60)
 
     sources = load_sources_from_file("source.txt")
@@ -845,14 +1022,14 @@ async def main_async():
     print("=" * 60)
 
     contents = await fetch_all_sources(sources)
-    all_configs = await collect_configs_async(contents)
-    save_configs(all_configs)
+    configs_map = await collect_configs_async(contents)
+    save_configs(configs_map)
 
     elapsed = time.time() - start_time
     print("\n" + "=" * 60)
     print("📊 ИТОГИ СБОРА:")
     print("=" * 60)
-    print(f"📈 Всего уникальных: {len(all_configs)}")
+    print(f"📈 Всего уникальных: {len(configs_map)}")
     print(f"⏱️ Время: {elapsed:.2f} секунд")
     print("=" * 60)
 
@@ -862,6 +1039,26 @@ def main():
 
 
 if __name__ == "__main__":
+    # Быстрый self-test VMess (если задан TEST_VMESS=1)
+    if os.environ.get("TEST_VMESS") == "1":
+        _sample = {
+            "v": "2", "ps": "test", "add": "1.2.3.4", "port": "443",
+            "id": "uuid", "aid": "0", "scy": "auto",
+            "net": "ws", "type": "none", "host": "example.com",
+            "path": "/ws", "tls": "tls", "sni": "example.com",
+        }
+        _raw = "vmess://" + base64.b64encode(json.dumps(_sample).encode()).decode()
+        _raw_nopad = _raw.rstrip('=') + "#Some%20name"
+        for _cfg in (_raw, _raw_nopad):
+            _d = decode_vmess_config(_cfg)
+            assert _d and _d["add"] == "1.2.3.4", f"decode failed: {_cfg}"
+            assert extract_host_from_config(_cfg) == "1.2.3.4"
+            assert extract_sni_domain(_cfg) == "example.com"
+            assert get_endpoint(_cfg) == ("1.2.3.4", 443)
+            assert _vmess_transport(_d) == "WebSocket"
+        print("✅ VMess self-test OK")
+        raise SystemExit(0)
+
     try:
         main()
     except KeyboardInterrupt:
