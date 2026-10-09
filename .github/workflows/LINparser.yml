@@ -1,0 +1,84 @@
+name: Collect & Sync Proxies
+
+on:
+  schedule:
+    - cron: '17 * * * *'        # раз в час в :17 (UTC)
+  push:
+    branches: ["main"]           # любой твой пуш в main
+  workflow_dispatch:             # кнопка Run workflow
+  repository_dispatch:
+    types: [parser-run, rebuild] # внешний триггер через API
+
+permissions:
+  contents: write                # нужно, чтобы коммитить sub/, README.md, source.txt
+
+# Один одновременный прогон, уже начавшийся не отменяем
+concurrency:
+  group: "parser"
+  cancel-in-progress: false
+
+jobs:
+  parser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install aiohttp
+
+      - name: Run collector script
+        continue-on-error: true
+        env:
+          IPINFO_TOKEN: ${{ secrets.IPINFO_TOKEN }}
+        run: python "parser[#LSO-#LinSpisokObhod].py"
+
+      - name: Remove base64 files from sub
+        run: rm -f sub/*.64.txt
+
+      - name: Commit and push plain text files
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add sub/ README.md source.txt
+
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "ℹ Изменений нет — коммитить нечего"
+            exit 0
+          fi
+
+          git commit -m "Auto-update proxy configs [skip ci]"
+
+          # До 3 попыток: pull --rebase → push
+          for i in 1 2 3; do
+            echo "▶ Попытка $i: pull --rebase"
+            if ! git pull --rebase --autostash origin main; then
+              echo "⚠ Rebase не удался (конфликт?)"
+              git rebase --abort || true
+              exit 1
+            fi
+
+            echo "▶ Попытка $i: push"
+            if git push origin main; then
+              echo "✅ Push OK (попытка $i)"
+              exit 0
+            fi
+
+            echo "⚠ Push отклонён — повтор через 5 сек (попытка $i)"
+            sleep 5
+          done
+
+          echo "❌ Не удалось запушить после 3 попыток"
+          exit 1
