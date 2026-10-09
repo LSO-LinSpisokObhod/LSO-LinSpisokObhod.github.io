@@ -2,38 +2,104 @@ name: Collect & Sync Proxies
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '17 * * * *'        # ⏰ раз в час в :17 (UTC)
+  push:
+    branches: ["main"]
   workflow_dispatch:
+  repository_dispatch:
+    types: [parser-run, rebuild]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  build:
+  # ────────────────────────────────────────────────────────────
+  # 1. Парсер: собирает конфиги, чистит base64, коммитит на GitHub
+  # ────────────────────────────────────────────────────────────
+  parser:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
     steps:
-    - name: Checkout GitHub repo
-      uses: actions/checkout@v4
+      - name: Checkout GitHub repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
-    - name: Install Python dependencies
-      run: pip install aiohttp
+      - name: Install Python dependencies
+        run: pip install aiohttp
 
-    - name: Run collector script
-      run: python "parser[#LSO-#LinSpisokObhod].py"
+      - name: Run collector script
+        continue-on-error: true
+        env:
+          IPINFO_TOKEN: ${{ secrets.IPINFO_TOKEN }}
+        run: python "parser[#LSO-#LinSpisokObhod].py"
 
-    # ========== Удаляем base64 файлы перед пушем на GitHub ==========
-    - name: Remove base64 files from sub
-      run: rm -f sub/*.64.txt
+      - name: Remove base64 files from sub
+        run: rm -f sub/*.64.txt
 
-    # ========== Сохраняем обычные файлы на GitHub ==========
-    - name: Commit and push plain text files to GitHub
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add sub/ README.md source.txt
-        git diff --quiet && git diff --staged --quiet || git commit -m "Auto-update proxy configs [skip ci]"
-        git push
+      - name: Commit and push plain text files to GitHub
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add sub/ README.md source.txt
+
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "ℹ Изменений нет — коммитить нечего"
+          else
+            git commit -m "Auto-update proxy configs [skip ci]"
+            git push
+          fi
+
+  # ────────────────────────────────────────────────────────────
+  # 2. Сборка Jekyll
+  # ────────────────────────────────────────────────────────────
+  build:
+    runs-on: ubuntu-latest
+    needs: parser
+    if: always() && needs.parser.result != 'cancelled'
+
+    steps:
+      - name: Checkout (latest main)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  # ────────────────────────────────────────────────────────────
+  # 3. Деплой на GitHub Pages
+  # ────────────────────────────────────────────────────────────
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    if: always() && needs.build.result == 'success'
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
