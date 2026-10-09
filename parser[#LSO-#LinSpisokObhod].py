@@ -19,13 +19,14 @@ from typing import Dict, Set, Optional, List, Tuple
 GEOIP_PARALLEL = 10
 GEOIP_DELAY = 0.1
 
-# Токены IPinfo берутся ТОЛЬКО из переменной окружения.
+# Токены IPinfo: env имеет приоритет, fallback — встроенный.
 # Можно передать несколько через запятую: IPINFO_TOKEN=tok1,tok2
-IPINFO_TOKENS = [
-    t.strip() for t in os.environ.get("IPINFO_TOKEN", "").split(",") if t.strip()
+_env_tokens = [t.strip() for t in os.environ.get("IPINFO_TOKEN", "").split(",") if t.strip()]
+IPINFO_TOKENS = _env_tokens or [
+    "a94d8c011ca891"
 ]
 if not IPINFO_TOKENS:
-    raise ValueError("No IPINFO_TOKEN provided. Set env var IPINFO_TOKEN (comma-separated for multiple).")
+    raise ValueError("No IPINFO_TOKEN provided.")
 
 GEOIP_CACHE = {}
 GEOIP_SEMAPHORE = asyncio.Semaphore(GEOIP_PARALLEL)
@@ -42,14 +43,11 @@ ESPD_TAG = "[#LOESPD - #LinSpisokObhod]"
 
 PROTOCOL_PATTERNS = {
     'vless':     re.compile(r'vless://[A-Za-z0-9+/=@:;,\?&%#\.\-_~!$*()]+', re.IGNORECASE),
-    # vmess: base64 может содержать '+', '/', '=', а после — '#comment'.
-    # Берём всё до whitespace/кавычек/угловых скобок, чтобы не обрезать хвост.
     'vmess':     re.compile(r'vmess://[^\s"\'`<>]+', re.IGNORECASE),
     'trojan':    re.compile(r'trojan://[A-Za-z0-9+/=@:;,\?&%#\.\-_~!$*()]+', re.IGNORECASE),
     'hysteria2': re.compile(r'(?:hysteria2|hy2)://[A-Za-z0-9+/=@:;,\?&%#\.\-_~!$*()]+', re.IGNORECASE),
 }
 
-# Алиасы протоколов: 'hy2://' и 'hysteria2://' → 'hysteria2'
 PROTOCOL_PREFIXES = {
     'vless': ('vless',),
     'vmess': ('vmess',),
@@ -177,7 +175,6 @@ def extract_configs_from_text(text: str) -> Dict[str, Set[str]]:
 def _vmess_b64_normalize(s: str) -> str:
     """Приводит base64 к стандартному виду: URL-safe → стандарт, добавляет padding."""
     s = s.strip().replace('-', '+').replace('_', '/')
-    # Убираем всё, что не из base64-алфавита (пробелы, переносы, случайные символы)
     s = re.sub(r'[^A-Za-z0-9+/=]', '', s)
     pad = (-len(s)) % 4
     if pad:
@@ -186,20 +183,11 @@ def _vmess_b64_normalize(s: str) -> str:
 
 
 def decode_vmess_config(config: str) -> Optional[Dict]:
-    """Возвращает JSON-словарь vmess-конфига или None.
-
-    Устойчив к:
-      - '#'-комментарию после base64;
-      - '?query' после base64 (некоторые панели добавляют remarks);
-      - отсутствию padding;
-      - URL-safe алфавиту;
-      - пробелам/переносам внутри base64.
-    """
+    """Возвращает JSON-словарь vmess-конфига или None."""
     if not config.startswith('vmess://'):
         return None
     payload = config[8:]
 
-    # Отрезаем '#comment' и '?query' — они не часть base64
     payload = payload.split('#', 1)[0]
     payload = payload.split('?', 1)[0].strip()
 
@@ -221,7 +209,6 @@ def decode_vmess_config(config: str) -> Optional[Dict]:
     if not isinstance(data, dict):
         return None
 
-    # Обязательное поле: 'add' (адрес сервера)
     add = data.get('add')
     if not isinstance(add, str) or not add.strip():
         return None
@@ -234,7 +221,7 @@ def _vmess_host(data: Dict) -> Optional[str]:
     host = data.get('add')
     if not isinstance(host, str):
         return None
-    host = host.strip().strip('[]')       # [::1] → ::1
+    host = host.strip().strip('[]')
     return host or None
 
 
@@ -277,7 +264,6 @@ def extract_host_from_config(config: str) -> Optional[str]:
     if not protocol:
         return None
 
-    # VMess: host в base64-JSON поле 'add'
     if protocol == 'vmess':
         data = decode_vmess_config(config)
         return _vmess_host(data) if data else None
@@ -287,7 +273,6 @@ def extract_host_from_config(config: str) -> Optional[str]:
         return None
     host_part = body.split('@', 1)[1]
 
-    # IPv6: [2001:db8::1]:443
     if host_part.startswith('['):
         return host_part[1:].split(']', 1)[0]
 
@@ -342,7 +327,6 @@ def get_endpoint(cfg: str) -> Optional[Tuple[str, int]]:
             return None
         return host, _vmess_port(data, 443)
 
-    # vless / trojan / hysteria2 — user@host:port
     host = extract_host_from_config(cfg)
     if not host:
         return None
@@ -359,7 +343,6 @@ def get_endpoint(cfg: str) -> Optional[Tuple[str, int]]:
 
 # === ДЕДУБЛИКАЦИЯ ===
 def get_config_key(config: str) -> str:
-    """Ключ для дедубликации: всё, что стоит до символа # (буква в букву)."""
     return config.split('#')[0].strip()
 
 
@@ -550,11 +533,9 @@ def is_domain_allowed(domain: str, whitelist: Set[str]) -> bool:
         if a.startswith('.'):
             tail = a[1:]
             if '.' in tail:
-                # '.example.com' — субдомены example.com, сам example.com не матчится
                 if domain.endswith(a):
                     return True
             else:
-                # '.yandex' — любой домен с лейблом 'yandex'
                 if tail in domain_labels:
                     return True
         else:
@@ -584,9 +565,7 @@ def count_protocols(configs) -> Dict[str, int]:
 
 # === ОСНОВНОЙ СБОР С TCP-ТЕСТИРОВАНИЕМ ===
 async def collect_configs_async(contents: Dict[str, Optional[str]]) -> Dict[str, Tuple[str, str]]:
-    """
-    Возвращает dict: {renamed_config: (original_config, country)}.
-    """
+    """Возвращает dict: {renamed_config: (original_config, country)}."""
     raw_configs: List[str] = []
     all_ips: Set[str] = set()
 
@@ -871,7 +850,7 @@ def save_configs(configs_map: Dict[str, Tuple[str, str]]):
     update_time = get_moscow_time()
     tagged_set: Set[str] = set(configs_map.keys())
 
-    # ---- ESPD (пере-переименование оригиналов под ESPD_TAG) ----
+    # ---- ESPD ----
     espd_configs: Set[str] = set()
     for renamed_cfg, (orig_cfg, country) in configs_map.items():
         sni = extract_sni_domain(orig_cfg)
@@ -1039,7 +1018,6 @@ def main():
 
 
 if __name__ == "__main__":
-    # Быстрый self-test VMess (если задан TEST_VMESS=1)
     if os.environ.get("TEST_VMESS") == "1":
         _sample = {
             "v": "2", "ps": "test", "add": "1.2.3.4", "port": "443",
