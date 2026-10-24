@@ -35,12 +35,14 @@ jobs:
           python-version: '3.11'
 
       - name: Install Python dependencies
-        run: pip install aiohttp
+        # Добавлен cloudscraper для обхода JS-защиты (aes.js) на прокси
+        run: pip install aiohttp cloudscraper
 
       - name: Run collector script
         continue-on-error: true
         env:
           IPINFO_TOKEN: ${{ secrets.IPINFO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python "parser[#LSO-#LinSpisokObhod].py"
 
       - name: Remove base64 files from sub
