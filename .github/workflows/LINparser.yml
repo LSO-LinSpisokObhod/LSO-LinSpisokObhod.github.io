@@ -35,7 +35,7 @@ jobs:
 
       - name: Install Python dependencies
         # Заменили cloudscraper на curl_cffi
-        run: pip install aiohttp curl_cffi
+        run: pip install aiohttp
 
       - name: Run collector script
         continue-on-error: true
