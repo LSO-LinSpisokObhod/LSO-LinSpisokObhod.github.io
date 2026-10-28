@@ -43,25 +43,23 @@ jobs:
           IPINFO_TOKEN: ${{ secrets.IPINFO_TOKEN }}
         run: python "parser[#LSO-#LinSpisokObhod].py"
 
-      # ── 2. GitVerse: sub/ заменяется целиком ────────────────────
+      # ── 2. GitVerse: sub/ заменяется целиком (ветка master по умолчанию) ──
       - name: Upload sub/ to GitVerse
         continue-on-error: true
         env:
           GITVERSE_USER:     ${{ secrets.GITVERSE_USER }}
           GITVERSE_REPO:     ${{ secrets.GITVERSE_REPO }}
           GITVERSE_PASSWORD: ${{ secrets.GITVERSE_PASSWORD }}
-          GITVERSE_BRANCH:   ${{ secrets.GITVERSE_BRANCH || 'main' }}
+          GITVERSE_BRANCH:   ${{ secrets.GITVERSE_BRANCH || 'master' }}
         run: |
           set -e
           shopt -s nullglob
 
-          # ── Валидация секретов ─────────────────────────────────
           if [ -z "$GITVERSE_USER" ] || [ -z "$GITVERSE_REPO" ] || [ -z "$GITVERSE_PASSWORD" ]; then
             echo "❌ Не заданы секреты GITVERSE_USER / GITVERSE_REPO / GITVERSE_PASSWORD"
             exit 1
           fi
 
-          # ── Парсим "repo" или "owner/repo" ─────────────────────
           if [[ "$GITVERSE_REPO" == */* ]]; then
             OWNER="${GITVERSE_REPO%%/*}"
             REPO="${GITVERSE_REPO#*/}"
@@ -124,7 +122,7 @@ jobs:
 
           git commit -m "Sync sub/ [skip ci]"
           git -c http.extraHeader="Authorization: Basic $AUTH" push origin "$GITVERSE_BRANCH"
-          echo "✅ GitVerse обновлён ($OWNER/$REPO, sub/ заменена целиком)"
+          echo "✅ GitVerse обновлён ($OWNER/$REPO@$GITVERSE_BRANCH, sub/ заменена целиком)"
 
       # ── 3. Убираем .64.txt перед пушем в GitHub ─────────────────
       - name: Remove base64 files from sub
