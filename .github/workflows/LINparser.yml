@@ -43,47 +43,44 @@ jobs:
           IPINFO_TOKEN: ${{ secrets.IPINFO_TOKEN }}
         run: python "parser[#LSO-#LinSpisokObhod].py"
 
-      # ── 2. GitVerse: sub/ заменяется целиком (ветка master по умолчанию) ──
+      # ── 2. GitVerse: sub/ заменяется целиком (username + password) ──
       - name: Upload sub/ to GitVerse
         continue-on-error: true
         env:
-          GITVERSE_USER:     ${{ secrets.GITVERSE_USER }}
-          GITVERSE_REPO:     ${{ secrets.GITVERSE_REPO }}
-          GITVERSE_PASSWORD: ${{ secrets.GITVERSE_PASSWORD }}
-          GITVERSE_BRANCH:   ${{ secrets.GITVERSE_BRANCH || 'master' }}
+          GV_USER:     ${{ secrets.GITVERSE_USER }}
+          GV_REPO:     ${{ secrets.GITVERSE_REPO }}
+          GV_PASSWORD: ${{ secrets.GITVERSE_PASSWORD }}
+          GV_BRANCH:   ${{ secrets.GITVERSE_BRANCH || 'master' }}
         run: |
           set -e
           shopt -s nullglob
 
-          if [ -z "$GITVERSE_USER" ] || [ -z "$GITVERSE_REPO" ] || [ -z "$GITVERSE_PASSWORD" ]; then
-            echo "❌ Не заданы секреты GITVERSE_USER / GITVERSE_REPO / GITVERSE_PASSWORD"
+          if [ -z "$GV_USER" ] || [ -z "$GV_REPO" ] || [ -z "$GV_PASSWORD" ]; then
+            echo "❌ GitVerse: не заданы GV_USER / GV_REPO / GV_PASSWORD"
             exit 1
           fi
 
-          if [[ "$GITVERSE_REPO" == */* ]]; then
-            OWNER="${GITVERSE_REPO%%/*}"
-            REPO="${GITVERSE_REPO#*/}"
+          if [[ "$GV_REPO" == */* ]]; then
+            OWNER="${GV_REPO%%/*}"; REPO="${GV_REPO#*/}"
           else
-            OWNER="$GITVERSE_USER"
-            REPO="$GITVERSE_REPO"
+            OWNER="$GV_USER"; REPO="$GV_REPO"
           fi
-          echo "📦 GitVerse target: $OWNER/$REPO @ $GITVERSE_BRANCH"
+          echo "📦 GitVerse target: $OWNER/$REPO @ $GV_BRANCH"
 
           files=(sub/*.64.txt)
           if [ ${#files[@]} -eq 0 ]; then
-            echo "⚠ Нет sub/*.64.txt — GitVerse пропускаю"
-            exit 0
+            echo "⚠ GitVerse: нет sub/*.64.txt — пропуск"; exit 0
           fi
 
-          AUTH="$(printf '%s:%s' "$GITVERSE_USER" "$GITVERSE_PASSWORD" | base64 -w0)"
+          AUTH="$(printf '%s:%s' "$GV_USER" "$GV_PASSWORD" | base64 -w0)"
           REPO_URL="https://gitverse.ru/${OWNER}/${REPO}.git"
 
           WORK="$(mktemp -d)"
-          echo "📥 Клонирую GitVerse → $WORK/repo"
+          echo "📥 GitVerse: клонирую → $WORK/repo"
           if ! git -c http.extraHeader="Authorization: Basic $AUTH" \
-                   clone --depth=1 --branch "$GITVERSE_BRANCH" "$REPO_URL" "$WORK/repo" 2>/dev/null; then
-            echo "⚠ Ветка '$GITVERSE_BRANCH' не найдена — создаю пустой репо"
-            git init -b "$GITVERSE_BRANCH" "$WORK/repo"
+                   clone --depth=1 --branch "$GV_BRANCH" "$REPO_URL" "$WORK/repo" 2>/dev/null; then
+            echo "⚠ GitVerse: ветка '$GV_BRANCH' не найдена — создаю пустой репо"
+            git init -b "$GV_BRANCH" "$WORK/repo"
             git -C "$WORK/repo" remote add origin "$REPO_URL"
           fi
 
@@ -91,12 +88,11 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "actions@github.com"
 
-          echo "🗑 Удаляю старую sub/ на GitVerse"
+          echo "🗑 GitVerse: удаляю старую sub/"
           git rm -r --cached sub/ 2>/dev/null || true
           rm -rf sub/
 
           mkdir -p sub/
-          echo "🔁 .64.txt → .txt"
           for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do
             base="$(basename "$f" .64.txt)"
             cp "$f" "sub/${base}.txt"
@@ -106,29 +102,133 @@ jobs:
           git add -- sub/
 
           if git diff --cached --quiet; then
-            echo "ℹ В sub/ изменений нет — GitVerse не обновляю"
-            exit 0
+            echo "ℹ GitVerse: изменений нет — пропуск"; exit 0
           fi
 
-          staged="$(git diff --cached --name-only)"
-          outside="$(printf '%s\n' "$staged" | grep -v '^sub/' || true)"
+          outside="$(git diff --cached --name-only | grep -v '^sub/' || true)"
           if [ -n "$outside" ]; then
-            echo "❌ В staged есть файлы вне sub/ — отмена"
-            printf '   %s\n' "$outside"
-            exit 1
+            echo "❌ GitVerse: в staged есть файлы вне sub/ — отмена"
+            printf '   %s\n' "$outside"; exit 1
           fi
-          echo "✅ Staged (только sub/):"
-          printf '   %s\n' "$staged"
 
           git commit -m "Sync sub/ [skip ci]"
-          git -c http.extraHeader="Authorization: Basic $AUTH" push origin "$GITVERSE_BRANCH"
-          echo "✅ GitVerse обновлён ($OWNER/$REPO@$GITVERSE_BRANCH, sub/ заменена целиком)"
+          git -c http.extraHeader="Authorization: Basic $AUTH" push origin "$GV_BRANCH"
+          echo "✅ GitVerse: $OWNER/$REPO@$GV_BRANCH обновлён"
 
-      # ── 3. Убираем .64.txt перед пушем в GitHub ─────────────────
+      # ── 3. GitFlic: два коммита .64.txt → .txt (только токен) ────
+      - name: Upload sub/ to GitFlic
+        continue-on-error: true
+        env:
+          GF_TOKEN:  ${{ secrets.GITFLIC_TOKEN }}
+          GF_REPO:   ${{ secrets.GITFLIC_REPO }}
+          GF_BRANCH: ${{ secrets.GITFLIC_BRANCH || 'master' }}
+        run: |
+          set -e
+          shopt -s nullglob
+
+          if [ -z "$GF_TOKEN" ] || [ -z "$GF_REPO" ]; then
+            echo "❌ GitFlic: не заданы GF_TOKEN / GF_REPO"
+            exit 1
+          fi
+
+          if [[ "$GF_REPO" != */* ]]; then
+            echo "❌ GitFlic: GITFLIC_REPO должен быть owner/repo (например: liniptv/lso)"
+            exit 1
+          fi
+          OWNER="${GF_REPO%%/*}"
+          REPO="${GF_REPO#*/}"
+          echo "📦 GitFlic target: $OWNER/$REPO @ $GF_BRANCH"
+
+          files=(sub/*.64.txt)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "⚠ GitFlic: нет sub/*.64.txt — пропуск"; exit 0
+          fi
+
+          # Токен в URL; GitHub Actions маскирует значение секрета в логах
+          REPO_URL="https://oauth2:${GF_TOKEN}@gitflic.ru/project/${OWNER}/${REPO}.git"
+          CLEAN_URL="https://gitflic.ru/project/${OWNER}/${REPO}.git"
+
+          WORK="$(mktemp -d)"
+          echo "📥 GitFlic: клонирую → $WORK/repo"
+          if ! git clone --depth=1 --branch "$GF_BRANCH" "$REPO_URL" "$WORK/repo" 2>/dev/null; then
+            echo "⚠ GitFlic: ветка '$GF_BRANCH' не найдена — создаю пустой репо"
+            git init -b "$GF_BRANCH" "$WORK/repo"
+            git -C "$WORK/repo" remote add origin "$CLEAN_URL"
+          else
+            git -C "$WORK/repo" remote set-url origin "$CLEAN_URL"
+          fi
+
+          cd "$WORK/repo"
+          git config user.name  "github-actions[bot]"
+          git config user.email "actions@github.com"
+
+          # ── Проверка: нужно ли что-то менять? ──────────────────
+          NEED_UPDATE=0
+
+          # 1) новые файлы или изменилось содержимое
+          for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do
+            base="$(basename "$f" .64.txt)"
+            target="sub/${base}.txt"
+            if [ ! -f "$target" ] || ! cmp -s "$f" "$target"; then
+              NEED_UPDATE=1; break
+            fi
+          done
+
+          # 2) есть ли «осиротевшие» .txt, которых больше нет в свежей генерации
+          if [ "$NEED_UPDATE" = "0" ]; then
+            for target in sub/*.txt; do
+              base="$(basename "$target" .txt)"
+              if [ ! -f "$GITHUB_WORKSPACE/sub/${base}.64.txt" ]; then
+                NEED_UPDATE=1; break
+              fi
+            done
+          fi
+
+          if [ "$NEED_UPDATE" = "0" ]; then
+            echo "ℹ GitFlic: содержимое не изменилось — пропуск"; exit 0
+          fi
+
+          # ── Шаг A: сносим старую sub/, кладём *.64.txt как есть ──
+          echo "🗑 GitFlic: удаляю старую sub/"
+          git rm -r --cached sub/ 2>/dev/null || true
+          rm -rf sub/
+          mkdir -p sub/
+
+          for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do
+            cp "$f" "sub/$(basename "$f")"
+            echo "   $(basename "$f") → sub/$(basename "$f")"
+          done
+          git add -- sub/
+          git commit -m "Upload sub as .64.txt [skip ci]"
+          echo "📝 GitFlic: коммит 1 — .64.txt загружены"
+
+          # ── Шаг B: переименовываем *.64.txt → *.txt ────────────
+          cd sub/
+          for f in *.64.txt; do
+            git mv "$f" "${f%.64.txt}.txt"
+            echo "   $(basename "$f") → ${f%.64.txt}.txt"
+          done
+          cd ..
+          git commit -m "Rename .64.txt to .txt [skip ci]"
+          echo "📝 GitFlic: коммит 2 — .64.txt → .txt"
+
+          # ── Проверка «только sub/» на итоговом коммите ─────────
+          staged="$(git diff --name-only HEAD~2 HEAD 2>/dev/null || git ls-files)"
+          outside="$(printf '%s\n' "$staged" | grep -v '^sub/' || true)"
+          if [ -n "$outside" ]; then
+            echo "❌ GitFlic: есть файлы вне sub/ — отмена"
+            printf '   %s\n' "$outside"; exit 1
+          fi
+
+          # ── Один push на оба коммита ────────────────────────────
+          git push origin "$GF_BRANCH"
+          echo "✅ GitFlic: $OWNER/$REPO@$GF_BRANCH обновлён (2 коммита)"
+
+      # ── 4. Убираем .64.txt перед пушем в GitHub ─────────────────
       - name: Remove base64 files from sub
         run: rm -f sub/*.64.txt
 
-      # ── 4. Коммит plain .txt в GitHub ───────────────────────────
+      # ── 5. Коммит plain .txt в GitHub ───────────────────────────
       - name: Commit and push plain text files
         run: |
           set -e
@@ -136,18 +236,15 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add sub/ README.md source.txt
           if git diff --quiet && git diff --staged --quiet; then
-            echo "ℹ Изменений нет — коммитить нечего"
-            exit 0
+            echo "ℹ Изменений нет — коммитить нечего"; exit 0
           fi
           git commit -m "Auto-update proxy configs [skip ci]"
           for i in 1 2 3; do
             if ! git pull --rebase --autostash origin main; then
-              git rebase --abort || true
-              exit 1
+              git rebase --abort || true; exit 1
             fi
             if git push origin main; then
-              echo "✅ Push OK (попытка $i)"
-              exit 0
+              echo "✅ Push OK (попытка $i)"; exit 0
             fi
             sleep 5
           done
