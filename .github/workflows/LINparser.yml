@@ -2,15 +2,15 @@ name: Collect & Sync Proxies
 
 on:
   schedule:
-    - cron: '17 * * * *'        # раз в час в :17 (UTC)
+    - cron: '17 * * * *'
   push:
-    branches: ["main"]           # любой твой пуш в main
-  workflow_dispatch:             # кнопка Run workflow
+    branches: ["main"]
+  workflow_dispatch:
   repository_dispatch:
-    types: [parser-run, rebuild] # внешний триггер через API
+    types: [parser-run, rebuild]
 
 permissions:
-  contents: write                # нужно, чтобы коммитить sub/, README.md, source.txt
+  contents: write
 
 concurrency:
   group: "parser"
@@ -22,7 +22,7 @@ jobs:
     timeout-minutes: 20
 
     steps:
-      - name: Checkout
+      - name: Checkout GitHub repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -34,52 +34,123 @@ jobs:
           python-version: '3.11'
 
       - name: Install Python dependencies
-        # Заменили cloudscraper на curl_cffi
         run: pip install aiohttp
 
+      # ── 1. Парсер ────────────────────────────────────────────────
       - name: Run collector script
         continue-on-error: true
         env:
           IPINFO_TOKEN: ${{ secrets.IPINFO_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python "parser[#LSO-#LinSpisokObhod].py"
 
+      # ── 2. GitVerse: sub/ заменяется целиком ────────────────────
+      - name: Upload sub/ to GitVerse
+        continue-on-error: true
+        env:
+          GITVERSE_USER:     ${{ secrets.GITVERSE_USER }}
+          GITVERSE_REPO:     ${{ secrets.GITVERSE_REPO }}
+          GITVERSE_PASSWORD: ${{ secrets.GITVERSE_PASSWORD }}
+          GITVERSE_BRANCH:   ${{ secrets.GITVERSE_BRANCH || 'main' }}
+        run: |
+          set -e
+          shopt -s nullglob
+
+          # ── Валидация секретов ─────────────────────────────────
+          if [ -z "$GITVERSE_USER" ] || [ -z "$GITVERSE_REPO" ] || [ -z "$GITVERSE_PASSWORD" ]; then
+            echo "❌ Не заданы секреты GITVERSE_USER / GITVERSE_REPO / GITVERSE_PASSWORD"
+            exit 1
+          fi
+
+          # ── Парсим "repo" или "owner/repo" ─────────────────────
+          if [[ "$GITVERSE_REPO" == */* ]]; then
+            OWNER="${GITVERSE_REPO%%/*}"
+            REPO="${GITVERSE_REPO#*/}"
+          else
+            OWNER="$GITVERSE_USER"
+            REPO="$GITVERSE_REPO"
+          fi
+          echo "📦 GitVerse target: $OWNER/$REPO @ $GITVERSE_BRANCH"
+
+          files=(sub/*.64.txt)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "⚠ Нет sub/*.64.txt — GitVerse пропускаю"
+            exit 0
+          fi
+
+          AUTH="$(printf '%s:%s' "$GITVERSE_USER" "$GITVERSE_PASSWORD" | base64 -w0)"
+          REPO_URL="https://gitverse.ru/${OWNER}/${REPO}.git"
+
+          WORK="$(mktemp -d)"
+          echo "📥 Клонирую GitVerse → $WORK/repo"
+          if ! git -c http.extraHeader="Authorization: Basic $AUTH" \
+                   clone --depth=1 --branch "$GITVERSE_BRANCH" "$REPO_URL" "$WORK/repo" 2>/dev/null; then
+            echo "⚠ Ветка '$GITVERSE_BRANCH' не найдена — создаю пустой репо"
+            git init -b "$GITVERSE_BRANCH" "$WORK/repo"
+            git -C "$WORK/repo" remote add origin "$REPO_URL"
+          fi
+
+          cd "$WORK/repo"
+          git config user.name  "github-actions[bot]"
+          git config user.email "actions@github.com"
+
+          echo "🗑 Удаляю старую sub/ на GitVerse"
+          git rm -r --cached sub/ 2>/dev/null || true
+          rm -rf sub/
+
+          mkdir -p sub/
+          echo "🔁 .64.txt → .txt"
+          for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do
+            base="$(basename "$f" .64.txt)"
+            cp "$f" "sub/${base}.txt"
+            echo "   $(basename "$f") → sub/${base}.txt"
+          done
+
+          git add -- sub/
+
+          if git diff --cached --quiet; then
+            echo "ℹ В sub/ изменений нет — GitVerse не обновляю"
+            exit 0
+          fi
+
+          staged="$(git diff --cached --name-only)"
+          outside="$(printf '%s\n' "$staged" | grep -v '^sub/' || true)"
+          if [ -n "$outside" ]; then
+            echo "❌ В staged есть файлы вне sub/ — отмена"
+            printf '   %s\n' "$outside"
+            exit 1
+          fi
+          echo "✅ Staged (только sub/):"
+          printf '   %s\n' "$staged"
+
+          git commit -m "Sync sub/ [skip ci]"
+          git -c http.extraHeader="Authorization: Basic $AUTH" push origin "$GITVERSE_BRANCH"
+          echo "✅ GitVerse обновлён ($OWNER/$REPO, sub/ заменена целиком)"
+
+      # ── 3. Убираем .64.txt перед пушем в GitHub ─────────────────
       - name: Remove base64 files from sub
         run: rm -f sub/*.64.txt
 
+      # ── 4. Коммит plain .txt в GitHub ───────────────────────────
       - name: Commit and push plain text files
         run: |
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           git add sub/ README.md source.txt
-
           if git diff --quiet && git diff --staged --quiet; then
             echo "ℹ Изменений нет — коммитить нечего"
             exit 0
           fi
-
           git commit -m "Auto-update proxy configs [skip ci]"
-
-          # До 3 попыток: pull --rebase → push
           for i in 1 2 3; do
-            echo "▶ Попытка $i: pull --rebase"
             if ! git pull --rebase --autostash origin main; then
-              echo "⚠ Rebase не удался (конфликт?)"
               git rebase --abort || true
               exit 1
             fi
-
-            echo "▶ Попытка $i: push"
             if git push origin main; then
               echo "✅ Push OK (попытка $i)"
               exit 0
             fi
-
-            echo "⚠ Push отклонён — повтор через 5 сек (попытка $i)"
             sleep 5
           done
-
-          echo "❌ Не удалось запушить после 3 попыток"
           exit 1
