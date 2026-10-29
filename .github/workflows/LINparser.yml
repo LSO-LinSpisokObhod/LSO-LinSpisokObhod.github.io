@@ -55,32 +55,35 @@ jobs:
           shopt -s nullglob
 
           if [ -z "$GITVERSE_USER" ] || [ -z "$GITVERSE_REPO" ] || [ -z "$GITVERSE_PASSWORD" ]; then
-            echo "::warning::GitVerse: пропуск — не заданы секреты"
-            exit 0
+            echo "::warning::GitVerse: пропуск — не заданы секреты"; exit 0
           fi
-          if [[ "$GITVERSE_REPO" == */* ]]; then
-            OWNER="${GITVERSE_REPO%%/*}"; REPO="${GITVERSE_REPO#*/}"
-          else
-            OWNER="$GITVERSE_USER"; REPO="$GITVERSE_REPO"
-          fi
-          echo "📦 GitVerse target: $OWNER/$REPO @ $GITVERSE_BRANCH"
+
+          # Санитизация: убираем все ':', '@', '/', пробелы из креденшелов
+          GV_USER_CLEAN="$(printf '%s' "$GITVERSE_USER"     | tr -d ': @/')"
+          GV_PASS_CLEAN="$(printf '%s' "$GITVERSE_PASSWORD" | tr -d ': @/')"
+          # Разбор repo: 'owner/repo', '/owner/repo', 'https://.../owner/repo(.git)?'
+          GV_REPO_CLEAN="$(printf '%s' "$GITVERSE_REPO" | sed -E 's#^[a-zA-Z]+://##; s#\.git$##; s#/$##')"
+          case "$GV_REPO_CLEAN" in
+            */*) OWNER="${GV_REPO_CLEAN%%/*}"; REPO="${GV_REPO_CLEAN##*/}" ;;
+            *)   OWNER="$GV_USER_CLEAN"; REPO="$GV_REPO_CLEAN" ;;
+          esac
+          echo "📦 GitVerse target: ${OWNER}/${REPO} @ ${GITVERSE_BRANCH}"
 
           files=(sub/*.64.txt)
           [ ${#files[@]} -eq 0 ] && { echo "⚠ GitVerse: нет sub/*.64.txt"; exit 0; }
 
-          AUTH="$(printf '%s:%s' "$GITVERSE_USER" "$GITVERSE_PASSWORD" | base64 -w0)"
           REPO_URL="https://gitverse.ru/${OWNER}/${REPO}.git"
-          GIT() { git -c http.extraHeader="Authorization: Basic $AUTH" "$@"; }
+          # Basic Auth в заголовке: ':' между user и pass формируется ЗДЕСЬ, а не в URL
+          AUTH_BASIC="$(printf '%s:%s' "$GV_USER_CLEAN" "$GV_PASS_CLEAN" | base64 -w0)"
+          GIT() { git -c http.extraHeader="Authorization: Basic $AUTH_BASIC" "$@"; }
 
           WORK="$(mktemp -d)/repo"
-          mkdir -p "$WORK"
-          cd "$WORK"
+          mkdir -p "$WORK"; cd "$WORK"
           git init -q
           git config user.name  "github-actions[bot]"
           git config user.email "actions@github.com"
           git remote add origin "$REPO_URL"
 
-          # Безопасный fetch: различаем «ветки нет» и «сеть упала»
           if ERR=$(GIT fetch --depth=1 origin "$GITVERSE_BRANCH" 2>&1); then
             git checkout -q -b "$GITVERSE_BRANCH" FETCH_HEAD
             echo "📥 GitVerse: ветка $GITVERSE_BRANCH загружена"
@@ -96,38 +99,26 @@ jobs:
             fi
           fi
 
-          # Содержимое: сносим sub/, кладём .64.txt как .txt
-          rm -rf sub/
-          mkdir -p sub/
+          rm -rf sub/; mkdir -p sub/
           for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do
             base="$(basename "$f" .64.txt)"
             cp "$f" "sub/${base}.txt"
           done
           git add -A sub/
-
-          if git diff --cached --quiet; then
-            echo "ℹ GitVerse: изменений нет"; exit 0
-          fi
-
+          git diff --cached --quiet && { echo "ℹ GitVerse: изменений нет"; exit 0; }
           outside="$(git diff --cached --name-only | grep -v '^sub/' || true)"
           [ -n "$outside" ] && { echo "❌ файлы вне sub/"; exit 1; }
-
           git commit -q -m "Sync sub/ [skip ci]"
 
-          # Push: одна попытка, без force. При race — fetch+merge+retry
           if ! GIT push origin "$GITVERSE_BRANCH" 2>&1; then
-            echo "⚠ GitVerse: push отклонён — пробую синхронизироваться"
+            echo "⚠ GitVerse: push отклонён — синхронизируюсь и повторяю"
             if GIT fetch --depth=1 origin "$GITVERSE_BRANCH" 2>/dev/null; then
-              git merge --allow-unrelated-histories -m "merge" FETCH_HEAD >/dev/null 2>&1 || true
-              if GIT push origin "$GITVERSE_BRANCH" 2>&1; then
-                echo "✅ GitVerse: $OWNER/$REPO@$GITVERSE_BRANCH обновлён (retry)"
-                exit 0
-              fi
+              git merge --allow-unrelated-histories -m merge FETCH_HEAD >/dev/null 2>&1 || true
+              GIT push origin "$GITVERSE_BRANCH" 2>&1 && { echo "✅ GitVerse: ${OWNER}/${REPO}@${GITVERSE_BRANCH} обновлён (retry)"; exit 0; }
             fi
-            echo "::warning::GitVerse: push не удался — ветка на remote не тронута"
-            exit 0
+            echo "::warning::GitVerse: push не удался — ветка не тронута"; exit 0
           fi
-          echo "✅ GitVerse: $OWNER/$REPO@$GITVERSE_BRANCH обновлён"
+          echo "✅ GitVerse: ${OWNER}/${REPO}@${GITVERSE_BRANCH} обновлён"
 
       # ── 3. Mos.Hub ─────────────────────────────────────────────
       - name: Upload sub/ to Mos.Hub
@@ -144,29 +135,30 @@ jobs:
           if [ -z "$MOSHUB_USER" ] || [ -z "$MOSHUB_TOKEN" ] || [ -z "$MOSHUB_REPO" ]; then
             echo "::warning::Mos.Hub: пропуск — не заданы секреты"; exit 0
           fi
-          if [[ "$MOSHUB_REPO" != */* ]]; then
-            echo "::warning::Mos.Hub: MOSHUB_REPO должен быть owner/repo"; exit 0
-          fi
-          OWNER="${MOSHUB_REPO%%/*}"
-          REPO="${MOSHUB_REPO#*/}"
-          echo "📦 Mos.Hub target: $OWNER/$REPO @ $MOSHUB_BRANCH"
+
+          MH_USER_CLEAN="$(printf '%s' "$MOSHUB_USER"  | tr -d ': @/')"
+          MH_TOKEN_CLEAN="$(printf '%s' "$MOSHUB_TOKEN" | tr -d ': @/')"
+          MH_REPO_CLEAN="$(printf '%s' "$MOSHUB_REPO" | sed -E 's#^[a-zA-Z]+://##; s#\.git$##; s#/$##')"
+          case "$MH_REPO_CLEAN" in
+            */*) OWNER="${MH_REPO_CLEAN%%/*}"; REPO="${MH_REPO_CLEAN##*/}" ;;
+            *)   echo "::warning::Mos.Hub: MOSHUB_REPO должен быть owner/repo"; exit 0 ;;
+          esac
+          echo "📦 Mos.Hub target: ${OWNER}/${REPO} @ ${MOSHUB_BRANCH}"
 
           files=(sub/*.64.txt)
           [ ${#files[@]} -eq 0 ] && { echo "⚠ Mos.Hub: нет sub/*.64.txt"; exit 0; }
 
-          AUTHED_URL="https://${MOSHUB_USER}:${MOSHUB_TOKEN}@hub.mos.ru/${OWNER}/${REPO}.git"
-          CLEAN_URL="https://hub.mos.ru/${OWNER}/${REPO}.git"
-          GIT() { git -c credential.helper= -c "url.${AUTHED_URL}.insteadof=${CLEAN_URL}" -c http.extraHeader="Authorization: Basic $(printf '%s:%s' "$MOSHUB_USER" "$MOSHUB_TOKEN" | base64 -w0)" "$@"; }
+          REPO_URL="https://hub.mos.ru/${OWNER}/${REPO}.git"
+          AUTH_BASIC="$(printf '%s:%s' "$MH_USER_CLEAN" "$MH_TOKEN_CLEAN" | base64 -w0)"
+          GIT() { git -c http.extraHeader="Authorization: Basic $AUTH_BASIC" "$@"; }
 
           WORK="$(mktemp -d)/repo"
-          mkdir -p "$WORK"
-          cd "$WORK"
+          mkdir -p "$WORK"; cd "$WORK"
           git init -q
           git config user.name  "github-actions[bot]"
           git config user.email "actions@github.com"
-          git remote add origin "$CLEAN_URL"
+          git remote add origin "$REPO_URL"
 
-          # Безопасный fetch: различаем «ветки нет» и «сеть упала»
           if ERR=$(GIT fetch --depth=1 origin "$MOSHUB_BRANCH" 2>&1); then
             git checkout -q -b "$MOSHUB_BRANCH" FETCH_HEAD
             echo "📥 Mos.Hub: ветка $MOSHUB_BRANCH загружена"
@@ -182,32 +174,22 @@ jobs:
             fi
           fi
 
-          # Проверка: нужно ли менять
           NEED_UPDATE=0
           for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do
             base="$(basename "$f" .64.txt)"
             target="sub/${base}.txt"
-            if [ ! -f "$target" ] || ! cmp -s "$f" "$target"; then
-              NEED_UPDATE=1; break
-            fi
+            if [ ! -f "$target" ] || ! cmp -s "$f" "$target"; then NEED_UPDATE=1; break; fi
           done
           [ "$NEED_UPDATE" = "0" ] && { echo "ℹ Mos.Hub: содержимое не изменилось"; exit 0; }
 
-          # Шаг A: .64.txt под тем же именем
-          rm -rf sub/
-          mkdir -p sub/
-          for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do
-            cp "$f" "sub/$(basename "$f")"
-          done
+          rm -rf sub/; mkdir -p sub/
+          for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do cp "$f" "sub/$(basename "$f")"; done
           git add -A sub/
           git commit -q -m "Upload sub as .64.txt [skip ci]"
           echo "📝 Mos.Hub: коммит 1 — .64.txt"
 
-          # Шаг B: переименование .64.txt → .txt
           cd sub/
-          for f in *.64.txt; do
-            git mv "$f" "${f%.64.txt}.txt"
-          done
+          for f in *.64.txt; do git mv "$f" "${f%.64.txt}.txt"; done
           cd ..
           git commit -q -m "Rename .64.txt to .txt [skip ci]"
           echo "📝 Mos.Hub: коммит 2 — .txt"
@@ -216,18 +198,14 @@ jobs:
           [ -n "$outside" ] && { echo "❌ файлы вне sub/"; exit 1; }
 
           if ! GIT push origin "$MOSHUB_BRANCH" 2>&1; then
-            echo "⚠ Mos.Hub: push отклонён — пробую синхронизироваться"
+            echo "⚠ Mos.Hub: push отклонён — синхронизируюсь и повторяю"
             if GIT fetch --depth=1 origin "$MOSHUB_BRANCH" 2>/dev/null; then
-              git merge --allow-unrelated-histories -m "merge" FETCH_HEAD >/dev/null 2>&1 || true
-              if GIT push origin "$MOSHUB_BRANCH" 2>&1; then
-                echo "✅ Mos.Hub: $OWNER/$REPO@$MOSHUB_BRANCH обновлён (retry)"
-                exit 0
-              fi
+              git merge --allow-unrelated-histories -m merge FETCH_HEAD >/dev/null 2>&1 || true
+              GIT push origin "$MOSHUB_BRANCH" 2>&1 && { echo "✅ Mos.Hub: ${OWNER}/${REPO}@${MOSHUB_BRANCH} обновлён (retry)"; exit 0; }
             fi
-            echo "::warning::Mos.Hub: push не удался — ветка на remote не тронута"
-            exit 0
+            echo "::warning::Mos.Hub: push не удался — ветка не тронута"; exit 0
           fi
-          echo "✅ Mos.Hub: $OWNER/$REPO@$MOSHUB_BRANCH обновлён (2 коммита)"
+          echo "✅ Mos.Hub: ${OWNER}/${REPO}@${MOSHUB_BRANCH} обновлён (2 коммита)"
 
       # ── 4. GitFlic ──────────────────────────────────────────────
       - name: Upload sub/ to GitFlic
@@ -241,30 +219,32 @@ jobs:
           set -e
           shopt -s nullglob
 
-          if [ -z "$GITFLIC_TOKEN" ] || [ -z "$GITFLIC_USER" ] || [ -z "$GITFLIC_REPO" ]; then
+          if [ -z "$GITFLIC_USER" ] || [ -z "$GITFLIC_TOKEN" ] || [ -z "$GITFLIC_REPO" ]; then
             echo "::warning::GitFlic: пропуск — не заданы секреты"; exit 0
           fi
-          if [[ "$GITFLIC_REPO" != */* ]]; then
-            echo "::warning::GitFlic: GITFLIC_REPO должен быть owner/repo"; exit 0
-          fi
-          OWNER="${GITFLIC_REPO%%/*}"
-          REPO="${GITFLIC_REPO#*/}"
-          echo "📦 GitFlic target: $OWNER/$REPO @ $GITFLIC_BRANCH"
+
+          GF_USER_CLEAN="$(printf '%s' "$GITFLIC_USER"  | tr -d ': @/')"
+          GF_TOKEN_CLEAN="$(printf '%s' "$GITFLIC_TOKEN" | tr -d ': @/')"
+          GF_REPO_CLEAN="$(printf '%s' "$GITFLIC_REPO" | sed -E 's#^[a-zA-Z]+://##; s#\.git$##; s#/$##')"
+          case "$GF_REPO_CLEAN" in
+            */*) OWNER="${GF_REPO_CLEAN%%/*}"; REPO="${GF_REPO_CLEAN##*/}" ;;
+            *)   echo "::warning::GitFlic: GITFLIC_REPO должен быть owner/repo"; exit 0 ;;
+          esac
+          echo "📦 GitFlic target: ${OWNER}/${REPO} @ ${GITFLIC_BRANCH}"
 
           files=(sub/*.64.txt)
           [ ${#files[@]} -eq 0 ] && { echo "⚠ GitFlic: нет sub/*.64.txt"; exit 0; }
 
-          AUTHED_URL="https://${GITFLIC_USER}:${GITFLIC_TOKEN}@gitflic.ru/project/${OWNER}/${REPO}.git"
-          CLEAN_URL="https://gitflic.ru/project/${OWNER}/${REPO}.git"
-          GIT() { git -c credential.helper= -c "url.${AUTHED_URL}.insteadof=${CLEAN_URL}" -c http.extraHeader="Authorization: Basic $(printf '%s:%s' "$GITFLIC_USER" "$GITFLIC_TOKEN" | base64 -w0)" "$@"; }
+          REPO_URL="https://gitflic.ru/project/${OWNER}/${REPO}.git"
+          AUTH_BASIC="$(printf '%s:%s' "$GF_USER_CLEAN" "$GF_TOKEN_CLEAN" | base64 -w0)"
+          GIT() { git -c http.extraHeader="Authorization: Basic $AUTH_BASIC" "$@"; }
 
           WORK="$(mktemp -d)/repo"
-          mkdir -p "$WORK"
-          cd "$WORK"
+          mkdir -p "$WORK"; cd "$WORK"
           git init -q
           git config user.name  "github-actions[bot]"
           git config user.email "actions@github.com"
-          git remote add origin "$CLEAN_URL"
+          git remote add origin "$REPO_URL"
 
           if ERR=$(GIT fetch --depth=1 origin "$GITFLIC_BRANCH" 2>&1); then
             git checkout -q -b "$GITFLIC_BRANCH" FETCH_HEAD
@@ -285,25 +265,18 @@ jobs:
           for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do
             base="$(basename "$f" .64.txt)"
             target="sub/${base}.txt"
-            if [ ! -f "$target" ] || ! cmp -s "$f" "$target"; then
-              NEED_UPDATE=1; break
-            fi
+            if [ ! -f "$target" ] || ! cmp -s "$f" "$target"; then NEED_UPDATE=1; break; fi
           done
           [ "$NEED_UPDATE" = "0" ] && { echo "ℹ GitFlic: не изменилось"; exit 0; }
 
-          rm -rf sub/
-          mkdir -p sub/
-          for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do
-            cp "$f" "sub/$(basename "$f")"
-          done
+          rm -rf sub/; mkdir -p sub/
+          for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do cp "$f" "sub/$(basename "$f")"; done
           git add -A sub/
           git commit -q -m "Upload sub as .64.txt [skip ci]"
           echo "📝 GitFlic: коммит 1 — .64.txt"
 
           cd sub/
-          for f in *.64.txt; do
-            git mv "$f" "${f%.64.txt}.txt"
-          done
+          for f in *.64.txt; do git mv "$f" "${f%.64.txt}.txt"; done
           cd ..
           git commit -q -m "Rename .64.txt to .txt [skip ci]"
           echo "📝 GitFlic: коммит 2 — .txt"
@@ -312,18 +285,14 @@ jobs:
           [ -n "$outside" ] && { echo "❌ файлы вне sub/"; exit 1; }
 
           if ! GIT push origin "$GITFLIC_BRANCH" 2>&1; then
-            echo "⚠ GitFlic: push отклонён — пробую синхронизироваться"
+            echo "⚠ GitFlic: push отклонён — синхронизируюсь и повторяю"
             if GIT fetch --depth=1 origin "$GITFLIC_BRANCH" 2>/dev/null; then
-              git merge --allow-unrelated-histories -m "merge" FETCH_HEAD >/dev/null 2>&1 || true
-              if GIT push origin "$GITFLIC_BRANCH" 2>&1; then
-                echo "✅ GitFlic: $OWNER/$REPO@$GITFLIC_BRANCH обновлён (retry)"
-                exit 0
-              fi
+              git merge --allow-unrelated-histories -m merge FETCH_HEAD >/dev/null 2>&1 || true
+              GIT push origin "$GITFLIC_BRANCH" 2>&1 && { echo "✅ GitFlic: ${OWNER}/${REPO}@${GITFLIC_BRANCH} обновлён (retry)"; exit 0; }
             fi
-            echo "::warning::GitFlic: push не удался — ветка на remote не тронута"
-            exit 0
+            echo "::warning::GitFlic: push не удался — ветка не тронута"; exit 0
           fi
-          echo "✅ GitFlic: $OWNER/$REPO@$GITFLIC_BRANCH обновлён (2 коммита)"
+          echo "✅ GitFlic: ${OWNER}/${REPO}@${GITFLIC_BRANCH} обновлён (2 коммита)"
 
       # ── 5. Убираем .64.txt перед пушем в GitHub ─────────────────
       - name: Remove base64 files from sub
@@ -344,14 +313,11 @@ jobs:
             if ! git pull --rebase --autostash origin main 2>/dev/null; then
               git rebase --abort 2>/dev/null || true
               git reset --hard HEAD
-              echo "::warning::GitHub: pull --rebase не удался — пропуск"
-              exit 0
+              echo "::warning::GitHub: pull --rebase не удался — пропуск"; exit 0
             fi
             if git push origin main 2>/dev/null; then
-              echo "✅ GitHub: push OK (попытка $i)"
-              exit 0
+              echo "✅ GitHub: push OK (попытка $i)"; exit 0
             fi
             sleep 5
           done
-          echo "::warning::GitHub: push не удался — ветка не тронута"
-          exit 0
+          echo "::warning::GitHub: push не удался — ветка не тронута"; exit 0
