@@ -36,32 +36,6 @@ jobs:
       - name: Install Python dependencies
         run: pip install aiohttp
 
-      # ── 0. Диагностика секретов ─────────────────────────────────
-      - name: Debug secrets visibility
-        env:
-          GITFLIC_USER:   ${{ secrets.GITFLIC_USER }}
-          GITFLIC_TOKEN:  ${{ secrets.GITFLIC_TOKEN }}
-          GITFLIC_REPO:   ${{ secrets.GITFLIC_REPO }}
-          MOSHUB_USER:    ${{ secrets.MOSHUB_USER }}
-          MOSHUB_TOKEN:   ${{ secrets.MOSHUB_TOKEN }}
-          MOSHUB_REPO:    ${{ secrets.MOSHUB_REPO }}
-          GITVERSE_USER:     ${{ secrets.GITVERSE_USER }}
-          GITVERSE_REPO:     ${{ secrets.GITVERSE_REPO }}
-        run: |
-          echo "=== Mos.Hub ==="
-          echo "MOSHUB_USER   → длина: ${#MOSHUB_USER}   [$([ -n "$MOSHUB_USER" ] && echo 'задан' || echo 'ПУСТО')]"
-          echo "MOSHUB_TOKEN  → длина: ${#MOSHUB_TOKEN}  [$([ -n "$MOSHUB_TOKEN" ] && echo 'задан' || echo 'ПУСТО')]"
-          echo "MOSHUB_REPO   → значение: [$MOSHUB_REPO]"
-          echo ""
-          echo "=== GitFlic ==="
-          echo "GITFLIC_USER   → длина: ${#GITFLIC_USER}   [$([ -n "$GITFLIC_USER" ] && echo 'задан' || echo 'ПУСТО')]"
-          echo "GITFLIC_TOKEN  → длина: ${#GITFLIC_TOKEN}  [$([ -n "$GITFLIC_TOKEN" ] && echo 'задан' || echo 'ПУСТО')]"
-          echo "GITFLIC_REPO   → значение: [$GITFLIC_REPO]"
-          echo ""
-          echo "=== GitVerse ==="
-          echo "GITVERSE_USER     → длина: ${#GITVERSE_USER}   [$([ -n "$GITVERSE_USER" ] && echo 'задан' || echo 'ПУСТО')]"
-          echo "GITVERSE_REPO     → значение: [$GITVERSE_REPO]"
-
       # ── 1. Парсер ───────────────────────────────────────────────
       - name: Run collector script
         continue-on-error: true
@@ -80,25 +54,18 @@ jobs:
         run: |
           set -e
           shopt -s nullglob
-
-          if [ -z "$GITVERSE_USER" ] || [ -z "$GITVERSE_REPO" ] || [ -z "$GITVERSE_PASSWORD" ]; then
-            echo "::warning::GitVerse: пропуск — не заданы GITVERSE_USER/REPO/PASSWORD"
-            exit 0
-          fi
-
+          [ -z "$GITVERSE_USER" ] || [ -z "$GITVERSE_REPO" ] || [ -z "$GITVERSE_PASSWORD" ] && \
+            { echo "::warning::GitVerse: пропуск"; exit 0; }
           if [[ "$GITVERSE_REPO" == */* ]]; then
             OWNER="${GITVERSE_REPO%%/*}"; REPO="${GITVERSE_REPO#*/}"
           else
             OWNER="$GITVERSE_USER"; REPO="$GITVERSE_REPO"
           fi
           echo "📦 GitVerse target: $OWNER/$REPO @ $GITVERSE_BRANCH"
-
           files=(sub/*.64.txt)
           [ ${#files[@]} -eq 0 ] && { echo "⚠ GitVerse: нет sub/*.64.txt"; exit 0; }
-
           AUTH="$(printf '%s:%s' "$GITVERSE_USER" "$GITVERSE_PASSWORD" | base64 -w0)"
           REPO_URL="https://gitverse.ru/${OWNER}/${REPO}.git"
-
           WORK="$(mktemp -d)"
           if ! git -c http.extraHeader="Authorization: Basic $AUTH" \
                clone --depth=1 --branch "$GITVERSE_BRANCH" "$REPO_URL" "$WORK/repo" 2>/dev/null; then
@@ -108,25 +75,21 @@ jobs:
           cd "$WORK/repo"
           git config user.name  "github-actions[bot]"
           git config user.email "actions@github.com"
-
           git rm -r --cached sub/ 2>/dev/null || true
           rm -rf sub/
           mkdir -p sub/
           for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do
-            base="$(basename "$f" .64.txt)"
-            cp "$f" "sub/${base}.txt"
+            base="$(basename "$f" .64.txt)"; cp "$f" "sub/${base}.txt"
           done
           git add -- sub/
           git diff --cached --quiet && { echo "ℹ GitVerse: изменений нет"; exit 0; }
-
           outside="$(git diff --cached --name-only | grep -v '^sub/' || true)"
           [ -n "$outside" ] && { echo "❌ файлы вне sub/"; exit 1; }
-
           git commit -m "Sync sub/ [skip ci]"
           git -c http.extraHeader="Authorization: Basic $AUTH" push origin "$GITVERSE_BRANCH"
           echo "✅ GitVerse: $OWNER/$REPO@$GITVERSE_BRANCH обновлён"
 
-      # ── 3. Mos.Hub ──────────────────────────────────────────────
+      # ── 3. Mos.Hub: https://{user}:{token}@hub.mos.ru/... ──────
       - name: Upload sub/ to Mos.Hub
         continue-on-error: true
         env:
@@ -142,9 +105,8 @@ jobs:
             echo "::warning::Mos.Hub: пропуск — не заданы MOSHUB_USER/TOKEN/REPO"
             exit 0
           fi
-
           if [[ "$MOSHUB_REPO" != */* ]]; then
-            echo "::warning::Mos.Hub: MOSHUB_REPO должен быть owner/repo (например, liniptv/lso) — пропуск"
+            echo "::warning::Mos.Hub: MOSHUB_REPO должен быть owner/repo — пропуск"
             exit 0
           fi
 
@@ -155,30 +117,24 @@ jobs:
           files=(sub/*.64.txt)
           [ ${#files[@]} -eq 0 ] && { echo "⚠ Mos.Hub: нет sub/*.64.txt"; exit 0; }
 
+          AUTHED_URL="https://${MOSHUB_USER}:${MOSHUB_TOKEN}@hub.mos.ru/${OWNER}/${REPO}.git"
           CLEAN_URL="https://hub.mos.ru/${OWNER}/${REPO}.git"
 
-          # Mos.Hub = GitLab, пробуем USER:TOKEN, затем oauth2:TOKEN, затем Basic
           WORK="$(mktemp -d)/repo"
-          if ! git clone --depth=1 --branch "$MOSHUB_BRANCH" \
-               "https://${MOSHUB_USER}:${MOSHUB_TOKEN}@hub.mos.ru/${OWNER}/${REPO}.git" "$WORK" 2>/dev/null; then
-            if ! git clone --depth=1 --branch "$MOSHUB_BRANCH" \
-                 "https://oauth2:${MOSHUB_TOKEN}@hub.mos.ru/${OWNER}/${REPO}.git" "$WORK" 2>/dev/null; then
-              AUTH=$(printf '%s:%s' "$MOSHUB_USER" "$MOSHUB_TOKEN" | base64 -w0)
-              if ! git -c http.extraHeader="Authorization: Basic $AUTH" \
-                   clone --depth=1 --branch "$MOSHUB_BRANCH" "$CLEAN_URL" "$WORK" 2>/dev/null; then
-                rm -rf "$WORK"
-                git init -b "$MOSHUB_BRANCH" "$WORK"
-                git -C "$WORK" remote add origin "$CLEAN_URL"
-              fi
-            fi
+          echo "📥 Mos.Hub: клонирую → $WORK"
+          if ! git clone --depth=1 --branch "$MOSHUB_BRANCH" "$AUTHED_URL" "$WORK" 2>/dev/null; then
+            echo "⚠ Mos.Hub: клон не удался — создаю пустой репо"
+            rm -rf "$WORK"
+            git init -b "$MOSHUB_BRANCH" "$WORK"
+            git -C "$WORK" remote add origin "$CLEAN_URL"
+          else
+            git -C "$WORK" remote set-url origin "$CLEAN_URL"
           fi
 
           cd "$WORK"
-          git remote set-url origin "$CLEAN_URL"
           git config user.name  "github-actions[bot]"
           git config user.email "actions@github.com"
 
-          # Проверка: нужно ли обновление (сравниваем содержимое)
           NEED_UPDATE=0
           for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do
             base="$(basename "$f" .64.txt)"
@@ -189,38 +145,36 @@ jobs:
           done
           [ "$NEED_UPDATE" = "0" ] && { echo "ℹ Mos.Hub: содержимое не изменилось"; exit 0; }
 
-          # Шаг A: сносим старую sub/, кладём *.64.txt как есть
+          echo "🗑 Mos.Hub: удаляю старую sub/"
           git rm -r --cached sub/ 2>/dev/null || true
           rm -rf sub/
           mkdir -p sub/
           for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do
             cp "$f" "sub/$(basename "$f")"
+            echo "   $(basename "$f") → sub/$(basename "$f")"
           done
           git add -- sub/
           git commit -m "Upload sub as .64.txt [skip ci]" >/dev/null
           echo "📝 Mos.Hub: коммит 1 — .64.txt"
 
-          # Шаг B: переименовываем .64.txt → .txt
           cd sub/
           for f in *.64.txt; do
             git mv "$f" "${f%.64.txt}.txt"
+            echo "   $(basename "$f") → ${f%.64.txt}.txt"
           done
           cd ..
           git commit -m "Rename .64.txt to .txt [skip ci]" >/dev/null
           echo "📝 Mos.Hub: коммит 2 — .txt"
 
           outside="$(git diff --name-only HEAD~2 HEAD 2>/dev/null | grep -v '^sub/' || true)"
-          [ -n "$outside" ] && { echo "❌ файлы вне sub/"; exit 1; }
+          if [ -n "$outside" ]; then
+            echo "❌ Mos.Hub: файлы вне sub/ — отмена"
+            printf '   %s\n' "$outside"; exit 1
+          fi
 
-          # Push с fallback авторизацией
-          if ! git push "https://${MOSHUB_USER}:${MOSHUB_TOKEN}@hub.mos.ru/${OWNER}/${REPO}.git" "$MOSHUB_BRANCH" 2>/dev/null; then
-            if ! git push "https://oauth2:${MOSHUB_TOKEN}@hub.mos.ru/${OWNER}/${REPO}.git" "$MOSHUB_BRANCH" 2>/dev/null; then
-              AUTH=$(printf '%s:%s' "$MOSHUB_USER" "$MOSHUB_TOKEN" | base64 -w0)
-              if ! git -c http.extraHeader="Authorization: Basic $AUTH" push origin "$MOSHUB_BRANCH" 2>/dev/null; then
-                echo "::error::Mos.Hub: push отклонён — проверьте MOSHUB_TOKEN и MOSHUB_USER"
-                exit 1
-              fi
-            fi
+          if ! git push "$AUTHED_URL" "$MOSHUB_BRANCH" 2>/dev/null; then
+            echo "::error::Mos.Hub: push отклонён — проверь MOSHUB_USER, MOSHUB_TOKEN (write_repository), MOSHUB_REPO"
+            exit 1
           fi
           echo "✅ Mos.Hub: $OWNER/$REPO@$MOSHUB_BRANCH обновлён (2 коммита)"
 
@@ -235,43 +189,30 @@ jobs:
         run: |
           set -e
           shopt -s nullglob
-
-          if [ -z "$GITFLIC_TOKEN" ]; then
-            echo "::warning::GitFlic: GITFLIC_TOKEN пуст — пропуск"; exit 0
+          if [ -z "$GITFLIC_TOKEN" ] || [ -z "$GITFLIC_USER" ] || [ -z "$GITFLIC_REPO" ]; then
+            echo "::warning::GitFlic: пропуск"; exit 0
           fi
-          if [ -z "$GITFLIC_USER" ]; then
-            echo "::warning::GitFlic: GITFLIC_USER пуст — пропуск"; exit 0
+          if [[ "$GITFLIC_REPO" != */* ]]; then
+            echo "::warning::GitFlic: GITFLIC_REPO должен быть owner/repo"; exit 0
           fi
-          if [ -z "$GITFLIC_REPO" ] || [[ "$GITFLIC_REPO" != */* ]]; then
-            echo "::warning::GitFlic: GITFLIC_REPO должен быть owner/repo — пропуск"; exit 0
-          fi
-
           OWNER="${GITFLIC_REPO%%/*}"
           REPO="${GITFLIC_REPO#*/}"
           echo "📦 GitFlic target: $OWNER/$REPO @ $GITFLIC_BRANCH"
-
           files=(sub/*.64.txt)
           [ ${#files[@]} -eq 0 ] && { echo "⚠ GitFlic: нет sub/*.64.txt"; exit 0; }
-
-          REPO_URL="https://${GITFLIC_USER}:${GITFLIC_TOKEN}@gitflic.ru/project/${OWNER}/${REPO}.git"
+          AUTHED_URL="https://${GITFLIC_USER}:${GITFLIC_TOKEN}@gitflic.ru/project/${OWNER}/${REPO}.git"
           CLEAN_URL="https://gitflic.ru/project/${OWNER}/${REPO}.git"
-
           WORK="$(mktemp -d)/repo"
-          if ! git clone --depth=1 --branch "$GITFLIC_BRANCH" "$REPO_URL" "$WORK" 2>/dev/null; then
-            AUTH=$(printf '%s:%s' "$GITFLIC_USER" "$GITFLIC_TOKEN" | base64 -w0)
-            if ! git -c http.extraHeader="Authorization: Basic $AUTH" \
-                 clone --depth=1 --branch "$GITFLIC_BRANCH" "$CLEAN_URL" "$WORK" 2>/dev/null; then
-              rm -rf "$WORK"
-              git init -b "$GITFLIC_BRANCH" "$WORK"
-              git -C "$WORK" remote add origin "$CLEAN_URL"
-            fi
+          if ! git clone --depth=1 --branch "$GITFLIC_BRANCH" "$AUTHED_URL" "$WORK" 2>/dev/null; then
+            rm -rf "$WORK"
+            git init -b "$GITFLIC_BRANCH" "$WORK"
+            git -C "$WORK" remote add origin "$CLEAN_URL"
+          else
+            git -C "$WORK" remote set-url origin "$CLEAN_URL"
           fi
-
           cd "$WORK"
-          git remote set-url origin "$CLEAN_URL"
           git config user.name  "github-actions[bot]"
           git config user.email "actions@github.com"
-
           NEED_UPDATE=0
           for f in "$GITHUB_WORKSPACE"/sub/*.64.txt; do
             base="$(basename "$f" .64.txt)"
@@ -281,7 +222,6 @@ jobs:
             fi
           done
           [ "$NEED_UPDATE" = "0" ] && { echo "ℹ GitFlic: не изменилось"; exit 0; }
-
           git rm -r --cached sub/ 2>/dev/null || true
           rm -rf sub/
           mkdir -p sub/
@@ -291,7 +231,6 @@ jobs:
           git add -- sub/
           git commit -m "Upload sub as .64.txt [skip ci]" >/dev/null
           echo "📝 GitFlic: коммит 1 — .64.txt"
-
           cd sub/
           for f in *.64.txt; do
             git mv "$f" "${f%.64.txt}.txt"
@@ -299,12 +238,10 @@ jobs:
           cd ..
           git commit -m "Rename .64.txt to .txt [skip ci]" >/dev/null
           echo "📝 GitFlic: коммит 2 — .txt"
-
           outside="$(git diff --name-only HEAD~2 HEAD 2>/dev/null | grep -v '^sub/' || true)"
           [ -n "$outside" ] && { echo "❌ файлы вне sub/"; exit 1; }
-
-          if ! git push "https://${GITFLIC_USER}:${GITFLIC_TOKEN}@gitflic.ru/project/${OWNER}/${REPO}.git" "$GITFLIC_BRANCH" 2>/dev/null; then
-            echo "::error::GitFlic: push отклонён — проверь GITFLIC_TOKEN и GITFLIC_USER"
+          if ! git push "$AUTHED_URL" "$GITFLIC_BRANCH" 2>/dev/null; then
+            echo "::error::GitFlic: push отклонён — проверь GITFLIC_USER, GITFLIC_TOKEN, GITFLIC_REPO"
             exit 1
           fi
           echo "✅ GitFlic: $OWNER/$REPO@$GITFLIC_BRANCH обновлён (2 коммита)"
