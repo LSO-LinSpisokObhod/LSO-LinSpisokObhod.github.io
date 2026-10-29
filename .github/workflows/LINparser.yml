@@ -16,6 +16,9 @@ concurrency:
   group: "parser"
   cancel-in-progress: false
 
+env:
+  GIT_TERMINAL_PROMPT: "0"
+
 jobs:
   parser:
     runs-on: ubuntu-latest
@@ -37,8 +40,7 @@ jobs:
         run: |
           set -e
           if [ ! -f source.txt ]; then
-            echo "::error::source.txt не найден"
-            exit 1
+            echo "::error::source.txt не найден"; exit 1
           fi
           > source.clean.txt
           while IFS= read -r line || [ -n "$line" ]; do
@@ -52,8 +54,7 @@ jobs:
             echo "$clean" >> source.clean.txt
           done < source.txt
           if [ ! -s source.clean.txt ]; then
-            echo "::error::source.txt пуст после очистки"
-            exit 1
+            echo "::error::source.txt пуст после очистки"; exit 1
           fi
           mv source.clean.txt source.txt
 
@@ -63,20 +64,7 @@ jobs:
           IPINFO_TOKEN: ${{ secrets.IPINFO_TOKEN }}
         run: python "parser[#LSO-#LinSpisokObhod].py"
 
-      - name: Verify *.64.txt
-        run: |
-          set -e
-          shopt -s nullglob
-          b64=(sub/*.64.txt)
-          echo "Найдено sub/*.64.txt: ${#b64[@]}"
-          for f in "${b64[@]}"; do echo "  ✔ $f"; done
-          if [ ${#b64[@]} -eq 0 ]; then
-            echo "::error::Парсер не создал ни одного sub/*.64.txt"
-            ls -la sub/ 2>/dev/null || echo "sub/ отсутствует"
-            exit 1
-          fi
-
-      # ── GitVerse ─────────────────────────────────────────────
+      # ── GitVerse: креды в URL ────────────────────────────────
       - name: Upload to GitVerse
         continue-on-error: true
         env:
@@ -88,50 +76,48 @@ jobs:
           set -e
           shopt -s nullglob
           if [ -z "$USER" ] || [ -z "$REPO" ] || [ -z "$PASSWORD" ]; then
-            echo "::warning::GitVerse: пропуск — нет USER/REPO/PASSWORD"
-            exit 0
+            echo "::warning::GitVerse: пропуск — нет USER/REPO/PASSWORD"; exit 0
           fi
-          U="$(printf '%s' "$USER" | tr -d ': @/')"
-          P="$(printf '%s' "$PASSWORD" | tr -d ': @/')"
           R="$(printf '%s' "$REPO" | sed -E 's#^[a-zA-Z]+://##; s#\.git$##; s#/$##')"
           case "$R" in
             */*) OWNER="${R%%/*}"; REPO_N="${R##*/}" ;;
-            *)   OWNER="$U"; REPO_N="$R" ;;
+            *)   OWNER="$USER"; REPO_N="$R" ;;
           esac
-          files=(sub/*.64.txt)
+          files=("$GITHUB_WORKSPACE"/sub/*.64.txt)
           if [ ${#files[@]} -eq 0 ]; then
-            echo "::error::GitVerse: нет sub/*.64.txt"
-            exit 0
+            echo "::error::GitVerse: нет sub/*.64.txt"; exit 0
           fi
           echo "📦 GitVerse: ${OWNER}/${REPO_N}@${BRANCH} (${#files[@]} файлов)"
-          URL="https://gitverse.ru/${OWNER}/${REPO_N}.git"
-          AUTH="$(printf '%s:%s' "$U" "$P" | base64 -w0)"
-          G() { git -c http.extraHeader="Authorization: Basic $AUTH" "$@"; }
+
+          U_ENC=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1],safe=''))" "$USER")
+          P_ENC=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1],safe=''))" "$PASSWORD")
+          URL="https://${U_ENC}:${P_ENC}@gitverse.ru/${OWNER}/${REPO_N}.git"
+
           W="$(mktemp -d)"; cd "$W"; git init -q
           git config user.name "github-actions[bot]"; git config user.email "actions@github.com"
           git remote add origin "$URL"
-          if ERR=$(G fetch --depth=1 origin "$BRANCH" 2>&1); then
+
+          if ERR=$(git fetch --depth=1 origin "$BRANCH" 2>&1); then
             git checkout -q -b "$BRANCH" FETCH_HEAD
           elif echo "$ERR" | grep -qiE "couldn't find remote ref|not found"; then
             git checkout -q --orphan "$BRANCH"; git rm -rfq . 2>/dev/null || true
           else
-            echo "::warning::GitVerse fetch fail"; echo "$ERR" | head -3; exit 0
+            echo "::warning::GitVerse fetch fail"; echo "$ERR" | head -5; exit 0
           fi
+
           rm -rf sub/; mkdir -p sub/
           for f in "${files[@]}"; do
             base="$(basename "$f" .64.txt)"; cp "$f" "sub/${base}.txt"
           done
           git add -A sub/
-          if git diff --cached --quiet; then
-            echo "ℹ GitVerse: без изменений"
-            exit 0
-          fi
+          if git diff --cached --quiet; then echo "ℹ GitVerse: без изменений"; exit 0; fi
           git commit -q -m "Sync sub/ [skip ci]"
-          if ! G push origin "$BRANCH"; then
+
+          if ! git push origin "$BRANCH"; then
             echo "⚠ GitVerse push fail — retry"
-            G fetch --depth=1 origin "$BRANCH" 2>/dev/null && \
+            git fetch --depth=1 origin "$BRANCH" 2>/dev/null && \
               git merge --allow-unrelated-histories -m merge FETCH_HEAD >/dev/null 2>&1 || true
-            G push origin "$BRANCH" || { echo "::warning::GitVerse push fail"; exit 0; }
+            git push origin "$BRANCH" || { echo "::warning::GitVerse push fail"; exit 0; }
           fi
           echo "✅ GitVerse OK (${#files[@]} .64 → .txt)"
 
@@ -151,12 +137,10 @@ jobs:
           set -e
           shopt -s nullglob
           if [ -z "$VPS_HOST" ] || [ -z "$VPS_USER" ] || [ -z "$VPS_KEY" ]; then
-            echo "::warning::Mos.Hub: VPS не задан — пропуск"
-            exit 0
+            echo "::warning::Mos.Hub: VPS не задан — пропуск"; exit 0
           fi
           if [ -z "$MH_USER" ] || [ -z "$MH_REPO" ] || [ -z "$MH_TOKEN" ]; then
-            echo "::warning::Mos.Hub: MH_* не заданы — пропуск"
-            exit 0
+            echo "::warning::Mos.Hub: MH_* не заданы — пропуск"; exit 0
           fi
           MU="$(printf '%s' "$MH_USER"  | tr -d ': @/')"
           MT="$(printf '%s' "$MH_TOKEN" | tr -d ': @/')"
@@ -165,10 +149,9 @@ jobs:
             */*) OWNER="${MR%%/*}"; REPO_N="${MR##*/}" ;;
             *)   echo "::warning::Mos.Hub: REPO должен быть owner/repo"; exit 0 ;;
           esac
-          files=(sub/*.64.txt)
+          files=("$GITHUB_WORKSPACE"/sub/*.64.txt)
           if [ ${#files[@]} -eq 0 ]; then
-            echo "::error::Mos.Hub: нет sub/*.64.txt"
-            exit 0
+            echo "::error::Mos.Hub: нет sub/*.64.txt"; exit 0
           fi
           echo "📦 Mos.Hub: ${OWNER}/${REPO_N}@${MH_BRANCH} via ${VPS_HOST} (${#files[@]} файлов)"
 
@@ -178,8 +161,7 @@ jobs:
           O=(-i ~/.ssh/k -p "$VPS_PORT" -o BatchMode=yes -o StrictHostKeyChecking=accept-new
              -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ExitOnForwardFailure=yes)
           if ! ssh "${O[@]}" "$VPS_USER@$VPS_HOST" true 2>/dev/null; then
-            echo "::error::Mos.Hub: SSH до VPS не работает"
-            exit 0
+            echo "::error::Mos.Hub: SSH до VPS не работает"; exit 0
           fi
           echo "✅ SSH OK"
 
@@ -188,10 +170,7 @@ jobs:
           trap '[ -n "$PID" ] && kill "$PID" 2>/dev/null || true' EXIT
           sleep 2
           CODE=$(curl -s --socks5-hostname 127.0.0.1:1080 --max-time 15 -o /dev/null -w '%{http_code}' https://hub.mos.ru/ || echo 000)
-          if [ "$CODE" = "000" ]; then
-            echo "::error::Mos.Hub: туннель не отвечает"
-            exit 0
-          fi
+          if [ "$CODE" = "000" ]; then echo "::error::Mos.Hub: туннель не отвечает"; exit 0; fi
           echo "✅ tunnel HTTP $CODE"
 
           PROXY="socks5h://127.0.0.1:1080"
@@ -223,13 +202,9 @@ jobs:
           echo "📝 коммит 2 — .txt"
 
           outside="$(git diff --name-only HEAD~2 HEAD 2>/dev/null | grep -v '^sub/' || true)"
-          if [ -n "$outside" ]; then
-            echo "❌ файлы вне sub/"
-            exit 1
-          fi
+          if [ -n "$outside" ]; then echo "❌ файлы вне sub/"; exit 1; fi
 
           if ! G push origin "$MH_BRANCH"; then
-            echo "⚠ Mos.Hub push fail — retry"
             G fetch --depth=1 origin "$MH_BRANCH" 2>/dev/null && \
               git merge --allow-unrelated-histories -m merge FETCH_HEAD >/dev/null 2>&1 || true
             G push origin "$MH_BRANCH" || { echo "::warning::Mos.Hub push fail"; exit 0; }
@@ -248,8 +223,7 @@ jobs:
           set -e
           shopt -s nullglob
           if [ -z "$GF_USER" ] || [ -z "$GF_TOKEN" ] || [ -z "$GF_REPO" ]; then
-            echo "::warning::GitFlic: пропуск — нет GF_USER/GF_TOKEN/GF_REPO"
-            exit 0
+            echo "::warning::GitFlic: пропуск"; exit 0
           fi
           GU="$(printf '%s' "$GF_USER"  | tr -d ': @/')"
           GT="$(printf '%s' "$GF_TOKEN" | tr -d ': @/')"
@@ -258,10 +232,9 @@ jobs:
             */*) OWNER="${GR%%/*}"; REPO_N="${GR##*/}" ;;
             *)   echo "::warning::GitFlic: REPO должен быть owner/repo"; exit 0 ;;
           esac
-          files=(sub/*.64.txt)
+          files=("$GITHUB_WORKSPACE"/sub/*.64.txt)
           if [ ${#files[@]} -eq 0 ]; then
-            echo "::error::GitFlic: нет sub/*.64.txt"
-            exit 0
+            echo "::error::GitFlic: нет sub/*.64.txt"; exit 0
           fi
           echo "📦 GitFlic: ${OWNER}/${REPO_N}@${GF_BRANCH} (${#files[@]} файлов)"
 
@@ -293,13 +266,9 @@ jobs:
           echo "📝 коммит 2 — .txt"
 
           outside="$(git diff --name-only HEAD~2 HEAD 2>/dev/null | grep -v '^sub/' || true)"
-          if [ -n "$outside" ]; then
-            echo "❌ файлы вне sub/"
-            exit 1
-          fi
+          if [ -n "$outside" ]; then echo "❌ файлы вне sub/"; exit 1; fi
 
           if ! G push origin "$GF_BRANCH"; then
-            echo "⚠ GitFlic push fail — retry"
             G fetch --depth=1 origin "$GF_BRANCH" 2>/dev/null && \
               git merge --allow-unrelated-histories -m merge FETCH_HEAD >/dev/null 2>&1 || true
             G push origin "$GF_BRANCH" || { echo "::warning::GitFlic push fail"; exit 0; }
@@ -317,8 +286,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add sub/ README.md source.txt
           if git diff --quiet && git diff --staged --quiet; then
-            echo "ℹ без изменений"
-            exit 0
+            echo "ℹ без изменений"; exit 0
           fi
           git commit -m "Auto-update configs [skip ci]"
           for i in 1 2 3; do
@@ -328,10 +296,8 @@ jobs:
               exit 0
             fi
             if git push origin main 2>/dev/null; then
-              echo "✅ GitHub OK"
-              exit 0
+              echo "✅ GitHub OK"; exit 0
             fi
             sleep 5
           done
-          echo "::warning::GitHub push fail"
-          exit 0
+          echo "::warning::GitHub push fail"; exit 0
