@@ -67,41 +67,31 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: www.healthcarejobshubenhancemedicalprofessionalskillstoday.com
-- name: 'Brazil | br001.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]'
-  type: trojan
-  server: 216.238.116.204
-  port: 39533
-  password: 5t6i121em5lkmsmk
-  udp: true
-  skip-cert-verify: false
-  sni: br001.zestapp778.com
-  client-fingerprint: firefox
-- name: 'Russia | hb.ru-msk.vkcloud-storage.ru | unknown | [#LSO - #LinSpisokObhod]'
+- name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 178.250.243.45
-  port: 2444
-  uuid: 0d070b9c-64a2-49dd-8c26-d9cbb6cc225c
+  server: 178.172.227.124
+  port: 10444
+  uuid: 1af36694-b548-4b18-89a0-bc076eab4ed7
   udp: true
   tls: true
   reality-opts:
-    public-key: LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY
-  servername: hb.ru-msk.vkcloud-storage.ru
-  client-fingerprint: firefox
+    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
+    short-id: 8debcf36f1cc69ff
+  servername: ads.x5.ru
+  client-fingerprint: safari
   flow: xtls-rprx-vision
-- name: 'Russia | lorettmay.top | WebSocket | [#LSO - #LinSpisokObhod]'
+- name: 'Sweden | smart.bachidze.com | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 185.178.208.167
+  server: 88.216.223.100
   port: 443
-  uuid: 2232d904-8e6a-4202-8240-6efd8aec02e9
+  uuid: 3bb97d46-789b-4229-88f6-9beb222a4137
   udp: true
   tls: true
-  servername: lorettmay.top
+  reality-opts:
+    public-key: vzRgIP8Mvd9V6krwKxw5EwwzvC4uiaW3wo0Y2ri2_Wc
+  servername: smart.bachidze.com
   client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /blog/posts
-    headers:
-      Host: lorettmay.top
+  flow: xtls-rprx-vision
 - name: 'Sweden | smart.bachidze.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.223.100
@@ -198,7 +188,7 @@ proxies:
     public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
     short-id: 8debcf36f1cc69ff
   servername: ads.x5.ru
-  client-fingerprint: firefox
+  client-fingerprint: safari
   flow: xtls-rprx-vision
 - name: 'Russia | ru.nnight.cfd | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -320,30 +310,6 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | api.bakarova-top.ru | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.178.208.140
-  port: 443
-  uuid: ea277838-a188-44f1-a2e8-94aa110c4f27
-  udp: true
-  tls: true
-  servername: api.bakarova-top.ru
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | lorettmay.top | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.178.208.167
-  port: 443
-  uuid: fb37d713-0ed3-4146-b085-a5c879a9aafa
-  udp: true
-  tls: true
-  servername: lorettmay.top
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /blog/posts
-    headers:
-      Host: lorettmay.top
 - name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 158.160.180.165
