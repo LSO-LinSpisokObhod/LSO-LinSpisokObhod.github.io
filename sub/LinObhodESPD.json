@@ -1,0 +1,121 @@
+{
+  "log": {
+    "level": "info",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "cloudflare",
+        "address": "https://1.1.1.1/dns-query"
+      },
+      {
+        "tag": "google",
+        "address": "https://8.8.8.8/dns-query"
+      },
+      {
+        "tag": "local",
+        "address": "local",
+        "detour": "direct"
+      }
+    ],
+    "final": "cloudflare",
+    "strategy": "prefer_ipv4"
+  },
+  "inbounds": [
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 2080
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "vless",
+      "tag": "France | max.ru | GRPC | [#LOESPD - #LinSpisokObhod]",
+      "server": "195.123.189.221",
+      "server_port": 443,
+      "uuid": "63959ed7-d26f-48dd-8c7b-ebdb6ea68535",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "9X-tgXeFaqxURY0nGxFNdz9bpNIo7DTXHoWXpBqiOj0",
+          "short_id": "cbc638acc8ac87"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "grpc",
+        "service_name": "grpc-90"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "France | max.ru | GRPC | [#LOESPD - #LinSpisokObhod]",
+      "server": "195.123.189.221",
+      "server_port": 443,
+      "uuid": "63959ed7-d26f-48dd-8c7b-ebdb6ea68535",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "9X-tgXeFaqxURY0nGxFNdz9bpNIo7DTXHoWXpBqiOj0",
+          "short_id": "cbc638acc8ac87"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "grpc",
+        "service_name": "grpc-90"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "unknown | max.ru | GRPC | [#LOESPD - #LinSpisokObhod]",
+      "server": "qtir1.dnetsolutions.ru",
+      "server_port": 443,
+      "uuid": "63959ed7-d26f-48dd-8c7b-ebdb6ea68535",
+      "flow": "",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "9X-tgXeFaqxURY0nGxFNdz9bpNIo7DTXHoWXpBqiOj0",
+          "short_id": "cbc638acc8ac87"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "grpc",
+        "service_name": "grpc-90"
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ],
+  "route": {
+    "rules": [],
+    "final": "direct",
+    "auto_detect_interface": true
+  }
+}

@@ -2,7 +2,7 @@
 
 ## 📅 Время последнего сбора
 
-`2026-11-02 23:52:37 (UTC+3)`
+`2026-11-03 00:50:33 (UTC+3)`
 
 ---
 
@@ -10,10 +10,10 @@
 
 | Файл | Всего конфигов |
 |------|----------------|
-| 📁 ALL.txt / ALL.yml / ALL.json | `343` |
-| 📱 LTE.txt / LTE.yml / LTE.json | `23` |
-| 📶 WIFI.txt / WIFI.yml / WIFI.json | `320` |
-| 🏫 LinObhodESPD.txt / LinObhodESPD.yml / LinObhodESPD.json | `0` |
+| 📁 ALL.txt / ALL.yml / ALL.json | `386` |
+| 📱 LTE.txt / LTE.yml / LTE.json | `34` |
+| 📶 WIFI.txt / WIFI.yml / WIFI.json | `352` |
+| 🏫 LinObhodESPD.txt / LinObhodESPD.yml / LinObhodESPD.json | `3` |
 
 ---
 
@@ -23,41 +23,41 @@
 
 | Протокол | Количество |
 |----------|------------|
-| 🔗 VLESS | `234` |
-| 📦 VMess | `26` |
-| 🛡️ Trojan | `77` |
-| ⚡ Hysteria2 | `6` |
-| **ИТОГО** | **`343`** |
+| 🔗 VLESS | `268` |
+| 📦 VMess | `31` |
+| 🛡️ Trojan | `80` |
+| ⚡ Hysteria2 | `7` |
+| **ИТОГО** | **`386`** |
 
 ### 📱 LTE
 
 | Протокол | Количество |
 |----------|------------|
-| 🔗 VLESS | `14` |
-| 📦 VMess | `0` |
+| 🔗 VLESS | `24` |
+| 📦 VMess | `1` |
 | 🛡️ Trojan | `9` |
 | ⚡ Hysteria2 | `0` |
-| **ИТОГО** | **`23`** |
+| **ИТОГО** | **`34`** |
 
 ### 📶 WIFI
 
 | Протокол | Количество |
 |----------|------------|
-| 🔗 VLESS | `220` |
-| 📦 VMess | `26` |
-| 🛡️ Trojan | `68` |
-| ⚡ Hysteria2 | `6` |
-| **ИТОГО** | **`320`** |
+| 🔗 VLESS | `244` |
+| 📦 VMess | `30` |
+| 🛡️ Trojan | `71` |
+| ⚡ Hysteria2 | `7` |
+| **ИТОГО** | **`352`** |
 
 ### 🏫 LinObhodESPD
 
 | Протокол | Количество |
 |----------|------------|
-| 🔗 VLESS | `0` |
+| 🔗 VLESS | `3` |
 | 📦 VMess | `0` |
 | 🛡️ Trojan | `0` |
 | ⚡ Hysteria2 | `0` |
-| **ИТОГО** | **`0`** |
+| **ИТОГО** | **`3`** |
 
 ---
 
