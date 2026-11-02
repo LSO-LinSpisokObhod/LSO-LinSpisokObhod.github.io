@@ -517,6 +517,15 @@ proxies:
   skip-cert-verify: false
   sni: ph001.zestapp778.com
   client-fingerprint: firefox
+- name: 'Canada | ca001.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 216.128.185.90
+  port: 46977
+  password: 5t6i121em5lkmsmk
+  udp: true
+  skip-cert-verify: false
+  sni: ca001.zestapp778.com
+  client-fingerprint: firefox
 - name: 'Brazil | br001.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 216.238.116.204
@@ -2112,6 +2121,16 @@ proxies:
   servername: 158.160.195.193
   client-fingerprint: safari
   network: xhttp
+- name: 'Russia | 158.160.195.193 | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 158.160.195.193
+  port: 443
+  uuid: 4777d90d-265b-4927-a0d1-63f36ed1421c
+  udp: true
+  tls: true
+  servername: 158.160.195.193
+  client-fingerprint: firefox
+  network: xhttp
 - name: 'Kazakhstan | kznode.easyvpn.dev | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 176.12.77.122
@@ -2532,73 +2551,6 @@ proxies:
     short-id: b2f9bb426426e0e7
   servername: www.kinopoisk.ru
   client-fingerprint: qq
-  network: xhttp
-- name: 'Germany | maps.blog-forme.ru | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.17.52.236
-  port: 2083
-  uuid: 6da2c981-8c77-4340-bda3-93399b7aea26
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: mbi4BZAuiq_L6pfhG2xxWmtosq0Z1Pzf18fvNSWKMxY
-    short-id: 3258252d44113e23
-  servername: maps.blog-forme.ru
-  client-fingerprint: edge
-  flow: ''
-  network: xhttp
-- name: 'Germany | maps.blog-forme.ru | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.17.52.236
-  port: 2083
-  uuid: 6da2c981-8c77-4340-bda3-93399b7aea26
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: mbi4BZAuiq_L6pfhG2xxWmtosq0Z1Pzf18fvNSWKMxY
-    short-id: 3258252d44113e23
-  servername: maps.blog-forme.ru
-  client-fingerprint: edge
-  flow: ''
-  network: xhttp
-- name: 'Germany | maps.blog-forme.ru | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.17.52.236
-  port: 2083
-  uuid: 6da2c981-8c77-4340-bda3-93399b7aea26
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: mbi4BZAuiq_L6pfhG2xxWmtosq0Z1Pzf18fvNSWKMxY
-    short-id: 3258252d44113e23
-  servername: maps.blog-forme.ru
-  client-fingerprint: edge
-  network: xhttp
-- name: 'Germany | maps.blog-forme.ru | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.17.52.236
-  port: 2083
-  uuid: 6da2c981-8c77-4340-bda3-93399b7aea26
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: mbi4BZAuiq_L6pfhG2xxWmtosq0Z1Pzf18fvNSWKMxY
-    short-id: 3258252d44113e23
-  servername: maps.blog-forme.ru
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Germany | maps.blog-forme.ru | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.17.52.236
-  port: 2083
-  uuid: 6da2c981-8c77-4340-bda3-93399b7aea26
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: mbi4BZAuiq_L6pfhG2xxWmtosq0Z1Pzf18fvNSWKMxY
-    short-id: 3258252d44113e23
-  servername: maps.blog-forme.ru
-  client-fingerprint: firefox
   network: xhttp
 - name: 'Russia | www.kinopoisk.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -3285,6 +3237,18 @@ proxies:
   servername: willow.gaznw.my
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Poland | pol.qikbro.com | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 147.45.126.220
+  port: 443
+  uuid: 905421fa-5085-46e0-bc5a-826a21b35113
+  udp: true
+  tls: true
+  servername: pol.qikbro.com
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: assets
 - name: 'Lithuania | admin.betust.net | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 93.115.24.135
@@ -4921,6 +4885,20 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
+- name: 'South Korea | null | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 132.145.80.230
+  port: 80
+  uuid: 5155860e-d07d-46c3-9128-3afbd84626c7
+  alterId: 0
+  cipher: auto
+  udp: true
+  servername: 'null'
+  network: ws
+  ws-opts:
+    path: /cctv13.m3u8
+    headers:
+      Host: 'null'
 - name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 158.160.180.165
@@ -4931,15 +4909,6 @@ proxies:
   udp: true
   tls: true
   servername: 158.160.180.165
-- name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 158.160.180.165
-  port: 24212
-  uuid: c58c1205-b308-416f-8503-c04557abf93d
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
 - name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 104.21.7.133
@@ -4976,16 +4945,6 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 158.160.180.165
-  port: 24212
-  uuid: c58c1205-b308-416f-8503-c04557abf93d
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: 158.160.180.165
 - name: 'unknown | dog-hk.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: dog-hk.kunlun01dns.com
@@ -5023,6 +4982,15 @@ proxies:
     path: /
     headers:
       Host: www.pubgmobile.com
+- name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 158.160.180.165
+  port: 24212
+  uuid: c58c1205-b308-416f-8503-c04557abf93d
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
 - name: 'unknown | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: cf.0sm.com
@@ -5104,6 +5072,17 @@ proxies:
     path: /ws?ed=2048
     headers:
       Host: vmess.lbw666.dpdns.org
+- name: 'South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 132.145.80.230
+  port: 80
+  uuid: 5155860e-d07d-46c3-9128-3afbd84626c7
+  alterId: 0
+  cipher: auto
+  udp: true
+  network: ws
+  ws-opts:
+    path: /cctv13.m3u8
 - name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 172.67.187.145
@@ -5148,6 +5127,16 @@ proxies:
   network: ws
   ws-opts:
     path: /
+- name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 158.160.180.165
+  port: 24212
+  uuid: c58c1205-b308-416f-8503-c04557abf93d
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: 158.160.180.165
 - name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 158.160.180.165
