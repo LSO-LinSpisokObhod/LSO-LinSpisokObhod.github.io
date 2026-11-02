@@ -137,22 +137,62 @@
       }
     },
     {
+      "type": "trojan",
+      "tag": "Brazil | br001.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "216.238.116.204",
+      "server_port": 39533,
+      "password": "5t6i121em5lkmsmk",
+      "tls": {
+        "enabled": true,
+        "server_name": "br001.zestapp778.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
       "type": "vless",
-      "tag": "Sweden | smart.bachidze.com | unknown | [#LSO - #LinSpisokObhod]",
-      "server": "88.216.223.100",
-      "server_port": 443,
-      "uuid": "3bb97d46-789b-4229-88f6-9beb222a4137",
+      "tag": "Russia | hb.ru-msk.vkcloud-storage.ru | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "178.250.243.45",
+      "server_port": 2444,
+      "uuid": "0d070b9c-64a2-49dd-8c26-d9cbb6cc225c",
       "flow": "xtls-rprx-vision",
       "tls": {
         "enabled": true,
-        "server_name": "smart.bachidze.com",
+        "server_name": "hb.ru-msk.vkcloud-storage.ru",
         "reality": {
           "enabled": true,
-          "public_key": "vzRgIP8Mvd9V6krwKxw5EwwzvC4uiaW3wo0Y2ri2_Wc"
+          "public_key": "LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY"
         },
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | lorettmay.top | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "185.178.208.167",
+      "server_port": 443,
+      "uuid": "2232d904-8e6a-4202-8240-6efd8aec02e9",
+      "tls": {
+        "enabled": true,
+        "server_name": "lorettmay.top",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/blog/posts",
+        "headers": {
+          "Host": "lorettmay.top"
         }
       }
     },
@@ -173,31 +213,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Russia | business.lesotorg-kirov.ru | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "185.229.9.135",
-      "server_port": 443,
-      "uuid": "4df3e06b-85e9-4b69-b38a-be37bad2fe9d",
-      "tls": {
-        "enabled": true,
-        "server_name": "business.lesotorg-kirov.ru",
-        "alpn": [
-          "http/1.1"
-        ],
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/chws",
-        "headers": {
-          "Host": "business.lesotorg-kirov.ru"
         }
       }
     },
@@ -279,31 +294,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Russia | ara.rtkdvbr.cc | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "185.86.145.37",
-      "server_port": 443,
-      "uuid": "769cc55c-7ed6-4f3a-a77c-92e1c5c137ba",
-      "tls": {
-        "enabled": true,
-        "server_name": "ara.rtkdvbr.cc",
-        "alpn": [
-          "http/1.1"
-        ],
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/amws",
-        "headers": {
-          "Host": "ara.rtkdvbr.cc"
         }
       }
     },
@@ -398,28 +388,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "safari"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Russia | prem-ai.shop | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "95.129.232.184",
-      "server_port": 443,
-      "uuid": "d49f7cc7-0c15-4a49-9644-ef72e00d8e56",
-      "tls": {
-        "enabled": true,
-        "server_name": "prem-ai.shop",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/gateway/v1/ws/3d71fffdcc0ea992b3084743829ae1ad",
-        "headers": {
-          "Host": "prem-ai.shop"
         }
       }
     },
@@ -607,16 +575,28 @@
       }
     },
     {
-      "type": "vmess",
-      "tag": "Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "158.160.180.165",
-      "server_port": 24212,
-      "uuid": "c58c1205-b308-416f-8503-c04557abf93d",
-      "security": "auto",
-      "alter_id": 0,
+      "type": "vless",
+      "tag": "Russia | lorettmay.top | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "185.178.208.167",
+      "server_port": 443,
+      "uuid": "fb37d713-0ed3-4146-b085-a5c879a9aafa",
       "tls": {
         "enabled": true,
-        "server_name": "158.160.180.165"
+        "server_name": "lorettmay.top",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/blog/posts",
+        "headers": {
+          "Host": "lorettmay.top"
+        }
       }
     },
     {
@@ -642,6 +622,19 @@
       "alter_id": 0,
       "tls": {
         "enabled": true
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "158.160.180.165",
+      "server_port": 24212,
+      "uuid": "c58c1205-b308-416f-8503-c04557abf93d",
+      "security": "auto",
+      "alter_id": 0,
+      "tls": {
+        "enabled": true,
+        "server_name": "158.160.180.165"
       }
     },
     {
