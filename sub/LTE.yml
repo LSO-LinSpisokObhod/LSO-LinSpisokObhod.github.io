@@ -67,6 +67,15 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: www.healthcarejobshubenhancemedicalprofessionalskillstoday.com
+- name: 'Brazil | br001.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 216.238.116.204
+  port: 39533
+  password: 5t6i121em5lkmsmk
+  udp: true
+  skip-cert-verify: false
+  sni: br001.zestapp778.com
+  client-fingerprint: firefox
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.172.227.124
@@ -146,6 +155,19 @@ proxies:
   network: xhttp
 - name: 'Russia | www.kinopoisk.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
+  server: 132.243.230.251
+  port: 443
+  uuid: 6da2c981-8c77-4340-bda3-93399b7aea26
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: Uz1UbBDf84n7oNfFIhFvXbuFcj1nbNEroiKC_Ud4ajg
+    short-id: b2f9bb426426e0e7
+  servername: www.kinopoisk.ru
+  client-fingerprint: firefox
+  network: xhttp
+- name: 'Russia | www.kinopoisk.ru | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
   server: 213.165.54.59
   port: 8443
   uuid: 6da2c981-8c77-4340-bda3-93399b7aea26
@@ -171,6 +193,21 @@ proxies:
   servername: www.kinopoisk.ru
   client-fingerprint: firefox
   network: xhttp
+- name: 'The Netherlands | nla.kosmosapp.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 79.141.164.81
+  port: 443
+  uuid: 818b6985-683d-4986-9899-986710736fea
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: pR39Vv5qhk8r6akOicoy6mMs4-ppSWUez8MyAXG7wwQ
+    short-id: 27350908de933e09
+  servername: nla.kosmosapp.net
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: neurex
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 95.128.71.79
@@ -325,16 +362,6 @@ proxies:
   cipher: auto
   udp: true
   tls: true
-  servername: 158.160.180.165
-- name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 158.160.180.165
-  port: 24212
-  uuid: c58c1205-b308-416f-8503-c04557abf93d
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
 - name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 158.160.180.165
@@ -354,3 +381,13 @@ proxies:
   cipher: auto
   udp: true
   tls: true
+- name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 158.160.180.165
+  port: 24212
+  uuid: c58c1205-b308-416f-8503-c04557abf93d
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: 158.160.180.165
