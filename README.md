@@ -2,7 +2,7 @@
 
 ## 📅 Время последнего сбора
 
-`2026-11-02 10:45:13 (UTC+3)`
+`2026-11-02 10:51:14 (UTC+3)`
 
 ---
 
@@ -10,9 +10,9 @@
 
 | Файл | Всего конфигов |
 |------|----------------|
-| 📁 ALL.txt / ALL.yml / ALL.json | `479` |
+| 📁 ALL.txt / ALL.yml / ALL.json | `478` |
 | 📱 LTE.txt / LTE.yml / LTE.json | `44` |
-| 📶 WIFI.txt / WIFI.yml / WIFI.json | `435` |
+| 📶 WIFI.txt / WIFI.yml / WIFI.json | `434` |
 | 🏫 LinObhodESPD.txt / LinObhodESPD.yml / LinObhodESPD.json | `0` |
 
 ---
@@ -25,9 +25,9 @@
 |----------|------------|
 | 🔗 VLESS | `348` |
 | 📦 VMess | `35` |
-| 🛡️ Trojan | `90` |
+| 🛡️ Trojan | `89` |
 | ⚡ Hysteria2 | `6` |
-| **ИТОГО** | **`479`** |
+| **ИТОГО** | **`478`** |
 
 ### 📱 LTE
 
@@ -45,9 +45,9 @@
 |----------|------------|
 | 🔗 VLESS | `319` |
 | 📦 VMess | `29` |
-| 🛡️ Trojan | `81` |
+| 🛡️ Trojan | `80` |
 | ⚡ Hysteria2 | `6` |
-| **ИТОГО** | **`435`** |
+| **ИТОГО** | **`434`** |
 
 ### 🏫 LinObhodESPD
 
