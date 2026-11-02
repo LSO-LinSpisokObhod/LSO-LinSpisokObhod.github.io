@@ -76,19 +76,6 @@ proxies:
   skip-cert-verify: false
   sni: br001.zestapp778.com
   client-fingerprint: firefox
-- name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.172.227.124
-  port: 10444
-  uuid: 1af36694-b548-4b18-89a0-bc076eab4ed7
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
-    short-id: 8debcf36f1cc69ff
-  servername: ads.x5.ru
-  client-fingerprint: safari
-  flow: xtls-rprx-vision
 - name: 'Sweden | smart.bachidze.com | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.223.100
@@ -155,17 +142,16 @@ proxies:
   network: xhttp
 - name: 'Russia | www.kinopoisk.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 213.165.54.59
-  port: 8443
+  server: 132.243.230.251
+  port: 443
   uuid: 6da2c981-8c77-4340-bda3-93399b7aea26
   udp: true
   tls: true
   reality-opts:
-    public-key: CI4hMTvVsem9mloOgRCW9A6WC-srPPwu3jlylwOnd3A
-    short-id: 2e6d668958829998
+    public-key: Uz1UbBDf84n7oNfFIhFvXbuFcj1nbNEroiKC_Ud4ajg
+    short-id: b2f9bb426426e0e7
   servername: www.kinopoisk.ru
-  client-fingerprint: edge
-  flow: ''
+  client-fingerprint: firefox
   network: xhttp
 - name: 'Russia | www.kinopoisk.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -191,46 +177,7 @@ proxies:
     public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
     short-id: 8debcf36f1cc69ff
   servername: ads.x5.ru
-  client-fingerprint: safari
-  flow: xtls-rprx-vision
-- name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 95.128.71.79
-  port: 10444
-  uuid: 8cef7621-c6f0-486e-b51d-59c30c5b0b25
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
-    short-id: 8debcf36f1cc69ff
-  servername: ads.x5.ru
   client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.172.227.228
-  port: 10444
-  uuid: b6e5dc56-836f-48c1-9163-b0b0b43b647d
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
-    short-id: 8debcf36f1cc69ff
-  servername: ads.x5.ru
-  client-fingerprint: safari
-  flow: xtls-rprx-vision
-- name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.172.227.228
-  port: 10444
-  uuid: b6e5dc56-836f-48c1-9163-b0b0b43b647d
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
-    short-id: 8debcf36f1cc69ff
-  servername: ads.x5.ru
-  client-fingerprint: edge
   flow: xtls-rprx-vision
 - name: 'Lithuania | ccc.010304.xyz | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -302,16 +249,18 @@ proxies:
     path: /amws
     headers:
       Host: ara.rtkdvbr.cc
-- name: 'United Kingdom | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
+- name: 'The Netherlands | nla.kosmosapp.net | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 138.124.125.193
-  port: 10444
-  uuid: e57ce64d-5a1a-4a90-96df-9e1bd3ad26e4
+  server: 79.141.164.81
+  port: 443
+  uuid: f101653b-7e1a-407c-b166-a7a40ab34a80
   udp: true
   tls: true
   reality-opts:
-    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
-    short-id: 8debcf36f1cc69ff
-  servername: ads.x5.ru
+    public-key: pR39Vv5qhk8r6akOicoy6mMs4-ppSWUez8MyAXG7wwQ
+    short-id: 27350908de933e09
+  servername: nla.kosmosapp.net
   client-fingerprint: firefox
-  flow: xtls-rprx-vision
+  network: grpc
+  grpc-opts:
+    grpc-service-name: neurex
