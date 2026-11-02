@@ -67,43 +67,6 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: www.healthcarejobshubenhancemedicalprofessionalskillstoday.com
-- name: 'Brazil | br001.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]'
-  type: trojan
-  server: 216.238.116.204
-  port: 39533
-  password: 5t6i121em5lkmsmk
-  udp: true
-  skip-cert-verify: false
-  sni: br001.zestapp778.com
-  client-fingerprint: firefox
-- name: 'Russia | lorettmay.top | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.178.208.167
-  port: 443
-  uuid: 2232d904-8e6a-4202-8240-6efd8aec02e9
-  udp: true
-  tls: true
-  servername: lorettmay.top
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /blog/posts
-    headers:
-      Host: lorettmay.top
-- name: 'Russia | lorettmay.top | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.178.208.167
-  port: 443
-  uuid: 2232d904-8e6a-4202-8240-6efd8aec02e9
-  udp: true
-  tls: true
-  servername: lorettmay.top
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /blog/posts
-    headers:
-      Host: lorettmay.top
 - name: 'Sweden | smart.bachidze.com | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.223.100
@@ -128,18 +91,20 @@ proxies:
   servername: smart.bachidze.com
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Germany | nl-modx-prime.storagedirectguide.com | unknown | [#LSO - #LinSpisokObhod]'
+- name: 'Russia | business.lesotorg-kirov.ru | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 88.216.70.92
+  server: 185.229.9.135
   port: 443
-  uuid: 5254c281-3bc1-40ee-ba89-1aaf8c251402
+  uuid: 4df3e06b-85e9-4b69-b38a-be37bad2fe9d
   udp: true
   tls: true
-  reality-opts:
-    public-key: node0aB_7yyVADkeieiBBpxqIlxNLQcvgotRClh0QXQ
-  servername: nl-modx-prime.storagedirectguide.com
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
+  servername: business.lesotorg-kirov.ru
+  client-fingerprint: qq
+  network: ws
+  ws-opts:
+    path: /chws
+    headers:
+      Host: business.lesotorg-kirov.ru
 - name: 'Russia | www.kinopoisk.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 132.243.230.251
@@ -240,19 +205,6 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Latvia | amber.gaznw.my | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.236.22.34
-  port: 443
-  uuid: 902e7be9-d0a8-42a6-994f-8320916a9d9e
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: oKG1EhkfIvBM6xLEk7ck51ZbjvUKDR22RNjTJR_7sTU
-    short-id: 46da9a2868751b85
-  servername: amber.gaznw.my
-  client-fingerprint: qq
-  flow: xtls-rprx-vision
 - name: 'Russia | ru.nnight.cfd | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 188.72.103.4
@@ -276,34 +228,6 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: safari
   flow: xtls-rprx-vision
-- name: 'Russia | me.nehtar.ru | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 91.215.42.63
-  port: 443
-  uuid: b981a63f-2343-493a-a924-de900807b169
-  udp: true
-  tls: true
-  servername: me.nehtar.ru
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /v1/data/chunk/
-    headers:
-      Host: me.nehtar.ru
-- name: 'Russia | my.console.pc-club.app | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 95.129.236.171
-  port: 443
-  uuid: b981a63f-2343-493a-a924-de900807b169
-  udp: true
-  tls: true
-  servername: my.console.pc-club.app
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /v1/data/chunk/
-    headers:
-      Host: my.console.pc-club.app
 - name: 'Russia | prem-ai.shop | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 95.129.232.184
@@ -318,20 +242,6 @@ proxies:
     path: /gateway/v1/ws/3d71fffdcc0ea992b3084743829ae1ad
     headers:
       Host: prem-ai.shop
-- name: 'unknown | vk.com | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: re-rus.koska.pro
-  port: 443
-  uuid: d529fe2a-44cc-4d4b-b764-834ab60c8a6d
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 6OOa1D_Yrkt0k9VXpuDC6j0qtqwtfV7-P-KsqAJyrks
-    short-id: 8580939eb8d1ca17
-  servername: vk.com
-  client-fingerprint: firefox
-  flow: ''
-  network: xhttp
 - name: 'Russia | business.lesotorg-kirov.ru | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.229.9.135
@@ -439,20 +349,6 @@ proxies:
   servername: api.bakarova-top.ru
   client-fingerprint: firefox
   network: xhttp
-- name: 'Russia | lorettmay.top | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.178.208.167
-  port: 443
-  uuid: fb37d713-0ed3-4146-b085-a5c879a9aafa
-  udp: true
-  tls: true
-  servername: lorettmay.top
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /blog/posts
-    headers:
-      Host: lorettmay.top
 - name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 158.160.180.165
@@ -472,6 +368,7 @@ proxies:
   cipher: auto
   udp: true
   tls: true
+  servername: 158.160.180.165
 - name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 158.160.180.165
@@ -481,7 +378,6 @@ proxies:
   cipher: auto
   udp: true
   tls: true
-  servername: 158.160.180.165
 - name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 158.160.180.165
