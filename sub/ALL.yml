@@ -730,6 +730,19 @@ proxies:
   network: ws
   ws-opts:
     path: /assignment
+- name: 'Malaysia | www.cordweave.com | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 76.13.188.13
+  port: 8443
+  password: humanity
+  udp: true
+  skip-cert-verify: false
+  sni: www.cordweave.com
+  network: ws
+  ws-opts:
+    path: /assignment
+    headers:
+      Host: www.cordweave.com
 - name: 'United States | www.trusteeforward.com | WebSocket | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 8.6.112.206
@@ -1149,6 +1162,19 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: assets
+- name: 'Romania | quartz807.filebeam.website | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 88.80.135.91
+  port: 443
+  uuid: 2cd9dc41-aace-41e3-b9bf-436875f0c0d2
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: xcTXD3of3Yt5hHdIwYGZ1LjMBgiL6sqj5J33J4U4ozM
+    short-id: a7c31f92
+  servername: quartz807.filebeam.website
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'unknown | tgju.org | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: FL.Private-Ai.IR
@@ -2285,6 +2311,18 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
+- name: 'Russia | uk.neuroniko.com | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 193.233.216.43
+  port: 24127
+  uuid: 69158986-cfae-4567-8391-0f96d9d985bd
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: ud15DX-emDBS7QsLMabJ7CjgIteK61jxwSp1v0Fewxc
+  servername: uk.neuroniko.com
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'India | www.cloudflare.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.212.35.198
@@ -2816,6 +2854,16 @@ proxies:
   servername: is-tw-relay.cdn.cachefleet.com
   client-fingerprint: firefox
   network: xhttp
+- name: 'Russia | sorrel-gate.cdn.cachefleet.com | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.129.234.113
+  port: 8443
+  uuid: 88281d02-b387-4fe3-918e-26ed331e6d08
+  udp: true
+  tls: true
+  servername: sorrel-gate.cdn.cachefleet.com
+  client-fingerprint: firefox
+  network: xhttp
 - name: 'Russia | tansy-wharf.cdn.cachefleet.com | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 95.129.234.113
@@ -3257,6 +3305,16 @@ proxies:
   udp: true
   tls: true
   servername: hazel-beacon.cdn.cachefleet.com
+  client-fingerprint: firefox
+  network: xhttp
+- name: 'Russia | linden-crest.cdn.cachefleet.com | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.129.234.108
+  port: 8443
+  uuid: b229d38c-35ec-4a0b-9c86-8fceba243d6c
+  udp: true
+  tls: true
+  servername: linden-crest.cdn.cachefleet.com
   client-fingerprint: firefox
   network: xhttp
 - name: 'Russia | wordpress.com | TCP | [#LSO - #LinSpisokObhod]'
@@ -4123,6 +4181,20 @@ proxies:
     path: /api/connect
     headers:
       Host: wstg.datasynctrue.online
+- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 104.17.147.222
+  port: 80
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
+  alterId: 0
+  cipher: auto
+  udp: true
+  servername: vmess.lbw666.dpdns.org
+  network: ws
+  ws-opts:
+    path: /ws?ed=2048
+    headers:
+      Host: vmess.lbw666.dpdns.org
 - name: 'unknown | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: cf.0sm.com
@@ -4326,20 +4398,6 @@ proxies:
   cipher: auto
   udp: true
   servername: zfd-hkv1.kunlun01dns.com
-- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 104.17.147.222
-  port: 80
-  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: vmess.lbw666.dpdns.org
-  network: ws
-  ws-opts:
-    path: /ws?ed=2048
-    headers:
-      Host: vmess.lbw666.dpdns.org
 - name: 'South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 132.145.80.230

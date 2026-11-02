@@ -1142,6 +1142,24 @@
     },
     {
       "type": "trojan",
+      "tag": "Malaysia | www.cordweave.com | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "76.13.188.13",
+      "server_port": 8443,
+      "password": "humanity",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.cordweave.com"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/assignment",
+        "headers": {
+          "Host": "www.cordweave.com"
+        }
+      }
+    },
+    {
+      "type": "trojan",
       "tag": "United States | www.trusteeforward.com | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "8.6.112.206",
       "server_port": 443,
@@ -1809,6 +1827,27 @@
       "transport": {
         "type": "grpc",
         "service_name": "assets"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Romania | quartz807.filebeam.website | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "88.80.135.91",
+      "server_port": 443,
+      "uuid": "2cd9dc41-aace-41e3-b9bf-436875f0c0d2",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "quartz807.filebeam.website",
+        "reality": {
+          "enabled": true,
+          "public_key": "xcTXD3of3Yt5hHdIwYGZ1LjMBgiL6sqj5J33J4U4ozM",
+          "short_id": "a7c31f92"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
       }
     },
     {
@@ -3697,6 +3736,26 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | uk.neuroniko.com | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "193.233.216.43",
+      "server_port": 24127,
+      "uuid": "69158986-cfae-4567-8391-0f96d9d985bd",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "uk.neuroniko.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "ud15DX-emDBS7QsLMabJ7CjgIteK61jxwSp1v0Fewxc"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "India | www.cloudflare.com | TCP | [#LSO - #LinSpisokObhod]",
       "server": "178.212.35.198",
       "server_port": 443,
@@ -4528,6 +4587,24 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | sorrel-gate.cdn.cachefleet.com | XHTTP | [#LSO - #LinSpisokObhod]",
+      "server": "95.129.234.113",
+      "server_port": 8443,
+      "uuid": "88281d02-b387-4fe3-918e-26ed331e6d08",
+      "tls": {
+        "enabled": true,
+        "server_name": "sorrel-gate.cdn.cachefleet.com",
+        "alpn": [
+          "h2"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Russia | tansy-wharf.cdn.cachefleet.com | XHTTP | [#LSO - #LinSpisokObhod]",
       "server": "95.129.234.113",
       "server_port": 8443,
@@ -5267,6 +5344,24 @@
       "tls": {
         "enabled": true,
         "server_name": "hazel-beacon.cdn.cachefleet.com",
+        "alpn": [
+          "h2"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | linden-crest.cdn.cachefleet.com | XHTTP | [#LSO - #LinSpisokObhod]",
+      "server": "95.129.234.108",
+      "server_port": 8443,
+      "uuid": "b229d38c-35ec-4a0b-9c86-8fceba243d6c",
+      "tls": {
+        "enabled": true,
+        "server_name": "linden-crest.cdn.cachefleet.com",
         "alpn": [
           "h2"
         ],
@@ -6636,6 +6731,22 @@
     },
     {
       "type": "vmess",
+      "tag": "United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "104.17.147.222",
+      "server_port": 80,
+      "uuid": "0cf6d970-3f1d-4aae-a989-92a8f76ae3db",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/ws?ed=2048",
+        "headers": {
+          "Host": "vmess.lbw666.dpdns.org"
+        }
+      }
+    },
+    {
+      "type": "vmess",
       "tag": "unknown | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "cf.0sm.com",
       "server_port": 80,
@@ -6869,22 +6980,6 @@
       "uuid": "0802ac03-7973-39ef-a019-ba02de6c01e1",
       "security": "auto",
       "alter_id": 0
-    },
-    {
-      "type": "vmess",
-      "tag": "United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "104.17.147.222",
-      "server_port": 80,
-      "uuid": "0cf6d970-3f1d-4aae-a989-92a8f76ae3db",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/ws?ed=2048",
-        "headers": {
-          "Host": "vmess.lbw666.dpdns.org"
-        }
-      }
     },
     {
       "type": "vmess",
