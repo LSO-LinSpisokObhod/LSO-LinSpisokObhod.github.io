@@ -220,30 +220,6 @@
     },
     {
       "type": "vless",
-      "tag": "unknown | max.ru | GRPC | [#LSO - #LinSpisokObhod]",
-      "server": "qtir1.dnetsolutions.ru",
-      "server_port": 443,
-      "uuid": "63959ed7-d26f-48dd-8c7b-ebdb6ea68535",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "9X-tgXeFaqxURY0nGxFNdz9bpNIo7DTXHoWXpBqiOj0",
-          "short_id": "cbc638acc8ac87"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      },
-      "transport": {
-        "type": "grpc",
-        "service_name": "grpc-90"
-      }
-    },
-    {
-      "type": "vless",
       "tag": "Russia | www.kinopoisk.ru | XHTTP | [#LSO - #LinSpisokObhod]",
       "server": "132.243.230.251",
       "server_port": 443,
@@ -569,18 +545,6 @@
       "security": "auto",
       "alter_id": 0,
       "tls": {
-        "enabled": true
-      }
-    },
-    {
-      "type": "vmess",
-      "tag": "Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "158.160.180.165",
-      "server_port": 24212,
-      "uuid": "c58c1205-b308-416f-8503-c04557abf93d",
-      "security": "auto",
-      "alter_id": 0,
-      "tls": {
         "enabled": true,
         "server_name": "158.160.180.165"
       }
@@ -608,6 +572,18 @@
       "tls": {
         "enabled": true,
         "server_name": "158.160.180.165"
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "158.160.180.165",
+      "server_port": 24212,
+      "uuid": "c58c1205-b308-416f-8503-c04557abf93d",
+      "security": "auto",
+      "alter_id": 0,
+      "tls": {
+        "enabled": true
       }
     },
     {

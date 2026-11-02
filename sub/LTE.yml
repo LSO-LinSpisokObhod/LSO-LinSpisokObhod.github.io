@@ -118,21 +118,6 @@ proxies:
   servername: stats.vk-portal.net
   client-fingerprint: safari
   flow: xtls-rprx-vision
-- name: 'unknown | max.ru | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: qtir1.dnetsolutions.ru
-  port: 443
-  uuid: 63959ed7-d26f-48dd-8c7b-ebdb6ea68535
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 9X-tgXeFaqxURY0nGxFNdz9bpNIo7DTXHoWXpBqiOj0
-    short-id: cbc638acc8ac87
-  servername: max.ru
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: grpc-90
 - name: 'Russia | www.kinopoisk.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 132.243.230.251
@@ -340,15 +325,6 @@ proxies:
   cipher: auto
   udp: true
   tls: true
-- name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 158.160.180.165
-  port: 24212
-  uuid: c58c1205-b308-416f-8503-c04557abf93d
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
   servername: 158.160.180.165
 - name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
@@ -369,3 +345,12 @@ proxies:
   udp: true
   tls: true
   servername: 158.160.180.165
+- name: 'Russia | 158.160.180.165 | TCP | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 158.160.180.165
+  port: 24212
+  uuid: c58c1205-b308-416f-8503-c04557abf93d
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
