@@ -2,7 +2,7 @@
 
 ## 📅 Время последнего сбора
 
-`2026-11-02 09:11:07 (UTC+3)`
+`2026-11-02 10:45:13 (UTC+3)`
 
 ---
 
@@ -10,46 +10,46 @@
 
 | Файл | Всего конфигов |
 |------|----------------|
-| 📁 ALL.txt / ALL.64.txt | `476` |
-| 📱 LTE.txt / LTE.64.txt | `45` |
-| 📶 WIFI.txt / WIFI.64.txt | `431` |
-| 🏫 LinObhodESPD.txt / LinObhodESPD.64.txt | `0` |
+| 📁 ALL.txt / ALL.yml / ALL.json | `479` |
+| 📱 LTE.txt / LTE.yml / LTE.json | `44` |
+| 📶 WIFI.txt / WIFI.yml / WIFI.json | `435` |
+| 🏫 LinObhodESPD.txt / LinObhodESPD.yml / LinObhodESPD.json | `0` |
 
 ---
 
 ## 📡 Статистика по протоколам
 
-### 🌐 ALL.txt
+### 🌐 ALL
 
 | Протокол | Количество |
 |----------|------------|
-| 🔗 VLESS | `347` |
-| 📦 VMess | `33` |
+| 🔗 VLESS | `348` |
+| 📦 VMess | `35` |
 | 🛡️ Trojan | `90` |
 | ⚡ Hysteria2 | `6` |
-| **ИТОГО** | **`476`** |
+| **ИТОГО** | **`479`** |
 
-### 📱 LTE.txt
+### 📱 LTE
 
 | Протокол | Количество |
 |----------|------------|
-| 🔗 VLESS | `30` |
+| 🔗 VLESS | `29` |
 | 📦 VMess | `6` |
 | 🛡️ Trojan | `9` |
 | ⚡ Hysteria2 | `0` |
-| **ИТОГО** | **`45`** |
+| **ИТОГО** | **`44`** |
 
-### 📶 WIFI.txt
+### 📶 WIFI
 
 | Протокол | Количество |
 |----------|------------|
-| 🔗 VLESS | `317` |
-| 📦 VMess | `27` |
+| 🔗 VLESS | `319` |
+| 📦 VMess | `29` |
 | 🛡️ Trojan | `81` |
 | ⚡ Hysteria2 | `6` |
-| **ИТОГО** | **`431`** |
+| **ИТОГО** | **`435`** |
 
-### 🏫 LinObhodESPD.txt
+### 🏫 LinObhodESPD
 
 | Протокол | Количество |
 |----------|------------|
@@ -61,20 +61,9 @@
 
 ---
 
-## 📋 Сводная таблица
+## 🗂️ Фильтрация
 
-| Протокол | ALL | LTE | WIFI | ESPD |
-|----------|-----|-----|------|------|
-| 🔗 VLESS | `347` | `30` | `317` | `0` |
-| 📦 VMess | `33` | `6` | `27` | `0` |
-| 🛡️ Trojan | `90` | `9` | `81` | `0` |
-| ⚡ Hysteria2 | `6` | `0` | `6` | `0` |
-
----
-
-## 🗂️ Логика фильтрации
-
-1. **fp=chrome** — конфиги с `fp=chrome` **удаляются** для всех протоколов (vless / vmess / trojan / hysteria2).
+1. **fp=chrome** — конфиги с `fp=chrome` **удаляются** для всех протоколов.
 2. **LTE** — SNI домен есть в `whitelist.txt` **ИЛИ** IP входит в CIDR из `cidrwhitelist.txt`.
 3. **WIFI** — все остальные рабочие конфиги.
 4. **LinObhodESPD** — конфиги с SNI `max.ru` или `api-maps.yandex.ru`.
@@ -84,11 +73,13 @@
 
 ## 📁 Доступные файлы
 
-- `sub/ALL.txt` — все конфиги
-- `sub/LTE.txt` — для мобильного интернета
-- `sub/WIFI.txt` — для Wi-Fi сетей
-- `sub/LinObhodESPD.txt` — для ЭСПД
-- `sub/*.64.txt` — те же файлы в base64
+- `sub/ALL.txt` — URI-список (plain)
+- `sub/ALL.yml` — Clash Meta (plain)
+- `sub/ALL.json` — sing-box (plain)
+- `sub/LTE.txt` / `sub/LTE.yml` / `sub/LTE.json`
+- `sub/WIFI.txt` / `sub/WIFI.yml` / `sub/WIFI.json`
+- `sub/LinObhodESPD.txt` / `sub/LinObhodESPD.yml` / `sub/LinObhodESPD.json`
+- `sub/*.64.txt` — URI-список в base64
 
 ---
 
@@ -98,4 +89,4 @@
 
 ---
 
-*LinSpisokObhod v3.13*
+*LinSpisokObhod v4.0 (YAML + JSON, no .64 for yml/json)*
