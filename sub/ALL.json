@@ -49,6 +49,17 @@
     },
     {
       "type": "hysteria2",
+      "tag": "Sweden | se.mimowhat.online | HYSTERIA2 | [#LSO - #LinSpisokObhod]",
+      "server": "95.143.196.97",
+      "server_port": 443,
+      "password": "769f34f0-1500-488f-b414-03bc90666502",
+      "tls": {
+        "enabled": true,
+        "server_name": "se.mimowhat.online"
+      }
+    },
+    {
+      "type": "hysteria2",
       "tag": "Romania | hy2-new.aspidnet.xyz | HYSTERIA2 | [#LSO - #LinSpisokObhod]",
       "server": "162.249.125.133",
       "server_port": 443,
@@ -871,6 +882,21 @@
     },
     {
       "type": "trojan",
+      "tag": "Sweden | connect-se.mimowhat.online | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "95.143.196.97",
+      "server_port": 443,
+      "password": "FkQH0Q5EFneySv20Qj3yoArD2GSb2XZF",
+      "tls": {
+        "enabled": true,
+        "server_name": "connect-se.mimowhat.online",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "trojan",
       "tag": "South Korea | ikr100a.zxom.eu.org | unknown | [#LSO - #LinSpisokObhod]",
       "server": "168.110.119.243",
       "server_port": 20039,
@@ -1314,6 +1340,26 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | hb.ru-msk.vkcloud-storage.ru | RAW | [#LSO - #LinSpisokObhod]",
+      "server": "178.250.243.45",
+      "server_port": 2444,
+      "uuid": "0d070b9c-64a2-49dd-8c26-d9cbb6cc225c",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "hb.ru-msk.vkcloud-storage.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Poland | amd.com | TCP | [#LSO - #LinSpisokObhod]",
       "server": "94.249.180.86",
       "server_port": 443,
@@ -1330,6 +1376,27 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "The Netherlands | steamcommunity.com | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "138.16.140.168",
+      "server_port": 443,
+      "uuid": "13bf9403-22d1-4221-939b-f6606c423139",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "steamcommunity.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "HyVJj9KuPfDV5lOLEkMeVmYFZoFMQid6eiLC_6Yf1mQ",
+          "short_id": "5c56a4cfea5866c0"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "edge"
         }
       }
     },
@@ -3242,6 +3309,29 @@
       "type": "vless",
       "tag": "Russia | pl.sparxiecn.com | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "84.23.52.120",
+      "server_port": 28449,
+      "uuid": "4d8132cb-f4e3-428c-91ff-2b4f7a868551",
+      "tls": {
+        "enabled": true,
+        "server_name": "pl.sparxiecn.com",
+        "alpn": [
+          "h2",
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/lovelive"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | pl.sparxiecn.com | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "84.23.52.120",
       "server_port": 28450,
       "uuid": "4d8132cb-f4e3-428c-91ff-2b4f7a868551",
       "tls": {
@@ -3475,6 +3565,27 @@
     },
     {
       "type": "vless",
+      "tag": "unknown | edge-fr.extazy.net | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "de.puflino.com",
+      "server_port": 443,
+      "uuid": "52d3cbc8-7e7c-4328-b21e-46c1d7064bd2",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "edge-fr.extazy.net",
+        "reality": {
+          "enabled": true,
+          "public_key": "ygxQyBcJzlLgpSl3MCRDDiFET4TT-3wxa4GdG1obkCY",
+          "short_id": "ba4b2afa9e7193ea"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "unknown | dnld.chaqalli.com | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "dnld.chaqalli.com",
       "server_port": 8180,
@@ -3667,6 +3778,31 @@
     },
     {
       "type": "vless",
+      "tag": "unknown | max.ru | GRPC | [#LSO - #LinSpisokObhod]",
+      "server": "qtir1.dnetsolutions.ru",
+      "server_port": 443,
+      "uuid": "63959ed7-d26f-48dd-8c7b-ebdb6ea68535",
+      "flow": "",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "9X-tgXeFaqxURY0nGxFNdz9bpNIo7DTXHoWXpBqiOj0",
+          "short_id": "cbc638acc8ac87"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "grpc",
+        "service_name": "grpc-90"
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Serbia | rs8.speedtestinternet.link | RAW | [#LSO - #LinSpisokObhod]",
       "server": "185.72.11.43",
       "server_port": 443,
@@ -3675,6 +3811,26 @@
       "tls": {
         "enabled": true,
         "server_name": "rs8.speedtestinternet.link",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | uk.neuroniko.com | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "193.233.216.43",
+      "server_port": 24127,
+      "uuid": "69158986-cfae-4567-8391-0f96d9d985bd",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "uk.neuroniko.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "ud15DX-emDBS7QsLMabJ7CjgIteK61jxwSp1v0Fewxc"
+        },
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
@@ -6791,27 +6947,6 @@
     },
     {
       "type": "vless",
-      "tag": "unknown | apply.betust.net | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "apply.betust.net",
-      "server_port": 443,
-      "uuid": "fb37d713-0ed3-4146-b085-a5c879a9aafa",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "apply.betust.net",
-        "reality": {
-          "enabled": true,
-          "public_key": "T98nmnCp0qrmkH1Oq92Tk94sCYa5RuuEjp8bDDbdVxk",
-          "short_id": "b20168a5"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "United States | vpn.cintaku.qzz.io | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "8.35.211.242",
       "server_port": 443,
@@ -6920,6 +7055,22 @@
     {
       "type": "vmess",
       "tag": "United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "172.67.187.145",
+      "server_port": 80,
+      "uuid": "0cf6d970-3f1d-4aae-a989-92a8f76ae3db",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/ws",
+        "headers": {
+          "Host": "vmess.lbw666.dpdns.org"
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "104.17.147.222",
       "server_port": 80,
       "uuid": "0cf6d970-3f1d-4aae-a989-92a8f76ae3db",
@@ -6963,6 +7114,32 @@
         "headers": {
           "Host": "vmess.lbw666.dpdns.org"
         }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "China | 120.48.133.162 | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "120.48.133.162",
+      "server_port": 10086,
+      "uuid": "a8d931b0-6c27-428b-8d86-c20efea3dba7",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": ""
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "China | 120.48.133.162 | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "120.48.133.162",
+      "server_port": 10086,
+      "uuid": "a8d931b0-6c27-428b-8d86-c20efea3dba7",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/"
       }
     },
     {
@@ -7134,6 +7311,15 @@
     },
     {
       "type": "vmess",
+      "tag": "unknown | zfd-hkv1.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "zfd-hkv1.kunlun01dns.com",
+      "server_port": 16115,
+      "uuid": "0802ac03-7973-39ef-a019-ba02de6c01e1",
+      "security": "auto",
+      "alter_id": 0
+    },
+    {
+      "type": "vmess",
       "tag": "South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "132.145.80.230",
       "server_port": 80,
@@ -7143,22 +7329,6 @@
       "transport": {
         "type": "ws",
         "path": "/cctv13.m3u8"
-      }
-    },
-    {
-      "type": "vmess",
-      "tag": "United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "172.67.187.145",
-      "server_port": 80,
-      "uuid": "0cf6d970-3f1d-4aae-a989-92a8f76ae3db",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/ws",
-        "headers": {
-          "Host": "vmess.lbw666.dpdns.org"
-        }
       }
     },
     {
