@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-03 20:04:17 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-03 20:57:43 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -84,7 +84,7 @@
     },
     {
       "type": "trojan",
-      "tag": "Подписка #LSO© Trojan: 112 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Trojan: 113 [#LSO - #LinSpisokObhod]",
       "server": "trojan.about.lso",
       "server_port": 443,
       "password": "trojan",
@@ -110,7 +110,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vmess: 36 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vmess: 35 [#LSO - #LinSpisokObhod]",
       "server": "vmess.about.lso",
       "server_port": 443,
       "uuid": "vmess",
@@ -953,6 +953,21 @@
       "tls": {
         "enabled": true,
         "server_name": "fr001.zestapp778.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "India | in002.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "139.84.150.159",
+      "server_port": 42733,
+      "password": "5t6i121em5lkmsmk",
+      "tls": {
+        "enabled": true,
+        "server_name": "in002.zestapp778.com",
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
@@ -7462,19 +7477,6 @@
       "uuid": "0802ac03-7973-39ef-a019-ba02de6c01e1",
       "security": "auto",
       "alter_id": 0
-    },
-    {
-      "type": "vmess",
-      "tag": "South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "132.145.80.230",
-      "server_port": 80,
-      "uuid": "5155860e-d07d-46c3-9128-3afbd84626c7",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/cctv13.m3u8"
-      }
     },
     {
       "type": "vmess",

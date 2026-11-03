@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-03 20:04:17 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-03 20:57:43 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -37,7 +37,7 @@ proxies:
   udp: true
   tls: true
   servername: vless.about.lso
-- name: 'Подписка #LSO© Trojan: 112 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Trojan: 113 [#LSO - #LinSpisokObhod]'
   type: trojan
   server: trojan.about.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 36 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 35 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -605,6 +605,15 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: fr001.zestapp778.com
+  client-fingerprint: firefox
+- name: 'India | in002.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 139.84.150.159
+  port: 42733
+  password: 5t6i121em5lkmsmk
+  udp: true
+  skip-cert-verify: false
+  sni: in002.zestapp778.com
   client-fingerprint: firefox
 - name: 'South Korea | kr002.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]'
   type: trojan
@@ -4744,17 +4753,6 @@ proxies:
   cipher: auto
   udp: true
   servername: zfd-hkv1.kunlun01dns.com
-- name: 'South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 132.145.80.230
-  port: 80
-  uuid: 5155860e-d07d-46c3-9128-3afbd84626c7
-  alterId: 0
-  cipher: auto
-  udp: true
-  network: ws
-  ws-opts:
-    path: /cctv13.m3u8
 - name: 'unknown | zfd-hkv2.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: zfd-hkv2.kunlun01dns.com
