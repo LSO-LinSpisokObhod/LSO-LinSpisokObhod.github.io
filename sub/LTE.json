@@ -153,26 +153,6 @@
     },
     {
       "type": "vless",
-      "tag": "Russia | hb.ru-msk.vkcloud-storage.ru | RAW | [#LSO - #LinSpisokObhod]",
-      "server": "178.250.243.45",
-      "server_port": 2444,
-      "uuid": "0d070b9c-64a2-49dd-8c26-d9cbb6cc225c",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "hb.ru-msk.vkcloud-storage.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "Russia | iv.kommersant.ru | GRPC | [#LSO - #LinSpisokObhod]",
       "server": "46.243.233.157",
       "server_port": 1505,
@@ -235,26 +215,6 @@
           "enabled": true,
           "public_key": "0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo",
           "short_id": "8debcf36f1cc69ff"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Denmark | api-maps.yandex.ru | unknown | [#LSO - #LinSpisokObhod]",
-      "server": "193.180.211.245",
-      "server_port": 8443,
-      "uuid": "35dc3ea6-2cdf-4f6e-95ea-ce786ac2947a",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "api-maps.yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "pbLP4dV9Nx4aHWf35QFadbjOCdP_klwS9fvKSszlr3Q"
         },
         "utls": {
           "enabled": true,
@@ -330,31 +290,6 @@
       "server": "195.123.189.221",
       "server_port": 443,
       "uuid": "63959ed7-d26f-48dd-8c7b-ebdb6ea68535",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "9X-tgXeFaqxURY0nGxFNdz9bpNIo7DTXHoWXpBqiOj0",
-          "short_id": "cbc638acc8ac87"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      },
-      "transport": {
-        "type": "grpc",
-        "service_name": "grpc-90"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "unknown | max.ru | GRPC | [#LSO - #LinSpisokObhod]",
-      "server": "qtir1.dnetsolutions.ru",
-      "server_port": 443,
-      "uuid": "63959ed7-d26f-48dd-8c7b-ebdb6ea68535",
-      "flow": "",
       "tls": {
         "enabled": true,
         "server_name": "max.ru",
@@ -751,26 +686,6 @@
         "path": "/amws",
         "headers": {
           "Host": "ara.rtkdvbr.cc"
-        }
-      }
-    },
-    {
-      "type": "vmess",
-      "tag": "Russia | renderer-stream-2-129.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "37.220.161.247",
-      "server_port": 443,
-      "uuid": "27653b37-603c-4c90-b1f5-25c4d23f8932",
-      "security": "auto",
-      "alter_id": 0,
-      "tls": {
-        "enabled": true,
-        "server_name": "renderer-stream-2-129.mirra.now"
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/api/v1/gpu-stream/socket",
-        "headers": {
-          "Host": "renderer-stream-2-129.mirra.now"
         }
       }
     },

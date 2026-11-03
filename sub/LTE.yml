@@ -76,19 +76,6 @@ proxies:
   skip-cert-verify: false
   sni: br001.zestapp778.com
   client-fingerprint: firefox
-- name: 'Russia | hb.ru-msk.vkcloud-storage.ru | RAW | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.250.243.45
-  port: 2444
-  uuid: 0d070b9c-64a2-49dd-8c26-d9cbb6cc225c
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY
-  servername: hb.ru-msk.vkcloud-storage.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-  network: raw
 - name: 'Russia | iv.kommersant.ru | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 46.243.233.157
@@ -132,18 +119,6 @@ proxies:
     public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
     short-id: 8debcf36f1cc69ff
   servername: ads.x5.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'Denmark | api-maps.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 193.180.211.245
-  port: 8443
-  uuid: 35dc3ea6-2cdf-4f6e-95ea-ce786ac2947a
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: pbLP4dV9Nx4aHWf35QFadbjOCdP_klwS9fvKSszlr3Q
-  servername: api-maps.yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'Sweden | smart.bachidze.com | unknown | [#LSO - #LinSpisokObhod]'
@@ -197,22 +172,6 @@ proxies:
     short-id: cbc638acc8ac87
   servername: max.ru
   client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: grpc-90
-- name: 'unknown | max.ru | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: qtir1.dnetsolutions.ru
-  port: 443
-  uuid: 63959ed7-d26f-48dd-8c7b-ebdb6ea68535
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 9X-tgXeFaqxURY0nGxFNdz9bpNIo7DTXHoWXpBqiOj0
-    short-id: cbc638acc8ac87
-  servername: max.ru
-  client-fingerprint: firefox
-  flow: ''
   network: grpc
   grpc-opts:
     grpc-service-name: grpc-90
@@ -454,21 +413,6 @@ proxies:
     path: /amws
     headers:
       Host: ara.rtkdvbr.cc
-- name: 'Russia | renderer-stream-2-129.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 37.220.161.247
-  port: 443
-  uuid: 27653b37-603c-4c90-b1f5-25c4d23f8932
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: renderer-stream-2-129.mirra.now
-  network: ws
-  ws-opts:
-    path: /api/v1/gpu-stream/socket
-    headers:
-      Host: renderer-stream-2-129.mirra.now
 - name: 'Russia | renderer-stream-2-129.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 37.220.161.249
