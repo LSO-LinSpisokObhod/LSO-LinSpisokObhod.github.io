@@ -76,19 +76,6 @@ proxies:
   skip-cert-verify: false
   sni: br001.zestapp778.com
   client-fingerprint: firefox
-- name: 'Russia | hb.ru-msk.vkcloud-storage.ru | RAW | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.250.243.45
-  port: 2444
-  uuid: 0d070b9c-64a2-49dd-8c26-d9cbb6cc225c
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY
-  servername: hb.ru-msk.vkcloud-storage.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-  network: raw
 - name: 'Russia | iv.kommersant.ru | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 46.243.233.157
@@ -338,21 +325,6 @@ proxies:
   servername: storage.yandex.net
   client-fingerprint: edge
   flow: xtls-rprx-vision
-- name: 'The Netherlands | nlb.kosmosapp.net | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 79.141.164.83
-  port: 443
-  uuid: 810a32e0-2318-4d0a-bd67-4f84270013a6
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: pR39Vv5qhk8r6akOicoy6mMs4-ppSWUez8MyAXG7wwQ
-    short-id: 27350908de933e09
-  servername: nlb.kosmosapp.net
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: neurex
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 95.128.71.79
