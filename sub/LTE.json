@@ -153,6 +153,26 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | hb.ru-msk.vkcloud-storage.ru | RAW | [#LSO - #LinSpisokObhod]",
+      "server": "178.250.243.45",
+      "server_port": 2444,
+      "uuid": "0d070b9c-64a2-49dd-8c26-d9cbb6cc225c",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "hb.ru-msk.vkcloud-storage.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Russia | iv.kommersant.ru | GRPC | [#LSO - #LinSpisokObhod]",
       "server": "46.243.233.157",
       "server_port": 1505,
@@ -215,6 +235,26 @@
           "enabled": true,
           "public_key": "0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo",
           "short_id": "8debcf36f1cc69ff"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Denmark | api-maps.yandex.ru | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "193.180.211.245",
+      "server_port": 8443,
+      "uuid": "35dc3ea6-2cdf-4f6e-95ea-ce786ac2947a",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "api-maps.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "pbLP4dV9Nx4aHWf35QFadbjOCdP_klwS9fvKSszlr3Q"
         },
         "utls": {
           "enabled": true,

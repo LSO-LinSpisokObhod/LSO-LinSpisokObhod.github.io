@@ -33,6 +33,26 @@
   "outbounds": [
     {
       "type": "vless",
+      "tag": "Denmark | api-maps.yandex.ru | unknown | [#LOESPD - #LinSpisokObhod]",
+      "server": "193.180.211.245",
+      "server_port": 8443,
+      "uuid": "35dc3ea6-2cdf-4f6e-95ea-ce786ac2947a",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "api-maps.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "pbLP4dV9Nx4aHWf35QFadbjOCdP_klwS9fvKSszlr3Q"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "France | max.ru | GRPC | [#LOESPD - #LinSpisokObhod]",
       "server": "195.123.189.221",
       "server_port": 443,
