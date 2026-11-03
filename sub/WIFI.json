@@ -49,6 +49,17 @@
     },
     {
       "type": "hysteria2",
+      "tag": "Sweden | se.mimowhat.online | HYSTERIA2 | [#LSO - #LinSpisokObhod]",
+      "server": "95.143.196.97",
+      "server_port": 443,
+      "password": "769f34f0-1500-488f-b414-03bc90666502",
+      "tls": {
+        "enabled": true,
+        "server_name": "se.mimowhat.online"
+      }
+    },
+    {
+      "type": "hysteria2",
       "tag": "Romania | hy2-new.aspidnet.xyz | HYSTERIA2 | [#LSO - #LinSpisokObhod]",
       "server": "162.249.125.133",
       "server_port": 443,
@@ -815,6 +826,21 @@
       "tls": {
         "enabled": true,
         "server_name": "2.27.27.59",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "Sweden | connect-se.mimowhat.online | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "95.143.196.97",
+      "server_port": 443,
+      "password": "FkQH0Q5EFneySv20Qj3yoArD2GSb2XZF",
+      "tls": {
+        "enabled": true,
+        "server_name": "connect-se.mimowhat.online",
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
@@ -3441,6 +3467,26 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | uk.neuroniko.com | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "193.233.216.43",
+      "server_port": 24127,
+      "uuid": "69158986-cfae-4567-8391-0f96d9d985bd",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "uk.neuroniko.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "ud15DX-emDBS7QsLMabJ7CjgIteK61jxwSp1v0Fewxc"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "The Netherlands | www.uva.nl | TCP | [#LSO - #LinSpisokObhod]",
       "server": "193.233.82.128",
       "server_port": 443,
@@ -4046,6 +4092,27 @@
         "path": "/service/telemetry/0294da469190/",
         "headers": {
           "Host": "nguyxejonb.rucdncomp.pro"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Germany | update-26.topp-con.xyz | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "13.143.165.126",
+      "server_port": 443,
+      "uuid": "7ad63b26-bf70-4872-8fab-ebaf73a1e19d",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "update-26.topp-con.xyz",
+        "reality": {
+          "enabled": true,
+          "public_key": "EHlZh1OuiO6gQLTSV2-BVeV0Niv23vvIxQaPvcWCJUw",
+          "short_id": "db382e1979d80ecb"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
         }
       }
     },
@@ -6738,22 +6805,6 @@
     },
     {
       "type": "vmess",
-      "tag": "United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "172.67.187.145",
-      "server_port": 80,
-      "uuid": "0cf6d970-3f1d-4aae-a989-92a8f76ae3db",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/ws",
-        "headers": {
-          "Host": "vmess.lbw666.dpdns.org"
-        }
-      }
-    },
-    {
-      "type": "vmess",
       "tag": "unknown | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "cf.0sm.com",
       "server_port": 80,
@@ -7002,15 +7053,18 @@
     },
     {
       "type": "vmess",
-      "tag": "South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "132.145.80.230",
+      "tag": "United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "172.67.187.145",
       "server_port": 80,
-      "uuid": "5155860e-d07d-46c3-9128-3afbd84626c7",
+      "uuid": "0cf6d970-3f1d-4aae-a989-92a8f76ae3db",
       "security": "auto",
       "alter_id": 0,
       "transport": {
         "type": "ws",
-        "path": "/cctv13.m3u8"
+        "path": "/ws",
+        "headers": {
+          "Host": "vmess.lbw666.dpdns.org"
+        }
       }
     },
     {
@@ -7050,19 +7104,6 @@
     },
     {
       "type": "vmess",
-      "tag": "South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "132.145.80.230",
-      "server_port": 80,
-      "uuid": "5155860e-d07d-46c3-9128-3afbd84626c7",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/cctv13.m3u8"
-      }
-    },
-    {
-      "type": "vmess",
       "tag": "United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "104.21.7.133",
       "server_port": 80,
@@ -7085,22 +7126,6 @@
       "uuid": "9b76bc31-17a5-4454-934a-8d5fb602cd70",
       "security": "auto",
       "alter_id": 0
-    },
-    {
-      "type": "vmess",
-      "tag": "South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "132.145.80.230",
-      "server_port": 80,
-      "uuid": "5155860e-d07d-46c3-9128-3afbd84626c7",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/cctv13.m3u8",
-        "headers": {
-          "Host": "132.145.80.230"
-        }
-      }
     },
     {
       "type": "vmess",
