@@ -9,14 +9,6 @@ proxies:
   sni: www.bing.com
   obfs: salamander
   obfs-password: 850a3fb1cd33a28f12d837578ae1a2e7
-- name: 'Sweden | se.mimowhat.online | HYSTERIA2 | [#LSO - #LinSpisokObhod]'
-  type: hysteria2
-  server: 95.143.196.97
-  port: 443
-  password: 769f34f0-1500-488f-b414-03bc90666502
-  udp: true
-  skip-cert-verify: false
-  sni: se.mimowhat.online
 - name: 'Romania | hy2-new.aspidnet.xyz | HYSTERIA2 | [#LSO - #LinSpisokObhod]'
   type: hysteria2
   server: 162.249.125.133
@@ -593,15 +585,6 @@ proxies:
   skip-cert-verify: false
   sni: 2.27.27.59
   client-fingerprint: firefox
-- name: 'Sweden | connect-se.mimowhat.online | unknown | [#LSO - #LinSpisokObhod]'
-  type: trojan
-  server: 95.143.196.97
-  port: 443
-  password: FkQH0Q5EFneySv20Qj3yoArD2GSb2XZF
-  udp: true
-  skip-cert-verify: false
-  sni: connect-se.mimowhat.online
-  client-fingerprint: firefox
 - name: 'South Korea | ikr100a.zxom.eu.org | unknown | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 168.110.119.243
@@ -900,31 +883,6 @@ proxies:
     public-key: 5H_MmyfvF4SkwS84wTbLmtcZDecXJIJtZ3uisiKQpSM
     short-id: 0c774b50
   servername: pl1.song69.fun
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'Russia | hb.ru-msk.vkcloud-storage.ru | RAW | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.250.243.45
-  port: 2444
-  uuid: 0d070b9c-64a2-49dd-8c26-d9cbb6cc225c
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY
-  servername: hb.ru-msk.vkcloud-storage.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-  network: raw
-- name: 'Russia | hb.ru-msk.vkcloud-storage.ru | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.250.243.45
-  port: 2444
-  uuid: 0d070b9c-64a2-49dd-8c26-d9cbb6cc225c
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY
-  servername: hb.ru-msk.vkcloud-storage.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'Poland | amd.com | TCP | [#LSO - #LinSpisokObhod]'
@@ -2357,18 +2315,6 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
-- name: 'Russia | uk.neuroniko.com | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 193.233.216.43
-  port: 24127
-  uuid: 69158986-cfae-4567-8391-0f96d9d985bd
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: ud15DX-emDBS7QsLMabJ7CjgIteK61jxwSp1v0Fewxc
-  servername: uk.neuroniko.com
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'The Netherlands | www.uva.nl | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 193.233.82.128
@@ -2866,19 +2812,6 @@ proxies:
   servername: db-23.topp-con.xyz
   client-fingerprint: safari
   flow: xtls-rprx-vision
-- name: 'Russia | patch-25.topp-con.xyz | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 5.129.202.74
-  port: 443
-  uuid: 7ad63b26-bf70-4872-8fab-ebaf73a1e19d
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: LEziyH-E4k9hehGRJkVi1FadVObB_NZJy8U7oUCVWXU
-    short-id: b9120cd53ffd7bba
-  servername: patch-25.topp-con.xyz
-  client-fingerprint: ios
-  flow: xtls-rprx-vision
 - name: 'Poland | site.syn1.cc | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.32.6.84
@@ -3311,9 +3244,9 @@ proxies:
   servername: tickets.betust.net
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Finland | 36a466g.fi1.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
+- name: 'unknown | 36a466g.fi1.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 196.196.204.180
+  server: 36a466g.fi1.h1clayd.click
   port: 443
   uuid: 9a0e84f8-4b58-477f-99da-5fac5a2e58e8
   udp: true
@@ -3326,9 +3259,9 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: 0adb9638509b
-- name: 'Finland | 36a466g.fi1.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
+- name: 'unknown | 36a466g.fi1.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 196.196.204.180
+  server: 36a466g.fi1.h1clayd.click
   port: 443
   uuid: 9a0e84f8-4b58-477f-99da-5fac5a2e58e8
   udp: true
@@ -3337,7 +3270,36 @@ proxies:
     public-key: pAgrBKJCmuSJHIzYkEJTqsOBOVBK_DMtEqFPo-PaTkg
     short-id: b3c9d0c6bdd114a6
   servername: 36a466g.fi1.h1clayd.click
-  client-fingerprint: firefox
+  client-fingerprint: random
+  network: grpc
+  grpc-opts:
+    grpc-service-name: 0adb9638509b
+- name: 'unknown | 36a466g.fi1.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 36a466g.fi1.h1clayd.click
+  port: 443
+  uuid: 9a0e84f8-4b58-477f-99da-5fac5a2e58e8
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: pAgrBKJCmuSJHIzYkEJTqsOBOVBK_DMtEqFPo-PaTkg
+    short-id: b3c9d0c6bdd114a6
+  servername: 36a466g.fi1.h1clayd.click
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: 0adb9638509b
+- name: 'unknown | 36a466g.fi1.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 36a466g.fi1.h1clayd.click
+  port: 443
+  uuid: 9a0e84f8-4b58-477f-99da-5fac5a2e58e8
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: pAgrBKJCmuSJHIzYkEJTqsOBOVBK_DMtEqFPo-PaTkg
+    short-id: b3c9d0c6bdd114a6
+  servername: 36a466g.fi1.h1clayd.click
   network: grpc
   grpc-opts:
     grpc-service-name: 0adb9638509b
@@ -4461,62 +4423,6 @@ proxies:
   servername: cz.pythonmakemigreat.wiki
   flow: ''
   network: xhttp
-- name: 'Russia | bb9052x.es4.h1clayd.click | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 83.171.241.199
-  port: 443
-  uuid: fafc7c16-f890-45ee-a856-02df225172dd
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: bJ6tjO4Jcc6ZduEgRSNHYqVml_OIEiBx-3el8jSRqwg
-    short-id: 79c4ab4dcd5ed080
-  servername: bb9052x.es4.h1clayd.click
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | bb9052x.es4.h1clayd.click | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 83.171.241.199
-  port: 443
-  uuid: fafc7c16-f890-45ee-a856-02df225172dd
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: bJ6tjO4Jcc6ZduEgRSNHYqVml_OIEiBx-3el8jSRqwg
-    short-id: 79c4ab4dcd5ed080
-  servername: bb9052x.es4.h1clayd.click
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | c3f630g.es4.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 83.171.241.199
-  port: 443
-  uuid: fafc7c16-f890-45ee-a856-02df225172dd
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: BzM-6A4DGbjpquuwUmotiamNZlamur11IXX5Xyh_wBg
-    short-id: 2d2d5faf568b584d
-  servername: c3f630g.es4.h1clayd.click
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: 7e802b075a7c
-- name: 'Russia | c3f630g.es4.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 83.171.241.199
-  port: 443
-  uuid: fafc7c16-f890-45ee-a856-02df225172dd
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: BzM-6A4DGbjpquuwUmotiamNZlamur11IXX5Xyh_wBg
-    short-id: 2d2d5faf568b584d
-  servername: c3f630g.es4.h1clayd.click
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: 7e802b075a7c
 - name: 'unknown | c3f630g.es4.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: c3f630g.es4.h1clayd.click
@@ -4640,6 +4546,20 @@ proxies:
     path: /api/connect
     headers:
       Host: wstg.datasynctrue.online
+- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 104.17.147.222
+  port: 80
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
+  alterId: 0
+  cipher: auto
+  udp: true
+  servername: vmess.lbw666.dpdns.org
+  network: ws
+  ws-opts:
+    path: /ws?ed=2048
+    headers:
+      Host: vmess.lbw666.dpdns.org
 - name: 'unknown | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: cf.0sm.com
@@ -4720,14 +4640,6 @@ proxies:
     path: /api/v1/gpu-stream/socket
     headers:
       Host: renderer-stream-2-129.mirra.now
-- name: 'unknown | dog-us.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: dog-us.kunlun01dns.com
-  port: 21009
-  uuid: 9464ca40-dd75-3742-a628-d931a9f413b2
-  alterId: 0
-  cipher: auto
-  udp: true
 - name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 104.17.147.222
@@ -4778,15 +4690,6 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 'unknown | dog-hk.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: dog-hk.kunlun01dns.com
-  port: 21021
-  uuid: 9464ca40-dd75-3742-a628-d931a9f413b2
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: dog-hk.kunlun01dns.com
 - name: 'Hong Kong | www.pubgmobile.com | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 156.245.232.239
@@ -4863,29 +4766,17 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 'unknown | zfd-hkv1.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
+- name: 'South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
-  server: zfd-hkv1.kunlun01dns.com
-  port: 16115
-  uuid: 0802ac03-7973-39ef-a019-ba02de6c01e1
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: zfd-hkv1.kunlun01dns.com
-- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 104.17.147.222
+  server: 132.145.80.230
   port: 80
-  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
+  uuid: 5155860e-d07d-46c3-9128-3afbd84626c7
   alterId: 0
   cipher: auto
   udp: true
-  servername: vmess.lbw666.dpdns.org
   network: ws
   ws-opts:
-    path: /ws?ed=2048
-    headers:
-      Host: vmess.lbw666.dpdns.org
+    path: /cctv13.m3u8
 - name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 172.67.187.145
@@ -4900,14 +4791,6 @@ proxies:
     path: /ws
     headers:
       Host: vmess.lbw666.dpdns.org
-- name: 'unknown | zfd-hkv2.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: zfd-hkv2.kunlun01dns.com
-  port: 16115
-  uuid: 0802ac03-7973-39ef-a019-ba02de6c01e1
-  alterId: 0
-  cipher: auto
-  udp: true
 - name: 'Hong Kong | 156.245.232.239 | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 156.245.232.239
@@ -4930,6 +4813,17 @@ proxies:
   network: ws
   ws-opts:
     path: /
+- name: 'South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 132.145.80.230
+  port: 80
+  uuid: 5155860e-d07d-46c3-9128-3afbd84626c7
+  alterId: 0
+  cipher: auto
+  udp: true
+  network: ws
+  ws-opts:
+    path: /cctv13.m3u8
 - name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 104.21.7.133
@@ -4952,6 +4846,20 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
+- name: 'South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 132.145.80.230
+  port: 80
+  uuid: 5155860e-d07d-46c3-9128-3afbd84626c7
+  alterId: 0
+  cipher: auto
+  udp: true
+  servername: 132.145.80.230
+  network: ws
+  ws-opts:
+    path: /cctv13.m3u8
+    headers:
+      Host: 132.145.80.230
 - name: 'South Korea | 140.238.2.250 | RAW | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 140.238.2.250

@@ -76,31 +76,6 @@ proxies:
   skip-cert-verify: false
   sni: br001.zestapp778.com
   client-fingerprint: firefox
-- name: 'Russia | hb.ru-msk.vkcloud-storage.ru | RAW | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.250.243.45
-  port: 2444
-  uuid: 0d070b9c-64a2-49dd-8c26-d9cbb6cc225c
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY
-  servername: hb.ru-msk.vkcloud-storage.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-  network: raw
-- name: 'Russia | hb.ru-msk.vkcloud-storage.ru | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.250.243.45
-  port: 2444
-  uuid: 0d070b9c-64a2-49dd-8c26-d9cbb6cc225c
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY
-  servername: hb.ru-msk.vkcloud-storage.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'Russia | iv.kommersant.ru | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 46.243.233.157
