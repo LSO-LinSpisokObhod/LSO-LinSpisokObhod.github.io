@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-03 19:00:12 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-03 20:04:17 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 50 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 49 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 37 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 35 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 2 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 3 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -339,19 +339,6 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: neurex
-- name: 'Finland | video.yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 193.188.21.253
-  port: 10444
-  uuid: 57f7772d-f5d6-4d8f-992d-5fa5e0d6da55
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
-    short-id: 8debcf36f1cc69ff
-  servername: video.yandex.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'unknown | max.ru | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: qtir1.dnetsolutions.ru
@@ -420,48 +407,6 @@ proxies:
   servername: www.kinopoisk.ru
   client-fingerprint: firefox
   network: xhttp
-- name: 'Russia | cdn.dash.gearmonster.org | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 95.129.236.117
-  port: 443
-  uuid: 77998cc6-8a4d-4251-b974-ebff48a84c4d
-  udp: true
-  tls: true
-  servername: cdn.dash.gearmonster.org
-  client-fingerprint: qq
-  network: ws
-  ws-opts:
-    path: /edge/node8/push
-    headers:
-      Host: cdn.dash.gearmonster.org
-- name: 'Russia | crm.hourtley.com | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 95.129.236.216
-  port: 443
-  uuid: 77998cc6-8a4d-4251-b974-ebff48a84c4d
-  udp: true
-  tls: true
-  servername: crm.hourtley.com
-  client-fingerprint: qq
-  network: ws
-  ws-opts:
-    path: /stream/video/ffmpeg
-    headers:
-      Host: crm.hourtley.com
-- name: 'Russia | content-iv1k.login.opendns.stream | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 95.129.236.239
-  port: 443
-  uuid: 77998cc6-8a4d-4251-b974-ebff48a84c4d
-  udp: true
-  tls: true
-  servername: content-iv1k.login.opendns.stream
-  client-fingerprint: qq
-  network: ws
-  ws-opts:
-    path: /sock/relay/007f9c12e265
-    headers:
-      Host: content-iv1k.login.opendns.stream
 - name: 'Russia | gran-game.pro | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.178.208.140
@@ -539,6 +484,20 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: edge
   flow: xtls-rprx-vision
+- name: 'Russia | gran-game.pro | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.178.208.140
+  port: 443
+  uuid: c720cb74-4c84-4fce-b8ae-637dbaa16199
+  udp: true
+  tls: true
+  servername: gran-game.pro
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /static/events/900598fa7500/
+    headers:
+      Host: gran-game.pro
 - name: 'Russia | z1q3pv4g78.rucdncomp.pro | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 217.19.122.156
@@ -650,6 +609,18 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Lithuania | lt-modx.nodexphere.net | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 88.216.127.115
+  port: 443
+  uuid: f935f257-1878-4656-8149-4e7737e2ff7d
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: cc2mDH9C31IlAwrn1eEhbuzZ3l4Ijw3mKl7rF75GUDo
+  servername: lt-modx.nodexphere.net
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'Russia | join.betust.net | RAW | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 81.163.22.143
@@ -681,6 +652,21 @@ proxies:
 - name: 'Russia | renderer-stream-2-129.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 37.220.161.247
+  port: 443
+  uuid: 27653b37-603c-4c90-b1f5-25c4d23f8932
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: renderer-stream-2-129.mirra.now
+  network: ws
+  ws-opts:
+    path: /api/v1/gpu-stream/socket
+    headers:
+      Host: renderer-stream-2-129.mirra.now
+- name: 'Russia | renderer-stream-2-129.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 37.220.161.249
   port: 443
   uuid: 27653b37-603c-4c90-b1f5-25c4d23f8932
   alterId: 0

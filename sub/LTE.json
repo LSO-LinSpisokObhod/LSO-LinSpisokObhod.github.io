@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-03 19:00:12 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-03 20:04:17 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -62,7 +62,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Всего конфигов: 50 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Всего конфигов: 49 [#LSO - #LinSpisokObhod]",
       "server": "all.lso",
       "server_port": 443,
       "uuid": "all",
@@ -73,7 +73,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vless: 37 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vless: 35 [#LSO - #LinSpisokObhod]",
       "server": "vless.about.lso",
       "server_port": 443,
       "uuid": "vless",
@@ -110,7 +110,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vmess: 2 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vmess: 3 [#LSO - #LinSpisokObhod]",
       "server": "vmess.about.lso",
       "server_port": 443,
       "uuid": "vmess",
@@ -557,27 +557,6 @@
     },
     {
       "type": "vless",
-      "tag": "Finland | video.yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "193.188.21.253",
-      "server_port": 10444,
-      "uuid": "57f7772d-f5d6-4d8f-992d-5fa5e0d6da55",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "video.yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo",
-          "short_id": "8debcf36f1cc69ff"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "unknown | max.ru | GRPC | [#LSO - #LinSpisokObhod]",
       "server": "qtir1.dnetsolutions.ru",
       "server_port": 443,
@@ -678,81 +657,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Russia | cdn.dash.gearmonster.org | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "95.129.236.117",
-      "server_port": 443,
-      "uuid": "77998cc6-8a4d-4251-b974-ebff48a84c4d",
-      "tls": {
-        "enabled": true,
-        "server_name": "cdn.dash.gearmonster.org",
-        "alpn": [
-          "http/1.1"
-        ],
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/edge/node8/push",
-        "headers": {
-          "Host": "cdn.dash.gearmonster.org"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Russia | crm.hourtley.com | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "95.129.236.216",
-      "server_port": 443,
-      "uuid": "77998cc6-8a4d-4251-b974-ebff48a84c4d",
-      "tls": {
-        "enabled": true,
-        "server_name": "crm.hourtley.com",
-        "alpn": [
-          "http/1.1"
-        ],
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/stream/video/ffmpeg",
-        "headers": {
-          "Host": "crm.hourtley.com"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Russia | content-iv1k.login.opendns.stream | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "95.129.236.239",
-      "server_port": 443,
-      "uuid": "77998cc6-8a4d-4251-b974-ebff48a84c4d",
-      "tls": {
-        "enabled": true,
-        "server_name": "content-iv1k.login.opendns.stream",
-        "alpn": [
-          "http/1.1"
-        ],
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/sock/relay/007f9c12e265",
-        "headers": {
-          "Host": "content-iv1k.login.opendns.stream"
         }
       }
     },
@@ -884,6 +788,31 @@
         "utls": {
           "enabled": true,
           "fingerprint": "edge"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | gran-game.pro | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "185.178.208.140",
+      "server_port": 443,
+      "uuid": "c720cb74-4c84-4fce-b8ae-637dbaa16199",
+      "tls": {
+        "enabled": true,
+        "server_name": "gran-game.pro",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/static/events/900598fa7500/",
+        "headers": {
+          "Host": "gran-game.pro"
         }
       }
     },
@@ -1076,6 +1005,26 @@
     },
     {
       "type": "vless",
+      "tag": "Lithuania | lt-modx.nodexphere.net | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "88.216.127.115",
+      "server_port": 443,
+      "uuid": "f935f257-1878-4656-8149-4e7737e2ff7d",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "lt-modx.nodexphere.net",
+        "reality": {
+          "enabled": true,
+          "public_key": "cc2mDH9C31IlAwrn1eEhbuzZ3l4Ijw3mKl7rF75GUDo"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Russia | join.betust.net | RAW | [#LSO - #LinSpisokObhod]",
       "server": "81.163.22.143",
       "server_port": 443,
@@ -1120,6 +1069,26 @@
       "type": "vmess",
       "tag": "Russia | renderer-stream-2-129.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "37.220.161.247",
+      "server_port": 443,
+      "uuid": "27653b37-603c-4c90-b1f5-25c4d23f8932",
+      "security": "auto",
+      "alter_id": 0,
+      "tls": {
+        "enabled": true,
+        "server_name": "renderer-stream-2-129.mirra.now"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/api/v1/gpu-stream/socket",
+        "headers": {
+          "Host": "renderer-stream-2-129.mirra.now"
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "Russia | renderer-stream-2-129.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "37.220.161.249",
       "server_port": 443,
       "uuid": "27653b37-603c-4c90-b1f5-25c4d23f8932",
       "security": "auto",
