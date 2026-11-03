@@ -456,6 +456,81 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | cdn.dash.gearmonster.org | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "95.129.236.117",
+      "server_port": 443,
+      "uuid": "77998cc6-8a4d-4251-b974-ebff48a84c4d",
+      "tls": {
+        "enabled": true,
+        "server_name": "cdn.dash.gearmonster.org",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/edge/node8/push",
+        "headers": {
+          "Host": "cdn.dash.gearmonster.org"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | crm.hourtley.com | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "95.129.236.216",
+      "server_port": 443,
+      "uuid": "77998cc6-8a4d-4251-b974-ebff48a84c4d",
+      "tls": {
+        "enabled": true,
+        "server_name": "crm.hourtley.com",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/stream/video/ffmpeg",
+        "headers": {
+          "Host": "crm.hourtley.com"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | content-iv1k.login.opendns.stream | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "95.129.236.239",
+      "server_port": 443,
+      "uuid": "77998cc6-8a4d-4251-b974-ebff48a84c4d",
+      "tls": {
+        "enabled": true,
+        "server_name": "content-iv1k.login.opendns.stream",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/sock/relay/007f9c12e265",
+        "headers": {
+          "Host": "content-iv1k.login.opendns.stream"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Poland | storage.yandex.net | TCP | [#LSO - #LinSpisokObhod]",
       "server": "212.127.91.79",
       "server_port": 443,

@@ -270,6 +270,48 @@ proxies:
   servername: www.kinopoisk.ru
   client-fingerprint: firefox
   network: xhttp
+- name: 'Russia | cdn.dash.gearmonster.org | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.129.236.117
+  port: 443
+  uuid: 77998cc6-8a4d-4251-b974-ebff48a84c4d
+  udp: true
+  tls: true
+  servername: cdn.dash.gearmonster.org
+  client-fingerprint: qq
+  network: ws
+  ws-opts:
+    path: /edge/node8/push
+    headers:
+      Host: cdn.dash.gearmonster.org
+- name: 'Russia | crm.hourtley.com | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.129.236.216
+  port: 443
+  uuid: 77998cc6-8a4d-4251-b974-ebff48a84c4d
+  udp: true
+  tls: true
+  servername: crm.hourtley.com
+  client-fingerprint: qq
+  network: ws
+  ws-opts:
+    path: /stream/video/ffmpeg
+    headers:
+      Host: crm.hourtley.com
+- name: 'Russia | content-iv1k.login.opendns.stream | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.129.236.239
+  port: 443
+  uuid: 77998cc6-8a4d-4251-b974-ebff48a84c4d
+  udp: true
+  tls: true
+  servername: content-iv1k.login.opendns.stream
+  client-fingerprint: qq
+  network: ws
+  ws-opts:
+    path: /sock/relay/007f9c12e265
+    headers:
+      Host: content-iv1k.login.opendns.stream
 - name: 'Poland | storage.yandex.net | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 212.127.91.79
