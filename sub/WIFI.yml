@@ -1,4 +1,84 @@
 proxies:
+- name: 'подписка #LSO© обновлена 2026-11-03 17:58:09 [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: update.lso
+  port: 443
+  uuid: update
+  udp: true
+  tls: true
+  servername: update.lso
+- name: 'подписка #LSO© ЭТО: подписка с конфигами для WIFI [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 1.about.lso
+  port: 443
+  uuid: about
+  udp: true
+  tls: true
+  servername: about.lso
+- name: 'и обхода блокировок РКН [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 2.about.lso
+  port: 443
+  uuid: about2
+  udp: true
+- name: 'Подписка #LSO© Всего конфигов: 389 [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: all.lso
+  port: 443
+  uuid: all
+  udp: true
+  tls: true
+  servername: all.lso
+- name: 'Подписка #LSO© Vless: 248 [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: vless.about.lso
+  port: 443
+  uuid: vless
+  udp: true
+  tls: true
+  servername: vless.about.lso
+- name: 'Подписка #LSO© Trojan: 105 [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: trojan.about.lso
+  port: 443
+  password: trojan
+  udp: true
+  skip-cert-verify: false
+  sni: trojan.lso
+- name: 'Подписка #LSO© Hy2: 7 [#LSO - #LinSpisokObhod]'
+  type: hysteria2
+  server: hy2.about.lso
+  port: 443
+  password: hy2
+  udp: true
+  skip-cert-verify: false
+  sni: hy2.lso
+  obfs: salamander
+  obfs-password: hy2
+- name: 'Подписка #LSO© Vmess: 29 [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: vmess.about.lso
+  port: 443
+  uuid: vmess
+  udp: true
+  tls: true
+  servername: vmess.about.lso
+- name: 'Подписка #LSO© ТГ КАНАЛ: @LSOVPN [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: tg.lso
+  port: 443
+  uuid: tg
+  udp: true
+  tls: true
+  servername: tg.lso
+- name: 'ТЕХПОДДЕРЖКА #LSO©: t.me/Kepochka_Miside [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: support.lso
+  port: 443
+  uuid: support
+  udp: true
+  tls: true
+  servername: support.lso
 - name: 'The Netherlands | rowan.sanriodevgroup.org | HYSTERIA2 | [#LSO - #LinSpisokObhod]'
   type: hysteria2
   server: 185.231.204.193
@@ -855,6 +935,20 @@ proxies:
     path: /notes/alder/sync-48560603
     headers:
       Host: app.alder.sanriodevgroup.org
+- name: 'Russia | app.elm.sanriodevgroup.org | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 2.153.249.21
+  port: 443
+  password: a9VcMkn2DwEQRxxoxDDhg1eopm2Ff5dY
+  udp: true
+  skip-cert-verify: false
+  sni: app.elm.sanriodevgroup.org
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /notes/elm/sync-08a935fc
+    headers:
+      Host: app.elm.sanriodevgroup.org
 - name: 'Germany | app.birch.sanriodevgroup.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 93.152.212.81
@@ -2822,6 +2916,19 @@ proxies:
   servername: get-37.topp-con.xyz
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Russia | defs-64.topp-con.xyz | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 147.45.245.17
+  port: 443
+  uuid: 7ad63b26-bf70-4872-8fab-ebaf73a1e19d
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: 4GpOXPkTdvuF1mgBH6n9AFYRvGEh7K2ETgE8asmNASY
+    short-id: 38146bd64aece7a5
+  servername: defs-64.topp-con.xyz
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'Russia | cache-89.topp-con.xyz | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 201.51.4.89
@@ -4186,14 +4293,17 @@ proxies:
     path: /@KVPROTOCOlVPN--@KVPROTOCOlVPN--@KVPROTOCOlVPN--@KVPROTOCOlVPN--vmess/s_48738e13cc
     headers:
       Host: cdn.kavosiprotocol.shop
-- name: 'unknown | dog-us.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
+- name: 'Japan | 168.138.43.75 | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
-  server: dog-us.kunlun01dns.com
-  port: 21009
-  uuid: 9464ca40-dd75-3742-a628-d931a9f413b2
+  server: 168.138.43.75
+  port: 80
+  uuid: 11c3627f-31e8-4695-dfbd-34076e2f1f5d
   alterId: 0
   cipher: auto
   udp: true
+  network: ws
+  ws-opts:
+    path: /cctv13.m3u8
 - name: 'United States | cg1c16.waimaojd.com | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 166.1.18.220
@@ -4245,15 +4355,6 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 'unknown | dog-hk.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: dog-hk.kunlun01dns.com
-  port: 21021
-  uuid: 9464ca40-dd75-3742-a628-d931a9f413b2
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: dog-hk.kunlun01dns.com
 - name: 'Hong Kong | www.pubgmobile.com | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 156.245.232.239

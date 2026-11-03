@@ -1,4 +1,84 @@
 proxies:
+- name: 'подписка #LSO© обновлена 2026-11-03 17:58:09 [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: update.lso
+  port: 443
+  uuid: update
+  udp: true
+  tls: true
+  servername: update.lso
+- name: 'подписка #LSO© ЭТО: подписка с конфигами для LTE [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 1.about.lso
+  port: 443
+  uuid: about
+  udp: true
+  tls: true
+  servername: about.lso
+- name: 'и обхода блокировок РКН [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 2.about.lso
+  port: 443
+  uuid: about2
+  udp: true
+- name: 'Подписка #LSO© Всего конфигов: 45 [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: all.lso
+  port: 443
+  uuid: all
+  udp: true
+  tls: true
+  servername: all.lso
+- name: 'Подписка #LSO© Vless: 33 [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: vless.about.lso
+  port: 443
+  uuid: vless
+  udp: true
+  tls: true
+  servername: vless.about.lso
+- name: 'Подписка #LSO© Trojan: 11 [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: trojan.about.lso
+  port: 443
+  password: trojan
+  udp: true
+  skip-cert-verify: false
+  sni: trojan.lso
+- name: 'Подписка #LSO© Hy2: 0 [#LSO - #LinSpisokObhod]'
+  type: hysteria2
+  server: hy2.about.lso
+  port: 443
+  password: hy2
+  udp: true
+  skip-cert-verify: false
+  sni: hy2.lso
+  obfs: salamander
+  obfs-password: hy2
+- name: 'Подписка #LSO© Vmess: 1 [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: vmess.about.lso
+  port: 443
+  uuid: vmess
+  udp: true
+  tls: true
+  servername: vmess.about.lso
+- name: 'Подписка #LSO© ТГ КАНАЛ: @LSOVPN [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: tg.lso
+  port: 443
+  uuid: tg
+  udp: true
+  tls: true
+  servername: tg.lso
+- name: 'ТЕХПОДДЕРЖКА #LSO©: t.me/Kepochka_Miside [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: support.lso
+  port: 443
+  uuid: support
+  udp: true
+  tls: true
+  servername: support.lso
 - name: 'United States | www.nextjobopportunityandclaimyouridealrole.com | unknown | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 216.152.155.131

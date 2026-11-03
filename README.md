@@ -2,7 +2,7 @@
 
 ## 📅 Время последнего сбора
 
-`2026-11-03 17:23:35 (UTC+3)`
+`2026-11-03 17:58:12 (UTC+3)`
 
 ---
 
@@ -10,10 +10,9 @@
 
 | Файл | Всего конфигов |
 |------|----------------|
-| 📁 ALL.txt / ALL.yml / ALL.json | `433` |
+| 📁 ALL.txt / ALL.yml / ALL.json | `434` |
 | 📱 LTE.txt / LTE.yml / LTE.json | `45` |
-| 📶 WIFI.txt / WIFI.yml / WIFI.json | `388` |
-| 🏫 LinObhodESPD.txt / LinObhodESPD.yml / LinObhodESPD.json | `1` |
+| 📶 WIFI.txt / WIFI.yml / WIFI.json | `389` |
 
 ---
 
@@ -23,11 +22,11 @@
 
 | Протокол | Количество |
 |----------|------------|
-| 🔗 VLESS | `280` |
-| 📦 VMess | `31` |
-| 🛡️ Trojan | `115` |
+| 🔗 VLESS | `281` |
+| 📦 VMess | `30` |
+| 🛡️ Trojan | `116` |
 | ⚡ Hysteria2 | `7` |
-| **ИТОГО** | **`433`** |
+| **ИТОГО** | **`434`** |
 
 ### 📱 LTE
 
@@ -43,21 +42,11 @@
 
 | Протокол | Количество |
 |----------|------------|
-| 🔗 VLESS | `247` |
-| 📦 VMess | `30` |
-| 🛡️ Trojan | `104` |
+| 🔗 VLESS | `248` |
+| 📦 VMess | `29` |
+| 🛡️ Trojan | `105` |
 | ⚡ Hysteria2 | `7` |
-| **ИТОГО** | **`388`** |
-
-### 🏫 LinObhodESPD
-
-| Протокол | Количество |
-|----------|------------|
-| 🔗 VLESS | `1` |
-| 📦 VMess | `0` |
-| 🛡️ Trojan | `0` |
-| ⚡ Hysteria2 | `0` |
-| **ИТОГО** | **`1`** |
+| **ИТОГО** | **`389`** |
 
 ---
 
@@ -66,8 +55,7 @@
 1. **fp=chrome** — конфиги с `fp=chrome` **удаляются** для всех протоколов.
 2. **LTE** — SNI домен есть в `whitelist.txt` **ИЛИ** IP входит в CIDR из `cidrwhitelist.txt`.
 3. **WIFI** — все остальные рабочие конфиги.
-4. **LinObhodESPD** — конфиги с SNI `max.ru` или `api-maps.yandex.ru`.
-5. **ALL** — все конфиги из всех источников.
+4. **ALL** — все конфиги из всех источников.
 
 ---
 
@@ -78,7 +66,6 @@
 - `sub/ALL.json` — sing-box (plain)
 - `sub/LTE.txt` / `sub/LTE.yml` / `sub/LTE.json`
 - `sub/WIFI.txt` / `sub/WIFI.yml` / `sub/WIFI.json`
-- `sub/LinObhodESPD.txt` / `sub/LinObhodESPD.yml` / `sub/LinObhodESPD.json`
 - `sub/*.64.txt` — URI-список в base64
 
 ---
@@ -89,4 +76,4 @@
 
 ---
 
-*LinSpisokObhod v4.0 (YAML + JSON, no .64 for yml/json)*
+*LinSpisokObhod v4.2 (Без ESPD)*

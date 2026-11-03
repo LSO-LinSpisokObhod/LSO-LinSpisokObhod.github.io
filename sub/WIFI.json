@@ -32,6 +32,116 @@
   ],
   "outbounds": [
     {
+      "type": "vless",
+      "tag": "подписка #LSO© обновлена 2026-11-03 17:58:09 [#LSO - #LinSpisokObhod]",
+      "server": "update.lso",
+      "server_port": 443,
+      "uuid": "update",
+      "tls": {
+        "enabled": true,
+        "server_name": "update.lso"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "подписка #LSO© ЭТО: подписка с конфигами для WIFI [#LSO - #LinSpisokObhod]",
+      "server": "1.about.lso",
+      "server_port": 443,
+      "uuid": "about",
+      "tls": {
+        "enabled": true,
+        "server_name": "about.lso"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "и обхода блокировок РКН [#LSO - #LinSpisokObhod]",
+      "server": "2.about.lso",
+      "server_port": 443,
+      "uuid": "about2"
+    },
+    {
+      "type": "vless",
+      "tag": "Подписка #LSO© Всего конфигов: 389 [#LSO - #LinSpisokObhod]",
+      "server": "all.lso",
+      "server_port": 443,
+      "uuid": "all",
+      "tls": {
+        "enabled": true,
+        "server_name": "all.lso"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Подписка #LSO© Vless: 248 [#LSO - #LinSpisokObhod]",
+      "server": "vless.about.lso",
+      "server_port": 443,
+      "uuid": "vless",
+      "tls": {
+        "enabled": true,
+        "server_name": "vless.about.lso"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "Подписка #LSO© Trojan: 105 [#LSO - #LinSpisokObhod]",
+      "server": "trojan.about.lso",
+      "server_port": 443,
+      "password": "trojan",
+      "tls": {
+        "enabled": true,
+        "server_name": "trojan.lso"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "Подписка #LSO© Hy2: 7 [#LSO - #LinSpisokObhod]",
+      "server": "hy2.about.lso",
+      "server_port": 443,
+      "password": "hy2",
+      "tls": {
+        "enabled": true,
+        "server_name": "hy2.lso"
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "hy2"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Подписка #LSO© Vmess: 29 [#LSO - #LinSpisokObhod]",
+      "server": "vmess.about.lso",
+      "server_port": 443,
+      "uuid": "vmess",
+      "tls": {
+        "enabled": true,
+        "server_name": "vmess.about.lso"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Подписка #LSO© ТГ КАНАЛ: @LSOVPN [#LSO - #LinSpisokObhod]",
+      "server": "tg.lso",
+      "server_port": 443,
+      "uuid": "tg",
+      "tls": {
+        "enabled": true,
+        "server_name": "tg.lso"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "ТЕХПОДДЕРЖКА #LSO©: t.me/Kepochka_Miside [#LSO - #LinSpisokObhod]",
+      "server": "support.lso",
+      "server_port": 443,
+      "uuid": "support",
+      "tls": {
+        "enabled": true,
+        "server_name": "support.lso"
+      }
+    },
+    {
       "type": "hysteria2",
       "tag": "The Netherlands | rowan.sanriodevgroup.org | HYSTERIA2 | [#LSO - #LinSpisokObhod]",
       "server": "185.231.204.193",
@@ -1314,6 +1424,28 @@
         "path": "/notes/alder/sync-48560603",
         "headers": {
           "Host": "app.alder.sanriodevgroup.org"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "Russia | app.elm.sanriodevgroup.org | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "2.153.249.21",
+      "server_port": 443,
+      "password": "a9VcMkn2DwEQRxxoxDDhg1eopm2Ff5dY",
+      "tls": {
+        "enabled": true,
+        "server_name": "app.elm.sanriodevgroup.org",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/notes/elm/sync-08a935fc",
+        "headers": {
+          "Host": "app.elm.sanriodevgroup.org"
         }
       }
     },
@@ -4480,6 +4612,27 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | defs-64.topp-con.xyz | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "147.45.245.17",
+      "server_port": 443,
+      "uuid": "7ad63b26-bf70-4872-8fab-ebaf73a1e19d",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "defs-64.topp-con.xyz",
+        "reality": {
+          "enabled": true,
+          "public_key": "4GpOXPkTdvuF1mgBH6n9AFYRvGEh7K2ETgE8asmNASY",
+          "short_id": "38146bd64aece7a5"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Russia | cache-89.topp-con.xyz | unknown | [#LSO - #LinSpisokObhod]",
       "server": "201.51.4.89",
       "server_port": 443,
@@ -6683,12 +6836,16 @@
     },
     {
       "type": "vmess",
-      "tag": "unknown | dog-us.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "dog-us.kunlun01dns.com",
-      "server_port": 21009,
-      "uuid": "9464ca40-dd75-3742-a628-d931a9f413b2",
+      "tag": "Japan | 168.138.43.75 | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "168.138.43.75",
+      "server_port": 80,
+      "uuid": "11c3627f-31e8-4695-dfbd-34076e2f1f5d",
       "security": "auto",
-      "alter_id": 0
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/cctv13.m3u8"
+      }
     },
     {
       "type": "vmess",
@@ -6748,15 +6905,6 @@
       "server": "119.46.51.45",
       "server_port": 37515,
       "uuid": "9b76bc31-17a5-4454-934a-8d5fb602cd70",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "type": "vmess",
-      "tag": "unknown | dog-hk.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "dog-hk.kunlun01dns.com",
-      "server_port": 21021,
-      "uuid": "9464ca40-dd75-3742-a628-d931a9f413b2",
       "security": "auto",
       "alter_id": 0
     },
