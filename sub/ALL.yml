@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-03 23:56:25 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-04 00:54:33 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 327 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 328 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -37,7 +37,7 @@ proxies:
   udp: true
   tls: true
   servername: vless.about.lso
-- name: 'Подписка #LSO© Trojan: 123 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Trojan: 122 [#LSO - #LinSpisokObhod]'
   type: trojan
   server: trojan.about.lso
   port: 443
@@ -863,19 +863,6 @@ proxies:
 - name: 'Japan | api.85s.me | WebSocket | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 172.238.29.97
-  port: 443
-  password: 8deb189a-3aed-4865-843b-b72dae954c46
-  udp: true
-  skip-cert-verify: false
-  sni: api.85s.me
-  network: ws
-  ws-opts:
-    path: /
-    headers:
-      Host: api.85s.me
-- name: 'Hong Kong | api.85s.me | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: trojan
-  server: 172.93.188.25
   port: 443
   password: 8deb189a-3aed-4865-843b-b72dae954c46
   udp: true
@@ -3750,6 +3737,21 @@ proxies:
   servername: ru.nnight.cfd
   client-fingerprint: firefox
   network: xhttp
+- name: 'Finland | 36a466g.fi1.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 196.196.204.180
+  port: 443
+  uuid: 9a0e84f8-4b58-477f-99da-5fac5a2e58e8
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: pAgrBKJCmuSJHIzYkEJTqsOBOVBK_DMtEqFPo-PaTkg
+    short-id: b3c9d0c6bdd114a6
+  servername: 36a466g.fi1.h1clayd.click
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: 0adb9638509b
 - name: 'unknown | 36a466g.fi1.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 36a466g.fi1.h1clayd.click
@@ -5443,6 +5445,20 @@ proxies:
     path: /api/connect
     headers:
       Host: wstg.datasynctrue.online
+- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 104.17.147.222
+  port: 80
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
+  alterId: 0
+  cipher: auto
+  udp: true
+  servername: vmess.lbw666.dpdns.org
+  network: ws
+  ws-opts:
+    path: /ws?ed=2048
+    headers:
+      Host: vmess.lbw666.dpdns.org
 - name: 'unknown | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: cf.0sm.com
@@ -5695,20 +5711,6 @@ proxies:
   cipher: auto
   udp: true
   servername: zfd-hkv1.kunlun01dns.com
-- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 104.17.147.222
-  port: 80
-  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: vmess.lbw666.dpdns.org
-  network: ws
-  ws-opts:
-    path: /ws?ed=2048
-    headers:
-      Host: vmess.lbw666.dpdns.org
 - name: 'South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 132.145.80.230
