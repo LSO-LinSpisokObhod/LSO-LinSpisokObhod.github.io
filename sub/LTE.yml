@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-04 14:23:59 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-04 16:14:15 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 46 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 47 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 34 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 35 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -199,6 +199,20 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Russia | lesotorg-kirov.ru | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.229.9.135
+  port: 443
+  uuid: 2f4de908-b22e-48e9-9e57-fc86acf02c56
+  udp: true
+  tls: true
+  servername: lesotorg-kirov.ru
+  client-fingerprint: qq
+  network: ws
+  ws-opts:
+    path: /chws
+    headers:
+      Host: lesotorg-kirov.ru
 - name: 'Sweden | smart.bachidze.com | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.223.100
@@ -235,6 +249,20 @@ proxies:
   servername: smart.bachidze.com
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Russia | rar.rtkdvbr.cc | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.86.145.37
+  port: 443
+  uuid: 40945325-a133-41ef-8fc3-2e726678ad52
+  udp: true
+  tls: true
+  servername: rar.rtkdvbr.cc
+  client-fingerprint: qq
+  network: ws
+  ws-opts:
+    path: /amws
+    headers:
+      Host: rar.rtkdvbr.cc
 - name: 'The Netherlands | nla.kosmosapp.net | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 79.141.164.125
@@ -576,20 +604,6 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'The Netherlands | ssj-wkg.pages.dev | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.173.254.251
-  port: 8443
-  uuid: f0d6aa7c-0b34-4b68-9af8-1ea5e0b39bdc
-  udp: true
-  tls: true
-  servername: ssj-wkg.pages.dev
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /
-    headers:
-      Host: ssj-wkg.pages.dev
 - name: 'Russia | marshalltmp.top | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.178.208.140

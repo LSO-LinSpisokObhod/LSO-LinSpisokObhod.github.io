@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-04 14:23:59 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-04 16:14:15 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -62,7 +62,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Всего конфигов: 46 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Всего конфигов: 47 [#LSO - #LinSpisokObhod]",
       "server": "all.lso",
       "server_port": 443,
       "uuid": "all",
@@ -73,7 +73,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vless: 34 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vless: 35 [#LSO - #LinSpisokObhod]",
       "server": "vless.about.lso",
       "server_port": 443,
       "uuid": "vless",
@@ -327,6 +327,31 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | lesotorg-kirov.ru | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "185.229.9.135",
+      "server_port": 443,
+      "uuid": "2f4de908-b22e-48e9-9e57-fc86acf02c56",
+      "tls": {
+        "enabled": true,
+        "server_name": "lesotorg-kirov.ru",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/chws",
+        "headers": {
+          "Host": "lesotorg-kirov.ru"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Sweden | smart.bachidze.com | unknown | [#LSO - #LinSpisokObhod]",
       "server": "88.216.223.100",
       "server_port": 443,
@@ -382,6 +407,31 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | rar.rtkdvbr.cc | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "185.86.145.37",
+      "server_port": 443,
+      "uuid": "40945325-a133-41ef-8fc3-2e726678ad52",
+      "tls": {
+        "enabled": true,
+        "server_name": "rar.rtkdvbr.cc",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/amws",
+        "headers": {
+          "Host": "rar.rtkdvbr.cc"
         }
       }
     },
@@ -943,28 +993,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "The Netherlands | ssj-wkg.pages.dev | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "178.173.254.251",
-      "server_port": 8443,
-      "uuid": "f0d6aa7c-0b34-4b68-9af8-1ea5e0b39bdc",
-      "tls": {
-        "enabled": true,
-        "server_name": "ssj-wkg.pages.dev",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "ssj-wkg.pages.dev"
         }
       }
     },
