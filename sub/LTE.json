@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-04 02:48:11 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-04 04:13:46 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -62,7 +62,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Всего конфигов: 40 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Всего конфигов: 45 [#LSO - #LinSpisokObhod]",
       "server": "all.lso",
       "server_port": 443,
       "uuid": "all",
@@ -73,7 +73,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vless: 28 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vless: 33 [#LSO - #LinSpisokObhod]",
       "server": "vless.about.lso",
       "server_port": 443,
       "uuid": "vless",
@@ -286,6 +286,26 @@
     {
       "type": "vless",
       "tag": "Russia | hb.ru-msk.vkcloud-storage.ru | RAW | [#LSO - #LinSpisokObhod]",
+      "server": "178.250.243.45",
+      "server_port": 2444,
+      "uuid": "0d070b9c-64a2-49dd-8c26-d9cbb6cc225c",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "hb.ru-msk.vkcloud-storage.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | hb.ru-msk.vkcloud-storage.ru | unknown | [#LSO - #LinSpisokObhod]",
       "server": "178.250.243.45",
       "server_port": 2444,
       "uuid": "0d070b9c-64a2-49dd-8c26-d9cbb6cc225c",
@@ -540,6 +560,31 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | z1q3pv4g78.rucdncomp.pro | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "217.19.122.156",
+      "server_port": 443,
+      "uuid": "7955bf18-35c4-412d-aabd-c0b36c793063",
+      "tls": {
+        "enabled": true,
+        "server_name": "z1q3pv4g78.rucdncomp.pro",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/useraction/events/b892639b7195/",
+        "headers": {
+          "Host": "z1q3pv4g78.rucdncomp.pro"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]",
       "server": "95.128.71.79",
       "server_port": 10444,
@@ -681,6 +726,78 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | gran-game.pro | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "185.178.208.140",
+      "server_port": 443,
+      "uuid": "c720cb74-4c84-4fce-b8ae-637dbaa16199",
+      "tls": {
+        "enabled": true,
+        "server_name": "gran-game.pro",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/static/events/900598fa7500/",
+        "headers": {
+          "Host": "gran-game.pro"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | z1q3pv4g78.rucdncomp.pro | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "217.19.122.156",
+      "server_port": 443,
+      "uuid": "c720cb74-4c84-4fce-b8ae-637dbaa16199",
+      "tls": {
+        "enabled": true,
+        "server_name": "z1q3pv4g78.rucdncomp.pro",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/useraction/events/b892639b7195/",
+        "headers": {
+          "Host": "z1q3pv4g78.rucdncomp.pro"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | z1q3pv4g78.rucdncomp.pro | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "217.19.122.156",
+      "server_port": 443,
+      "uuid": "c720cb74-4c84-4fce-b8ae-637dbaa16199",
+      "tls": {
+        "enabled": true,
+        "server_name": "z1q3pv4g78.rucdncomp.pro",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/useraction/events/b892639b7195/",
+        "headers": {
+          "Host": "z1q3pv4g78.rucdncomp.pro"
         }
       }
     },
