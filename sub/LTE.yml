@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-04 17:27:02 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-04 19:01:21 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -186,6 +186,19 @@ proxies:
   client-fingerprint: qq
   flow: xtls-rprx-vision
   network: raw
+- name: 'Russia | game.vopn.co.uk | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 31.184.253.40
+  port: 443
+  uuid: 03248cf9-cbcb-4718-a11d-35b499978d27
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: k87FtAby22FLJXeHshOeyh3w_KlkomFwIrTeLSXQEA0
+    short-id: f1086c50e0498c7a
+  servername: game.vopn.co.uk
+  client-fingerprint: firefox
+  network: xhttp
 - name: 'Russia | hb.ru-msk.vkcloud-storage.ru | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.250.243.45
@@ -209,19 +222,6 @@ proxies:
     public-key: GCCZ1ZZjB_nj7yxqFi22bIIWWr_G6rnWUzDcssN_40o
     short-id: b28db60d77c50b4f
   servername: yandex.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.172.227.124
-  port: 10444
-  uuid: 1af36694-b548-4b18-89a0-bc076eab4ed7
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
-    short-id: 8debcf36f1cc69ff
-  servername: ads.x5.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'Russia | lesotorg-kirov.ru | WebSocket | [#LSO - #LinSpisokObhod]'
@@ -384,7 +384,7 @@ proxies:
     public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
     short-id: 8debcf36f1cc69ff
   servername: ads.x5.ru
-  client-fingerprint: safari
+  client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'Russia | ru.nnight.cfd | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -407,7 +407,7 @@ proxies:
     public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
     short-id: 8debcf36f1cc69ff
   servername: ads.x5.ru
-  client-fingerprint: safari
+  client-fingerprint: edge
   flow: xtls-rprx-vision
 - name: 'Russia | z1q3pv4g78.rucdncomp.pro | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
