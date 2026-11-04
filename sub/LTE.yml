@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-05 00:56:12 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-05 01:56:11 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 63 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 60 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 46 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 43 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -256,18 +256,6 @@ proxies:
   servername: game.vopn.co.uk
   client-fingerprint: firefox
   network: xhttp
-- name: 'Russia | hb.ru-msk.vkcloud-storage.ru | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.250.243.45
-  port: 2444
-  uuid: 0d070b9c-64a2-49dd-8c26-d9cbb6cc225c
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY
-  servername: hb.ru-msk.vkcloud-storage.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 193.163.203.170
@@ -344,18 +332,6 @@ proxies:
     short-id: a25d0f
   servername: play.google.com
   client-fingerprint: firefox
-- name: 'Sweden | smart.bachidze.com | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 88.216.223.100
-  port: 443
-  uuid: 3bb97d46-789b-4229-88f6-9beb222a4137
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: vzRgIP8Mvd9V6krwKxw5EwwzvC4uiaW3wo0Y2ri2_Wc
-  servername: smart.bachidze.com
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'Sweden | smart.bachidze.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.223.100
@@ -613,20 +589,6 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
-- name: 'Russia | gran-game.pro | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.178.208.140
-  port: 443
-  uuid: c720cb74-4c84-4fce-b8ae-637dbaa16199
-  udp: true
-  tls: true
-  servername: gran-game.pro
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /static/events/900598fa7500/
-    headers:
-      Host: gran-game.pro
 - name: 'Russia | z1q3pv4g78.rucdncomp.pro | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 217.19.122.156
