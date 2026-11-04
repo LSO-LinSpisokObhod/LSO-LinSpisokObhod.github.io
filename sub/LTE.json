@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-04 10:26:04 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-04 12:04:08 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -435,30 +435,6 @@
     },
     {
       "type": "vless",
-      "tag": "unknown | max.ru | GRPC | [#LSO - #LinSpisokObhod]",
-      "server": "qtir1.dnetsolutions.ru",
-      "server_port": 443,
-      "uuid": "63959ed7-d26f-48dd-8c7b-ebdb6ea68535",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "9X-tgXeFaqxURY0nGxFNdz9bpNIo7DTXHoWXpBqiOj0",
-          "short_id": "cbc638acc8ac87"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      },
-      "transport": {
-        "type": "grpc",
-        "service_name": "grpc-90"
-      }
-    },
-    {
-      "type": "vless",
       "tag": "Russia | www.kinopoisk.ru | XHTTP | [#LSO - #LinSpisokObhod]",
       "server": "132.243.230.251",
       "server_port": 443,
@@ -560,6 +536,31 @@
       "transport": {
         "type": "grpc",
         "service_name": "neurex"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | z1q3pv4g78.rucdncomp.pro | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "217.19.122.156",
+      "server_port": 443,
+      "uuid": "7955bf18-35c4-412d-aabd-c0b36c793063",
+      "tls": {
+        "enabled": true,
+        "server_name": "z1q3pv4g78.rucdncomp.pro",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/useraction/events/b892639b7195/",
+        "headers": {
+          "Host": "z1q3pv4g78.rucdncomp.pro"
+        }
       }
     },
     {
