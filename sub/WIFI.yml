@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-04 16:14:15 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-04 16:19:24 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 458 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 454 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 342 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 340 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -37,7 +37,7 @@ proxies:
   udp: true
   tls: true
   servername: vless.about.lso
-- name: 'Подписка #LSO© Trojan: 75 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Trojan: 76 [#LSO - #LinSpisokObhod]'
   type: trojan
   server: trojan.about.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 36 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 33 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -567,6 +567,15 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: kr002.zestapp778.com
+  client-fingerprint: firefox
+- name: 'Canada | ca001.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 216.128.185.90
+  port: 46977
+  password: 5t6i121em5lkmsmk
+  udp: true
+  skip-cert-verify: false
+  sni: ca001.zestapp778.com
   client-fingerprint: firefox
 - name: 'unknown | in002.zestapp778.com | TCP | [#LSO - #LinSpisokObhod]'
   type: trojan
@@ -3483,19 +3492,6 @@ proxies:
   servername: cache-89.topp-con.xyz
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | patch-25.topp-con.xyz | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 5.129.202.74
-  port: 443
-  uuid: 7ad63b26-bf70-4872-8fab-ebaf73a1e19d
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: LEziyH-E4k9hehGRJkVi1FadVObB_NZJy8U7oUCVWXU
-    short-id: b9120cd53ffd7bba
-  servername: patch-25.topp-con.xyz
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'unknown | 7d1a74fd.ferrin.uk | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: api.ferrin.uk
@@ -3639,18 +3635,6 @@ proxies:
   servername: cdndownloadlink.song69.fun
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'unknown | 100497t.de2.h1clayd.click | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 100497t.de2.h1clayd.click
-  port: 443
-  uuid: 94042dd1-d32a-4797-b88c-dc48459e2b34
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: x-7K9P2E91DCL-0ONwm14gxDkUseukg98hYzB-1dW1A
-    short-id: 5be240e45d3c445c
-  servername: 100497t.de2.h1clayd.click
-  client-fingerprint: firefox
 - name: 'The Netherlands | reg.jarbook.net | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 84.32.101.84
@@ -5059,14 +5043,6 @@ proxies:
   network: ws
   ws-opts:
     path: /
-- name: 'unknown | dog-us.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: dog-us.kunlun01dns.com
-  port: 21009
-  uuid: 9464ca40-dd75-3742-a628-d931a9f413b2
-  alterId: 0
-  cipher: auto
-  udp: true
 - name: 'India | 152.67.8.205 | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 152.67.8.205
@@ -5158,15 +5134,6 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 'unknown | dog-hk.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: dog-hk.kunlun01dns.com
-  port: 21021
-  uuid: 9464ca40-dd75-3742-a628-d931a9f413b2
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: dog-hk.kunlun01dns.com
 - name: 'Hong Kong | www.pubgmobile.com | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 156.245.232.239
@@ -5243,15 +5210,6 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 'unknown | zfd-hkv1.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: zfd-hkv1.kunlun01dns.com
-  port: 16115
-  uuid: 0802ac03-7973-39ef-a019-ba02de6c01e1
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: zfd-hkv1.kunlun01dns.com
 - name: 'South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 132.145.80.230

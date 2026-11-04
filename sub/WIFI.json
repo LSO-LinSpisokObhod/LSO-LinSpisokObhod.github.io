@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-04 16:14:15 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-04 16:19:24 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -62,7 +62,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Всего конфигов: 458 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Всего конфигов: 454 [#LSO - #LinSpisokObhod]",
       "server": "all.lso",
       "server_port": 443,
       "uuid": "all",
@@ -73,7 +73,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vless: 342 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vless: 340 [#LSO - #LinSpisokObhod]",
       "server": "vless.about.lso",
       "server_port": 443,
       "uuid": "vless",
@@ -84,7 +84,7 @@
     },
     {
       "type": "trojan",
-      "tag": "Подписка #LSO© Trojan: 75 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Trojan: 76 [#LSO - #LinSpisokObhod]",
       "server": "trojan.about.lso",
       "server_port": 443,
       "password": "trojan",
@@ -110,7 +110,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vmess: 36 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vmess: 33 [#LSO - #LinSpisokObhod]",
       "server": "vmess.about.lso",
       "server_port": 443,
       "uuid": "vmess",
@@ -894,6 +894,21 @@
       "tls": {
         "enabled": true,
         "server_name": "kr002.zestapp778.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "Canada | ca001.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "216.128.185.90",
+      "server_port": 46977,
+      "password": "5t6i121em5lkmsmk",
+      "tls": {
+        "enabled": true,
+        "server_name": "ca001.zestapp778.com",
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
@@ -5556,27 +5571,6 @@
     },
     {
       "type": "vless",
-      "tag": "Russia | patch-25.topp-con.xyz | unknown | [#LSO - #LinSpisokObhod]",
-      "server": "5.129.202.74",
-      "server_port": 443,
-      "uuid": "7ad63b26-bf70-4872-8fab-ebaf73a1e19d",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "patch-25.topp-con.xyz",
-        "reality": {
-          "enabled": true,
-          "public_key": "LEziyH-E4k9hehGRJkVi1FadVObB_NZJy8U7oUCVWXU",
-          "short_id": "b9120cd53ffd7bba"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "unknown | 7d1a74fd.ferrin.uk | XHTTP | [#LSO - #LinSpisokObhod]",
       "server": "api.ferrin.uk",
       "server_port": 443,
@@ -5810,26 +5804,6 @@
         "reality": {
           "enabled": true,
           "public_key": "HRmmr0Ii4Tr9jPLwratvLhee3_VWFNK47T8AAo7kzww"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "unknown | 100497t.de2.h1clayd.click | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "100497t.de2.h1clayd.click",
-      "server_port": 443,
-      "uuid": "94042dd1-d32a-4797-b88c-dc48459e2b34",
-      "tls": {
-        "enabled": true,
-        "server_name": "100497t.de2.h1clayd.click",
-        "reality": {
-          "enabled": true,
-          "public_key": "x-7K9P2E91DCL-0ONwm14gxDkUseukg98hYzB-1dW1A",
-          "short_id": "5be240e45d3c445c"
         },
         "utls": {
           "enabled": true,
@@ -8062,15 +8036,6 @@
     },
     {
       "type": "vmess",
-      "tag": "unknown | dog-us.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "dog-us.kunlun01dns.com",
-      "server_port": 21009,
-      "uuid": "9464ca40-dd75-3742-a628-d931a9f413b2",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "type": "vmess",
       "tag": "India | 152.67.8.205 | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "152.67.8.205",
       "server_port": 80,
@@ -8180,15 +8145,6 @@
     },
     {
       "type": "vmess",
-      "tag": "unknown | dog-hk.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "dog-hk.kunlun01dns.com",
-      "server_port": 21021,
-      "uuid": "9464ca40-dd75-3742-a628-d931a9f413b2",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "type": "vmess",
       "tag": "Hong Kong | www.pubgmobile.com | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "156.245.232.239",
       "server_port": 35043,
@@ -8274,15 +8230,6 @@
       "server": "47.250.135.244",
       "server_port": 10000,
       "uuid": "aedc66b8-99d7-4a21-8310-61870e7f870d",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "type": "vmess",
-      "tag": "unknown | zfd-hkv1.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "zfd-hkv1.kunlun01dns.com",
-      "server_port": 16115,
-      "uuid": "0802ac03-7973-39ef-a019-ba02de6c01e1",
       "security": "auto",
       "alter_id": 0
     },

@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-04 16:14:15 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-04 16:19:24 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 47 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 48 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 35 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 36 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -186,6 +186,18 @@ proxies:
   client-fingerprint: qq
   flow: xtls-rprx-vision
   network: raw
+- name: 'Russia | hb.ru-msk.vkcloud-storage.ru | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 178.250.243.45
+  port: 2444
+  uuid: 0d070b9c-64a2-49dd-8c26-d9cbb6cc225c
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: LJsl2DgOqknCTlIUAJ9RIp5-2L5chl_sOycmWzmeWgY
+  servername: hb.ru-msk.vkcloud-storage.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.172.227.124
