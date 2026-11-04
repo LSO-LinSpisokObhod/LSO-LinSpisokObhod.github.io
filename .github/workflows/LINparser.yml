@@ -181,10 +181,21 @@ jobs:
           fi
           echo "✅ SSH OK"
           
-          ssh "${O[@]}" -f -N -D 127.0.0.1:1080 "$VPS_USER@$VPS_HOST"
-          PID=$(pgrep -f "ssh .* -D 127.0.0.1:1080 .*$VPS_HOST" | tail -1 || true)
-          trap '[ -n "$PID" ] && kill "$PID" 2>/dev/null || true' EXIT
+          SOCK=/tmp/moshub-ssh.sock
+          cleanup_tunnel() {
+            ssh -S "$SOCK" -O exit "$VPS_USER@$VPS_HOST" 2>/dev/null || true
+            rm -f "$SOCK"
+          }
+          trap cleanup_tunnel EXIT
+
+          # -M включает ControlMaster, -S кладёт сокет в /tmp,
+          # -O check / -O exit далее работают с конкретно этим PID.
+          ssh "${O[@]}" -M -S "$SOCK" -f -N -D 127.0.0.1:1080 "$VPS_USER@$VPS_HOST"
           sleep 2
+
+          if ! ssh -S "$SOCK" -O check "$VPS_USER@$VPS_HOST" 2>/dev/null; then
+            echo "::error::Mos.Hub SSH-мультиплексор не активен"; exit 0
+          fi
           
           CODE=$(curl -s --socks5-hostname 127.0.0.1:1080 --max-time 15 -o /dev/null -w '%{http_code}' https://hub.mos.ru/ || echo 000)
           if [ "$CODE" = "000" ]; then echo "::error::Mos.Hub туннель не отвечает"; exit 0; fi
