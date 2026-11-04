@@ -108,17 +108,20 @@ async def check_tcp_port(host: str, port: int, timeout: float = 30.0) -> bool:
         return False
 
 
-# === BASE64 ===
+# === BASE64 (безопасная версия) ===
 def decode_base64_if_needed(content: str) -> str:
+    """
+    Декодирует base64 ТОЛЬКО если результат содержит '://'.
+    Иначе возвращает исходную строку нетронутой.
+    Это защита от декодирования обычного текста в мусор.
+    """
     content = content.strip()
     if len(content) < 20:
         return content
 
-    # Уже содержит протокол — декодировать нечего
     if '://' in content:
         return content
 
-    # URL-encoded base64 (например, '%3D' в конце)
     if '%' in content:
         try:
             content = unquote(content)
@@ -129,12 +132,10 @@ def decode_base64_if_needed(content: str) -> str:
         s = re.sub(r'\s+', '', s)
         if not s:
             return None
-        # base64url → base64
         s = s.replace('-', '+').replace('_', '/')
-        s = re.sub(r'[^A-Za-z0-9+/=]', '', s)
-        if not s:
+        # Строгая проверка: только base64-символы (никаких точек, дефисов и пр.)
+        if not re.match(r'^[A-Za-z0-9+/]+={0,2}$', s):
             return None
-        # Восстанавливаем padding (unpadded base64 — самый частый случай)
         s += '=' * ((-len(s)) % 4)
         try:
             decoded = base64.b64decode(s, validate=False)
@@ -143,21 +144,16 @@ def decode_base64_if_needed(content: str) -> str:
             return None
 
     decoded_str = _try_decode(content)
-    if decoded_str is None:
-        return content
-
-    if '://' in decoded_str:
+    if decoded_str is not None and '://' in decoded_str:
         return decoded_str
 
-    # Бывает double-encoded: base64 от base64
-    if len(decoded_str) >= 20:
+    # double-encoded (base64 от base64)
+    if decoded_str is not None and len(decoded_str) >= 20:
         nested = _try_decode(decoded_str)
         if nested is not None and '://' in nested:
             return nested
 
-    if decoded_str.isprintable() and len(decoded_str) > 50:
-        return decoded_str
-
+    # Если не удалось получить текст с протоколом — НЕ ДЕКОДИРУЕМ
     return content
 
 
@@ -228,6 +224,8 @@ def _vmess_b64_normalize(s: str) -> str:
             pass
     s = s.replace('-', '+').replace('_', '/')
     s = re.sub(r'[^A-Za-z0-9+/=]', '', s)
+    # Убираем лишние '=' в середине и восстанавливаем padding
+    s = s.rstrip('=')
     pad = (-len(s)) % 4
     if pad:
         s += '=' * pad
@@ -339,8 +337,12 @@ def extract_sni_domain(config: str) -> Optional[str]:
     if '?' in body:
         query_part = body.split('?', 1)[1].split('#', 1)[0]
         params = parse_qs(query_part)
-        # 'peer' — стандартный ключ SNI в hysteria2
-        for key in ('sni', 'host', 'peer'):
+        # 'peer' — стандартный ключ SNI ТОЛЬКО в hysteria2
+        # для vless/trojan используем только sni/host
+        keys = ['sni', 'host']
+        if protocol == 'hysteria2':
+            keys.append('peer')
+        for key in keys:
             if key in params and params[key]:
                 return params[key][0]
     return None
@@ -404,7 +406,7 @@ def is_fp_chrome(config: str) -> bool:
     return _url_fp(config) == 'chrome'
 
 
-# === ЗАМЕНА fp=chrome → fp=firefox ===
+# === ЗАМЕНА fp=chrome → fp=firefox (сохраняя формат) ===
 def replace_fp_chrome(config: str) -> str:
     """Заменяет fp=chrome на fp=firefox. Возвращает исходный конфиг, если fp=chrome нет."""
     protocol = detect_protocol(config)
@@ -436,6 +438,7 @@ def _url_replace_fp_chrome(config: str) -> str:
     for i, part in enumerate(parts):
         if '=' in part:
             k, _, v = part.partition('=')
+            # k должен быть строго 'fp' (без 'fpX' и пр.)
             if k == 'fp' and unquote(v).strip().lower() == 'chrome':
                 parts[i] = k + '=firefox'
                 changed = True
@@ -455,18 +458,36 @@ def _vmess_replace_fp_chrome(config: str) -> str:
     if not isinstance(fp, str) or fp.strip().lower() != 'chrome':
         return config
 
-    data['fp'] = 'firefox'
-
+    # Отделяем фрагмент (комментарий)
     fragment = ''
     if '#' in config:
         _, fragment = config.rsplit('#', 1)
 
+    # Определяем формат оригинального payload — чтобы сохранить его
+    orig_payload = config[8:]
+    if '#' in orig_payload:
+        orig_payload = orig_payload.split('#', 1)[0]
+    if '?' in orig_payload:
+        orig_payload = orig_payload.split('?', 1)[0]
+    orig_payload = orig_payload.strip()
+
+    orig_was_padded = orig_payload.endswith('=')
+    orig_was_urlsafe = ('-' in orig_payload or '_' in orig_payload)
+
+    data['fp'] = 'firefox'
+
     try:
-        payload = base64.b64encode(
-            json.dumps(data, ensure_ascii=False).encode('utf-8')
-        ).decode('ascii')
+        payload_str = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
+        raw_bytes = payload_str.encode('utf-8')
+        payload = base64.b64encode(raw_bytes).decode('ascii')
     except Exception:
         return config
+
+    # Приводим к формату оригинала
+    if orig_was_urlsafe:
+        payload = payload.replace('+', '-').replace('/', '_')
+    if not orig_was_padded:
+        payload = payload.rstrip('=')
 
     result = 'vmess://' + payload
     if fragment:
@@ -490,11 +511,11 @@ def _vmess_canonical_key(data: Dict) -> str:
         if v is None:
             v = ''
         if k in ('port', 'aid'):
-            # Нормализуем к int — иначе "443" != 443, дубликаты не склеиваются
+            # Нормализуем к строке без ведущих нулей (не теряя значения)
             try:
-                v = int(v)
+                v = str(int(v))
             except (TypeError, ValueError):
-                v = 0
+                v = str(v).strip()
         elif isinstance(v, (dict, list)):
             v = json.dumps(v, sort_keys=True, ensure_ascii=False)
         else:
@@ -1622,16 +1643,38 @@ if __name__ == "__main__":
         assert is_fp_chrome(_cfg_c)
         assert not is_fp_chrome(_cfg_f)
 
-        # Замена fp=chrome → fp=firefox
+        # Замена fp=chrome → fp=firefox (URL)
         _r = replace_fp_chrome("vless://u@h:443?security=tls&fp=chrome&sni=x.com#Tag")
         assert 'fp=firefox' in _r and 'fp=chrome' not in _r and _r.endswith('#Tag')
         assert replace_fp_chrome("vless://u@h:443?fp=firefox") == "vless://u@h:443?fp=firefox"
         assert replace_fp_chrome("vless://u@h:443?sni=x.com") == "vless://u@h:443?sni=x.com"
 
+        # Замена fp=chrome → fp=firefox (VMess) — сохраняет padded/unpadded
         _vm_r = replace_fp_chrome(_cfg_c)
         _d_r = decode_vmess_config(_vm_r)
         assert _d_r and _d_r.get("fp") == "firefox"
+        # padded — padding на месте
+        assert _vm_r.split('#', 1)[0][8:].endswith('=')
+        # unpadded — без padding
+        _cfg_c_nopad = _cfg_c.rstrip('=')
+        _vm_r_nopad = replace_fp_chrome(_cfg_c_nopad)
+        assert not _vm_r_nopad.split('#', 1)[0][8:].endswith('=')
+        # no-op
         assert replace_fp_chrome(_cfg_f) == _cfg_f
+
+        # decode_base64_if_needed — не должен ломать обычный текст
+        assert decode_base64_if_needed("Hello, this is a regular text with no protocols at all") == "Hello, this is a regular text with no protocols at all"
+        # должен декодировать реальный base64 конфига
+        _real_cfg = "vless://uuid@host.com:443?security=tls&sni=x.com"
+        _b64 = base64.b64encode(_real_cfg.encode()).decode()
+        assert _real_cfg in decode_base64_if_needed(_b64)
+        # unpadded
+        _b64_nopad = _b64.rstrip('=')
+        assert _real_cfg in decode_base64_if_needed(_b64_nopad)
+
+        # extract_sni_domain — peer только для hy2
+        assert extract_sni_domain("vless://u@h:443?peer=api.example.com") is None
+        assert extract_sni_domain("hy2://u@h:443?peer=api.example.com") == "api.example.com"
 
         _clash = parse_uri_to_clash("vless://uuid@host.com:443?security=tls&sni=x.com&type=ws&path=%2Fws&host=x.com")
         assert _clash and _clash['type'] == 'vless'
