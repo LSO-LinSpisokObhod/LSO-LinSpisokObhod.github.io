@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-05 05:21:11 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-05 07:02:11 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 65 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 73 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 48 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 57 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -37,7 +37,7 @@ proxies:
   udp: true
   tls: true
   servername: vless.about.lso
-- name: 'Подписка #LSO© Trojan: 13 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Trojan: 14 [#LSO - #LinSpisokObhod]'
   type: trojan
   server: trojan.about.lso
   port: 443
@@ -45,7 +45,7 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: trojan.lso
-- name: 'Подписка #LSO© Hy2: 3 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Hy2: 1 [#LSO - #LinSpisokObhod]'
   type: hysteria2
   server: hy2.about.lso
   port: 443
@@ -79,22 +79,6 @@ proxies:
   udp: true
   tls: true
   servername: support.lso
-- name: 'Germany | westtransit.comparecarprices.org | HYSTERIA2 | [#LSO - #LinSpisokObhod]'
-  type: hysteria2
-  server: 185.99.96.102
-  port: 443
-  password: e3adcd92-7f84-47cf-9be7-a9676f0465db
-  udp: true
-  skip-cert-verify: false
-  sni: westtransit.comparecarprices.org
-- name: 'Finland | suboard.net | HYSTERIA2 | [#LSO - #LinSpisokObhod]'
-  type: hysteria2
-  server: 185.99.98.160
-  port: 443
-  password: e5573253-44fc-4502-ba06-96e4742bb448
-  udp: true
-  skip-cert-verify: false
-  sni: suboard.net
 - name: 'Poland | cinema.kinopolka.net | HYSTERIA2 | [#LSO - #LinSpisokObhod]'
   type: hysteria2
   server: 217.12.207.38
@@ -138,6 +122,24 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: www.nextjobopportunityandclaimyouridealrole.com
+- name: 'United States | courses.healthcarejobshubenhancemedicalprofessionalskillstoday.com | unknown | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 216.152.156.212
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  skip-cert-verify: false
+  sni: courses.healthcarejobshubenhancemedicalprofessionalskillstoday.com
+  client-fingerprint: firefox
+- name: 'United States | learn.healthcarejobshubenhancemedicalprofessionalskillstoday.com | unknown | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 216.152.156.65
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  skip-cert-verify: false
+  sni: learn.healthcarejobshubenhancemedicalprofessionalskillstoday.com
+  client-fingerprint: firefox
 - name: 'United States | www.healthcarejobshubenhancemedicalprofessionalskillstoday.com | unknown | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 216.152.156.81
@@ -181,14 +183,6 @@ proxies:
   skip-cert-verify: false
   sni: www.healthcarejobshubenhancemedicalprofessionalskillstoday.com
 - name: 'Brazil | findtemporaryworkandfreelancerprojectsonlineplatform.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: trojan
-  server: 216.238.104.154
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  skip-cert-verify: false
-  sni: findtemporaryworkandfreelancerprojectsonlineplatform.com
-- name: 'Brazil | findtemporaryworkandfreelancerprojectsonlineplatform.com | unknown | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 216.238.104.154
   port: 443
@@ -386,6 +380,30 @@ proxies:
   servername: splitter.wb.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Denmark | api-maps.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 193.180.211.245
+  port: 8443
+  uuid: 35dc3ea6-2cdf-4f6e-95ea-ce786ac2947a
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: pbLP4dV9Nx4aHWf35QFadbjOCdP_klwS9fvKSszlr3Q
+  servername: api-maps.yandex.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'Sweden | smart.bachidze.com | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 88.216.223.100
+  port: 443
+  uuid: 3bb97d46-789b-4229-88f6-9beb222a4137
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: vzRgIP8Mvd9V6krwKxw5EwwzvC4uiaW3wo0Y2ri2_Wc
+  servername: smart.bachidze.com
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'Sweden | smart.bachidze.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.223.100
@@ -453,6 +471,48 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: neurex
+- name: 'Finland | fu.baiproxy.us.ci | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.103.103.240
+  port: 443
+  uuid: 55d9ec38-1b8a-454b-981a-6acfe8f56d8c
+  udp: true
+  tls: true
+  servername: fu.baiproxy.us.ci
+  client-fingerprint: qq
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: fu.baiproxy.us.ci
+- name: 'Russia | fu.baiproxy.us.ci | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 212.109.220.55
+  port: 443
+  uuid: 55d9ec38-1b8a-454b-981a-6acfe8f56d8c
+  udp: true
+  tls: true
+  servername: fu.baiproxy.us.ci
+  client-fingerprint: qq
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: fu.baiproxy.us.ci
+- name: 'Greece | vp6.1145678.xyz | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 91.250.248.151
+  port: 443
+  uuid: 5d7b401c-78fa-4254-872e-6d42bf7e75ec
+  udp: true
+  tls: true
+  servername: vp6.1145678.xyz
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /docs
+    headers:
+      Host: vp6.1145678.xyz
 - name: 'Russia | www.kinopoisk.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 132.243.230.251
@@ -589,6 +649,30 @@ proxies:
   udp: true
   servername: ads.x5.ru
   flow: ''
+- name: 'Russia | yabro-wbplugin.edadeal.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 46.182.24.15
+  port: 443
+  uuid: aa09ada3-ad33-0004-9c1a-6af275272567
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: V-wRiXvhBx01utmXJbrThJ_DE4tNJfK6mnzo9EB3fVA
+  servername: yabro-wbplugin.edadeal.yandex.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'Russia | yabro-wbplugin.edadeal.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 46.182.24.15
+  port: 443
+  uuid: aa09ada3-ad33-0005-9c1a-6af275272567
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: V-wRiXvhBx01utmXJbrThJ_DE4tNJfK6mnzo9EB3fVA
+  servername: yabro-wbplugin.edadeal.yandex.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'The Netherlands | nl01.proxmoxguidline.forum | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.86.13.217
@@ -790,6 +874,34 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'The Netherlands | ssj-wkg.pages.dev | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 178.173.254.251
+  port: 8443
+  uuid: f0d6aa7c-0b34-4b68-9af8-1ea5e0b39bdc
+  udp: true
+  tls: true
+  servername: ssj-wkg.pages.dev
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: ssj-wkg.pages.dev
+- name: 'The Netherlands | ssj-wkg.pages.dev | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 178.173.254.251
+  port: 8443
+  uuid: f0d6aa7c-0b34-4b68-9af8-1ea5e0b39bdc
+  udp: true
+  tls: true
+  servername: ssj-wkg.pages.dev
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: ssj-wkg.pages.dev
 - name: 'Russia | marshalltmp.top | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.178.208.140
