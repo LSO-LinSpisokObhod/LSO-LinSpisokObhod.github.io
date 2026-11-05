@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-05 07:02:11 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-05 08:07:51 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 73 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 72 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -45,7 +45,7 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: trojan.lso
-- name: 'Подписка #LSO© Hy2: 1 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Hy2: 0 [#LSO - #LinSpisokObhod]'
   type: hysteria2
   server: hy2.about.lso
   port: 443
@@ -79,14 +79,6 @@ proxies:
   udp: true
   tls: true
   servername: support.lso
-- name: 'Poland | cinema.kinopolka.net | HYSTERIA2 | [#LSO - #LinSpisokObhod]'
-  type: hysteria2
-  server: 217.12.207.38
-  port: 443
-  password: e5573253-44fc-4502-ba06-96e4742bb448
-  udp: true
-  skip-cert-verify: false
-  sni: cinema.kinopolka.net
 - name: 'United States | www.nextjobopportunityandclaimyouridealrole.com | unknown | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 216.152.155.131
@@ -223,6 +215,19 @@ proxies:
   servername: bm1.hat.onl
   client-fingerprint: qq
   flow: xtls-rprx-vision
+- name: 'Russia | bm6.hat.onl | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 217.19.122.170
+  port: 2083
+  uuid: 00d09ead-4080-4c39-a75d-be7dcabe77f4
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: Zy-GGHQ4J0M5RtpGPF7MUabmQo8nNr9iohVfyrmSGEY
+    short-id: 7e704e370213f498
+  servername: bm6.hat.onl
+  client-fingerprint: qq
+  flow: xtls-rprx-vision
 - name: 'Russia | bm6.hat.onl | RAW | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 217.19.122.170
@@ -303,19 +308,6 @@ proxies:
   servername: yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 193.163.203.170
-  port: 443
-  uuid: 11aabba0-5fd1-4f15-8068-74c1a466cefc
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: GCCZ1ZZjB_nj7yxqFi22bIIWWr_G6rnWUzDcssN_40o
-    short-id: b28db60d77c50b4f
-  servername: yandex.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.172.227.124
@@ -367,19 +359,6 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
-- name: 'Kazakhstan | splitter.wb.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 85.202.192.131
-  port: 34033
-  uuid: 2cb6a5d1-0165-4bc2-aff2-832672160c56
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: I7s_V_6XHD2As0H5Ok2GV2a2M7o9RDCrH2USpCZPy0A
-    short-id: a1fdf7b7bebade41
-  servername: splitter.wb.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'Denmark | api-maps.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 193.180.211.245
@@ -392,7 +371,7 @@ proxies:
   servername: api-maps.yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Sweden | smart.bachidze.com | unknown | [#LSO - #LinSpisokObhod]'
+- name: 'Sweden | smart.bachidze.com | RAW | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.223.100
   port: 443
@@ -404,7 +383,8 @@ proxies:
   servername: smart.bachidze.com
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Sweden | smart.bachidze.com | TCP | [#LSO - #LinSpisokObhod]'
+  network: raw
+- name: 'Sweden | smart.bachidze.com | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.223.100
   port: 443
@@ -673,6 +653,18 @@ proxies:
   servername: yabro-wbplugin.edadeal.yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'The Netherlands | nl01.proxmoxguidline.forum | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.86.13.217
+  port: 443
+  uuid: b1e4bfe2-2b12-11f1-92cb-12ba70109d32
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: qyVTRBNzBF7TwtkzeB_Q9jN9aYhGWX7F4SUCOjxK9VU
+  servername: nl01.proxmoxguidline.forum
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'The Netherlands | nl01.proxmoxguidline.forum | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.86.13.217
@@ -686,6 +678,18 @@ proxies:
   client-fingerprint: firefox
   network: xhttp
 - name: 'The Netherlands | nl03-gos.everycom.store | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.86.13.248
+  port: 443
+  uuid: b1e4bfe2-2b12-11f1-92cb-12ba70109d32
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: qyVTRBNzBF7TwtkzeB_Q9jN9aYhGWX7F4SUCOjxK9VU
+  servername: nl03-gos.everycom.store
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'The Netherlands | nl03-gos.everycom.store | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.86.13.248
   port: 443
@@ -792,19 +796,6 @@ proxies:
     path: /fp
     headers:
       Host: ccc.010304.xyz
-- name: 'Poland | www.ya.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 31.76.251.23
-  port: 443
-  uuid: db4f6c31-ae15-43f1-811e-4ec34768952f
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: dlhoLMdfvgjSVzSuT0PPhomRdNcy8_qtnky0kKflqGI
-    short-id: a1b2c3d4
-  servername: www.ya.ru
-  client-fingerprint: firefox
-  flow: ''
 - name: 'Russia | ara.rtkdvbr.cc | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.86.145.37
