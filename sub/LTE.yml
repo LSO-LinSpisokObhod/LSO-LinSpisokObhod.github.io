@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-05 20:23:46 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-05 22:04:07 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -293,6 +293,30 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
+- name: 'The Netherlands | bezlimitapi-bm-s1517.reverseenge.sbs | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.86.13.98
+  port: 443
+  uuid: 25c960fd-bd23-4dfa-a190-239e6e867e0b
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: qyVTRBNzBF7TwtkzeB_Q9jN9aYhGWX7F4SUCOjxK9VU
+  servername: bezlimitapi-bm-s1517.reverseenge.sbs
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'The Netherlands | bezlimitapi-bm-s1517.reverseenge.sbs | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.86.13.98
+  port: 8443
+  uuid: 25c960fd-bd23-4dfa-a190-239e6e867e0b
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: ULkeAC-sya96NLLkoSptqmwyc__sfpV7qWKXqQjn-Wk
+  servername: bezlimitapi-bm-s1517.reverseenge.sbs
+  client-fingerprint: firefox
+  network: xhttp
 - name: 'Sweden | smart.bachidze.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.223.100
@@ -304,19 +328,6 @@ proxies:
     public-key: vzRgIP8Mvd9V6krwKxw5EwwzvC4uiaW3wo0Y2ri2_Wc
   servername: smart.bachidze.com
   client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'The Netherlands | vkvd754.okcdn.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 87.199.205.28
-  port: 443
-  uuid: 501a2da5-cb22-4a3f-915e-e3b821d1d62d
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: W-9zyiOq287RtXVTZlTFbSDJ0Mx8joyBLJoA7ZE7eBw
-    short-id: 6b196d2f190f32b3
-  servername: vkvd754.okcdn.ru
-  client-fingerprint: qq
   flow: xtls-rprx-vision
 - name: 'The Netherlands | skskks.top | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -419,18 +430,6 @@ proxies:
   servername: nl03-gos.everycom.store
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'The Netherlands | nl03-gos.everycom.store | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.86.13.248
-  port: 8443
-  uuid: b1e4bfe2-2b12-11f1-92cb-12ba70109d32
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: ULkeAC-sya96NLLkoSptqmwyc__sfpV7qWKXqQjn-Wk
-  servername: nl03-gos.everycom.store
-  client-fingerprint: firefox
-  network: xhttp
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.172.227.228
