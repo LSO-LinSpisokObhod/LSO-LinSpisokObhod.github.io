@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-05 18:06:24 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-05 19:12:17 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -62,7 +62,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Всего конфигов: 37 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Всего конфигов: 41 [#LSO - #LinSpisokObhod]",
       "server": "all.lso",
       "server_port": 443,
       "uuid": "all",
@@ -73,7 +73,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vless: 28 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vless: 32 [#LSO - #LinSpisokObhod]",
       "server": "vless.about.lso",
       "server_port": 443,
       "uuid": "vless",
@@ -290,6 +290,94 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | passport.yandex.ru | RAW | [#LSO - #LinSpisokObhod]",
+      "server": "185.86.147.184",
+      "server_port": 9449,
+      "uuid": "12fd3a3e-31dd-49bc-91df-44834c58e1b2",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "passport.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SsPslLCfw2CGDmCs17gTLRSUOsOfv0KgnuLnkyTqCzA",
+          "short_id": "62002c0a685ac208"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | passport.yandex.ru | RAW | [#LSO - #LinSpisokObhod]",
+      "server": "91.185.83.105",
+      "server_port": 9443,
+      "uuid": "12fd3a3e-31dd-49bc-91df-44834c58e1b2",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "passport.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "Te3ZcFFTilb6_j4hdotSvXaRYBzGuNiRxuBh8n1NezU",
+          "short_id": "91d2d3db690f4b59"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | d.nehtar.ru | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "95.129.236.149",
+      "server_port": 443,
+      "uuid": "12fd3a3e-31dd-49bc-91df-44834c58e1b2",
+      "tls": {
+        "enabled": true,
+        "server_name": "d.nehtar.ru",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/gateway/v1/ws/74c4d5e82a8e50ccf09fc628c17dc9be"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "The Netherlands | nla.kosmosapp.net | GRPC | [#LSO - #LinSpisokObhod]",
+      "server": "79.141.164.124",
+      "server_port": 443,
+      "uuid": "14f3543e-6136-47a2-9bc0-eea1dac73d07",
+      "tls": {
+        "enabled": true,
+        "server_name": "nla.kosmosapp.net",
+        "reality": {
+          "enabled": true,
+          "public_key": "pR39Vv5qhk8r6akOicoy6mMs4-ppSWUez8MyAXG7wwQ",
+          "short_id": "27350908de933e09"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "grpc",
+        "service_name": "neurex"
+      }
+    },
+    {
+      "type": "vless",
       "tag": "The Netherlands | nla.kosmosapp.net | GRPC | [#LSO - #LinSpisokObhod]",
       "server": "79.141.164.124",
       "server_port": 443,
@@ -455,6 +543,30 @@
       "transport": {
         "type": "grpc",
         "service_name": ""
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | www.yandex.ru | GRPC | [#LSO - #LinSpisokObhod]",
+      "server": "195.58.55.18",
+      "server_port": 2088,
+      "uuid": "7c602328-d732-41d9-b94a-bcf28a5f7f8f",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "Eq3c19Y0WGB1APWMADQB-oxCvZFSVFAQxG5L6b8EkUg",
+          "short_id": "b1ad165f903c62fe"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "ios"
+        }
+      },
+      "transport": {
+        "type": "grpc",
+        "service_name": "astracat"
       }
     },
     {
@@ -645,27 +757,6 @@
           "enabled": true,
           "public_key": "33zaT3jHXjtynSQ0Ucw9bK92-XH2zolJmuIeZ1XyZB0",
           "short_id": "e6"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Russia | ru1.japancase.site | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "185.76.241.241",
-      "server_port": 443,
-      "uuid": "db80088c-32a1-4cb8-a907-0f3cb7844152",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "ru1.japancase.site",
-        "reality": {
-          "enabled": true,
-          "public_key": "SiwxBWpYrdcS70DDnr0yBrTgpJY-MiqKiOs3_yjK1Cc",
-          "short_id": "5b555442d5975d6b"
         },
         "utls": {
           "enabled": true,

@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-05 18:06:24 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-05 19:12:17 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 37 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 41 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 28 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 32 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -172,6 +172,61 @@ proxies:
   servername: yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Russia | passport.yandex.ru | RAW | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.86.147.184
+  port: 9449
+  uuid: 12fd3a3e-31dd-49bc-91df-44834c58e1b2
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: SsPslLCfw2CGDmCs17gTLRSUOsOfv0KgnuLnkyTqCzA
+    short-id: 62002c0a685ac208
+  servername: passport.yandex.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+  network: raw
+- name: 'Russia | passport.yandex.ru | RAW | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 91.185.83.105
+  port: 9443
+  uuid: 12fd3a3e-31dd-49bc-91df-44834c58e1b2
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: Te3ZcFFTilb6_j4hdotSvXaRYBzGuNiRxuBh8n1NezU
+    short-id: 91d2d3db690f4b59
+  servername: passport.yandex.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+  network: raw
+- name: 'Russia | d.nehtar.ru | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.129.236.149
+  port: 443
+  uuid: 12fd3a3e-31dd-49bc-91df-44834c58e1b2
+  udp: true
+  tls: true
+  servername: d.nehtar.ru
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /gateway/v1/ws/74c4d5e82a8e50ccf09fc628c17dc9be
+- name: 'The Netherlands | nla.kosmosapp.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 79.141.164.124
+  port: 443
+  uuid: 14f3543e-6136-47a2-9bc0-eea1dac73d07
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: pR39Vv5qhk8r6akOicoy6mMs4-ppSWUez8MyAXG7wwQ
+    short-id: 27350908de933e09
+  servername: nla.kosmosapp.net
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: neurex
 - name: 'The Netherlands | nla.kosmosapp.net | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 79.141.164.124
@@ -278,6 +333,21 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: ''
+- name: 'Russia | www.yandex.ru | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 195.58.55.18
+  port: 2088
+  uuid: 7c602328-d732-41d9-b94a-bcf28a5f7f8f
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: Eq3c19Y0WGB1APWMADQB-oxCvZFSVFAQxG5L6b8EkUg
+    short-id: b1ad165f903c62fe
+  servername: www.yandex.ru
+  client-fingerprint: ios
+  network: grpc
+  grpc-opts:
+    grpc-service-name: astracat
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 95.128.71.79
@@ -401,19 +471,6 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
-- name: 'Russia | ru1.japancase.site | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.76.241.241
-  port: 443
-  uuid: db80088c-32a1-4cb8-a907-0f3cb7844152
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: SiwxBWpYrdcS70DDnr0yBrTgpJY-MiqKiOs3_yjK1Cc
-    short-id: 5b555442d5975d6b
-  servername: ru1.japancase.site
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'Russia | ru1.japancase.site | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.76.241.241
