@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-05 14:14:27 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-05 15:04:43 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 45 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 44 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -37,7 +37,7 @@ proxies:
   udp: true
   tls: true
   servername: vless.about.lso
-- name: 'Подписка #LSO© Trojan: 12 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Trojan: 11 [#LSO - #LinSpisokObhod]'
   type: trojan
   server: trojan.about.lso
   port: 443
@@ -165,14 +165,6 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: www.healthcarejobshubenhancemedicalprofessionalskillstoday.com
-- name: 'Brazil | findtemporaryworkandfreelancerprojectsonlineplatform.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: trojan
-  server: 216.238.104.154
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  skip-cert-verify: false
-  sni: findtemporaryworkandfreelancerprojectsonlineplatform.com
 - name: 'United States | www.cordweave.com | WebSocket | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 199.119.137.32
@@ -225,19 +217,6 @@ proxies:
     short-id: 8debcf36f1cc69ff
   servername: ads.x5.ru
   client-fingerprint: safari
-  flow: xtls-rprx-vision
-- name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.172.227.124
-  port: 10444
-  uuid: 1af36694-b548-4b18-89a0-bc076eab4ed7
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
-    short-id: 8debcf36f1cc69ff
-  servername: ads.x5.ru
-  client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'Russia | max.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -388,31 +367,6 @@ proxies:
   udp: true
   servername: ads.x5.ru
   flow: ''
-- name: 'The Netherlands | nl01.proxmoxguidline.forum | RAW | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.86.13.217
-  port: 443
-  uuid: b1e4bfe2-2b12-11f1-92cb-12ba70109d32
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: qyVTRBNzBF7TwtkzeB_Q9jN9aYhGWX7F4SUCOjxK9VU
-  servername: nl01.proxmoxguidline.forum
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-  network: raw
-- name: 'The Netherlands | nl01.proxmoxguidline.forum | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.86.13.217
-  port: 443
-  uuid: b1e4bfe2-2b12-11f1-92cb-12ba70109d32
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: qyVTRBNzBF7TwtkzeB_Q9jN9aYhGWX7F4SUCOjxK9VU
-  servername: nl01.proxmoxguidline.forum
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'The Netherlands | nl01.proxmoxguidline.forum | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.86.13.217
@@ -485,6 +439,34 @@ proxies:
     public-key: 33zaT3jHXjtynSQ0Ucw9bK92-XH2zolJmuIeZ1XyZB0
     short-id: e6
   servername: passport.yandex.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+  network: raw
+- name: 'Russia | z1q3pv4g78.rucdncomp.pro | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 46.243.235.98
+  port: 443
+  uuid: c720cb74-4c84-4fce-b8ae-637dbaa16199
+  udp: true
+  tls: true
+  servername: z1q3pv4g78.rucdncomp.pro
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /useraction/events/b892639b7195/
+    headers:
+      Host: z1q3pv4g78.rucdncomp.pro
+- name: 'Austria | at1.japancase.site | RAW | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 178.22.31.72
+  port: 443
+  uuid: db80088c-32a1-4cb8-a907-0f3cb7844152
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: zEntiD6D81wY__YHPvIw78e09CBIgYkyQ5meIo7c_hg
+    short-id: 41ae8e266bc3346f
+  servername: at1.japancase.site
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
@@ -594,6 +576,20 @@ proxies:
     public-key: GQul8Ak0VO_z4FW_m_R-xsQbwd2e1rWZO-XfMmKmpQE
     short-id: 351224a7
   servername: join.betust.net
+  client-fingerprint: safari
+  flow: xtls-rprx-vision
+  network: raw
+- name: 'Russia | apply.betust.net | RAW | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 81.163.22.194
+  port: 443
+  uuid: fb37d713-0ed3-4146-b085-a5c879a9aafa
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: T98nmnCp0qrmkH1Oq92Tk94sCYa5RuuEjp8bDDbdVxk
+    short-id: b20168a5
+  servername: apply.betust.net
   client-fingerprint: safari
   flow: xtls-rprx-vision
   network: raw
