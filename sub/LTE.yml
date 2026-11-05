@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-05 08:07:51 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-05 09:10:09 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 72 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 66 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 57 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 51 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -359,18 +359,6 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
-- name: 'Denmark | api-maps.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 193.180.211.245
-  port: 8443
-  uuid: 35dc3ea6-2cdf-4f6e-95ea-ce786ac2947a
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: pbLP4dV9Nx4aHWf35QFadbjOCdP_klwS9fvKSszlr3Q
-  servername: api-maps.yandex.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'Sweden | smart.bachidze.com | RAW | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.223.100
@@ -451,48 +439,6 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: neurex
-- name: 'Finland | fu.baiproxy.us.ci | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.103.103.240
-  port: 443
-  uuid: 55d9ec38-1b8a-454b-981a-6acfe8f56d8c
-  udp: true
-  tls: true
-  servername: fu.baiproxy.us.ci
-  client-fingerprint: qq
-  network: ws
-  ws-opts:
-    path: /
-    headers:
-      Host: fu.baiproxy.us.ci
-- name: 'Russia | fu.baiproxy.us.ci | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 212.109.220.55
-  port: 443
-  uuid: 55d9ec38-1b8a-454b-981a-6acfe8f56d8c
-  udp: true
-  tls: true
-  servername: fu.baiproxy.us.ci
-  client-fingerprint: qq
-  network: ws
-  ws-opts:
-    path: /
-    headers:
-      Host: fu.baiproxy.us.ci
-- name: 'Greece | vp6.1145678.xyz | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 91.250.248.151
-  port: 443
-  uuid: 5d7b401c-78fa-4254-872e-6d42bf7e75ec
-  udp: true
-  tls: true
-  servername: vp6.1145678.xyz
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /docs
-    headers:
-      Host: vp6.1145678.xyz
 - name: 'Russia | www.kinopoisk.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 132.243.230.251
@@ -629,18 +575,6 @@ proxies:
   udp: true
   servername: ads.x5.ru
   flow: ''
-- name: 'Russia | yabro-wbplugin.edadeal.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 46.182.24.15
-  port: 443
-  uuid: aa09ada3-ad33-0004-9c1a-6af275272567
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: V-wRiXvhBx01utmXJbrThJ_DE4tNJfK6mnzo9EB3fVA
-  servername: yabro-wbplugin.edadeal.yandex.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'Russia | yabro-wbplugin.edadeal.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 46.182.24.15
@@ -893,20 +827,6 @@ proxies:
     path: /
     headers:
       Host: ssj-wkg.pages.dev
-- name: 'Russia | marshalltmp.top | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.178.208.140
-  port: 443
-  uuid: fb37d713-0ed3-4146-b085-a5c879a9aafa
-  udp: true
-  tls: true
-  servername: marshalltmp.top
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /shop/catalog
-    headers:
-      Host: marshalltmp.top
 - name: 'Russia | join.betust.net | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 81.163.22.143
