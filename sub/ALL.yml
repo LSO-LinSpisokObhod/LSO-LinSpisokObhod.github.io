@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-05 04:15:06 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-05 05:21:11 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 553 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 551 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 347 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 345 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -1798,19 +1798,6 @@ proxies:
   servername: ask.w-ert.org
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Hungary | cdn.tbank.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 2.26.139.69
-  port: 443
-  uuid: 1d7427ab-8a5d-4317-9335-2e48d50be4fc
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: HmnsKa6Mmm34gALomXBKB7d8UMIM33hhItp2z43VCkQ
-    short-id: a1d8f3b6c2e59407
-  servername: cdn.tbank.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'Russia | max.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 84.201.146.8
@@ -3285,19 +3272,6 @@ proxies:
   servername: uk-room10.filesnap.tech
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'unknown | at-85-10.cdn-lab.online | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: at-85-10.cdn-lab.online
-  port: 443
-  uuid: 5fa16fdf-5b3c-4f57-988d-b24c6722c91a
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: kqFDKE3z7o9a2KoFM4IEHzoaeU-vYCAU5-jspLY1cH4
-    short-id: 37f7ef1f627f1c29
-  servername: at-85-10.cdn-lab.online
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'unknown | fi-94-10.cdn-lab.online | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: fi-94-10.cdn-lab.online
@@ -3309,6 +3283,18 @@ proxies:
     public-key: d1aZn0vbZdj0VrkfiXE7D10TRmdf91oa1LwCxQEAcBg
     short-id: a74baa611fbfb118
   servername: fi-94-10.cdn-lab.online
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'Poland | undef-aut-0.undef.network | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 201.10.90.113
+  port: 443
+  uuid: 610ac982-04eb-34c0-80b1-5dd3c2ca131e
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: 6z3VlbF2v0C3FTWQQemYDxX-MIzwaz_k8_B-xyc0Xyg
+  servername: undef-aut-0.undef.network
   client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'unknown | estonia.izzzyvpn.space | TCP | [#LSO - #LinSpisokObhod]'
@@ -4502,18 +4488,6 @@ proxies:
   reality-opts:
     public-key: MMpt_jWc4J3oySBdf5sPDVRkiWlZmOObth6A1scM9BM
   servername: rusbid.de
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'The Netherlands | nl01.proxmoxguidline.forum | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.86.13.217
-  port: 443
-  uuid: b1e4bfe2-2b12-11f1-92cb-12ba70109d32
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: qyVTRBNzBF7TwtkzeB_Q9jN9aYhGWX7F4SUCOjxK9VU
-  servername: nl01.proxmoxguidline.forum
   client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'The Netherlands | nl01.proxmoxguidline.forum | XHTTP | [#LSO - #LinSpisokObhod]'
@@ -5828,6 +5802,34 @@ proxies:
     path: /vlessws
     headers:
       Host: vpn.cintaku.qzz.io
+- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 172.67.187.145
+  port: 80
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
+  alterId: 0
+  cipher: auto
+  udp: true
+  servername: vmess.lbw666.dpdns.org
+  network: ws
+  ws-opts:
+    path: /ws
+    headers:
+      Host: vmess.lbw666.dpdns.org
+- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 104.17.147.222
+  port: 80
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
+  alterId: 0
+  cipher: auto
+  udp: true
+  servername: vmess.lbw666.dpdns.org
+  network: ws
+  ws-opts:
+    path: /ws?ed=2048
+    headers:
+      Host: vmess.lbw666.dpdns.org
 - name: 'unknown | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: cf.0sm.com
@@ -6215,20 +6217,6 @@ proxies:
   cipher: auto
   udp: true
   servername: zfd-hkv1.kunlun01dns.com
-- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 104.17.147.222
-  port: 80
-  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: vmess.lbw666.dpdns.org
-  network: ws
-  ws-opts:
-    path: /ws?ed=2048
-    headers:
-      Host: vmess.lbw666.dpdns.org
 - name: 'South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 132.145.80.230
@@ -6240,20 +6228,6 @@ proxies:
   network: ws
   ws-opts:
     path: /cctv13.m3u8
-- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 172.67.187.145
-  port: 80
-  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: vmess.lbw666.dpdns.org
-  network: ws
-  ws-opts:
-    path: /ws
-    headers:
-      Host: vmess.lbw666.dpdns.org
 - name: 'unknown | zfd-hkv2.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: zfd-hkv2.kunlun01dns.com
