@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-05 10:28:23 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-05 12:10:02 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 66 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 67 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 51 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 52 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -202,6 +202,20 @@ proxies:
   network: ws
   ws-opts:
     path: /assignment
+- name: 'Russia | bm1.hat.onl | RAW | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 217.19.122.170
+  port: 2053
+  uuid: 00d09ead-4080-4c39-a75d-be7dcabe77f4
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: GyYuIjccJJRQZM72MGdBQEwGwGR9e0UMNlJxw0sQR2M
+    short-id: 38560e0003d69843
+  servername: bm1.hat.onl
+  client-fingerprint: qq
+  flow: xtls-rprx-vision
+  network: raw
 - name: 'Russia | bm6.hat.onl | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 217.19.122.170
