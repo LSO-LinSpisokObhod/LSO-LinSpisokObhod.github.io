@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-05 12:10:02 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-05 13:14:33 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 67 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 53 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 52 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 39 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -37,7 +37,7 @@ proxies:
   udp: true
   tls: true
   servername: vless.about.lso
-- name: 'Подписка #LSO© Trojan: 14 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Trojan: 13 [#LSO - #LinSpisokObhod]'
   type: trojan
   server: trojan.about.lso
   port: 443
@@ -123,15 +123,6 @@ proxies:
   skip-cert-verify: false
   sni: courses.healthcarejobshubenhancemedicalprofessionalskillstoday.com
   client-fingerprint: firefox
-- name: 'United States | learn.healthcarejobshubenhancemedicalprofessionalskillstoday.com | unknown | [#LSO - #LinSpisokObhod]'
-  type: trojan
-  server: 216.152.156.65
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  skip-cert-verify: false
-  sni: learn.healthcarejobshubenhancemedicalprofessionalskillstoday.com
-  client-fingerprint: firefox
 - name: 'United States | www.healthcarejobshubenhancemedicalprofessionalskillstoday.com | unknown | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 216.152.156.81
@@ -202,99 +193,6 @@ proxies:
   network: ws
   ws-opts:
     path: /assignment
-- name: 'Russia | bm1.hat.onl | RAW | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 217.19.122.170
-  port: 2053
-  uuid: 00d09ead-4080-4c39-a75d-be7dcabe77f4
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: GyYuIjccJJRQZM72MGdBQEwGwGR9e0UMNlJxw0sQR2M
-    short-id: 38560e0003d69843
-  servername: bm1.hat.onl
-  client-fingerprint: qq
-  flow: xtls-rprx-vision
-  network: raw
-- name: 'Russia | bm6.hat.onl | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 217.19.122.170
-  port: 2083
-  uuid: 00d09ead-4080-4c39-a75d-be7dcabe77f4
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: Zy-GGHQ4J0M5RtpGPF7MUabmQo8nNr9iohVfyrmSGEY
-    short-id: 7e704e370213f498
-  servername: bm6.hat.onl
-  client-fingerprint: qq
-  flow: xtls-rprx-vision
-- name: 'Russia | bm6.hat.onl | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 217.19.122.170
-  port: 2083
-  uuid: 00d09ead-4080-4c39-a75d-be7dcabe77f4
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: Zy-GGHQ4J0M5RtpGPF7MUabmQo8nNr9iohVfyrmSGEY
-    short-id: 7e704e370213f498
-  servername: bm6.hat.onl
-  client-fingerprint: qq
-  flow: xtls-rprx-vision
-- name: 'Russia | bm7.hat.onl | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 217.19.122.170
-  port: 2087
-  uuid: 00d09ead-4080-4c39-a75d-be7dcabe77f4
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: WL9GPq_lRWgT2lNCnDGSSU9GB9LghVKZ7nUrHAS5Pw8
-    short-id: 6f009fe1fab1d42e
-  servername: bm7.hat.onl
-  client-fingerprint: qq
-  flow: xtls-rprx-vision
-- name: 'Russia | bm8.hat.onl | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 217.19.122.170
-  port: 2096
-  uuid: 00d09ead-4080-4c39-a75d-be7dcabe77f4
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 26eRxOLahaWymVv1f33Za0Cw56VDNJ8BN2bEKznW-m4
-    short-id: 2a096f7b298d0aba
-  servername: bm8.hat.onl
-  client-fingerprint: qq
-  flow: xtls-rprx-vision
-- name: 'Russia | bm8.hat.onl | RAW | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 217.19.122.170
-  port: 2096
-  uuid: 00d09ead-4080-4c39-a75d-be7dcabe77f4
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 26eRxOLahaWymVv1f33Za0Cw56VDNJ8BN2bEKznW-m4
-    short-id: 2a096f7b298d0aba
-  servername: bm8.hat.onl
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-  network: raw
-- name: 'Russia | bm9.hat.onl | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 217.19.122.170
-  port: 8443
-  uuid: 00d09ead-4080-4c39-a75d-be7dcabe77f4
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: Dx5aV0n9e1j_YDhVk8Z4O9HPrg1HLAuGKlmQpgERgDo
-    short-id: 8eeca41a32d1523d
-  servername: bm9.hat.onl
-  client-fingerprint: qq
-  flow: xtls-rprx-vision
 - name: 'Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 193.163.203.170
@@ -387,18 +285,6 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
-- name: 'Sweden | smart.bachidze.com | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 88.216.223.100
-  port: 443
-  uuid: 3bb97d46-789b-4229-88f6-9beb222a4137
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: vzRgIP8Mvd9V6krwKxw5EwwzvC4uiaW3wo0Y2ri2_Wc
-  servername: smart.bachidze.com
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'Sweden | smart.bachidze.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.223.100
@@ -493,34 +379,6 @@ proxies:
   servername: www.kinopoisk.ru
   client-fingerprint: firefox
   network: xhttp
-- name: 'Russia | z1q3pv4g78.rucdncomp.pro | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 217.19.122.156
-  port: 443
-  uuid: 7955bf18-35c4-412d-aabd-c0b36c793063
-  udp: true
-  tls: true
-  servername: z1q3pv4g78.rucdncomp.pro
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /useraction/events/b892639b7195/
-    headers:
-      Host: z1q3pv4g78.rucdncomp.pro
-- name: 'Russia | z1q3pv4g78.rucdncomp.pro | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 217.19.122.156
-  port: 443
-  uuid: 7955bf18-35c4-412d-aabd-c0b36c793063
-  udp: true
-  tls: true
-  servername: z1q3pv4g78.rucdncomp.pro
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /useraction/events/b892639b7195/
-    headers:
-      Host: z1q3pv4g78.rucdncomp.pro
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 95.128.71.79
@@ -689,48 +547,6 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
-- name: 'Russia | z1q3pv4g78.rucdncomp.pro | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 217.19.122.156
-  port: 443
-  uuid: c720cb74-4c84-4fce-b8ae-637dbaa16199
-  udp: true
-  tls: true
-  servername: z1q3pv4g78.rucdncomp.pro
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /useraction/events/b892639b7195/
-    headers:
-      Host: z1q3pv4g78.rucdncomp.pro
-- name: 'Russia | z1q3pv4g78.rucdncomp.pro | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 217.19.122.156
-  port: 443
-  uuid: c720cb74-4c84-4fce-b8ae-637dbaa16199
-  udp: true
-  tls: true
-  servername: z1q3pv4g78.rucdncomp.pro
-  client-fingerprint: random
-  network: ws
-  ws-opts:
-    path: /useraction/events/b892639b7195/
-    headers:
-      Host: z1q3pv4g78.rucdncomp.pro
-- name: 'Russia | z1q3pv4g78.rucdncomp.pro | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 217.19.122.156
-  port: 443
-  uuid: c720cb74-4c84-4fce-b8ae-637dbaa16199
-  udp: true
-  tls: true
-  servername: z1q3pv4g78.rucdncomp.pro
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /useraction/events/b892639b7195/
-    headers:
-      Host: z1q3pv4g78.rucdncomp.pro
 - name: 'Lithuania | ccc.010304.xyz | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.69.253
