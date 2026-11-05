@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-05 13:14:33 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-05 14:14:27 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 53 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 45 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 39 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 33 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -37,7 +37,7 @@ proxies:
   udp: true
   tls: true
   servername: vless.about.lso
-- name: 'Подписка #LSO© Trojan: 13 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Trojan: 12 [#LSO - #LinSpisokObhod]'
   type: trojan
   server: trojan.about.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 1 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 0 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -173,14 +173,6 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: findtemporaryworkandfreelancerprojectsonlineplatform.com
-- name: 'Mexico | connectwithtopemployersandfindidealjobs.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: trojan
-  server: 216.238.80.100
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  skip-cert-verify: false
-  sni: connectwithtopemployersandfindidealjobs.com
 - name: 'United States | www.cordweave.com | WebSocket | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 199.119.137.32
@@ -234,6 +226,19 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: safari
   flow: xtls-rprx-vision
+- name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 178.172.227.124
+  port: 10444
+  uuid: 1af36694-b548-4b18-89a0-bc076eab4ed7
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
+    short-id: 8debcf36f1cc69ff
+  servername: ads.x5.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'Russia | max.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 84.201.146.8
@@ -285,18 +290,6 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
-- name: 'Sweden | smart.bachidze.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 88.216.223.100
-  port: 443
-  uuid: 3bb97d46-789b-4229-88f6-9beb222a4137
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: vzRgIP8Mvd9V6krwKxw5EwwzvC4uiaW3wo0Y2ri2_Wc
-  servername: smart.bachidze.com
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'The Netherlands | vkvd754.okcdn.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 87.199.205.28
@@ -310,36 +303,6 @@ proxies:
   servername: vkvd754.okcdn.ru
   client-fingerprint: qq
   flow: xtls-rprx-vision
-- name: 'The Netherlands | nla.kosmosapp.net | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 79.141.164.125
-  port: 443
-  uuid: 52a7c001-4c6f-4ae5-8098-01991dfb7ff6
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: pR39Vv5qhk8r6akOicoy6mMs4-ppSWUez8MyAXG7wwQ
-    short-id: 27350908de933e09
-  servername: nla.kosmosapp.net
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: neurex
-- name: 'The Netherlands | nla.kosmosapp.net | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 79.141.164.81
-  port: 443
-  uuid: 52a9eb94-bbf7-4037-b939-c298a1860a1f
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: pR39Vv5qhk8r6akOicoy6mMs4-ppSWUez8MyAXG7wwQ
-    short-id: 27350908de933e09
-  servername: nla.kosmosapp.net
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: neurex
 - name: 'Russia | www.kinopoisk.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 132.243.230.251
@@ -405,16 +368,6 @@ proxies:
   servername: tickets.betust.net
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | ru.nnight.cfd | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 188.72.103.4
-  port: 443
-  uuid: 9737cc16-7266-45ce-94d9-6e05a45e0b9c
-  udp: true
-  tls: true
-  servername: ru.nnight.cfd
-  client-fingerprint: firefox
-  network: xhttp
 - name: 'Poland | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 83.168.71.216
@@ -435,18 +388,6 @@ proxies:
   udp: true
   servername: ads.x5.ru
   flow: ''
-- name: 'Russia | yabro-wbplugin.edadeal.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 46.182.24.15
-  port: 443
-  uuid: aa09ada3-ad33-0005-9c1a-6af275272567
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: V-wRiXvhBx01utmXJbrThJ_DE4tNJfK6mnzo9EB3fVA
-  servername: yabro-wbplugin.edadeal.yandex.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'The Netherlands | nl01.proxmoxguidline.forum | RAW | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.86.13.217
@@ -547,20 +488,6 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
-- name: 'Lithuania | ccc.010304.xyz | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 88.216.69.253
-  port: 443
-  uuid: d342d11e-d224-4463-b982-532309285094
-  udp: true
-  tls: true
-  servername: ccc.010304.xyz
-  client-fingerprint: unsafe
-  network: ws
-  ws-opts:
-    path: /fp
-    headers:
-      Host: ccc.010304.xyz
 - name: 'Russia | ru1.japancase.site | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.76.241.241
@@ -667,21 +594,7 @@ proxies:
     public-key: GQul8Ak0VO_z4FW_m_R-xsQbwd2e1rWZO-XfMmKmpQE
     short-id: 351224a7
   servername: join.betust.net
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-  network: raw
-- name: 'Russia | apply.betust.net | RAW | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 81.163.22.194
-  port: 443
-  uuid: fb37d713-0ed3-4146-b085-a5c879a9aafa
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: T98nmnCp0qrmkH1Oq92Tk94sCYa5RuuEjp8bDDbdVxk
-    short-id: b20168a5
-  servername: apply.betust.net
-  client-fingerprint: firefox
+  client-fingerprint: safari
   flow: xtls-rprx-vision
   network: raw
 - name: 'Russia | apply.betust.net | RAW | [#LSO - #LinSpisokObhod]'
@@ -698,18 +611,3 @@ proxies:
   client-fingerprint: ios
   flow: xtls-rprx-vision
   network: raw
-- name: 'Russia | renderer-stream-2-129.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 93.93.89.99
-  port: 443
-  uuid: 27653b37-603c-4c90-b1f5-25c4d23f8932
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: renderer-stream-2-129.mirra.now
-  network: ws
-  ws-opts:
-    path: /api/v1/gpu-stream/socket
-    headers:
-      Host: renderer-stream-2-129.mirra.now
