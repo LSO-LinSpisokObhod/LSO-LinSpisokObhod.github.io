@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-06 01:55:53 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-06 02:51:53 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 39 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 35 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 31 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 27 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -163,19 +163,6 @@ proxies:
   servername: yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 193.163.203.170
-  port: 443
-  uuid: 11aabba0-5fd1-4f15-8068-74c1a466cefc
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: GCCZ1ZZjB_nj7yxqFi22bIIWWr_G6rnWUzDcssN_40o
-    short-id: b28db60d77c50b4f
-  servername: yandex.ru
-  client-fingerprint: safari
-  flow: xtls-rprx-vision
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.172.227.124
@@ -281,6 +268,21 @@ proxies:
   servername: max.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'The Netherlands | skskks.top | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 178.173.255.244
+  port: 8443
+  uuid: 5d978525-bfa5-4b1e-b807-c4e2ac2db56d
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: hBYxL0uaNGqI8NKoNXDlPm7LlaOsj4OIl013uOYh_HY
+    short-id: b02b745e
+  servername: skskks.top
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: ''
 - name: 'Singapore | video.yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 147.93.173.45
@@ -294,21 +296,6 @@ proxies:
   servername: video.yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | www.yandex.ru | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 195.58.55.18
-  port: 2088
-  uuid: 7c602328-d732-41d9-b94a-bcf28a5f7f8f
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: Eq3c19Y0WGB1APWMADQB-oxCvZFSVFAQxG5L6b8EkUg
-    short-id: b1ad165f903c62fe
-  servername: www.yandex.ru
-  client-fingerprint: ios
-  network: grpc
-  grpc-opts:
-    grpc-service-name: astracat
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 95.128.71.79
@@ -394,18 +381,6 @@ proxies:
   udp: true
   servername: ads.x5.ru
   flow: ''
-- name: 'Russia | yabro-wbplugin.edadeal.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 46.254.18.27
-  port: 443
-  uuid: a596399a-1fe1-0004-b992-031d43175892
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: V-wRiXvhBx01utmXJbrThJ_DE4tNJfK6mnzo9EB3fVA
-  servername: yabro-wbplugin.edadeal.yandex.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'Russia | max.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 147.45.104.86
@@ -417,19 +392,6 @@ proxies:
     public-key: KbjX7IJnVtwq2USeRmLgXzACOtFCiA5lnsXhIFOX3ho
     short-id: a7eb8a4e
   servername: max.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.172.227.228
-  port: 10444
-  uuid: b6e5dc56-836f-48c1-9163-b0b0b43b647d
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
-    short-id: 8debcf36f1cc69ff
-  servername: ads.x5.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
@@ -457,20 +419,6 @@ proxies:
     short-id: 67ece882d65d0f1a
   servername: m.vk.com
   client-fingerprint: edge
-- name: 'Austria | at1.japancase.site | RAW | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.22.31.72
-  port: 443
-  uuid: db80088c-32a1-4cb8-a907-0f3cb7844152
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: zEntiD6D81wY__YHPvIw78e09CBIgYkyQ5meIo7c_hg
-    short-id: 41ae8e266bc3346f
-  servername: at1.japancase.site
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-  network: raw
 - name: 'Austria | at1.japancase.site | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.22.31.72
