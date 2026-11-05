@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-05 23:01:00 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-05 23:58:38 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 344 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 343 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -37,7 +37,7 @@ proxies:
   udp: true
   tls: true
   servername: vless.about.lso
-- name: 'Подписка #LSO© Trojan: 79 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Trojan: 80 [#LSO - #LinSpisokObhod]'
   type: trojan
   server: trojan.about.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 40 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 38 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -818,6 +818,19 @@ proxies:
   network: ws
   ws-opts:
     path: /assignment
+- name: 'Malaysia | www.cordweave.com | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 76.13.188.13
+  port: 8443
+  password: humanity
+  udp: true
+  skip-cert-verify: false
+  sni: www.cordweave.com
+  network: ws
+  ws-opts:
+    path: /assignment
+    headers:
+      Host: www.cordweave.com
 - name: 'United States | www.trusteeforward.com | WebSocket | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 8.6.112.206
@@ -1517,6 +1530,15 @@ proxies:
   client-fingerprint: firefox
 - name: 'Germany | static.196.198.105.178.clients.your-server.de | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
+  server: 78.47.31.69
+  port: 443
+  uuid: 30d4edb0-2d8e-4b43-b48d-5a6a78032f3f
+  udp: true
+  tls: true
+  servername: static.196.198.105.178.clients.your-server.de
+  client-fingerprint: firefox
+- name: 'Germany | static.196.198.105.178.clients.your-server.de | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
   server: 91.99.11.74
   port: 443
   uuid: 30d4edb0-2d8e-4b43-b48d-5a6a78032f3f
@@ -1874,19 +1896,6 @@ proxies:
     public-key: kBTMVLCNE0jjwuJF6H5-65l5Pe0QToS0Hg-9Tmaa7Sk
     short-id: 1a2b3c4d
   servername: images.porsche.com
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'unknown | fi-94-10.cdn-lab.online | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: fi-94-10.cdn-lab.online
-  port: 443
-  uuid: 5fa16fdf-5b3c-4f57-988d-b24c6722c91a
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: d1aZn0vbZdj0VrkfiXE7D10TRmdf91oa1LwCxQEAcBg
-    short-id: a74baa611fbfb118
-  servername: fi-94-10.cdn-lab.online
   client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'Sweden | se3.shtil.io | TCP | [#LSO - #LinSpisokObhod]'
@@ -3686,20 +3695,6 @@ proxies:
     path: /ws
     headers:
       Host: vmess.lbw666.dpdns.org
-- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 104.17.147.222
-  port: 80
-  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: vmess.lbw666.dpdns.org
-  network: ws
-  ws-opts:
-    path: /ws?ed=2048
-    headers:
-      Host: vmess.lbw666.dpdns.org
 - name: 'unknown | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: cf.0sm.com
@@ -3947,15 +3942,20 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 'unknown | zfd-hkv1.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
+- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
-  server: zfd-hkv1.kunlun01dns.com
-  port: 16115
-  uuid: 0802ac03-7973-39ef-a019-ba02de6c01e1
+  server: 104.17.147.222
+  port: 80
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
   alterId: 0
   cipher: auto
   udp: true
-  servername: zfd-hkv1.kunlun01dns.com
+  servername: vmess.lbw666.dpdns.org
+  network: ws
+  ws-opts:
+    path: /ws?ed=2048
+    headers:
+      Host: vmess.lbw666.dpdns.org
 - name: 'South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 132.145.80.230
@@ -4105,12 +4105,3 @@ proxies:
     path: /ws?ed=2048
     headers:
       Host: vmess.lbw666.dpdns.org
-- name: 'unknown | dog-us.kunlun01dns.com | RAW | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: dog-us.kunlun01dns.com
-  port: 21010
-  uuid: 9464ca40-dd75-3742-a628-d931a9f413b2
-  alterId: 0
-  cipher: auto
-  udp: true
-  network: raw

@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-05 23:01:00 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-05 23:58:38 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -62,7 +62,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Всего конфигов: 375 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Всего конфигов: 374 [#LSO - #LinSpisokObhod]",
       "server": "all.lso",
       "server_port": 443,
       "uuid": "all",
@@ -84,7 +84,7 @@
     },
     {
       "type": "trojan",
-      "tag": "Подписка #LSO© Trojan: 87 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Trojan: 88 [#LSO - #LinSpisokObhod]",
       "server": "trojan.about.lso",
       "server_port": 443,
       "password": "trojan",
@@ -110,7 +110,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vmess: 40 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vmess: 38 [#LSO - #LinSpisokObhod]",
       "server": "vmess.about.lso",
       "server_port": 443,
       "uuid": "vmess",
@@ -1374,6 +1374,24 @@
     },
     {
       "type": "trojan",
+      "tag": "Malaysia | www.cordweave.com | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "76.13.188.13",
+      "server_port": 8443,
+      "password": "humanity",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.cordweave.com"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/assignment",
+        "headers": {
+          "Host": "www.cordweave.com"
+        }
+      }
+    },
+    {
+      "type": "trojan",
       "tag": "United States | www.trusteeforward.com | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "8.6.112.206",
       "server_port": 443,
@@ -2589,6 +2607,25 @@
     {
       "type": "vless",
       "tag": "Germany | static.196.198.105.178.clients.your-server.de | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "78.47.31.69",
+      "server_port": 443,
+      "uuid": "30d4edb0-2d8e-4b43-b48d-5a6a78032f3f",
+      "tls": {
+        "enabled": true,
+        "server_name": "static.196.198.105.178.clients.your-server.de",
+        "alpn": [
+          "h2",
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Germany | static.196.198.105.178.clients.your-server.de | unknown | [#LSO - #LinSpisokObhod]",
       "server": "91.99.11.74",
       "server_port": 443,
       "uuid": "30d4edb0-2d8e-4b43-b48d-5a6a78032f3f",
@@ -3266,27 +3303,6 @@
       "transport": {
         "type": "grpc",
         "service_name": ""
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "unknown | fi-94-10.cdn-lab.online | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "fi-94-10.cdn-lab.online",
-      "server_port": 443,
-      "uuid": "5fa16fdf-5b3c-4f57-988d-b24c6722c91a",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "fi-94-10.cdn-lab.online",
-        "reality": {
-          "enabled": true,
-          "public_key": "d1aZn0vbZdj0VrkfiXE7D10TRmdf91oa1LwCxQEAcBg",
-          "short_id": "a74baa611fbfb118"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
       }
     },
     {
@@ -6481,22 +6497,6 @@
     },
     {
       "type": "vmess",
-      "tag": "United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "104.17.147.222",
-      "server_port": 80,
-      "uuid": "0cf6d970-3f1d-4aae-a989-92a8f76ae3db",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/ws?ed=2048",
-        "headers": {
-          "Host": "vmess.lbw666.dpdns.org"
-        }
-      }
-    },
-    {
-      "type": "vmess",
       "tag": "unknown | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "cf.0sm.com",
       "server_port": 80,
@@ -6778,12 +6778,19 @@
     },
     {
       "type": "vmess",
-      "tag": "unknown | zfd-hkv1.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "zfd-hkv1.kunlun01dns.com",
-      "server_port": 16115,
-      "uuid": "0802ac03-7973-39ef-a019-ba02de6c01e1",
+      "tag": "United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "104.17.147.222",
+      "server_port": 80,
+      "uuid": "0cf6d970-3f1d-4aae-a989-92a8f76ae3db",
       "security": "auto",
-      "alter_id": 0
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/ws?ed=2048",
+        "headers": {
+          "Host": "vmess.lbw666.dpdns.org"
+        }
+      }
     },
     {
       "type": "vmess",
@@ -6950,15 +6957,6 @@
           "Host": "vmess.lbw666.dpdns.org"
         }
       }
-    },
-    {
-      "type": "vmess",
-      "tag": "unknown | dog-us.kunlun01dns.com | RAW | [#LSO - #LinSpisokObhod]",
-      "server": "dog-us.kunlun01dns.com",
-      "server_port": 21010,
-      "uuid": "9464ca40-dd75-3742-a628-d931a9f413b2",
-      "security": "auto",
-      "alter_id": 0
     },
     {
       "type": "direct",
