@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-07 00:49:09 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-07 01:50:25 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 9 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 11 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 9 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 10 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 0 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 1 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -89,6 +89,31 @@ proxies:
   servername: decdn2.bota7.com
   client-fingerprint: firefox
   network: xhttp
+- name: 'Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 193.163.203.170
+  port: 443
+  uuid: 11aabba0-5fd1-4f15-8068-74c1a466cefc
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: GCCZ1ZZjB_nj7yxqFi22bIIWWr_G6rnWUzDcssN_40o
+    short-id: b28db60d77c50b4f
+  servername: yandex.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'Sweden | smart.bachidze.com | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 88.216.223.100
+  port: 443
+  uuid: 3bb97d46-789b-4229-88f6-9beb222a4137
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: vzRgIP8Mvd9V6krwKxw5EwwzvC4uiaW3wo0Y2ri2_Wc
+  servername: smart.bachidze.com
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'Russia | cdnno2.artemida.live | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 188.72.103.4
@@ -113,29 +138,20 @@ proxies:
     path: /service/telemetry/045d381f1166/
     headers:
       Host: bhjolq0d0l.flowersgood.top
-- name: 'Russia | tehnomarket-ekb.cc | WebSocket | [#LSO - #LinSpisokObhod]'
+- name: 'Germany | 186.baklajann.ru | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 185.86.145.80
+  server: 194.156.26.125
   port: 443
-  uuid: 7ae99e68-1cb8-4845-b4f1-0f8a4f218d70
+  uuid: 86c7af80-c9cf-4265-ab77-da12b0bf8bb6
   udp: true
   tls: true
-  servername: tehnomarket-ekb.cc
-  client-fingerprint: edge
+  servername: 186.baklajann.ru
+  client-fingerprint: firefox
   network: ws
   ws-opts:
-    path: /account/refresh/C6Gbmvj-D5Vy
-- name: 'Russia | tehnomarket-ekb.cc | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.86.145.80
-  port: 443
-  uuid: 7ae99e68-1cb8-4845-b4f1-0f8a4f218d70
-  udp: true
-  tls: true
-  servername: tehnomarket-ekb.cc
-  network: ws
-  ws-opts:
-    path: /account/refresh/C6Gbmvj-D5Vy
+    path: /
+    headers:
+      Host: 186.baklajann.ru
 - name: 'Germany | 186.baklajann.ru | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 194.156.26.125
@@ -190,3 +206,18 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
+- name: 'Russia | renderer-stream-1-871.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 195.208.65.155
+  port: 443
+  uuid: 27653b37-603c-4c90-b1f5-25c4d23f8932
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: renderer-stream-1-871.mirra.now
+  network: ws
+  ws-opts:
+    path: /api/v1/gpu-stream/o36ecpsebqjq/socket
+    headers:
+      Host: renderer-stream-1-871.mirra.now

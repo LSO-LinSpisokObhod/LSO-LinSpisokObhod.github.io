@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-07 00:49:09 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-07 01:50:25 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -62,7 +62,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Всего конфигов: 9 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Всего конфигов: 11 [#LSO - #LinSpisokObhod]",
       "server": "all.lso",
       "server_port": 443,
       "uuid": "all",
@@ -73,7 +73,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vless: 9 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vless: 10 [#LSO - #LinSpisokObhod]",
       "server": "vless.about.lso",
       "server_port": 443,
       "uuid": "vless",
@@ -110,7 +110,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vmess: 0 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vmess: 1 [#LSO - #LinSpisokObhod]",
       "server": "vmess.about.lso",
       "server_port": 443,
       "uuid": "vmess",
@@ -158,6 +158,47 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "193.163.203.170",
+      "server_port": 443,
+      "uuid": "11aabba0-5fd1-4f15-8068-74c1a466cefc",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "GCCZ1ZZjB_nj7yxqFi22bIIWWr_G6rnWUzDcssN_40o",
+          "short_id": "b28db60d77c50b4f"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Sweden | smart.bachidze.com | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "88.216.223.100",
+      "server_port": 443,
+      "uuid": "3bb97d46-789b-4229-88f6-9beb222a4137",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "smart.bachidze.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "vzRgIP8Mvd9V6krwKxw5EwwzvC4uiaW3wo0Y2ri2_Wc"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Russia | cdnno2.artemida.live | XHTTP | [#LSO - #LinSpisokObhod]",
       "server": "188.72.103.4",
       "server_port": 443,
@@ -195,39 +236,27 @@
     },
     {
       "type": "vless",
-      "tag": "Russia | tehnomarket-ekb.cc | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "185.86.145.80",
+      "tag": "Germany | 186.baklajann.ru | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "194.156.26.125",
       "server_port": 443,
-      "uuid": "7ae99e68-1cb8-4845-b4f1-0f8a4f218d70",
+      "uuid": "86c7af80-c9cf-4265-ab77-da12b0bf8bb6",
       "tls": {
         "enabled": true,
-        "server_name": "tehnomarket-ekb.cc",
+        "server_name": "186.baklajann.ru",
         "alpn": [
           "http/1.1"
         ],
         "utls": {
           "enabled": true,
-          "fingerprint": "edge"
+          "fingerprint": "firefox"
         }
       },
       "transport": {
         "type": "ws",
-        "path": "/account/refresh/C6Gbmvj-D5Vy"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Russia | tehnomarket-ekb.cc | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "185.86.145.80",
-      "server_port": 443,
-      "uuid": "7ae99e68-1cb8-4845-b4f1-0f8a4f218d70",
-      "tls": {
-        "enabled": true,
-        "server_name": "tehnomarket-ekb.cc"
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/account/refresh/C6Gbmvj-D5Vy"
+        "path": "/",
+        "headers": {
+          "Host": "186.baklajann.ru"
+        }
       }
     },
     {
@@ -239,9 +268,6 @@
       "tls": {
         "enabled": true,
         "server_name": "186.baklajann.ru",
-        "alpn": [
-          "http/1.1"
-        ],
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
@@ -316,6 +342,26 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "Russia | renderer-stream-1-871.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "195.208.65.155",
+      "server_port": 443,
+      "uuid": "27653b37-603c-4c90-b1f5-25c4d23f8932",
+      "security": "auto",
+      "alter_id": 0,
+      "tls": {
+        "enabled": true,
+        "server_name": "renderer-stream-1-871.mirra.now"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/api/v1/gpu-stream/o36ecpsebqjq/socket",
+        "headers": {
+          "Host": "renderer-stream-1-871.mirra.now"
         }
       }
     },
