@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-06 20:55:27 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-06 22:01:19 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -62,7 +62,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Всего конфигов: 14 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Всего конфигов: 13 [#LSO - #LinSpisokObhod]",
       "server": "all.lso",
       "server_port": 443,
       "uuid": "all",
@@ -73,7 +73,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vless: 6 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vless: 5 [#LSO - #LinSpisokObhod]",
       "server": "vless.about.lso",
       "server_port": 443,
       "uuid": "vless",
@@ -254,21 +254,6 @@
     },
     {
       "type": "vless",
-      "tag": "Russia | decdn2.bota7.com | XHTTP | [#LSO - #LinSpisokObhod]",
-      "server": "188.72.103.4",
-      "server_port": 443,
-      "uuid": "00a560f4-035e-48eb-b698-6f6be0b5e477",
-      "tls": {
-        "enabled": true,
-        "server_name": "decdn2.bota7.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "Russia | max.ru | XHTTP | [#LSO - #LinSpisokObhod]",
       "server": "84.201.146.8",
       "server_port": 443,
@@ -307,42 +292,40 @@
     },
     {
       "type": "vless",
-      "tag": "Russia | www.yandex.ru | GRPC | [#LSO - #LinSpisokObhod]",
-      "server": "195.58.55.18",
-      "server_port": 2088,
-      "uuid": "7c602328-d732-41d9-b94a-bcf28a5f7f8f",
+      "tag": "Russia | bhjolq0d0l.flowersgood.top | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "185.86.147.175",
+      "server_port": 443,
+      "uuid": "7955bf18-35c4-412d-aabd-c0b36c793063",
       "tls": {
         "enabled": true,
-        "server_name": "www.yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "Eq3c19Y0WGB1APWMADQB-oxCvZFSVFAQxG5L6b8EkUg",
-          "short_id": "b1ad165f903c62fe"
-        },
+        "server_name": "bhjolq0d0l.flowersgood.top",
         "utls": {
           "enabled": true,
-          "fingerprint": "ios"
+          "fingerprint": "firefox"
         }
       },
       "transport": {
-        "type": "grpc",
-        "service_name": "astracat"
+        "type": "ws",
+        "path": "/service/telemetry/045d381f1166/",
+        "headers": {
+          "Host": "bhjolq0d0l.flowersgood.top"
+        }
       }
     },
     {
       "type": "vless",
-      "tag": "Austria | at1.japancase.site | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "178.22.31.72",
+      "tag": "Russia | music.yandex.ru | RAW | [#LSO - #LinSpisokObhod]",
+      "server": "188.225.78.228",
       "server_port": 443,
-      "uuid": "db80088c-32a1-4cb8-a907-0f3cb7844152",
+      "uuid": "bb190cdb-82ae-4212-b6cd-8ae9e6b768dd",
       "flow": "xtls-rprx-vision",
       "tls": {
         "enabled": true,
-        "server_name": "at1.japancase.site",
+        "server_name": "music.yandex.ru",
         "reality": {
           "enabled": true,
-          "public_key": "zEntiD6D81wY__YHPvIw78e09CBIgYkyQ5meIo7c_hg",
-          "short_id": "41ae8e266bc3346f"
+          "public_key": "aV_BHCeZ30y4-5rpUIHaWHMYAgogLsw4AE06Rw2X4WE",
+          "short_id": "e202a94ad1711af2"
         },
         "utls": {
           "enabled": true,

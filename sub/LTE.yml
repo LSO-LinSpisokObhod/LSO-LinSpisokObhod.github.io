@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-06 20:55:27 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-06 22:01:19 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 14 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 13 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 6 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 5 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -150,16 +150,6 @@ proxies:
   network: ws
   ws-opts:
     path: /assignment
-- name: 'Russia | decdn2.bota7.com | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 188.72.103.4
-  port: 443
-  uuid: 00a560f4-035e-48eb-b698-6f6be0b5e477
-  udp: true
-  tls: true
-  servername: decdn2.bota7.com
-  client-fingerprint: firefox
-  network: xhttp
 - name: 'Russia | max.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 84.201.146.8
@@ -184,34 +174,34 @@ proxies:
   servername: max.ru
   client-fingerprint: firefox
   network: xhttp
-- name: 'Russia | www.yandex.ru | GRPC | [#LSO - #LinSpisokObhod]'
+- name: 'Russia | bhjolq0d0l.flowersgood.top | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 195.58.55.18
-  port: 2088
-  uuid: 7c602328-d732-41d9-b94a-bcf28a5f7f8f
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: Eq3c19Y0WGB1APWMADQB-oxCvZFSVFAQxG5L6b8EkUg
-    short-id: b1ad165f903c62fe
-  servername: www.yandex.ru
-  client-fingerprint: ios
-  network: grpc
-  grpc-opts:
-    grpc-service-name: astracat
-- name: 'Austria | at1.japancase.site | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.22.31.72
+  server: 185.86.147.175
   port: 443
-  uuid: db80088c-32a1-4cb8-a907-0f3cb7844152
+  uuid: 7955bf18-35c4-412d-aabd-c0b36c793063
+  udp: true
+  tls: true
+  servername: bhjolq0d0l.flowersgood.top
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /service/telemetry/045d381f1166/
+    headers:
+      Host: bhjolq0d0l.flowersgood.top
+- name: 'Russia | music.yandex.ru | RAW | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 188.225.78.228
+  port: 443
+  uuid: bb190cdb-82ae-4212-b6cd-8ae9e6b768dd
   udp: true
   tls: true
   reality-opts:
-    public-key: zEntiD6D81wY__YHPvIw78e09CBIgYkyQ5meIo7c_hg
-    short-id: 41ae8e266bc3346f
-  servername: at1.japancase.site
+    public-key: aV_BHCeZ30y4-5rpUIHaWHMYAgogLsw4AE06Rw2X4WE
+    short-id: e202a94ad1711af2
+  servername: music.yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+  network: raw
 - name: 'Russia | join.betust.net | RAW | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 81.163.22.143
