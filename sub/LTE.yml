@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-06 23:18:43 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-06 23:54:34 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 4 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 6 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 4 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 6 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -111,9 +111,35 @@ proxies:
   udp: true
   tls: true
   servername: tehnomarket-ekb.cc
+  client-fingerprint: edge
   network: ws
   ws-opts:
     path: /account/refresh/C6Gbmvj-D5Vy
+- name: 'Russia | tehnomarket-ekb.cc | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.86.145.80
+  port: 443
+  uuid: 7ae99e68-1cb8-4845-b4f1-0f8a4f218d70
+  udp: true
+  tls: true
+  servername: tehnomarket-ekb.cc
+  network: ws
+  ws-opts:
+    path: /account/refresh/C6Gbmvj-D5Vy
+- name: 'Germany | 186.baklajann.ru | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 194.156.26.125
+  port: 443
+  uuid: 86c7af80-c9cf-4265-ab77-da12b0bf8bb6
+  udp: true
+  tls: true
+  servername: 186.baklajann.ru
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: 186.baklajann.ru
 - name: 'Russia | metrics.api.downloader-pet.xyz | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 91.215.43.80

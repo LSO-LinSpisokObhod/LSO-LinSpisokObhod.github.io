@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-06 23:18:43 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-06 23:54:34 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -62,7 +62,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Всего конфигов: 4 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Всего конфигов: 6 [#LSO - #LinSpisokObhod]",
       "server": "all.lso",
       "server_port": 443,
       "uuid": "all",
@@ -73,7 +73,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vless: 4 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vless: 6 [#LSO - #LinSpisokObhod]",
       "server": "vless.about.lso",
       "server_port": 443,
       "uuid": "vless",
@@ -186,11 +186,58 @@
       "uuid": "7ae99e68-1cb8-4845-b4f1-0f8a4f218d70",
       "tls": {
         "enabled": true,
+        "server_name": "tehnomarket-ekb.cc",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "edge"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/account/refresh/C6Gbmvj-D5Vy"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | tehnomarket-ekb.cc | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "185.86.145.80",
+      "server_port": 443,
+      "uuid": "7ae99e68-1cb8-4845-b4f1-0f8a4f218d70",
+      "tls": {
+        "enabled": true,
         "server_name": "tehnomarket-ekb.cc"
       },
       "transport": {
         "type": "ws",
         "path": "/account/refresh/C6Gbmvj-D5Vy"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Germany | 186.baklajann.ru | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "194.156.26.125",
+      "server_port": 443,
+      "uuid": "86c7af80-c9cf-4265-ab77-da12b0bf8bb6",
+      "tls": {
+        "enabled": true,
+        "server_name": "186.baklajann.ru",
+        "alpn": [
+          "http/1.1"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "186.baklajann.ru"
+        }
       }
     },
     {
