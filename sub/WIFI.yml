@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-06 15:00:02 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-06 16:14:37 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 327 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 372 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 196 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 238 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -37,7 +37,7 @@ proxies:
   udp: true
   tls: true
   servername: vless.about.lso
-- name: 'Подписка #LSO© Trojan: 88 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Trojan: 90 [#LSO - #LinSpisokObhod]'
   type: trojan
   server: trojan.about.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 40 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 41 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -606,6 +606,34 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: br001.zestapp778.com
+- name: 'United States | vwscscac-production.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 153.52.255.52
+  port: 443
+  password: GKZo7rioAXOpE5bp
+  udp: true
+  skip-cert-verify: false
+  sni: vwscscac-production.up.railway.app
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /api/5OOEVz
+    headers:
+      Host: vwscscac-production.up.railway.app
+- name: 'United States | vwscscac-production.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 153.52.255.52
+  port: 443
+  password: GKZo7rioAXOpE5bp
+  udp: true
+  skip-cert-verify: false
+  sni: vwscscac-production.up.railway.app
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /api/5OOEVz
+    headers:
+      Host: vwscscac-production.up.railway.app
 - name: 'Australia | au.tronsg.com | unknown | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 45.32.241.180
@@ -1509,6 +1537,20 @@ proxies:
     path: /api/v1/devices/10be32b380/telemetry
     headers:
       Host: pl1.meshbeat.online
+- name: 'Austria | 19.baklajann.ru | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 212.183.88.53
+  port: 443
+  uuid: 38cc60c3-e5e9-462f-8111-dcac9e7bc60a
+  udp: true
+  tls: true
+  servername: 19.baklajann.ru
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: 19.baklajann.ru
 - name: 'Russia | yoy-api.bachidze.com | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 83.147.246.12
@@ -1778,6 +1820,15 @@ proxies:
   servername: fi-94-10.cdn-lab.online
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Sweden | se3.shtil.io | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 194.104.94.141
+  port: 443
+  uuid: 6ba4ed2e-b42b-4880-8b3b-c7e2df2d02f6
+  udp: true
+  tls: true
+  servername: se3.shtil.io
+  client-fingerprint: firefox
 - name: 'The Netherlands | docs.blog-forme.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 87.199.207.116
@@ -1987,6 +2038,34 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
+- name: 'United States | vwscscac-production.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 153.52.255.52
+  port: 443
+  uuid: 72a93bfe-bea8-4731-b484-37c3ff49df4b
+  udp: true
+  tls: true
+  servername: vwscscac-production.up.railway.app
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /api/mMzCEF
+    headers:
+      Host: vwscscac-production.up.railway.app
+- name: 'United States | vwscscac-production.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 153.52.255.52
+  port: 443
+  uuid: 72a93bfe-bea8-4731-b484-37c3ff49df4b
+  udp: true
+  tls: true
+  servername: vwscscac-production.up.railway.app
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /api/mMzCEF
+    headers:
+      Host: vwscscac-production.up.railway.app
 - name: 'Russia | cache-89.topp-con.xyz | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 201.51.4.89
@@ -2197,6 +2276,62 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
+- name: 'Iran | Tunde5.pasarguardspeed.ir | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 94.182.108.147
+  port: 4530
+  uuid: 984163f9-61a8-4b9c-82db-50604863ecfc
+  udp: true
+  tls: true
+  servername: Tunde5.pasarguardspeed.ir
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: Tunde5.pasarguardspeed.ir
+- name: 'Iran | Tunde5.pasarguardspeed.ir | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 94.182.108.150
+  port: 4500
+  uuid: 984163f9-61a8-4b9c-82db-50604863ecfc
+  udp: true
+  tls: true
+  servername: Tunde5.pasarguardspeed.ir
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: Tunde5.pasarguardspeed.ir
+- name: 'Iran | Tunde5.pasarguardspeed.ir | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 94.182.108.151
+  port: 4520
+  uuid: 984163f9-61a8-4b9c-82db-50604863ecfc
+  udp: true
+  tls: true
+  servername: Tunde5.pasarguardspeed.ir
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: Tunde5.pasarguardspeed.ir
+- name: 'Iran | Tunde5.pasarguardspeed.ir | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 94.182.108.153
+  port: 200
+  uuid: 984163f9-61a8-4b9c-82db-50604863ecfc
+  udp: true
+  tls: true
+  servername: Tunde5.pasarguardspeed.ir
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: Tunde5.pasarguardspeed.ir
 - name: 'Finland | 36a466g.fi1.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 196.196.204.180
@@ -2529,6 +2664,30 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: sync.v1
+- name: 'Russia | a20uq2ozhd.j.cloudfront.hls.edgehls.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: a20uq2ozhd.j.cloudfront.hls.edgehls.net
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | a20uq2ozhd.j.cloudfront.hls.edgehls.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: a20uq2ozhd.j.cloudfront.hls.edgehls.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
 - name: 'Russia | ekkgkmfqm9.j.cloudfront.hls.edgehls.net | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 135.106.190.126
@@ -2538,6 +2697,54 @@ proxies:
   tls: true
   servername: ekkgkmfqm9.j.cloudfront.hls.edgehls.net
   client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | ekkgkmfqm9.j.cloudfront.hls.edgehls.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: ekkgkmfqm9.j.cloudfront.hls.edgehls.net
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | ekkgkmfqm9.j.cloudfront.hls.edgehls.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: ekkgkmfqm9.j.cloudfront.hls.edgehls.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | fgvqz26cf9.j.cloudfront.hls.vodcdn-edge.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: fgvqz26cf9.j.cloudfront.hls.vodcdn-edge.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | fgvqz26cf9.j.cloudfront.hls.vodcdn-edge.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: fgvqz26cf9.j.cloudfront.hls.vodcdn-edge.net
+  client-fingerprint: firefox
   network: grpc
   grpc-opts:
     grpc-service-name: sync.v1
@@ -2565,6 +2772,30 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: sync.v1
+- name: 'Russia | g5j6r0l5i9.j.cloudfront.hls.vodcdn-edge.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: g5j6r0l5i9.j.cloudfront.hls.vodcdn-edge.net
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | g5j6r0l5i9.j.cloudfront.hls.vodcdn-edge.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: g5j6r0l5i9.j.cloudfront.hls.vodcdn-edge.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
 - name: 'Russia | h9t9rvxazl.j.cloudfront.hls.hlsnode.net | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 135.106.190.126
@@ -2574,6 +2805,54 @@ proxies:
   tls: true
   servername: h9t9rvxazl.j.cloudfront.hls.hlsnode.net
   client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | h9t9rvxazl.j.cloudfront.hls.hlsnode.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: h9t9rvxazl.j.cloudfront.hls.hlsnode.net
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | h9t9rvxazl.j.cloudfront.hls.hlsnode.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: h9t9rvxazl.j.cloudfront.hls.hlsnode.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | jagamsrxd6.j.cloudfront.hls.vodcdn-edge.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: jagamsrxd6.j.cloudfront.hls.vodcdn-edge.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | jagamsrxd6.j.cloudfront.hls.vodcdn-edge.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: jagamsrxd6.j.cloudfront.hls.vodcdn-edge.net
+  client-fingerprint: firefox
   network: grpc
   grpc-opts:
     grpc-service-name: sync.v1
@@ -2609,7 +2888,43 @@ proxies:
   udp: true
   tls: true
   servername: k5s6n5ql4d.j.cloudfront.hls.hlsnode.net
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | k5s6n5ql4d.j.cloudfront.hls.hlsnode.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: k5s6n5ql4d.j.cloudfront.hls.hlsnode.net
   client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | oeal42h1p4.j.cloudfront.hls.vodcdn-edge.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: oeal42h1p4.j.cloudfront.hls.vodcdn-edge.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | oeal42h1p4.j.cloudfront.hls.vodcdn-edge.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: oeal42h1p4.j.cloudfront.hls.vodcdn-edge.net
+  client-fingerprint: firefox
   network: grpc
   grpc-opts:
     grpc-service-name: sync.v1
@@ -2645,7 +2960,43 @@ proxies:
   udp: true
   tls: true
   servername: xtdvvaie2g.j.cloudfront.hls.edgehls.net
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | xtdvvaie2g.j.cloudfront.hls.edgehls.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 135.106.190.126
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: xtdvvaie2g.j.cloudfront.hls.edgehls.net
   client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | ar5v3uc2o9.j.cloudfront.hls.hlsnode.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: ar5v3uc2o9.j.cloudfront.hls.hlsnode.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | ar5v3uc2o9.j.cloudfront.hls.hlsnode.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: ar5v3uc2o9.j.cloudfront.hls.hlsnode.net
+  client-fingerprint: firefox
   network: grpc
   grpc-opts:
     grpc-service-name: sync.v1
@@ -2681,7 +3032,43 @@ proxies:
   udp: true
   tls: true
   servername: ce3fp598gr.j.cloudfront.hls.edgehls.net
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | ce3fp598gr.j.cloudfront.hls.edgehls.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: ce3fp598gr.j.cloudfront.hls.edgehls.net
   client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | ekkgkmfqm9.j.cloudfront.hls.edgehls.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: ekkgkmfqm9.j.cloudfront.hls.edgehls.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | ekkgkmfqm9.j.cloudfront.hls.edgehls.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: ekkgkmfqm9.j.cloudfront.hls.edgehls.net
+  client-fingerprint: firefox
   network: grpc
   grpc-opts:
     grpc-service-name: sync.v1
@@ -2706,6 +3093,54 @@ proxies:
   tls: true
   servername: g5j6r0l5i9.j.cloudfront.hls.vodcdn-edge.net
   client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | g5j6r0l5i9.j.cloudfront.hls.vodcdn-edge.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: g5j6r0l5i9.j.cloudfront.hls.vodcdn-edge.net
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | g5j6r0l5i9.j.cloudfront.hls.vodcdn-edge.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: g5j6r0l5i9.j.cloudfront.hls.vodcdn-edge.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | jagamsrxd6.j.cloudfront.hls.vodcdn-edge.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: jagamsrxd6.j.cloudfront.hls.vodcdn-edge.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | jagamsrxd6.j.cloudfront.hls.vodcdn-edge.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: jagamsrxd6.j.cloudfront.hls.vodcdn-edge.net
+  client-fingerprint: firefox
   network: grpc
   grpc-opts:
     grpc-service-name: sync.v1
@@ -2741,7 +3176,43 @@ proxies:
   udp: true
   tls: true
   servername: k5s6n5ql4d.j.cloudfront.hls.hlsnode.net
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | k5s6n5ql4d.j.cloudfront.hls.hlsnode.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: k5s6n5ql4d.j.cloudfront.hls.hlsnode.net
   client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | pqlaxiq96l.j.cloudfront.hls.hlsnode.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: pqlaxiq96l.j.cloudfront.hls.hlsnode.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | pqlaxiq96l.j.cloudfront.hls.hlsnode.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: pqlaxiq96l.j.cloudfront.hls.hlsnode.net
+  client-fingerprint: firefox
   network: grpc
   grpc-opts:
     grpc-service-name: sync.v1
@@ -2766,6 +3237,54 @@ proxies:
   tls: true
   servername: tz5gtjwlki.j.cloudfront.hls.hlsnode.net
   client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | tz5gtjwlki.j.cloudfront.hls.hlsnode.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: tz5gtjwlki.j.cloudfront.hls.hlsnode.net
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | tz5gtjwlki.j.cloudfront.hls.hlsnode.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: tz5gtjwlki.j.cloudfront.hls.hlsnode.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | xa69h5ofn2.j.cloudfront.hls.edgehls.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: xa69h5ofn2.j.cloudfront.hls.edgehls.net
+  client-fingerprint: safari
+  network: grpc
+  grpc-opts:
+    grpc-service-name: sync.v1
+- name: 'Russia | xa69h5ofn2.j.cloudfront.hls.edgehls.net | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.143.188.113
+  port: 443
+  uuid: c47159bb-2c15-440d-b239-8594d7e7efbb
+  udp: true
+  tls: true
+  servername: xa69h5ofn2.j.cloudfront.hls.edgehls.net
+  client-fingerprint: firefox
   network: grpc
   grpc-opts:
     grpc-service-name: sync.v1
@@ -3261,6 +3780,26 @@ proxies:
   servername: edge.cdn-space.org
   client-fingerprint: firefox
   network: xhttp
+- name: 'Russia | ru1.cdn-space.org | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.173.179.218
+  port: 443
+  uuid: f219ffe2-bc36-495f-a83d-8f9ac4af05fd
+  udp: true
+  tls: true
+  servername: ru1.cdn-space.org
+  client-fingerprint: firefox
+  network: xhttp
+- name: 'Russia | ru1.cdn-space.org | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.173.179.218
+  port: 443
+  uuid: f219ffe2-bc36-495f-a83d-8f9ac4af05fd
+  udp: true
+  tls: true
+  servername: ru1.cdn-space.org
+  client-fingerprint: firefox
+  network: xhttp
 - name: 'Poland | pl-b1.golangwikito.cfd | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 217.60.33.182
@@ -3345,6 +3884,20 @@ proxies:
     path: /vlessws
     headers:
       Host: vpn.cintaku.qzz.io
+- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 172.67.187.145
+  port: 80
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
+  alterId: 0
+  cipher: auto
+  udp: true
+  servername: vmess.lbw666.dpdns.org
+  network: ws
+  ws-opts:
+    path: /ws
+    headers:
+      Host: vmess.lbw666.dpdns.org
 - name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 104.17.147.222
@@ -3447,6 +4000,21 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
+- name: 'United States | sinagolestani-production-c355.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 153.52.255.32
+  port: 443
+  uuid: 46470358-5035-473d-aad6-8ffd0870a75c
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: sinagolestani-production-c355.up.railway.app
+  network: ws
+  ws-opts:
+    path: /cdn/1b3d0b0a-8cbd-4490-9eac-4d99909d8c61/m?ed=2560
+    headers:
+      Host: sinagolestani-production-c355.up.railway.app
 - name: 'Kazakhstan | google.com | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 38.107.234.57
@@ -3656,20 +4224,6 @@ proxies:
   network: ws
   ws-opts:
     path: /cctv13.m3u8
-- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 172.67.187.145
-  port: 80
-  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: vmess.lbw666.dpdns.org
-  network: ws
-  ws-opts:
-    path: /ws
-    headers:
-      Host: vmess.lbw666.dpdns.org
 - name: 'unknown | zfd-hkv2.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: zfd-hkv2.kunlun01dns.com
