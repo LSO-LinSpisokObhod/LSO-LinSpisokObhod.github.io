@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-06 16:14:37 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-06 17:25:45 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 18 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 17 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 10 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 9 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -150,30 +150,14 @@ proxies:
   network: ws
   ws-opts:
     path: /assignment
-- name: 'Russia | stechnostore.life | WebSocket | [#LSO - #LinSpisokObhod]'
+- name: 'Russia | decdn2.bota7.com | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 185.178.208.167
+  server: 188.72.103.4
   port: 443
-  uuid: 043b6cd2-fad5-461c-ae58-31d40ea7073f
+  uuid: 00a560f4-035e-48eb-b698-6f6be0b5e477
   udp: true
   tls: true
-  servername: stechnostore.life
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /client/report/04c88cca7509/
-    headers:
-      Host: stechnostore.life
-- name: 'Russia | max.ru | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 84.201.146.8
-  port: 443
-  uuid: 1e2b9c0c-4f9b-56f5-a062-1c4f2d2aa200
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: biyXF3Egpu0ul4Jyf04Vh1Zl6u3JGXJ2k5y5y7pDjgo
-  servername: max.ru
+  servername: decdn2.bota7.com
   client-fingerprint: firefox
   network: xhttp
 - name: 'Russia | max.ru | XHTTP | [#LSO - #LinSpisokObhod]'
@@ -188,15 +172,18 @@ proxies:
   servername: max.ru
   client-fingerprint: firefox
   network: xhttp
-- name: 'Sweden | gamenews.best | unknown | [#LSO - #LinSpisokObhod]'
+- name: 'Russia | max.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 88.216.129.234
+  server: 84.201.146.8
   port: 443
-  uuid: acc50200-7f21-4f90-9cca-0057efcbf042
+  uuid: 1e2b9c0c-4f9b-56f5-a062-1c4f2d2aa200
   udp: true
   tls: true
-  servername: gamenews.best
+  reality-opts:
+    public-key: biyXF3Egpu0ul4Jyf04Vh1Zl6u3JGXJ2k5y5y7pDjgo
+  servername: max.ru
   client-fingerprint: firefox
+  network: xhttp
 - name: 'Austria | at1.japancase.site | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.22.31.72
@@ -266,16 +253,17 @@ proxies:
     path: /amws
     headers:
       Host: ara.rtkdvbr.cc
-- name: 'Russia | apply.betust.net | TCP | [#LSO - #LinSpisokObhod]'
+- name: 'Russia | join.betust.net | RAW | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 81.163.22.194
+  server: 81.163.22.143
   port: 443
   uuid: fb37d713-0ed3-4146-b085-a5c879a9aafa
   udp: true
   tls: true
   reality-opts:
-    public-key: T98nmnCp0qrmkH1Oq92Tk94sCYa5RuuEjp8bDDbdVxk
-    short-id: b20168a5
-  servername: apply.betust.net
+    public-key: GQul8Ak0VO_z4FW_m_R-xsQbwd2e1rWZO-XfMmKmpQE
+    short-id: 351224a7
+  servername: join.betust.net
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+  network: raw
