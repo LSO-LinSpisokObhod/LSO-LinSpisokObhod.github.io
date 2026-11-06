@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-06 22:01:19 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-06 22:58:34 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -62,7 +62,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Всего конфигов: 13 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Всего конфигов: 15 [#LSO - #LinSpisokObhod]",
       "server": "all.lso",
       "server_port": 443,
       "uuid": "all",
@@ -73,7 +73,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vless: 5 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vless: 7 [#LSO - #LinSpisokObhod]",
       "server": "vless.about.lso",
       "server_port": 443,
       "uuid": "vless",
@@ -254,6 +254,21 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | decdn2.bota7.com | XHTTP | [#LSO - #LinSpisokObhod]",
+      "server": "188.72.103.4",
+      "server_port": 443,
+      "uuid": "00a560f4-035e-48eb-b698-6f6be0b5e477",
+      "tls": {
+        "enabled": true,
+        "server_name": "decdn2.bota7.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Russia | max.ru | XHTTP | [#LSO - #LinSpisokObhod]",
       "server": "84.201.146.8",
       "server_port": 443,
@@ -314,18 +329,42 @@
     },
     {
       "type": "vless",
-      "tag": "Russia | music.yandex.ru | RAW | [#LSO - #LinSpisokObhod]",
-      "server": "188.225.78.228",
-      "server_port": 443,
-      "uuid": "bb190cdb-82ae-4212-b6cd-8ae9e6b768dd",
+      "tag": "Austria | 360.yandex.ru | GRPC | [#LSO - #LinSpisokObhod]",
+      "server": "147.45.71.104",
+      "server_port": 8444,
+      "uuid": "7b8ad3a1-fc0a-4fe4-8844-56e606b6eabb",
+      "tls": {
+        "enabled": true,
+        "server_name": "360.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "_vlpU9DnN8dz3FZ7Uifl3DPmi1o2vq2qhyZ8KKPvESM",
+          "short_id": "6d956f726b46010a"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "grpc",
+        "service_name": "grpc-reality"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "The Netherlands | metrika.yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "144.31.225.239",
+      "server_port": 28150,
+      "uuid": "92b79c22-f68b-4713-8b21-52f264cb92f5",
       "flow": "xtls-rprx-vision",
       "tls": {
         "enabled": true,
-        "server_name": "music.yandex.ru",
+        "server_name": "metrika.yandex.ru",
         "reality": {
           "enabled": true,
-          "public_key": "aV_BHCeZ30y4-5rpUIHaWHMYAgogLsw4AE06Rw2X4WE",
-          "short_id": "e202a94ad1711af2"
+          "public_key": "HRmmr0Ii4Tr9jPLwratvLhee3_VWFNK47T8AAo7kzww",
+          "short_id": "dcb858da"
         },
         "utls": {
           "enabled": true,
@@ -335,18 +374,18 @@
     },
     {
       "type": "vless",
-      "tag": "Russia | join.betust.net | RAW | [#LSO - #LinSpisokObhod]",
-      "server": "81.163.22.143",
-      "server_port": 443,
-      "uuid": "fb37d713-0ed3-4146-b085-a5c879a9aafa",
+      "tag": "Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "178.172.227.228",
+      "server_port": 10444,
+      "uuid": "b6e5dc56-836f-48c1-9163-b0b0b43b647d",
       "flow": "xtls-rprx-vision",
       "tls": {
         "enabled": true,
-        "server_name": "join.betust.net",
+        "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "GQul8Ak0VO_z4FW_m_R-xsQbwd2e1rWZO-XfMmKmpQE",
-          "short_id": "351224a7"
+          "public_key": "0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo",
+          "short_id": "8debcf36f1cc69ff"
         },
         "utls": {
           "enabled": true,
