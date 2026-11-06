@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-07 01:50:25 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-07 02:45:49 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 11 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 8 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 10 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 7 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -79,16 +79,6 @@ proxies:
   udp: true
   tls: true
   servername: support.lso
-- name: 'Russia | decdn2.bota7.com | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 188.72.103.4
-  port: 443
-  uuid: 00a560f4-035e-48eb-b698-6f6be0b5e477
-  udp: true
-  tls: true
-  servername: decdn2.bota7.com
-  client-fingerprint: firefox
-  network: xhttp
 - name: 'Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 193.163.203.170
@@ -114,16 +104,6 @@ proxies:
   servername: smart.bachidze.com
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | cdnno2.artemida.live | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 188.72.103.4
-  port: 443
-  uuid: 5f1c2e83-d4aa-4f10-81e9-e0ccc018974c
-  udp: true
-  tls: true
-  servername: cdnno2.artemida.live
-  client-fingerprint: firefox
-  network: xhttp
 - name: 'Russia | bhjolq0d0l.flowersgood.top | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.86.147.175
@@ -166,20 +146,6 @@ proxies:
     path: /
     headers:
       Host: 186.baklajann.ru
-- name: 'Russia | music.yandex.ru | RAW | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 188.225.78.228
-  port: 443
-  uuid: bb190cdb-82ae-4212-b6cd-8ae9e6b768dd
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: aV_BHCeZ30y4-5rpUIHaWHMYAgogLsw4AE06Rw2X4WE
-    short-id: e202a94ad1711af2
-  servername: music.yandex.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-  network: raw
 - name: 'Russia | metrics.api.downloader-pet.xyz | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 91.215.43.80
@@ -192,20 +158,15 @@ proxies:
   network: ws
   ws-opts:
     path: /gateway/v1/ws/a901ed17102fc3090ca1ab052c672f47
-- name: 'Russia | join.betust.net | RAW | [#LSO - #LinSpisokObhod]'
+- name: 'Russia | static.bakarova-top.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 81.163.22.143
+  server: 185.178.208.140
   port: 443
-  uuid: fb37d713-0ed3-4146-b085-a5c879a9aafa
+  uuid: ea277838-a188-44f1-a2e8-94aa110c4f27
   udp: true
   tls: true
-  reality-opts:
-    public-key: GQul8Ak0VO_z4FW_m_R-xsQbwd2e1rWZO-XfMmKmpQE
-    short-id: 351224a7
-  servername: join.betust.net
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-  network: raw
+  servername: static.bakarova-top.ru
+  network: xhttp
 - name: 'Russia | renderer-stream-1-871.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 195.208.65.155

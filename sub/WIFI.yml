@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-07 01:50:25 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-07 02:45:49 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 209 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 202 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 155 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 153 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -37,7 +37,7 @@ proxies:
   udp: true
   tls: true
   servername: vless.about.lso
-- name: 'Подписка #LSO© Trojan: 15 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Trojan: 13 [#LSO - #LinSpisokObhod]'
   type: trojan
   server: trojan.about.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 36 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 33 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -189,14 +189,6 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: ol2.ssn571.top
-- name: 'Hong Kong | hk2.ssn571.top | unknown | [#LSO - #LinSpisokObhod]'
-  type: trojan
-  server: 38.147.177.247
-  port: 37777
-  password: 24f9c0b4-f1c8-43a2-9c17-0a256b693db5
-  udp: true
-  skip-cert-verify: false
-  sni: hk2.ssn571.top
 - name: 'Japan | ol1.ssn571.top | unknown | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 150.230.217.160
@@ -213,14 +205,6 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: ol2.ssn571.top
-- name: 'Hong Kong | hk2.ssn571.top | unknown | [#LSO - #LinSpisokObhod]'
-  type: trojan
-  server: 38.147.177.247
-  port: 37777
-  password: e79bb958-2a79-4eea-87a3-7e73d0059ebf
-  udp: true
-  skip-cert-verify: false
-  sni: hk2.ssn571.top
 - name: 'United States | marvdasht.phonecomparisonblog.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 104.18.0.1
@@ -686,6 +670,26 @@ proxies:
   udp: true
   tls: true
   servername: alb.play-cat.uk
+  client-fingerprint: qq
+  network: xhttp
+- name: 'Albania | alb.play-cat.uk | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 157.22.240.159
+  port: 443
+  uuid: 3c4aa500-e3ae-4778-837b-f02dfea8c85f
+  udp: true
+  tls: true
+  servername: alb.play-cat.uk
+  client-fingerprint: qq
+  network: xhttp
+- name: 'United States | us2.qik-fin.uk | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 172.86.86.21
+  port: 443
+  uuid: 3c4aa500-e3ae-4778-837b-f02dfea8c85f
+  udp: true
+  tls: true
+  servername: us2.qik-fin.uk
   client-fingerprint: qq
   network: xhttp
 - name: 'United States | us2.qik-fin.uk | XHTTP | [#LSO - #LinSpisokObhod]'
@@ -1195,62 +1199,6 @@ proxies:
     path: /static/js/vendor.4fd8db0d.js?ed=2048
     headers:
       Host: ch-ws.gacvpn.site
-- name: 'unknown | fi.gacvpn.site | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: fi.gacvpn.site
-  port: 993
-  uuid: 981c7ccc-2b17-473c-8358-7fd1d6eec1b4
-  udp: true
-  tls: true
-  servername: fi.gacvpn.site
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /static/js/vendor.63a45d33.js?ed=2048
-    headers:
-      Host: fi.gacvpn.site
-- name: 'unknown | fi.gacvpn.site | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: fi.gacvpn.site
-  port: 995
-  uuid: 981c7ccc-2b17-473c-8358-7fd1d6eec1b4
-  udp: true
-  tls: true
-  servername: fi.gacvpn.site
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /static/js/runtime.6dc28486.js?ed=2048
-    headers:
-      Host: fi.gacvpn.site
-- name: 'unknown | lv.gacvpn.site | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: lv.gacvpn.site
-  port: 993
-  uuid: 981c7ccc-2b17-473c-8358-7fd1d6eec1b4
-  udp: true
-  tls: true
-  servername: lv.gacvpn.site
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /static/js/vendor.448f02e7.js?ed=2048
-    headers:
-      Host: lv.gacvpn.site
-- name: 'unknown | msk4.gacvpn.site | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: msk4.gacvpn.site
-  port: 993
-  uuid: 981c7ccc-2b17-473c-8358-7fd1d6eec1b4
-  udp: true
-  tls: true
-  servername: msk4.gacvpn.site
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /static/js/chunk.cc795b0d.js?ed=2048
-    headers:
-      Host: msk4.gacvpn.site
 - name: 'unknown | msk5.gacvpn.site | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: msk5.gacvpn.site
@@ -2186,16 +2134,6 @@ proxies:
   type: vmess
   server: 151.145.71.43
   port: 28888
-  uuid: 24f9c0b4-f1c8-43a2-9c17-0a256b693db5
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: ol2.ssn571.top
-- name: 'Japan | ol2.ssn571.top | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 151.145.71.43
-  port: 28888
   uuid: e79bb958-2a79-4eea-87a3-7e73d0059ebf
   alterId: 0
   cipher: auto
@@ -2224,32 +2162,6 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 'Hong Kong | hk2.ssn571.top | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 38.147.177.247
-  port: 38888
-  uuid: 24f9c0b4-f1c8-43a2-9c17-0a256b693db5
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: hk2.ssn571.top
-  network: ws
-  ws-opts:
-    path: /
-- name: 'Hong Kong | hk2.ssn571.top | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 38.147.177.247
-  port: 38888
-  uuid: e79bb958-2a79-4eea-87a3-7e73d0059ebf
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: hk2.ssn571.top
-  network: ws
-  ws-opts:
-    path: /
 - name: 'unknown | vipccc.cc | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: vipccc.cc
@@ -2316,6 +2228,16 @@ proxies:
   cipher: auto
   udp: true
   servername: 38.91.107.49
+- name: 'Japan | ol2.ssn571.top | TCP | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 151.145.71.43
+  port: 28888
+  uuid: 24f9c0b4-f1c8-43a2-9c17-0a256b693db5
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: ol2.ssn571.top
 - name: 'South Korea | 140.238.2.250 | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 140.238.2.250
@@ -2396,14 +2318,6 @@ proxies:
     path: /d3d3LmlyYW5ob3N0LmNvbQ==?ed=2560
     headers:
       Host: https.http.www.net.com.ramseyv2.ir.
-- name: 'Finland | 65.108.240.210 | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 65.108.240.210
-  port: 39018
-  uuid: 8ca123a8-720b-47c5-bd0c-637431418b09
-  alterId: 0
-  cipher: auto
-  udp: true
 - name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 104.21.7.133
