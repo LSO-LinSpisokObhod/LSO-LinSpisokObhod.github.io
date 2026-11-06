@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-06 14:11:59 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-06 15:00:02 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 18 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 19 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 10 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 11 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -279,3 +279,16 @@ proxies:
     path: /amws
     headers:
       Host: ara.rtkdvbr.cc
+- name: 'Russia | apply.betust.net | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 81.163.22.194
+  port: 443
+  uuid: fb37d713-0ed3-4146-b085-a5c879a9aafa
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: T98nmnCp0qrmkH1Oq92Tk94sCYa5RuuEjp8bDDbdVxk
+    short-id: b20168a5
+  servername: apply.betust.net
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
