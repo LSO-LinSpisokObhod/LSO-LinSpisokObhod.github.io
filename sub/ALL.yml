@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-06 02:51:53 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-06 04:19:18 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 342 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 346 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 40 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 36 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -1054,6 +1054,16 @@ proxies:
   servername: www.cloudflare.com
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Russia | ironlever.net | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 46.243.233.170
+  port: 8443
+  uuid: 13718497-ab31-4144-b2dc-3d9315366376
+  udp: true
+  tls: true
+  servername: ironlever.net
+  client-fingerprint: firefox
+  network: xhttp
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.172.227.124
@@ -1066,6 +1076,18 @@ proxies:
     short-id: 8debcf36f1cc69ff
   servername: ads.x5.ru
   client-fingerprint: safari
+  flow: xtls-rprx-vision
+- name: 'Russia | rumos.yandex-api.com | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 176.108.253.204
+  port: 443
+  uuid: 1b7ee703-fa08-4305-8469-ae3e30e61e44
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: aacc3j_mijcn5WdrrUcMRlTV7IhTgTVawR6oK_3cJGI
+  servername: rumos.yandex-api.com
+  client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'United States | download.autodesk.com | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -2586,19 +2608,6 @@ proxies:
   client-fingerprint: firefox
   flow: ''
   network: xhttp
-- name: 'unknown | fi-94-10.cdn-lab.online | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: fi-94-10.cdn-lab.online
-  port: 443
-  uuid: 5fa16fdf-5b3c-4f57-988d-b24c6722c91a
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: d1aZn0vbZdj0VrkfiXE7D10TRmdf91oa1LwCxQEAcBg
-    short-id: a74baa611fbfb118
-  servername: fi-94-10.cdn-lab.online
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'unknown | fi-94-10.cdn-lab.online | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: fi-94-10.cdn-lab.online
@@ -2633,19 +2642,6 @@ proxies:
   servername: nl29.dr-ping.ir
   client-fingerprint: firefox
   network: xhttp
-- name: 'Russia | rockdash113.argonaft2.online | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 201.24.113.15
-  port: 7443
-  uuid: 69d4ab17-6127-4dd2-a5da-b583f29c1993
-  udp: true
-  tls: true
-  servername: rockdash113.argonaft2.online
-  network: ws
-  ws-opts:
-    path: /api
-    headers:
-      Host: rockdash113.argonaft2.online
 - name: 'Sweden | se3.shtil.io | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 194.104.94.141
@@ -3064,6 +3060,44 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: ebl
+- name: 'Belgium | info.eppyuniformescorperu.com | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 138.124.249.213
+  port: 8443
+  uuid: 8c194452-6d5d-4c5c-a91a-eda47ec95916
+  udp: true
+  tls: true
+  servername: info.eppyuniformescorperu.com
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /ab63bc9ad7d3ae6cd4035b91
+- name: 'Russia | 100gramm.pro | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 31.177.111.185
+  port: 443
+  uuid: 8c194452-6d5d-4c5c-a91a-eda47ec95916
+  udp: true
+  tls: true
+  servername: 100gramm.pro
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /client/report/7a0ba0ac5155/
+    headers:
+      Host: 100gramm.pro
+- name: 'United Kingdom | muchos.rutasdelperu.org | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 94.183.179.210
+  port: 8443
+  uuid: 8c194452-6d5d-4c5c-a91a-eda47ec95916
+  udp: true
+  tls: true
+  servername: muchos.rutasdelperu.org
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /edge/2550b17bb09aa33e51ab37e3/
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 95.128.71.79
@@ -3090,6 +3124,16 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Russia | 3b4073f0c394.vps.myjino.ru | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 81.177.140.23
+  port: 443
+  uuid: 8dddc313-e588-478b-9175-8702da3235bf
+  udp: true
+  tls: true
+  servername: 3b4073f0c394.vps.myjino.ru
+  client-fingerprint: firefox
+  network: xhttp
 - name: 'Estonia | ee.song69.fun | RAW | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 132.243.74.104
@@ -5306,34 +5350,6 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: TunService
-- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 172.67.187.145
-  port: 80
-  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: vmess.lbw666.dpdns.org
-  network: ws
-  ws-opts:
-    path: /ws
-    headers:
-      Host: vmess.lbw666.dpdns.org
-- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 104.17.147.222
-  port: 80
-  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: vmess.lbw666.dpdns.org
-  network: ws
-  ws-opts:
-    path: /ws?ed=2048
-    headers:
-      Host: vmess.lbw666.dpdns.org
 - name: 'unknown | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: cf.0sm.com
@@ -5395,14 +5411,6 @@ proxies:
   network: ws
   ws-opts:
     path: /
-- name: 'unknown | dog-us.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: dog-us.kunlun01dns.com
-  port: 21009
-  uuid: 9464ca40-dd75-3742-a628-d931a9f413b2
-  alterId: 0
-  cipher: auto
-  udp: true
 - name: 'Kazakhstan | google.com | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 38.107.234.57
@@ -5507,15 +5515,6 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 'unknown | dog-hk.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: dog-hk.kunlun01dns.com
-  port: 21021
-  uuid: 9464ca40-dd75-3742-a628-d931a9f413b2
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: dog-hk.kunlun01dns.com
 - name: 'Hong Kong | www.pubgmobile.com | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 156.245.232.239
@@ -5592,23 +5591,45 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 'unknown | zfd-hkv1.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
+- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
-  server: zfd-hkv1.kunlun01dns.com
-  port: 16115
-  uuid: 0802ac03-7973-39ef-a019-ba02de6c01e1
+  server: 104.17.147.222
+  port: 80
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
   alterId: 0
   cipher: auto
   udp: true
-  servername: zfd-hkv1.kunlun01dns.com
-- name: 'unknown | zfd-hkv2.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
+  servername: vmess.lbw666.dpdns.org
+  network: ws
+  ws-opts:
+    path: /ws?ed=2048
+    headers:
+      Host: vmess.lbw666.dpdns.org
+- name: 'South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
-  server: zfd-hkv2.kunlun01dns.com
-  port: 16115
-  uuid: 0802ac03-7973-39ef-a019-ba02de6c01e1
+  server: 132.145.80.230
+  port: 80
+  uuid: 5155860e-d07d-46c3-9128-3afbd84626c7
   alterId: 0
   cipher: auto
   udp: true
+  network: ws
+  ws-opts:
+    path: /cctv13.m3u8
+- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 172.67.187.145
+  port: 80
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
+  alterId: 0
+  cipher: auto
+  udp: true
+  servername: vmess.lbw666.dpdns.org
+  network: ws
+  ws-opts:
+    path: /ws
+    headers:
+      Host: vmess.lbw666.dpdns.org
 - name: 'Hong Kong | 156.245.232.239 | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 156.245.232.239
@@ -5739,12 +5760,3 @@ proxies:
     path: /ws?ed=2048
     headers:
       Host: vmess.lbw666.dpdns.org
-- name: 'unknown | dog-us.kunlun01dns.com | RAW | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: dog-us.kunlun01dns.com
-  port: 21010
-  uuid: 9464ca40-dd75-3742-a628-d931a9f413b2
-  alterId: 0
-  cipher: auto
-  udp: true
-  network: raw
