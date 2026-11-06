@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-06 10:26:18 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-06 12:06:06 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 52 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 48 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 44 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 40 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -150,6 +150,40 @@ proxies:
   network: ws
   ws-opts:
     path: /assignment
+- name: 'Russia | decdn2.bota7.com | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 188.72.103.4
+  port: 443
+  uuid: 00a560f4-035e-48eb-b698-6f6be0b5e477
+  udp: true
+  tls: true
+  servername: decdn2.bota7.com
+  client-fingerprint: firefox
+  network: xhttp
+- name: 'Russia | librarycenter.net | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.178.208.140
+  port: 443
+  uuid: 0ac8792c-236d-4085-9e12-af8ffd998162
+  udp: true
+  tls: true
+  servername: librarycenter.net
+  client-fingerprint: firefox
+  network: xhttp
+- name: 'Russia | librarycenter.net | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.178.208.140
+  port: 443
+  uuid: 0ac8792c-236d-4085-9e12-af8ffd998162
+  udp: true
+  tls: true
+  servername: librarycenter.net
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /catalog/live/inventory
+    headers:
+      Host: librarycenter.net
 - name: 'Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 193.163.203.170
@@ -163,106 +197,6 @@ proxies:
   servername: yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | megawasp.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.86.145.173
-  port: 444
-  uuid: 13718497-ab31-4144-b2dc-3d9315366376
-  udp: true
-  tls: true
-  servername: megawasp.net
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | ironlever.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 46.243.233.170
-  port: 2053
-  uuid: 13718497-ab31-4144-b2dc-3d9315366376
-  udp: true
-  tls: true
-  servername: ironlever.net
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | ironlever.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 46.243.233.170
-  port: 2053
-  uuid: 13718497-ab31-4144-b2dc-3d9315366376
-  udp: true
-  tls: true
-  servername: ironlever.net
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | ironlever.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 46.243.233.170
-  port: 2053
-  uuid: 13718497-ab31-4144-b2dc-3d9315366376
-  udp: true
-  tls: true
-  servername: ironlever.net
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | ironlever.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 46.243.233.170
-  port: 2053
-  uuid: 13718497-ab31-4144-b2dc-3d9315366376
-  udp: true
-  tls: true
-  servername: ironlever.net
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | ironlever.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 46.243.233.170
-  port: 2053
-  uuid: 13718497-ab31-4144-b2dc-3d9315366376
-  udp: true
-  tls: true
-  servername: ironlever.net
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | ironlever.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 46.243.233.170
-  port: 8443
-  uuid: 13718497-ab31-4144-b2dc-3d9315366376
-  udp: true
-  tls: true
-  servername: ironlever.net
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | ironlever.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 46.243.233.170
-  port: 8443
-  uuid: 13718497-ab31-4144-b2dc-3d9315366376
-  udp: true
-  tls: true
-  servername: ironlever.net
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | ironlever.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 46.243.233.170
-  port: 8443
-  uuid: 13718497-ab31-4144-b2dc-3d9315366376
-  udp: true
-  tls: true
-  servername: ironlever.net
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | ironlever.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 46.243.233.170
-  port: 8443
-  uuid: 13718497-ab31-4144-b2dc-3d9315366376
-  udp: true
-  tls: true
-  servername: ironlever.net
-  client-fingerprint: firefox
-  network: xhttp
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.172.227.124
@@ -371,6 +305,61 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: grpc-reality
+- name: 'Russia | cdn.nodemesh.top | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 158.160.146.45
+  port: 443
+  uuid: 38fd804a-837b-5e32-ae66-f594eff83ac9
+  udp: true
+  tls: true
+  servername: cdn.nodemesh.top
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /stream/updates/81b28ff3
+    headers:
+      Host: cdn.nodemesh.top
+- name: 'Russia | cdn.nodemesh.top | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 158.160.172.181
+  port: 443
+  uuid: 38fd804a-837b-5e32-ae66-f594eff83ac9
+  udp: true
+  tls: true
+  servername: cdn.nodemesh.top
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /stream/updates/81b28ff3
+    headers:
+      Host: cdn.nodemesh.top
+- name: 'Russia | cdn.nodemesh.top | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 158.160.198.141
+  port: 443
+  uuid: 38fd804a-837b-5e32-ae66-f594eff83ac9
+  udp: true
+  tls: true
+  servername: cdn.nodemesh.top
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /stream/updates/81b28ff3
+    headers:
+      Host: cdn.nodemesh.top
+- name: 'The Netherlands | vkvd754.okcdn.ru | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 87.199.205.28
+  port: 443
+  uuid: 501a2da5-cb22-4a3f-915e-e3b821d1d62d
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: W-9zyiOq287RtXVTZlTFbSDJ0Mx8joyBLJoA7ZE7eBw
+    short-id: 6b196d2f190f32b3
+  servername: vkvd754.okcdn.ru
+  client-fingerprint: qq
+  flow: xtls-rprx-vision
 - name: 'The Netherlands | nla.kosmosapp.net | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 79.141.164.125
@@ -665,19 +654,6 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | 360.yandex.ru | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.244.43.99
-  port: 443
-  uuid: e6b16182-b55a-481a-a72a-a02d0233b850
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: drHN56XyKC5veHm0uaclQBAz2pLm70u-aXuVaSaSU0w
-    short-id: 21d9dbf9eb99735d
-  servername: 360.yandex.ru
-  client-fingerprint: firefox
-  network: xhttp
 - name: 'Russia | 360.yandex.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 104.171.134.135

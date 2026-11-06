@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-06 10:26:18 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-06 12:06:06 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 469 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 466 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 351 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 343 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -37,7 +37,7 @@ proxies:
   udp: true
   tls: true
   servername: vless.about.lso
-- name: 'Подписка #LSO© Trojan: 72 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Trojan: 76 [#LSO - #LinSpisokObhod]'
   type: trojan
   server: trojan.about.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 40 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 41 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -87,14 +87,6 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: crt.onecloudstream.com
-- name: 'Germany | 70033cc8.con.rasterparcel.tech | HYSTERIA2 | [#LSO - #LinSpisokObhod]'
-  type: hysteria2
-  server: 144.31.243.187
-  port: 443
-  password: 8645697d-51c1-4e90-aca5-ba63a0392f11
-  udp: true
-  skip-cert-verify: false
-  sni: 70033cc8.con.rasterparcel.tech
 - name: 'Germany | crt.onecloudstream.com | HYSTERIA2 | [#LSO - #LinSpisokObhod]'
   type: hysteria2
   server: 193.23.216.179
@@ -126,6 +118,14 @@ proxies:
   udp: true
   skip-cert-verify: true
   sni: 8.209.247.109
+- name: 'Russia | de.vip-get.ru | HYSTERIA2 | [#LSO - #LinSpisokObhod]'
+  type: hysteria2
+  server: 84.252.100.138
+  port: 2443
+  password: zWqQKhzHQOeuIcQleiAC2Ld8j0eZSjZXEAgTKwGaP9c
+  udp: true
+  skip-cert-verify: false
+  sni: de.vip-get.ru
 - name: 'Japan | discoverparttimepositionsandsupplementyourincomeguide.com | TCP | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 167.179.108.225
@@ -499,6 +499,34 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: indyourperfectremotetechjobfromthecomfortofhome.com
+- name: 'United States | siderail-production-0a00.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 153.52.255.89
+  port: 443
+  password: 0rSywmhaO-4LNS73
+  udp: true
+  skip-cert-verify: false
+  sni: siderail-production-0a00.up.railway.app
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /api/ZVe7VJ
+    headers:
+      Host: siderail-production-0a00.up.railway.app
+- name: 'United States | siderail-production-0a00.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 153.52.255.89
+  port: 443
+  password: 0rSywmhaO-4LNS73
+  udp: true
+  skip-cert-verify: false
+  sni: siderail-production-0a00.up.railway.app
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /api/ZVe7VJ
+    headers:
+      Host: siderail-production-0a00.up.railway.app
 - name: 'United States | us007.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 108.61.119.63
@@ -526,6 +554,14 @@ proxies:
   skip-cert-verify: false
   sni: fr001.zestapp778.com
   client-fingerprint: firefox
+- name: 'Philippines | ph001.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 130.94.51.219
+  port: 46298
+  password: 5t6i121em5lkmsmk
+  udp: true
+  skip-cert-verify: false
+  sni: ph001.zestapp778.com
 - name: 'Brazil | br001.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 216.128.169.78
@@ -552,34 +588,43 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: br001.zestapp778.com
-- name: 'United States | nexoshop.netvia.ir | WebSocket | [#LSO - #LinSpisokObhod]'
+- name: 'Australia | au.tronsg.com | unknown | [#LSO - #LinSpisokObhod]'
   type: trojan
-  server: 199.68.156.121
-  port: 2087
-  password: 7bpe9s002exll38s
+  server: 45.32.241.180
+  port: 443
+  password: Trojan%4082164024
   udp: true
   skip-cert-verify: false
-  sni: nexoshop.netvia.ir
+  sni: au.tronsg.com
+  client-fingerprint: firefox
+- name: 'United States | siderail-production-fbfe.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: trojan
+  server: 153.52.255.92
+  port: 443
+  password: eOtS4rA1poPu4R1i
+  udp: true
+  skip-cert-verify: false
+  sni: siderail-production-fbfe.up.railway.app
   client-fingerprint: firefox
   network: ws
   ws-opts:
-    path: /wss
+    path: /api/iruee_
     headers:
-      Host: nexoshop.netvia.ir
-- name: 'United States | nexoshop.netvia.ir | WebSocket | [#LSO - #LinSpisokObhod]'
+      Host: siderail-production-fbfe.up.railway.app
+- name: 'United States | siderail-production-fbfe.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
   type: trojan
-  server: 199.68.156.121
-  port: 2087
-  password: 7bpe9s002exll38s
+  server: 153.52.255.92
+  port: 443
+  password: eOtS4rA1poPu4R1i
   udp: true
   skip-cert-verify: false
-  sni: nexoshop.netvia.ir
+  sni: siderail-production-fbfe.up.railway.app
   client-fingerprint: firefox
   network: ws
   ws-opts:
-    path: /wss
+    path: /api/iruee_
     headers:
-      Host: nexoshop.netvia.ir
+      Host: siderail-production-fbfe.up.railway.app
 - name: 'Kazakhstan | www.cordweave.com | WebSocket | [#LSO - #LinSpisokObhod]'
   type: trojan
   server: 109.248.170.245
@@ -955,19 +1000,6 @@ proxies:
   servername: www.bing.com
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Sweden | sw2.cloudvienta.com | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 82.148.225.244
-  port: 443
-  uuid: 0fdb1df7-b3b6-4d29-9fd6-2b92fc80b852
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: ndIKnA3ySMv5vBJ-OfP8IhFWVu7mtK0nzhgSil1NaVg
-    short-id: 00f7359d92c884cc
-  servername: sw2.cloudvienta.com
-  client-fingerprint: firefox
-  network: xhttp
 - name: 'Moldova | md.gorobsub.com | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 80.96.108.29
@@ -1005,6 +1037,48 @@ proxies:
   servername: www.cloudflare.com
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'United States | siderail-production-0a00.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 69.46.46.190
+  port: 443
+  uuid: 12fd7f55-88f3-4e92-9e1a-d323dcb64e93
+  udp: true
+  tls: true
+  servername: siderail-production-0a00.up.railway.app
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /api/b_pE1m
+    headers:
+      Host: siderail-production-0a00.up.railway.app
+- name: 'Austria | 19.baklajann.ru | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 212.183.88.53
+  port: 443
+  uuid: 1a77be72-ca85-48d8-b6d5-a33674edda00
+  udp: true
+  tls: true
+  servername: 19.baklajann.ru
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: 19.baklajann.ru
+- name: 'Austria | 19.baklajann.ru | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 212.183.88.53
+  port: 443
+  uuid: 1a77be72-ca85-48d8-b6d5-a33674edda00
+  udp: true
+  tls: true
+  servername: 19.baklajann.ru
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: 19.baklajann.ru
 - name: 'Russia | apsnl.yandex-api.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 176.108.246.180
@@ -1250,46 +1324,6 @@ proxies:
   reality-opts:
     public-key: QzFNQqkvBnDKIyjXUHJQe9jruaw9G5AV44vDC-qvnlo
   servername: www.hp.com
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: TunService
-- name: 'Finland | download.nvidia.com | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 122.8.47.4
-  port: 443
-  uuid: 1c80222f-9fd9-db7b-c1ae-86c82c158b9d
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: hwwiWVqYq5b7S0JaXNSxjWSEv_1OUFMaWJGHzeAGyRM
-  servername: download.nvidia.com
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Finland | download.nvidia.com | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 122.8.47.4
-  port: 8443
-  uuid: 1c80222f-9fd9-db7b-c1ae-86c82c158b9d
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: hwwiWVqYq5b7S0JaXNSxjWSEv_1OUFMaWJGHzeAGyRM
-  servername: download.nvidia.com
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: TunService
-- name: 'Finland | download.nvidia.com | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 122.8.47.4
-  port: 8443
-  uuid: 1c80222f-9fd9-db7b-c1ae-86c82c158b9d
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: hwwiWVqYq5b7S0JaXNSxjWSEv_1OUFMaWJGHzeAGyRM
-  servername: download.nvidia.com
   client-fingerprint: firefox
   network: grpc
   grpc-opts:
@@ -1579,20 +1613,6 @@ proxies:
   servername: md.flicker.work
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | piston.kachow.ink | RAW | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 194.55.239.86
-  port: 443
-  uuid: 255a8044-3337-473e-af26-46a37208adcc
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: wl48cP9KpZxoAqUAePYqVmjNHO2gOzW_QCm3okkiLks
-    short-id: 87ac946b53bb52f5
-  servername: piston.kachow.ink
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-  network: raw
 - name: 'France | fr.tokiandrift.space | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 205.237.105.35
@@ -1606,6 +1626,17 @@ proxies:
   servername: fr.tokiandrift.space
   client-fingerprint: firefox
   network: xhttp
+- name: 'Russia | cdn4.anytube.ru | RAW | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 81.94.148.112
+  port: 443
+  uuid: 255a8044-3337-473e-af26-46a37208adcc
+  udp: true
+  tls: true
+  servername: cdn4.anytube.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+  network: raw
 - name: 'unknown | hudson.glowbreeze.online | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: hudson.glowbreeze.online
@@ -2270,34 +2301,6 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: grpc-tunnel
-- name: 'Hong Kong | main.vpsvdsclouds.net | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 45.133.73.20
-  port: 2087
-  uuid: 3d78373f-bdbd-428a-9b83-aea64264bf4e
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: oxdpwF7pHTpNG_R2y_Og0vOd2AAsCZ9dhCADuFH90AU
-  servername: main.vpsvdsclouds.net
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: grpc-tunnel
-- name: 'Hong Kong | main.vpsvdsclouds.net | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 45.133.73.20
-  port: 2087
-  uuid: 3d78373f-bdbd-428a-9b83-aea64264bf4e
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: oxdpwF7pHTpNG_R2y_Og0vOd2AAsCZ9dhCADuFH90AU
-  servername: main.vpsvdsclouds.net
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: grpc-tunnel
 - name: 'unknown | 63458cg.es4.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 63458cg.es4.h1clayd.click
@@ -2341,6 +2344,42 @@ proxies:
   servername: qq.utiltools.site
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'unknown | qq.utiltools.site | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: qq.utiltools.site
+  port: 443
+  uuid: 4054fdc2-ee80-4419-8a8e-d937df4719e2
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: drY21DHNOr6ezJLA2B10mzTExeJ9-gVBfTBNLwVBtWI
+  servername: qq.utiltools.site
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'Germany | wizard.friedshrimp.xyz | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 138.124.36.188
+  port: 443
+  uuid: 41ff2b37-7fbf-420d-9713-fbe4b350ebb7
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: yCwoksWL5L6bU15u4eQYiQT0J3BYhZkHkaIjkrW061k
+  servername: wizard.friedshrimp.xyz
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'The Netherlands | wolverine.friedshrimp.xyz | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 45.140.141.0
+  port: 443
+  uuid: 41ff2b37-7fbf-420d-9713-fbe4b350ebb7
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: owZAMMuFlyOd34ATpv4B65eX6eN9rssFNoR3B1V7qnc
+  servername: wolverine.friedshrimp.xyz
+  client-fingerprint: edge
+  flow: xtls-rprx-vision
 - name: 'The Netherlands | nodeam.easyvpn.dev | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 95.81.102.121
@@ -2367,6 +2406,30 @@ proxies:
   servername: fuck.rkn
   client-fingerprint: ''
   flow: xtls-rprx-vision
+- name: 'United States | game.worldoftanks.com | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 217.28.137.49
+  port: 443
+  uuid: 4bddc015-8391-4806-858f-b1eab2b3497b
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: 6dc3iKXilOQpA_JFrKlk5-CsFjSmOm_5p0kSQcO9qi4
+  servername: game.worldoftanks.com
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'United States | worldoftanks.com | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 87.120.252.21
+  port: 443
+  uuid: 4bddc015-8391-4806-858f-b1eab2b3497b
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: 6dc3iKXilOQpA_JFrKlk5-CsFjSmOm_5p0kSQcO9qi4
+  servername: worldoftanks.com
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'United States | yfz9dmeruxus.wfewf209v5ef.workers.dev | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 165.215.250.1
@@ -2389,6 +2452,30 @@ proxies:
   reality-opts:
     public-key: y0wgEdmPNIKlAMJHeC0teOW_fBnX8tmRE8n1CwOZSwU
   servername: 13oktober.live
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'Russia | ecalc.ru | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 176.108.243.140
+  port: 443
+  uuid: 54c13857-f1e1-4f7b-8e7c-793d87def80e
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: yCKV2xr725jI0sFhm4KbttKl8b9UZrnQTXxZLN2S4BM
+  servername: ecalc.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'Russia | s.rbk.ru | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 89.19.222.65
+  port: 443
+  uuid: 54c13857-f1e1-4f7b-8e7c-793d87def80e
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: yCKV2xr725jI0sFhm4KbttKl8b9UZrnQTXxZLN2S4BM
+  servername: s.rbk.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'Germany | c9.qwyak.ru | TCP | [#LSO - #LinSpisokObhod]'
@@ -2571,26 +2658,6 @@ proxies:
   servername: fi-94-10.cdn-lab.online
   client-fingerprint: firefox
   flow: ''
-  network: xhttp
-- name: 'United States | nl29.dr-ping.ir | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 198.202.24.27
-  port: 443
-  uuid: 64c5f924-1c24-44a5-acff-2e3ebcd2f807
-  udp: true
-  tls: true
-  servername: nl29.dr-ping.ir
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'United States | nl29.dr-ping.ir | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 198.202.24.27
-  port: 443
-  uuid: 64c5f924-1c24-44a5-acff-2e3ebcd2f807
-  udp: true
-  tls: true
-  servername: nl29.dr-ping.ir
-  client-fingerprint: firefox
   network: xhttp
 - name: 'Sweden | se3.shtil.io | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -2824,19 +2891,6 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
-- name: 'Germany | de-2.ffpn.pro | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 130.49.177.193
-  port: 443
-  uuid: 727a9178-d7f0-4142-8205-b0d19959ded0
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: DCpi9-1rSXxBnEIAQ9U3mTqHivk7vHJRV_T2pWw5vCc
-    short-id: 681fc2dd643bc2f3
-  servername: de-2.ffpn.pro
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'The Netherlands | bol.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 138.124.245.102
@@ -2863,19 +2917,6 @@ proxies:
   servername: ru.it-crp.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | api.weologic.pro | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 188.225.58.108
-  port: 443
-  uuid: 73a0f995-f2f1-4d47-a99d-a6dcc1952bf9
-  udp: true
-  tls: true
-  servername: api.weologic.pro
-  network: ws
-  ws-opts:
-    path: /api/v2/query/zpxgr1pf/
-    headers:
-      Host: api.weologic.pro
 - name: 'The Netherlands | nl-3.it-crp.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 31.76.110.231
@@ -3258,36 +3299,6 @@ proxies:
   tls: true
   servername: 7d1a74fd.ferrin.uk
   network: xhttp
-- name: 'Germany | 6d160a52.con.fernarchive.online | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 144.31.213.229
-  port: 443
-  uuid: 8645697d-51c1-4e90-aca5-ba63a0392f11
-  udp: true
-  tls: true
-  servername: 6d160a52.con.fernarchive.online
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Germany | 6d160a52.con.fernarchive.online | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 144.31.213.229
-  port: 443
-  uuid: 8645697d-51c1-4e90-aca5-ba63a0392f11
-  udp: true
-  tls: true
-  servername: 6d160a52.con.fernarchive.online
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Germany | 6d160a52.con.fernarchive.online | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 144.31.213.229
-  port: 443
-  uuid: 8645697d-51c1-4e90-aca5-ba63a0392f11
-  udp: true
-  tls: true
-  servername: 6d160a52.con.fernarchive.online
-  client-fingerprint: firefox
-  network: xhttp
 - name: 'Russia | sorrel-gate.cdn.cachefleet.com | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 95.129.234.113
@@ -3516,73 +3527,6 @@ proxies:
   servername: prime.jarbook.net
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'United States | sys-827407-4068cc-production.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 153.52.255.10
-  port: 443
-  uuid: 96341708-6833-7020-0998-eac39b6b9de8
-  udp: true
-  tls: true
-  servername: sys-827407-4068cc-production.up.railway.app
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /ws/96341708-6833-7020-0998-eac39b6b9de8
-    headers:
-      Host: sys-827407-4068cc-production.up.railway.app
-- name: 'United States | sys-827407-4068cc-production.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 153.52.255.10
-  port: 443
-  uuid: 96341708-6833-7020-0998-eac39b6b9de8
-  udp: true
-  tls: true
-  servername: sys-827407-4068cc-production.up.railway.app
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /ws/96341708-6833-7020-0998-eac39b6b9de8
-    headers:
-      Host: sys-827407-4068cc-production.up.railway.app
-- name: 'Russia | lte-v2-ws.gacvpn.site | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 72.56.233.10
-  port: 8443
-  uuid: 981c7ccc-2b17-473c-8358-7fd1d6eec1b4
-  udp: true
-  tls: true
-  servername: lte-v2-ws.gacvpn.site
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /static/js/runtime.9d03c7.js
-- name: 'Russia | lte-v2-ws.gacvpn.site | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 72.56.233.10
-  port: 8443
-  uuid: 981c7ccc-2b17-473c-8358-7fd1d6eec1b4
-  udp: true
-  tls: true
-  servername: lte-v2-ws.gacvpn.site
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /static/js/runtime.9d03c7.js
-    headers:
-      Host: 72.56.233.10
-- name: 'Russia | lte-v2-ws.gacvpn.site | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 72.56.233.10
-  port: 8443
-  uuid: 981c7ccc-2b17-473c-8358-7fd1d6eec1b4
-  udp: true
-  tls: true
-  servername: lte-v2-ws.gacvpn.site
-  network: ws
-  ws-opts:
-    path: /static/js/runtime.9d03c7.js
-    headers:
-      Host: lte-v2-ws.gacvpn.site
 - name: 'Finland | 36a466g.fi1.h1clayd.click | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 196.196.204.180
@@ -3701,6 +3645,94 @@ proxies:
     path: /e8ws
     headers:
       Host: vivozim.vyvoz-musora.cc
+- name: 'United States | siderail-production-fbfe.up.railway.app | HTTPUPGRADE | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 153.52.255.92
+  port: 443
+  uuid: a039c6ac-5e2f-4f7e-a79b-27582a8d61e0
+  udp: true
+  tls: true
+  servername: siderail-production-fbfe.up.railway.app
+  client-fingerprint: firefox
+  network: httpupgrade
+- name: 'United States | siderail-production-fbfe.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 153.52.255.92
+  port: 443
+  uuid: a039c6ac-5e2f-4f7e-a79b-27582a8d61e0
+  udp: true
+  tls: true
+  servername: siderail-production-fbfe.up.railway.app
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /api/0nauYY
+    headers:
+      Host: siderail-production-fbfe.up.railway.app
+- name: 'United States | siderail-production-fbfe.up.railway.app | HTTPUPGRADE | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 153.52.255.92
+  port: 443
+  uuid: a039c6ac-5e2f-4f7e-a79b-27582a8d61e0
+  udp: true
+  tls: true
+  servername: siderail-production-fbfe.up.railway.app
+  client-fingerprint: firefox
+  network: httpupgrade
+- name: 'United States | siderail-production-fbfe.up.railway.app | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 153.52.255.92
+  port: 443
+  uuid: a039c6ac-5e2f-4f7e-a79b-27582a8d61e0
+  udp: true
+  tls: true
+  servername: siderail-production-fbfe.up.railway.app
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /api/0nauYY
+    headers:
+      Host: siderail-production-fbfe.up.railway.app
+- name: 'United States | xuius.907737.xyz | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 207.246.104.91
+  port: 37379
+  uuid: a4bec43e-8073-4725-b307-47edad331fee
+  udp: true
+  tls: true
+  servername: xuius.907737.xyz
+  client-fingerprint: firefox
+  network: xhttp
+- name: 'United States | xuius.907737.xyz | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 207.246.104.91
+  port: 37379
+  uuid: a4bec43e-8073-4725-b307-47edad331fee
+  udp: true
+  tls: true
+  servername: xuius.907737.xyz
+  client-fingerprint: firefox
+  network: xhttp
+- name: 'United States | xuius.907737.xyz | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 207.246.104.91
+  port: 37379
+  uuid: a4bec43e-8073-4725-b307-47edad331fee
+  udp: true
+  tls: true
+  servername: xuius.907737.xyz
+  client-fingerprint: firefox
+  network: xhttp
+- name: 'United States | xuius.907737.xyz | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 207.246.104.91
+  port: 37379
+  uuid: a4bec43e-8073-4725-b307-47edad331fee
+  udp: true
+  tls: true
+  servername: xuius.907737.xyz
+  client-fingerprint: firefox
+  network: xhttp
 - name: 'Poland | teamdocs.su | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 13.143.167.251
@@ -4282,46 +4314,6 @@ proxies:
     grpc-service-name: TunService
 - name: 'Finland | download.nvidia.com | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 122.8.47.4
-  port: 443
-  uuid: cfcfd0bb-7e8c-4f2b-9cc2-505c983fb8f1
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: hwwiWVqYq5b7S0JaXNSxjWSEv_1OUFMaWJGHzeAGyRM
-  servername: download.nvidia.com
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Finland | download.nvidia.com | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 122.8.47.4
-  port: 8443
-  uuid: cfcfd0bb-7e8c-4f2b-9cc2-505c983fb8f1
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: hwwiWVqYq5b7S0JaXNSxjWSEv_1OUFMaWJGHzeAGyRM
-  servername: download.nvidia.com
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: TunService
-- name: 'Finland | download.nvidia.com | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 122.8.47.4
-  port: 8443
-  uuid: cfcfd0bb-7e8c-4f2b-9cc2-505c983fb8f1
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: hwwiWVqYq5b7S0JaXNSxjWSEv_1OUFMaWJGHzeAGyRM
-  servername: download.nvidia.com
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: TunService
-- name: 'Finland | download.nvidia.com | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
   server: 122.8.47.5
   port: 443
   uuid: cfcfd0bb-7e8c-4f2b-9cc2-505c983fb8f1
@@ -4769,6 +4761,15 @@ proxies:
   tls: true
   servername: in001.zestapp778.com
   client-fingerprint: firefox
+- name: 'South Korea | kr002.zestapp778.com | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 158.247.220.26
+  port: 37095
+  uuid: e9a8144e-5237-488a-afb1-9ca3d8d54c80
+  udp: true
+  tls: true
+  servername: kr002.zestapp778.com
+  client-fingerprint: firefox
 - name: 'Serbia | fancy-mouse-6aff.wixit71180.workers.dev | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 45.130.125.151
@@ -5060,72 +5061,26 @@ proxies:
   tls: true
   servername: tg1.cdnphotos.org
   network: xhttp
-- name: 'Germany | n.bitpulse.me | WebSocket | [#LSO - #LinSpisokObhod]'
+- name: 'Russia | edge.cdn-space.org | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 155.212.240.11
+  server: 178.253.45.107
   port: 443
-  uuid: f27b6f65-6e59-4f89-b929-afa397ca587f
+  uuid: f219ffe2-bc36-495f-a83d-8f9ac4af05fd
   udp: true
   tls: true
-  servername: n.bitpulse.me
+  servername: edge.cdn-space.org
   client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /019bcbad-3813-7cce-8786-3ac0e418f128
-    headers:
-      Host: n.bitpulse.me
-- name: 'Germany | n.bitpulse.me | WebSocket | [#LSO - #LinSpisokObhod]'
+  network: xhttp
+- name: 'Poland | pl-b1.golangwikito.cfd | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 155.212.240.11
-  port: 443
-  uuid: f27b6f65-6e59-4f89-b929-afa397ca587f
-  udp: true
-  tls: true
-  servername: n.bitpulse.me
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /019bcbad-3813-7cce-8786-3ac0e418f128
-    headers:
-      Host: n.bitpulse.me
-- name: 'Germany | n.bitpulse.me | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 155.212.240.11
-  port: 443
-  uuid: f27b6f65-6e59-4f89-b929-afa397ca587f
-  udp: true
-  tls: true
-  servername: n.bitpulse.me
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /019bcbad-3813-7cce-8786-3ac0e418f128
-    headers:
-      Host: n.bitpulse.me
-- name: 'Germany | n.bitpulse.me | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 155.212.240.11
-  port: 443
-  uuid: f27b6f65-6e59-4f89-b929-afa397ca587f
-  udp: true
-  tls: true
-  servername: n.bitpulse.me
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /019bcbad-3813-7cce-8786-3ac0e418f128
-    headers:
-      Host: n.bitpulse.me
-- name: 'Germany | fl-b2.golangwikito.cfd | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 187.7.206.127
+  server: 217.60.33.182
   port: 61374
   uuid: f8d52ece-fad4-478d-875d-df6eed3befa7
   udp: true
   tls: true
   reality-opts:
     public-key: QrNs0ew7snHqLfpVXS9RAhlRzgAzzGZK9fXmDcx9xHI
-  servername: fl-b2.golangwikito.cfd
+  servername: pl-b1.golangwikito.cfd
   client-fingerprint: firefox
   network: xhttp
 - name: 'unknown | cz.pythonmakemigreat.wiki | XHTTP | [#LSO - #LinSpisokObhod]'
@@ -5248,19 +5203,6 @@ proxies:
   servername: api14.betust.net
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'unknown | apply.betust.net | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: apply.betust.net
-  port: 443
-  uuid: fb37d713-0ed3-4146-b085-a5c879a9aafa
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: T98nmnCp0qrmkH1Oq92Tk94sCYa5RuuEjp8bDDbdVxk
-    short-id: b20168a5
-  servername: apply.betust.net
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'unknown | panel.betust.net | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: panel.betust.net
@@ -5301,62 +5243,6 @@ proxies:
     path: /vlessws
     headers:
       Host: vpn.cintaku.qzz.io
-- name: 'Finland | www.philips.com | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 122.8.47.4
-  port: 8443
-  uuid: ffaa2141-759b-424f-f28c-23dbeae00f10
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: Sq7mtLmaanwsTVNBR9gU7ECU87ftrb_wFGRLLNRBlmQ
-  servername: www.philips.com
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: TunService
-- name: 'Finland | www.philips.com | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 122.8.47.4
-  port: 8443
-  uuid: ffaa2141-759b-424f-f28c-23dbeae00f10
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: Sq7mtLmaanwsTVNBR9gU7ECU87ftrb_wFGRLLNRBlmQ
-  servername: www.philips.com
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: TunService
-- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 172.67.187.145
-  port: 80
-  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: vmess.lbw666.dpdns.org
-  network: ws
-  ws-opts:
-    path: /ws
-    headers:
-      Host: vmess.lbw666.dpdns.org
-- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 104.17.147.222
-  port: 80
-  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
-  alterId: 0
-  cipher: auto
-  udp: true
-  servername: vmess.lbw666.dpdns.org
-  network: ws
-  ws-opts:
-    path: /ws?ed=2048
-    headers:
-      Host: vmess.lbw666.dpdns.org
 - name: 'unknown | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: cf.0sm.com
@@ -5624,6 +5510,45 @@ proxies:
   cipher: auto
   udp: true
   servername: zfd-hkv1.kunlun01dns.com
+- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 104.17.147.222
+  port: 80
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
+  alterId: 0
+  cipher: auto
+  udp: true
+  servername: vmess.lbw666.dpdns.org
+  network: ws
+  ws-opts:
+    path: /ws?ed=2048
+    headers:
+      Host: vmess.lbw666.dpdns.org
+- name: 'South Korea | 132.145.80.230 | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 132.145.80.230
+  port: 80
+  uuid: 5155860e-d07d-46c3-9128-3afbd84626c7
+  alterId: 0
+  cipher: auto
+  udp: true
+  network: ws
+  ws-opts:
+    path: /cctv13.m3u8
+- name: 'United States | vmess.lbw666.dpdns.org | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 172.67.187.145
+  port: 80
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
+  alterId: 0
+  cipher: auto
+  udp: true
+  servername: vmess.lbw666.dpdns.org
+  network: ws
+  ws-opts:
+    path: /ws
+    headers:
+      Host: vmess.lbw666.dpdns.org
 - name: 'unknown | zfd-hkv2.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: zfd-hkv2.kunlun01dns.com
