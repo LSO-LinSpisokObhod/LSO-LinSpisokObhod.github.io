@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-06 23:54:34 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-07 00:49:09 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -62,7 +62,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Всего конфигов: 228 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Всего конфигов: 233 [#LSO - #LinSpisokObhod]",
       "server": "all.lso",
       "server_port": 443,
       "uuid": "all",
@@ -73,7 +73,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vless: 172 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vless: 175 [#LSO - #LinSpisokObhod]",
       "server": "vless.about.lso",
       "server_port": 443,
       "uuid": "vless",
@@ -110,7 +110,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vmess: 32 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vmess: 34 [#LSO - #LinSpisokObhod]",
       "server": "vmess.about.lso",
       "server_port": 443,
       "uuid": "vmess",
@@ -298,6 +298,17 @@
     },
     {
       "type": "trojan",
+      "tag": "Japan | ol2.ssn571.top | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "151.145.71.43",
+      "server_port": 27777,
+      "password": "24f9c0b4-f1c8-43a2-9c17-0a256b693db5",
+      "tls": {
+        "enabled": true,
+        "server_name": "ol2.ssn571.top"
+      }
+    },
+    {
+      "type": "trojan",
       "tag": "Hong Kong | hk2.ssn571.top | unknown | [#LSO - #LinSpisokObhod]",
       "server": "38.147.177.247",
       "server_port": 37777,
@@ -375,28 +386,6 @@
     },
     {
       "type": "trojan",
-      "tag": "Hong Kong | t04.emnode.top | unknown | [#LSO - #LinSpisokObhod]",
-      "server": "45.196.221.31",
-      "server_port": 6777,
-      "password": "c3d17f1d-9201-4644-b184-6cd1414c6cc5",
-      "tls": {
-        "enabled": true,
-        "server_name": "t04.emnode.top"
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "Hong Kong | t05.emnode.top | unknown | [#LSO - #LinSpisokObhod]",
-      "server": "45.196.221.31",
-      "server_port": 8423,
-      "password": "c3d17f1d-9201-4644-b184-6cd1414c6cc5",
-      "tls": {
-        "enabled": true,
-        "server_name": "t05.emnode.top"
-      }
-    },
-    {
-      "type": "trojan",
       "tag": "Japan | ol1.ssn571.top | unknown | [#LSO - #LinSpisokObhod]",
       "server": "150.230.217.160",
       "server_port": 27777,
@@ -404,6 +393,17 @@
       "tls": {
         "enabled": true,
         "server_name": "ol1.ssn571.top"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "Japan | ol2.ssn571.top | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "151.145.71.43",
+      "server_port": 27777,
+      "password": "e79bb958-2a79-4eea-87a3-7e73d0059ebf",
+      "tls": {
+        "enabled": true,
+        "server_name": "ol2.ssn571.top"
       }
     },
     {
@@ -1072,6 +1072,60 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Albania | alb.play-cat.uk | XHTTP | [#LSO - #LinSpisokObhod]",
+      "server": "157.22.240.159",
+      "server_port": 443,
+      "uuid": "3c4aa500-e3ae-4778-837b-f02dfea8c85f",
+      "tls": {
+        "enabled": true,
+        "server_name": "alb.play-cat.uk",
+        "alpn": [
+          "h2"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "United States | us2.qik-fin.uk | XHTTP | [#LSO - #LinSpisokObhod]",
+      "server": "172.86.86.21",
+      "server_port": 443,
+      "uuid": "3c4aa500-e3ae-4778-837b-f02dfea8c85f",
+      "tls": {
+        "enabled": true,
+        "server_name": "us2.qik-fin.uk",
+        "alpn": [
+          "h2"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "The Netherlands | nep.qiksme.com | XHTTP | [#LSO - #LinSpisokObhod]",
+      "server": "193.233.127.149",
+      "server_port": 443,
+      "uuid": "3c4aa500-e3ae-4778-837b-f02dfea8c85f",
+      "tls": {
+        "enabled": true,
+        "server_name": "nep.qiksme.com",
+        "alpn": [
+          "h2"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     },
@@ -3672,6 +3726,20 @@
     },
     {
       "type": "vless",
+      "tag": "The Netherlands | nep.qiksme.com | XHTTP | [#LSO - #LinSpisokObhod]",
+      "server": "193.233.127.149",
+      "server_port": 443,
+      "uuid": "cbd6c099-5d4f-467e-86d2-92cb292892fb",
+      "tls": {
+        "enabled": true,
+        "server_name": "nep.qiksme.com",
+        "alpn": [
+          "h2"
+        ]
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Poland | pl4.japancase.site | TCP | [#LSO - #LinSpisokObhod]",
       "server": "179.253.99.12",
       "server_port": 443,
@@ -3829,27 +3897,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "unknown | join.betust.net | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "join.betust.net",
-      "server_port": 443,
-      "uuid": "fb37d713-0ed3-4146-b085-a5c879a9aafa",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "join.betust.net",
-        "reality": {
-          "enabled": true,
-          "public_key": "GQul8Ak0VO_z4FW_m_R-xsQbwd2e1rWZO-XfMmKmpQE",
-          "short_id": "351224a7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
         }
       }
     },
@@ -4074,12 +4121,83 @@
     },
     {
       "type": "vmess",
-      "tag": "unknown | dog-hk.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "dog-hk.kunlun01dns.com",
-      "server_port": 21018,
-      "uuid": "9464ca40-dd75-3742-a628-d931a9f413b2",
+      "tag": "Hong Kong | v15.nodemo.top | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "141.11.91.8",
+      "server_port": 3117,
+      "uuid": "c3d17f1d-9201-4644-b184-6cd1414c6cc5",
       "security": "auto",
-      "alter_id": 0
+      "alter_id": 0,
+      "tls": {
+        "enabled": true,
+        "server_name": "v15.nodemo.top"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "v15.nodemo.top"
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "Hong Kong | v18.nodemo.top | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "141.11.91.8",
+      "server_port": 5193,
+      "uuid": "c3d17f1d-9201-4644-b184-6cd1414c6cc5",
+      "security": "auto",
+      "alter_id": 0,
+      "tls": {
+        "enabled": true,
+        "server_name": "v18.nodemo.top"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "v18.nodemo.top"
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "Hong Kong | v29.nodemo.top | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "141.11.91.8",
+      "server_port": 7647,
+      "uuid": "c3d17f1d-9201-4644-b184-6cd1414c6cc5",
+      "security": "auto",
+      "alter_id": 0,
+      "tls": {
+        "enabled": true,
+        "server_name": "v29.nodemo.top"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "v29.nodemo.top"
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "Hong Kong | v25.nodemo.top | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "141.11.91.8",
+      "server_port": 8283,
+      "uuid": "c3d17f1d-9201-4644-b184-6cd1414c6cc5",
+      "security": "auto",
+      "alter_id": 0,
+      "tls": {
+        "enabled": true,
+        "server_name": "v25.nodemo.top"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "v25.nodemo.top"
+        }
+      }
     },
     {
       "type": "vmess",
@@ -4134,15 +4252,6 @@
           "Host": "vipccc.cc"
         }
       }
-    },
-    {
-      "type": "vmess",
-      "tag": "unknown | dog-hk.kunlun01dns.com | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "dog-hk.kunlun01dns.com",
-      "server_port": 21022,
-      "uuid": "9464ca40-dd75-3742-a628-d931a9f413b2",
-      "security": "auto",
-      "alter_id": 0
     },
     {
       "type": "vmess",
