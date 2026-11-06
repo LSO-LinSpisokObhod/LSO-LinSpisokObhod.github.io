@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-06 13:12:06 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-06 14:11:59 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 24 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 18 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 16 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 10 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -188,86 +188,19 @@ proxies:
   servername: max.ru
   client-fingerprint: firefox
   network: xhttp
-- name: 'Lithuania | app26.betust.net | TCP | [#LSO - #LinSpisokObhod]'
+- name: 'Russia | www.kinopoisk.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 88.216.127.42
-  port: 443
-  uuid: 2232d904-8e6a-4202-8240-6efd8aec02e9
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 5pR15ATlWW3tVzfnMN3xoiN56LjIUbhnOMp37ZvTFUc
-    short-id: d44d6d46
-  servername: app26.betust.net
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'France | 360.yandex.ru | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 95.163.152.232
-  port: 8444
-  uuid: 314bfcda-ea36-494d-9522-aa0f6d40a340
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: feCpmxhNdrVkZ2ggjKY_vjHI6buLtGM8mUccpy0blSI
-    short-id: 81059ecb5a20112d
-  servername: 360.yandex.ru
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: grpc-reality
-- name: 'Russia | max.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 147.45.104.86
-  port: 7443
-  uuid: 5d978525-bfa5-4b1e-b807-c4e2ac2db56d
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: KbjX7IJnVtwq2USeRmLgXzACOtFCiA5lnsXhIFOX3ho
-    short-id: a7eb8a4e
-  servername: max.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'Russia | vk.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 176.123.162.102
+  server: 213.165.54.59
   port: 8443
-  uuid: 65e7a6ab-84b4-4202-a951-7d2afe2aa352
+  uuid: 6da2c981-8c77-4340-bda3-93399b7aea26
   udp: true
   tls: true
   reality-opts:
-    public-key: 5J8IRlEEy8vuB2NArH15h9EVV--wwDUdq-_9HXoy9FM
-    short-id: dcc04e7520
-  servername: vk.ru
+    public-key: CI4hMTvVsem9mloOgRCW9A6WC-srPPwu3jlylwOnd3A
+    short-id: 2e6d668958829998
+  servername: www.kinopoisk.ru
   client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'unknown | metrika.yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: downloadchache1.song69.fun
-  port: 28150
-  uuid: 92b79c22-f68b-4713-8b21-52f264cb92f5
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: HRmmr0Ii4Tr9jPLwratvLhee3_VWFNK47T8AAo7kzww
-    short-id: dcb858da
-  servername: metrika.yandex.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'Germany | tickets.betust.net | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 88.216.70.128
-  port: 443
-  uuid: 95d0e214-eab0-4701-93ed-fea4f1b56062
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: TRaUsnzFf-AhWUuW4RQUQOBYTdM-qJdLDTTkzQNkcRw
-    short-id: f70764f8
-  servername: tickets.betust.net
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
+  network: xhttp
 - name: 'Sweden | gamenews.best | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.129.234
@@ -277,19 +210,6 @@ proxies:
   tls: true
   servername: gamenews.best
   client-fingerprint: firefox
-- name: 'Russia | max.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 147.45.104.86
-  port: 7443
-  uuid: af185070-7170-46a8-b1e9-d61a035f4691
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: KbjX7IJnVtwq2USeRmLgXzACOtFCiA5lnsXhIFOX3ho
-    short-id: a7eb8a4e
-  servername: max.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'Austria | at1.japancase.site | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.22.31.72
