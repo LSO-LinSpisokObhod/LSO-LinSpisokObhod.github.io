@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-07 11:58:09 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-07 12:55:17 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 20 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 21 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 18 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 19 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -255,6 +255,18 @@ proxies:
   servername: art-media.live
   client-fingerprint: firefox
   network: xhttp
+- name: 'unknown | passport.yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: rapira-dof.whitenw.net
+  port: 8445
+  uuid: cd138479-c87a-4d4c-b6ea-4beeb6ef2b47
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: l06r0clkHjHk7HRGpkDBJwZ1JJscSqfwHUQOrV3v3hQ
+  servername: passport.yandex.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'Russia | metrics.api.downloader-pet.xyz | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 91.215.43.80
@@ -275,6 +287,7 @@ proxies:
   udp: true
   tls: true
   servername: static.bakarova-top.ru
+  client-fingerprint: firefox
   network: xhttp
 - name: 'Sweden | 360.yandex.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
