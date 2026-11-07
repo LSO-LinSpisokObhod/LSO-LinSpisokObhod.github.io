@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-07 06:57:30 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-07 07:58:26 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 27 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 21 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 25 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 19 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -90,18 +90,6 @@ proxies:
     public-key: GCCZ1ZZjB_nj7yxqFi22bIIWWr_G6rnWUzDcssN_40o
     short-id: b28db60d77c50b4f
   servername: yandex.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'Denmark | api-maps.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 193.180.211.245
-  port: 8443
-  uuid: 35dc3ea6-2cdf-4f6e-95ea-ce786ac2947a
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: pbLP4dV9Nx4aHWf35QFadbjOCdP_klwS9fvKSszlr3Q
-  servername: api-maps.yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'Sweden | smart.bachidze.com | TCP | [#LSO - #LinSpisokObhod]'
@@ -185,62 +173,6 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: grpc-reality
-- name: 'Finland | fu.baiproxy.us.ci | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.103.103.240
-  port: 443
-  uuid: 55d9ec38-1b8a-454b-981a-6acfe8f56d8c
-  udp: true
-  tls: true
-  servername: fu.baiproxy.us.ci
-  client-fingerprint: qq
-  network: ws
-  ws-opts:
-    path: /
-    headers:
-      Host: fu.baiproxy.us.ci
-- name: 'Russia | fu.baiproxy.us.ci | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 212.109.220.55
-  port: 443
-  uuid: 55d9ec38-1b8a-454b-981a-6acfe8f56d8c
-  udp: true
-  tls: true
-  servername: fu.baiproxy.us.ci
-  client-fingerprint: qq
-  network: ws
-  ws-opts:
-    path: /
-    headers:
-      Host: fu.baiproxy.us.ci
-- name: 'Germany | vp4.1145678.xyz | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.110.188.50
-  port: 443
-  uuid: 5d7b401c-78fa-4254-872e-6d42bf7e75ec
-  udp: true
-  tls: true
-  servername: vp4.1145678.xyz
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /wenku/comics
-    headers:
-      Host: vp4.1145678.xyz
-- name: 'Switzerland | vp4.1145678.xyz | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.234.213.169
-  port: 443
-  uuid: 5d7b401c-78fa-4254-872e-6d42bf7e75ec
-  udp: true
-  tls: true
-  servername: vp4.1145678.xyz
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /wenku/comics
-    headers:
-      Host: vp4.1145678.xyz
 - name: 'Russia | bhjolq0d0l.flowersgood.top | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.86.147.175
@@ -297,34 +229,6 @@ proxies:
     path: /service/telemetry/045d381f1166/
     headers:
       Host: bhjolq0d0l.flowersgood.top
-- name: 'Germany | 186.baklajann.ru | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 194.156.26.125
-  port: 443
-  uuid: 86c7af80-c9cf-4265-ab77-da12b0bf8bb6
-  udp: true
-  tls: true
-  servername: 186.baklajann.ru
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /
-    headers:
-      Host: 186.baklajann.ru
-- name: 'Germany | 186.baklajann.ru | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 194.156.26.125
-  port: 443
-  uuid: 86c7af80-c9cf-4265-ab77-da12b0bf8bb6
-  udp: true
-  tls: true
-  servername: 186.baklajann.ru
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /
-    headers:
-      Host: 186.baklajann.ru
 - name: 'Sweden | art-media.live | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 88.216.129.233
@@ -351,6 +255,20 @@ proxies:
   servername: art-media.live
   client-fingerprint: firefox
   network: xhttp
+- name: 'Germany | 186.baklajann.ru | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 194.156.26.125
+  port: 443
+  uuid: b2b05b34-153e-494f-8bcb-31e6a2a20cb6
+  udp: true
+  tls: true
+  servername: 186.baklajann.ru
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: 186.baklajann.ru
 - name: 'Russia | metrics.api.downloader-pet.xyz | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 91.215.43.80
