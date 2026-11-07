@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-07 14:47:55 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-07 16:07:02 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 19 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 15 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 17 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 15 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 2 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 0 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -92,17 +92,18 @@ proxies:
   servername: yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Sweden | smart.bachidze.com | TCP | [#LSO - #LinSpisokObhod]'
+- name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 88.216.223.100
-  port: 443
-  uuid: 3bb97d46-789b-4229-88f6-9beb222a4137
+  server: 178.172.227.124
+  port: 10444
+  uuid: 1af36694-b548-4b18-89a0-bc076eab4ed7
   udp: true
   tls: true
   reality-opts:
-    public-key: vzRgIP8Mvd9V6krwKxw5EwwzvC4uiaW3wo0Y2ri2_Wc
-  servername: smart.bachidze.com
-  client-fingerprint: firefox
+    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
+    short-id: 8debcf36f1cc69ff
+  servername: ads.x5.ru
+  client-fingerprint: safari
   flow: xtls-rprx-vision
 - name: 'France | 360.yandex.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -143,6 +144,34 @@ proxies:
   servername: 360.yandex.ru
   client-fingerprint: firefox
   network: xhttp
+- name: 'France | 360.yandex.ru | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 82.148.255.201
+  port: 443
+  uuid: 49fdd350-6ffb-4343-b467-14e269bb95de
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: DvNpCmas0_0MO91s70vlkAxZxnnIt1NE0zqCC4trURQ
+    short-id: 2bf10fc0a85601e5
+  servername: 360.yandex.ru
+  client-fingerprint: firefox
+  network: xhttp
+- name: 'France | 360.yandex.ru | GRPC | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 82.148.255.201
+  port: 8444
+  uuid: 49fdd350-6ffb-4343-b467-14e269bb95de
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: DvNpCmas0_0MO91s70vlkAxZxnnIt1NE0zqCC4trURQ
+    short-id: 2bf10fc0a85601e5
+  servername: 360.yandex.ru
+  client-fingerprint: firefox
+  network: grpc
+  grpc-opts:
+    grpc-service-name: grpc-reality
 - name: 'France | 360.yandex.ru | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 82.148.255.201
@@ -215,20 +244,32 @@ proxies:
     path: /service/telemetry/045d381f1166/
     headers:
       Host: bhjolq0d0l.flowersgood.top
-- name: 'Russia | bhjolq0d0l.flowersgood.top | WebSocket | [#LSO - #LinSpisokObhod]'
+- name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 185.86.147.175
-  port: 443
-  uuid: 7955bf18-35c4-412d-aabd-c0b36c793063
+  server: 95.128.71.79
+  port: 10444
+  uuid: 8cef7621-c6f0-486e-b51d-59c30c5b0b25
   udp: true
   tls: true
-  servername: bhjolq0d0l.flowersgood.top
+  reality-opts:
+    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
+    short-id: 8debcf36f1cc69ff
+  servername: ads.x5.ru
   client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /service/telemetry/045d381f1166/
-    headers:
-      Host: bhjolq0d0l.flowersgood.top
+  flow: xtls-rprx-vision
+- name: 'unknown | metrika.yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: downloadchache1.song69.fun
+  port: 28150
+  uuid: 92b79c22-f68b-4713-8b21-52f264cb92f5
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: HRmmr0Ii4Tr9jPLwratvLhee3_VWFNK47T8AAo7kzww
+    short-id: dcb858da
+  servername: metrika.yandex.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'Russia | metrics.api.downloader-pet.xyz | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 91.215.43.80
@@ -241,98 +282,3 @@ proxies:
   network: ws
   ws-opts:
     path: /gateway/v1/ws/a901ed17102fc3090ca1ab052c672f47
-- name: 'Russia | metrics.api.downloader-pet.xyz | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 91.215.43.80
-  port: 443
-  uuid: e9b117e4-8be9-4105-9354-a5e0663294f0
-  udp: true
-  tls: true
-  servername: metrics.api.downloader-pet.xyz
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /gateway/v1/ws/a901ed17102fc3090ca1ab052c672f47
-    headers:
-      Host: metrics.api.downloader-pet.xyz
-- name: 'Russia | api.bakarova-top.ru | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.178.208.140
-  port: 443
-  uuid: ea277838-a188-44f1-a2e8-94aa110c4f27
-  udp: true
-  tls: true
-  servername: api.bakarova-top.ru
-  client-fingerprint: safari
-  network: xhttp
-- name: 'Sweden | 360.yandex.ru | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 83.141.67.164
-  port: 443
-  uuid: f4ef1d6a-8f01-4ccd-8547-5b5a2a572d00
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: qUq7a-iukyszVvH-5C74VBujzYAMC_shfv8O-1crZlY
-    short-id: 09fd8f6666eec544
-  servername: 360.yandex.ru
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Sweden | 360.yandex.ru | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 83.141.67.164
-  port: 443
-  uuid: f4ef1d6a-8f01-4ccd-8547-5b5a2a572d00
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: qUq7a-iukyszVvH-5C74VBujzYAMC_shfv8O-1crZlY
-    short-id: 09fd8f6666eec544
-  servername: 360.yandex.ru
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Sweden | 360.yandex.ru | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 83.141.67.164
-  port: 8444
-  uuid: f4ef1d6a-8f01-4ccd-8547-5b5a2a572d00
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: qUq7a-iukyszVvH-5C74VBujzYAMC_shfv8O-1crZlY
-    short-id: 09fd8f6666eec544
-  servername: 360.yandex.ru
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: grpc-reality
-- name: 'Russia | renderer-stream-1-871.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 195.208.65.155
-  port: 443
-  uuid: 27653b37-603c-4c90-b1f5-25c4d23f8932
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: renderer-stream-1-871.mirra.now
-  network: ws
-  ws-opts:
-    path: /api/v1/gpu-stream/o36ecpsebqjq/socket
-    headers:
-      Host: renderer-stream-1-871.mirra.now
-- name: 'Russia | renderer-stream-1-871.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vmess
-  server: 93.93.88.22
-  port: 443
-  uuid: 27653b37-603c-4c90-b1f5-25c4d23f8932
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: renderer-stream-1-871.mirra.now
-  network: ws
-  ws-opts:
-    path: /api/v1/gpu-stream/o36ecpsebqjq/socket
-    headers:
-      Host: renderer-stream-1-871.mirra.now
