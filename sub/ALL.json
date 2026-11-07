@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-07 05:56:40 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-07 06:57:30 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -62,7 +62,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Всего конфигов: 414 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Всего конфигов: 419 [#LSO - #LinSpisokObhod]",
       "server": "all.lso",
       "server_port": 443,
       "uuid": "all",
@@ -73,7 +73,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vless: 352 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vless: 355 [#LSO - #LinSpisokObhod]",
       "server": "vless.about.lso",
       "server_port": 443,
       "uuid": "vless",
@@ -95,7 +95,7 @@
     },
     {
       "type": "hysteria2",
-      "tag": "Подписка #LSO© Hy2: 3 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Hy2: 4 [#LSO - #LinSpisokObhod]",
       "server": "hy2.about.lso",
       "server_port": 443,
       "password": "hy2",
@@ -110,7 +110,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vmess: 36 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vmess: 37 [#LSO - #LinSpisokObhod]",
       "server": "vmess.about.lso",
       "server_port": 443,
       "uuid": "vmess",
@@ -153,6 +153,18 @@
       "obfs": {
         "type": "salamander",
         "password": "rG07s3COMIEvdnQipRyWzx_H_2xygNC3"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "Japan | vp3.yysyy.online | HYSTERIA2 | [#LSO - #LinSpisokObhod]",
+      "server": "45.32.10.7",
+      "server_port": 443,
+      "password": "96ab5cd282733fd4c312a61f972f330a",
+      "tls": {
+        "enabled": true,
+        "server_name": "vp3.yysyy.online",
+        "insecure": true
       }
     },
     {
@@ -1383,6 +1395,26 @@
           "enabled": true,
           "public_key": "P7S4UPFlQbmiBr4txyy8NZIMTrmO3UdxyH16WBU-YzY",
           "short_id": "19253fae84102271"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | yoy-api.bachidze.com | unknown | [#LSO - #LinSpisokObhod]",
+      "server": "217.25.93.165",
+      "server_port": 443,
+      "uuid": "3bb97d46-789b-4229-88f6-9beb222a4137",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "yoy-api.bachidze.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "ZJlfiMh4ebjrTl2_kwAk_zXMAaCiwNS7yMd5XzlUgmI"
         },
         "utls": {
           "enabled": true,
@@ -5204,6 +5236,28 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | msk5.gacvpn.site | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "201.51.0.7",
+      "server_port": 993,
+      "uuid": "981c7ccc-2b17-473c-8358-7fd1d6eec1b4",
+      "tls": {
+        "enabled": true,
+        "server_name": "msk5.gacvpn.site",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/static/js/runtime.d9e71138.js",
+        "headers": {
+          "Host": "msk5.gacvpn.site"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Finland | msk2.gacvpn.site | WebSocket | [#LSO - #LinSpisokObhod]",
       "server": "31.77.138.193",
       "server_port": 443,
@@ -5221,6 +5275,28 @@
         "path": "/static/js/app.5b8e2c41.js",
         "headers": {
           "Host": "msk2.gacvpn.site"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "The Netherlands | fr2-ws.gacvpn.site | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "50.7.178.184",
+      "server_port": 993,
+      "uuid": "981c7ccc-2b17-473c-8358-7fd1d6eec1b4",
+      "tls": {
+        "enabled": true,
+        "server_name": "fr2-ws.gacvpn.site",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/static/js/vendor.61db254e.js",
+        "headers": {
+          "Host": "fr2-ws.gacvpn.site"
         }
       }
     },
@@ -7648,19 +7724,6 @@
     },
     {
       "type": "vmess",
-      "tag": "Japan | ol1.ssn571.top | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "150.230.217.160",
-      "server_port": 28888,
-      "uuid": "e79bb958-2a79-4eea-87a3-7e73d0059ebf",
-      "security": "auto",
-      "alter_id": 0,
-      "tls": {
-        "enabled": true,
-        "server_name": "ol1.ssn571.top"
-      }
-    },
-    {
-      "type": "vmess",
       "tag": "Japan | ol2.ssn571.top | TCP | [#LSO - #LinSpisokObhod]",
       "server": "151.145.71.43",
       "server_port": 28888,
@@ -7891,6 +7954,19 @@
     },
     {
       "type": "vmess",
+      "tag": "Japan | ol1.ssn571.top | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "150.230.217.160",
+      "server_port": 28888,
+      "uuid": "e79bb958-2a79-4eea-87a3-7e73d0059ebf",
+      "security": "auto",
+      "alter_id": 0,
+      "tls": {
+        "enabled": true,
+        "server_name": "ol1.ssn571.top"
+      }
+    },
+    {
+      "type": "vmess",
       "tag": "South Korea | 140.238.2.250 | TCP | [#LSO - #LinSpisokObhod]",
       "server": "140.238.2.250",
       "server_port": 443,
@@ -7980,6 +8056,15 @@
           "Host": "https.http.www.net.com.ramseyv2.ir."
         }
       }
+    },
+    {
+      "type": "vmess",
+      "tag": "Finland | 65.108.240.210 | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "65.108.240.210",
+      "server_port": 39018,
+      "uuid": "8ca123a8-720b-47c5-bd0c-637431418b09",
+      "security": "auto",
+      "alter_id": 0
     },
     {
       "type": "vmess",
