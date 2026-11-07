@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-07 12:55:17 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-07 13:51:05 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 19 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 18 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 2 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 3 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -79,6 +79,16 @@ proxies:
   udp: true
   tls: true
   servername: support.lso
+- name: 'Russia | decdn2.bota7.com | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 188.72.103.4
+  port: 443
+  uuid: 00a560f4-035e-48eb-b698-6f6be0b5e477
+  udp: true
+  tls: true
+  servername: decdn2.bota7.com
+  client-fingerprint: firefox
+  network: xhttp
 - name: 'Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 193.163.203.170
@@ -229,32 +239,6 @@ proxies:
     path: /service/telemetry/045d381f1166/
     headers:
       Host: bhjolq0d0l.flowersgood.top
-- name: 'Sweden | art-media.live | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 88.216.129.233
-  port: 443
-  uuid: acc50200-7f21-4f90-9cca-0057efcbf042
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: AJxMbMVTdXPGHeyla_rG9EW_ICt1nqAVdnCB6qnlrgU
-    short-id: 94289e3f4774195d
-  servername: art-media.live
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Sweden | art-media.live | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 88.216.129.233
-  port: 443
-  uuid: acc50200-7f21-4f90-9cca-0057efcbf042
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: AJxMbMVTdXPGHeyla_rG9EW_ICt1nqAVdnCB6qnlrgU
-    short-id: 94289e3f4774195d
-  servername: art-media.live
-  client-fingerprint: firefox
-  network: xhttp
 - name: 'unknown | passport.yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: rapira-dof.whitenw.net
@@ -287,7 +271,7 @@ proxies:
   udp: true
   tls: true
   servername: static.bakarova-top.ru
-  client-fingerprint: firefox
+  client-fingerprint: edge
   network: xhttp
 - name: 'Sweden | 360.yandex.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -348,6 +332,21 @@ proxies:
 - name: 'Russia | renderer-stream-1-871.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 93.93.88.22
+  port: 443
+  uuid: 27653b37-603c-4c90-b1f5-25c4d23f8932
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: renderer-stream-1-871.mirra.now
+  network: ws
+  ws-opts:
+    path: /api/v1/gpu-stream/o36ecpsebqjq/socket
+    headers:
+      Host: renderer-stream-1-871.mirra.now
+- name: 'Russia | renderer-stream-1-871.mirra.now | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 93.93.89.118
   port: 443
   uuid: 27653b37-603c-4c90-b1f5-25c4d23f8932
   alterId: 0
