@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-08 23:30:02 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-09 03:54:06 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 21 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 8 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 20 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 8 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -37,7 +37,7 @@ proxies:
   udp: true
   tls: true
   servername: vless.about.lso
-- name: 'Подписка #LSO© Trojan: 1 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Trojan: 0 [#LSO - #LinSpisokObhod]'
   type: trojan
   server: trojan.about.lso
   port: 443
@@ -79,74 +79,6 @@ proxies:
   udp: true
   tls: true
   servername: support.lso
-- name: 'United States | cdn.nextjobopportunityandclaimyouridealrole.com | unknown | [#LSO - #LinSpisokObhod]'
-  type: trojan
-  server: 216.152.155.50
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  skip-cert-verify: false
-  sni: cdn.nextjobopportunityandclaimyouridealrole.com
-- name: 'Russia | cdnapi.tronglob1.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 188.72.103.4
-  port: 443
-  uuid: 0000be2c-fb3a-5bce-a7d7-2105d461915b
-  udp: true
-  tls: true
-  servername: cdnapi.tronglob1.net
-  client-fingerprint: edge
-  network: xhttp
-- name: 'Russia | cdnapi.tronglob3.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 188.72.103.4
-  port: 443
-  uuid: 0000be2c-fb3a-5bce-a7d7-2105d461915b
-  udp: true
-  tls: true
-  servername: cdnapi.tronglob3.net
-  client-fingerprint: edge
-  network: xhttp
-- name: 'Russia | cdnapi.tronglob5.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 188.72.103.4
-  port: 443
-  uuid: 0000be2c-fb3a-5bce-a7d7-2105d461915b
-  udp: true
-  tls: true
-  servername: cdnapi.tronglob5.net
-  client-fingerprint: edge
-  network: xhttp
-- name: 'Russia | cdnapi.tronglob6.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 188.72.103.4
-  port: 443
-  uuid: 0000be2c-fb3a-5bce-a7d7-2105d461915b
-  udp: true
-  tls: true
-  servername: cdnapi.tronglob6.net
-  client-fingerprint: edge
-  network: xhttp
-- name: 'Russia | cdnapiv2.tronglob4.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 188.72.103.4
-  port: 443
-  uuid: 0000be2c-fb3a-5bce-a7d7-2105d461915b
-  udp: true
-  tls: true
-  servername: cdnapiv2.tronglob4.net
-  client-fingerprint: edge
-  network: xhttp
-- name: 'Russia | cdnapiv2.tronglob6.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 188.72.103.4
-  port: 443
-  uuid: 0000be2c-fb3a-5bce-a7d7-2105d461915b
-  udp: true
-  tls: true
-  servername: cdnapiv2.tronglob6.net
-  client-fingerprint: edge
-  network: xhttp
 - name: 'Russia | decdn2.bota7.com | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 188.72.103.4
@@ -157,73 +89,6 @@ proxies:
   servername: decdn2.bota7.com
   client-fingerprint: firefox
   network: xhttp
-- name: 'Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 193.163.203.170
-  port: 443
-  uuid: 11aabba0-5fd1-4f15-8068-74c1a466cefc
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: GCCZ1ZZjB_nj7yxqFi22bIIWWr_G6rnWUzDcssN_40o
-    short-id: b28db60d77c50b4f
-  servername: yandex.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'Russia | stechnostore.life | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.178.208.167
-  port: 443
-  uuid: 18b99163-5196-4ddc-85f8-8fdf5efdcd53
-  udp: true
-  tls: true
-  servername: stechnostore.life
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /player/collect/9c8514f9552d/
-    headers:
-      Host: stechnostore.life
-- name: 'Russia | passport.yandex.ru | GRPC | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 46.243.232.71
-  port: 444
-  uuid: 37af0181-5598-4aad-a040-d926bcb65757
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: VHWmCkZwC5XE-ctv0p8BinjoIx4SWgJUIsZPrhNf6TA
-  servername: passport.yandex.ru
-  client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-service-name: grpc
-- name: 'Sweden | smart.bachidze.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 88.216.223.100
-  port: 443
-  uuid: 3bb97d46-789b-4229-88f6-9beb222a4137
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: vzRgIP8Mvd9V6krwKxw5EwwzvC4uiaW3wo0Y2ri2_Wc
-  servername: smart.bachidze.com
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'Russia | passport.yandex.ru | RAW | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.86.145.216
-  port: 32944
-  uuid: 6d026a0f-32a0-427c-9080-8b68d31eaf16
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: Te3ZcFFTilb6_j4hdotSvXaRYBzGuNiRxuBh8n1NezU
-    short-id: 91d2d3db690f4b59
-  servername: passport.yandex.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-  network: raw
 - name: 'Russia | bhjolq0d0l.flowersgood.top | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.86.147.175
@@ -266,20 +131,6 @@ proxies:
     path: /service/telemetry/045d381f1166/
     headers:
       Host: bhjolq0d0l.flowersgood.top
-- name: 'Russia | stechnostore.life | WebSocket | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.178.208.167
-  port: 443
-  uuid: 8a4fe9f3-4da3-4004-b721-cae64ff0d018
-  udp: true
-  tls: true
-  servername: stechnostore.life
-  client-fingerprint: firefox
-  network: ws
-  ws-opts:
-    path: /player/collect/9c8514f9552d/
-    headers:
-      Host: stechnostore.life
 - name: 'Estonia | cabinet.evotor.ru | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 196.196.148.67
