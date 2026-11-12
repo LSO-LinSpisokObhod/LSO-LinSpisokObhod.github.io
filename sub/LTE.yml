@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-12 21:54:45 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-12 23:35:20 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 6 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 14 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 6 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 13 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 0 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 1 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -79,6 +79,19 @@ proxies:
   udp: true
   tls: true
   servername: support.lso
+- name: 'Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 193.163.203.170
+  port: 443
+  uuid: 11aabba0-5fd1-4f15-8068-74c1a466cefc
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: GCCZ1ZZjB_nj7yxqFi22bIIWWr_G6rnWUzDcssN_40o
+    short-id: b28db60d77c50b4f
+  servername: yandex.ru
+  client-fingerprint: ios
+  flow: xtls-rprx-vision
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.172.227.124
@@ -92,6 +105,30 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: safari
   flow: xtls-rprx-vision
+- name: 'Russia | mbr.rkn-pediki.site | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.178.208.167
+  port: 443
+  uuid: 2b5962e8-1ec2-0001-bdab-cefa57555d2a
+  udp: true
+  tls: true
+  servername: mbr.rkn-pediki.site
+  client-fingerprint: ios
+  network: ws
+  ws-opts:
+    path: /session
+    headers:
+      Host: mbr.rkn-pediki.site
+- name: 'Russia | tgg.fastcon.cc | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 178.176.128.128
+  port: 443
+  uuid: 50b95deb-6394-46c5-b88a-583e5b3ca7ee
+  udp: true
+  tls: true
+  servername: tgg.fastcon.cc
+  client-fingerprint: firefox
+  network: xhttp
 - name: 'Estonia | 185.215.184.50 | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.215.184.50
@@ -157,3 +194,64 @@ proxies:
   servername: 185.215.184.86
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Hong Kong | www.mtr.com.hk | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 82.29.36.252
+  port: 443
+  uuid: b6058894-f212-4926-9e19-f65713cca4a4
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: N-fcZsehZk3eIoo3bfjCdtYXsy1luM9Iz6LscVEr33U
+  servername: www.mtr.com.hk
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'France | passport.yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 161.97.160.224
+  port: 443
+  uuid: b81b4d1b-7f20-48f1-82dc-d24bef898cab
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: 33zaT3jHXjtynSQ0Ucw9bK92-XH2zolJmuIeZ1XyZB0
+    short-id: e6
+  servername: passport.yandex.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'Russia | ya.ru | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 77.232.36.228
+  port: 443
+  uuid: c059d2b8-d7d6-4873-b5e8-2c5f6cd908bb
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: nGTRCnoPVEFz6M7S-dr3rfnfuZONPtCgEczaxy53-XQ
+    short-id: b997e34399a919f3
+  servername: ya.ru
+  client-fingerprint: firefox
+  network: xhttp
+- name: 'United Kingdom | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 138.124.125.193
+  port: 10444
+  uuid: e57ce64d-5a1a-4a90-96df-9e1bd3ad26e4
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
+    short-id: 8debcf36f1cc69ff
+  servername: ads.x5.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'Germany | xmfhlpy.com | TCP | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 185.177.229.95
+  port: 1270
+  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: xmfhlpy.com
