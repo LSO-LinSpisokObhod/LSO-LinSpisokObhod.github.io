@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-12 23:35:20 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-12 23:38:41 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 229 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 232 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -55,7 +55,7 @@ proxies:
   sni: hy2.lso
   obfs: salamander
   obfs-password: hy2
-- name: 'Подписка #LSO© Vmess: 19 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vmess: 22 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vmess.about.lso
   port: 443
@@ -2714,6 +2714,14 @@ proxies:
   servername: expired.gamma-nodes.com
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Finland | 65.108.240.210 | TCP | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 65.108.240.210
+  port: 39018
+  uuid: 45dc10c6-04c8-4c70-a06a-d396254a6c0b
+  alterId: 0
+  cipher: auto
+  udp: true
 - name: 'United Kingdom | xmfhlpy.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 149.7.16.228
@@ -2833,6 +2841,24 @@ proxies:
     path: /vmess/?TELEGRAM--B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub--TELEGRAM
     headers:
       Host: google.com
+- name: 'Finland | 65.108.240.210 | RAW | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 65.108.240.210
+  port: 39018
+  uuid: 45dc10c6-04c8-4c70-a06a-d396254a6c0b
+  alterId: 0
+  cipher: auto
+  udp: true
+  network: raw
+- name: 'Finland | 65.108.240.210 | RAW | [#LSO - #LinSpisokObhod]'
+  type: vmess
+  server: 65.108.240.210
+  port: 39018
+  uuid: 8ca123a8-720b-47c5-bd0c-637431418b09
+  alterId: 0
+  cipher: auto
+  udp: true
+  network: raw
 - name: 'Singapore | 149.88.23.207 | RAW | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 149.88.23.207
