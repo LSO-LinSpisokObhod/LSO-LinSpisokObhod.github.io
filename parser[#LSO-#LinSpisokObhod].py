@@ -26,7 +26,6 @@ GEOIP_DELAY = 0.1
 REQUEST_TIMEOUT = int(os.environ.get("REQUEST_TIMEOUT", "15"))
 
 # INSECURE_SSL=1 (по умолчанию) — игнорируем ошибки SSL-сертификата
-# (self-signed, hostname mismatch, expired и т.п.)
 # INSECURE_SSL=0 — строгая проверка сертификатов
 INSECURE_SSL = os.environ.get("INSECURE_SSL", "1") != "0"
 
@@ -45,6 +44,13 @@ LISTS_DIR = "lists"
 WHITELIST_FILE = os.path.join(LISTS_DIR, "whitelist.txt")
 CIDR_WHITELIST_FILE = os.path.join(LISTS_DIR, "cidrwhitelist.txt")
 GLOBAL_TAG = "[#LSO - #LinSpisokObhod]"
+
+# TCP-тест: двухпроходный (быстрый + медленный)
+TCP_FAST_TIMEOUT = float(os.environ.get("TCP_FAST_TIMEOUT", "5"))
+TCP_FAST_CONC = int(os.environ.get("TCP_FAST_CONC", "150"))
+TCP_SLOW_TIMEOUT = float(os.environ.get("TCP_SLOW_TIMEOUT", "30"))
+TCP_SLOW_CONC = int(os.environ.get("TCP_SLOW_CONC", "40"))
+TCP_DNS_CONC = int(os.environ.get("TCP_DNS_CONC", "100"))
 
 PROTOCOL_PATTERNS = {
     'vless':     re.compile(r'vless://[A-Za-z0-9+/=@:;,\?&%#\.\-_~!$*()]+', re.IGNORECASE),
@@ -95,22 +101,158 @@ def load_sources_from_file(path: str = "source.txt") -> List[str]:
     return sources
 
 
-# === TCP-ПРОВЕРКА ===
-async def check_tcp_port(host: str, port: int, timeout: float = 30.0) -> bool:
-    try:
-        loop = asyncio.get_running_loop()
+# === TCP-ПРОВЕРКА: ОДИН ЭНДПОИНТ ===
+async def _tcp_check_one(host: str, port: int, timeout: float,
+                          sem: asyncio.Semaphore) -> Tuple[str, int, bool]:
+    """Одна TCP-проверка. Для доменов форсирует IPv4 (не ждём IPv6)."""
+    async with sem:
+        # Если host — уже IP, family=0 (пусть система решает).
+        # Если домен — AF_INET (IPv4), чтобы не было 10-15s IPv6-фолбэка.
         try:
-            await asyncio.wait_for(
-                loop.create_connection(lambda: asyncio.Protocol(), host, port),
-                timeout=timeout
-            )
-            return True
-        except (ConnectionRefusedError, TimeoutError, OSError, socket.gaierror, asyncio.TimeoutError):
-            return False
+            ipaddress.ip_address(host.strip('[]'))
+            family = 0
+        except ValueError:
+            family = socket.AF_INET
+
+        try:
+            loop = asyncio.get_running_loop()
+            try:
+                reader, writer = await asyncio.wait_for(
+                    loop.create_connection(
+                        asyncio.Protocol, host, port, family=family,
+                    ),
+                    timeout=timeout
+                )
+                try:
+                    writer.close()
+                except Exception:
+                    pass
+                return host, port, True
+            except (asyncio.TimeoutError, OSError,
+                    socket.gaierror, ConnectionRefusedError, ConnectionResetError):
+                return host, port, False
+            except Exception:
+                return host, port, False
         except Exception:
-            return False
-    except Exception:
-        return False
+            return host, port, False
+
+
+# === TCP-ПРОВЕРКА: DNS PRE-RESOLVE ===
+async def _pre_resolve_hosts(endpoints: Set[Tuple[str, int]]) -> Dict[str, str]:
+    """Параллельно резолвит все не-IP hosts в IPv4. Возвращает {hostname: ipv4}."""
+    loop = asyncio.get_running_loop()
+    hosts = {h for h, _ in endpoints}
+
+    targets = []
+    for h in hosts:
+        try:
+            ipaddress.ip_address(h.strip('[]'))
+        except ValueError:
+            targets.append(h)
+
+    if not targets:
+        return {}
+
+    sem = asyncio.Semaphore(TCP_DNS_CONC)
+
+    async def _resolve_one(h: str) -> Optional[Tuple[str, str]]:
+        async with sem:
+            try:
+                infos = await loop.getaddrinfo(
+                    h, None, family=socket.AF_INET, type=socket.SOCK_STREAM
+                )
+                if infos:
+                    return (h, infos[0][4][0])
+            except Exception:
+                return None
+        return None
+
+    logger.info(f"🔎 DNS pre-resolve: {len(targets)} уникальных hostname")
+    t0 = time.time()
+    results = await asyncio.gather(*[_resolve_one(h) for h in targets])
+    resolved = {h: ip for r in results if r for h, ip in [r]}
+    logger.info(f"✅ DNS pre-resolve: {len(resolved)}/{len(targets)} за {time.time()-t0:.1f}s")
+    return resolved
+
+
+# === TCP-ПРОВЕРКА: ДВУХПРОХОДНАЯ ===
+async def check_tcp_two_pass(
+    endpoints: Set[Tuple[str, int]],
+    fast_timeout: float = TCP_FAST_TIMEOUT,
+    fast_conc: int = TCP_FAST_CONC,
+    slow_timeout: float = TCP_SLOW_TIMEOUT,
+    slow_conc: int = TCP_SLOW_CONC,
+) -> Set[Tuple[str, int]]:
+    """
+    Двухпроходная TCP-проверка.
+
+    Pass 1: fast_timeout + fast_conc → быстро подтверждаем большинство живых.
+    Pass 2: slow_timeout + slow_conc → для тех, кто не ответил в Pass 1.
+
+    + DNS pre-resolve — не резолвим один и тот же hostname 100 раз.
+    + IPv4 forced — не ждём IPv6-фолбэк.
+
+    Возвращает множество ЖИВЫХ эндпоинтов (в исходных именах, не IP).
+    """
+    endpoints = list(endpoints)
+    total = len(endpoints)
+    if total == 0:
+        return set()
+
+    # ── 1. DNS pre-resolve ──
+    dns_map = await _pre_resolve_hosts(set(endpoints))
+
+    # Готовим список (ip, port, orig_host)
+    resolved_to_check: List[Tuple[str, int, str]] = []
+    for h, p in endpoints:
+        ip = dns_map.get(h, h)
+        resolved_to_check.append((ip, p, h))
+
+    # ── 2. Pass 1: быстрый ──
+    logger.info(f"⚡ Pass 1: {len(resolved_to_check)} endpoints, "
+                f"timeout {fast_timeout}s, conc {fast_conc}")
+    sem_fast = asyncio.Semaphore(fast_conc)
+    t0 = time.time()
+    tasks = [_tcp_check_one(ip, p, fast_timeout, sem_fast)
+             for ip, p, _ in resolved_to_check]
+    results1 = await asyncio.gather(*tasks)
+
+    alive: Set[Tuple[str, int]] = set()
+    need_retry: List[Tuple[str, int]] = []
+    for (_, p, ok), (_, _, orig_h) in zip(results1, resolved_to_check):
+        if ok:
+            alive.add((orig_h, p))
+        else:
+            need_retry.append((orig_h, p))
+
+    elapsed1 = time.time() - t0
+    logger.info(f"✅ Pass 1: {elapsed1:.1f}s — "
+                f"живых {len(alive)}, "
+                f"в retry {len(need_retry)}")
+
+    # ── 3. Pass 2: медленный ──
+    if need_retry:
+        logger.info(f"🐢 Pass 2: {len(need_retry)} endpoints, "
+                    f"timeout {slow_timeout}s, conc {slow_conc}")
+        sem_slow = asyncio.Semaphore(slow_conc)
+        t0 = time.time()
+
+        # Re-use dns_map из Pass 1 (не резолвим заново)
+        tasks2 = []
+        for h, p in need_retry:
+            ip = dns_map.get(h, h)
+            tasks2.append(_tcp_check_one(ip, p, slow_timeout, sem_slow))
+
+        results2 = await asyncio.gather(*tasks2)
+        for (_, p, ok), (orig_h, orig_p) in zip(results2, need_retry):
+            if ok:
+                alive.add((orig_h, orig_p))
+
+        elapsed2 = time.time() - t0
+        logger.info(f"✅ Pass 2: {elapsed2:.1f}s — "
+                    f"итого {len(alive)}/{total}")
+
+    return alive
 
 
 # === BASE64 (безопасная версия) ===
@@ -1266,7 +1408,6 @@ async def collect_configs_async(contents: Dict[str, Optional[str]]) -> Dict[str,
     logger.info(f"🔄 После дедубликации: {len(raw_configs)}")
 
     if raw_configs:
-        logger.info(f"🔍 Начинаю TCP-тестирование {len(raw_configs)} конфигов (таймаут 30 сек)...")
         unique_endpoints: Set[Tuple[str, int]] = set()
         for cfg in raw_configs:
             ep = get_endpoint(cfg)
@@ -1274,24 +1415,9 @@ async def collect_configs_async(contents: Dict[str, Optional[str]]) -> Dict[str,
                 unique_endpoints.add(ep)
 
         if unique_endpoints:
-            total_endpoints = len(unique_endpoints)
-            logger.info(f"🌐 Уникальных эндпоинтов для проверки: {total_endpoints}")
-            sem = asyncio.Semaphore(20)
-            checked_count = 0
-
-            async def check_endpoint(host, port):
-                nonlocal checked_count
-                async with sem:
-                    result = host, port, await check_tcp_port(host, port)
-                    checked_count += 1
-                    if checked_count % 100 == 0 or checked_count == total_endpoints:
-                        logger.info(f"⏳ Прогресс TCP-тестирования: {checked_count}/{total_endpoints}")
-                    return result
-
-            tasks = [check_endpoint(host, port) for (host, port) in unique_endpoints]
-            results = await asyncio.gather(*tasks)
-            alive_endpoints = {(h, p) for h, p, alive in results if alive}
-            logger.info(f"✅ Рабочих эндпоинтов: {len(alive_endpoints)}")
+            t_start = time.time()
+            alive_endpoints = await check_tcp_two_pass(unique_endpoints)
+            t_total = time.time() - t_start
 
             filtered_configs: List[str] = []
             for cfg in raw_configs:
@@ -1300,7 +1426,11 @@ async def collect_configs_async(contents: Dict[str, Optional[str]]) -> Dict[str,
                     filtered_configs.append(cfg)
 
             raw_configs = filtered_configs
-            logger.info(f"✅ После TCP-тестирования осталось {len(raw_configs)} конфигов")
+            logger.info(
+                f"✅ TCP-тест завершён за {t_total:.1f}s — "
+                f"осталось {len(raw_configs)} конфигов "
+                f"({len(alive_endpoints)}/{len(unique_endpoints)} эндпоинтов живы)"
+            )
         else:
             logger.info("⚠️ Не найдено эндпоинтов для TCP-тестирования")
 
@@ -1385,9 +1515,10 @@ def update_readme(total: int, lte: int, wifi: int,
 ## 🗂️ Фильтрация
 
 1. **fp=chrome → fp=firefox** — все конфиги с `fp=chrome` автоматически переписываются на `fp=firefox` (без удаления).
-2. **LTE** — SNI домен есть в `whitelist.txt` **ИЛИ** IP входит в CIDR из `cidrwhitelist.txt`.
-3. **WIFI** — все остальные рабочие конфиги.
-4. **ALL** — все конфиги из всех источников.
+2. **TCP-проверка** — двухпроходная (5s быстрая + 30s медленная).
+3. **LTE** — SNI домен есть в `whitelist.txt` **ИЛИ** IP входит в CIDR из `cidrwhitelist.txt`.
+4. **WIFI** — все остальные рабочие конфиги.
+5. **ALL** — все конфиги из всех источников.
 
 ---
 
@@ -1618,6 +1749,8 @@ async def main_async():
     print(f"🌍 Геолокация: ВКЛЮЧЕНА (IPinfo, токенов: {len(IPINFO_TOKENS)})")
     print(f"🔓 SSL-верификация: {'ОТКЛЮЧЕНА (INSECURE_SSL=1)' if INSECURE_SSL else 'включена'}")
     print(f"🔧 Трансформация: fp=chrome → fp=firefox")
+    print(f"⚡ TCP: 2-pass ({TCP_FAST_TIMEOUT:.0f}s×{TCP_FAST_CONC} → "
+          f"{TCP_SLOW_TIMEOUT:.0f}s×{TCP_SLOW_CONC}), без кэша")
     print(f"📦 Форматы: .txt (URI), .yml (Clash Meta), .json (sing-box)")
     print(f"🔐 Base64: только .64.txt (yml/json — plain)")
     print("=" * 60)
@@ -1663,7 +1796,6 @@ if __name__ == "__main__":
         ]
         assert len({get_config_key(s) for s in _samples}) == 1
         assert get_config_key("hy2://u@h:443?x=1") == get_config_key("hysteria2://u@h:443?x=1")
-        # unquote в path
         assert get_config_key("vless://u@h:443?type=ws&path=%2Fws") == \
                get_config_key("vless://u@h:443?type=ws&path=/ws")
 
@@ -1679,13 +1811,11 @@ if __name__ == "__main__":
         assert is_fp_chrome(_cfg_c)
         assert not is_fp_chrome(_cfg_f)
 
-        # Замена fp=chrome → fp=firefox (URL)
         _r = replace_fp_chrome("vless://u@h:443?security=tls&fp=chrome&sni=x.com#Tag")
         assert 'fp=firefox' in _r and 'fp=chrome' not in _r and _r.endswith('#Tag')
         assert replace_fp_chrome("vless://u@h:443?fp=firefox") == "vless://u@h:443?fp=firefox"
         assert replace_fp_chrome("vless://u@h:443?sni=x.com") == "vless://u@h:443?sni=x.com"
 
-        # Замена fp=chrome → fp=firefox (VMess) — сохраняет padded/unpadded
         _vm_r = replace_fp_chrome(_cfg_c)
         _d_r = decode_vmess_config(_vm_r)
         assert _d_r and _d_r.get("fp") == "firefox"
@@ -1695,7 +1825,6 @@ if __name__ == "__main__":
         assert not _vm_r_nopad.split('#', 1)[0][8:].endswith('=')
         assert replace_fp_chrome(_cfg_f) == _cfg_f
 
-        # decode_base64_if_needed — не должен ломать обычный текст
         assert decode_base64_if_needed("Hello, this is a regular text with no protocols at all") == "Hello, this is a regular text with no protocols at all"
         _real_cfg = "vless://uuid@host.com:443?security=tls&sni=x.com"
         _b64 = base64.b64encode(_real_cfg.encode()).decode()
@@ -1703,11 +1832,9 @@ if __name__ == "__main__":
         _b64_nopad = _b64.rstrip('=')
         assert _real_cfg in decode_base64_if_needed(_b64_nopad)
 
-        # extract_sni_domain — peer только для hy2
         assert extract_sni_domain("vless://u@h:443?peer=api.example.com") is None
         assert extract_sni_domain("hy2://u@h:443?peer=api.example.com") == "api.example.com"
 
-        # is_config_secure
         assert is_config_secure("vless://u@h:443?security=reality&sni=x.com")
         assert is_config_secure("vless://u@h:443?security=tls&sni=x.com")
         assert not is_config_secure("vless://u@h:443?security=tls&allowInsecure=1&sni=x.com")
@@ -1733,6 +1860,9 @@ if __name__ == "__main__":
         _json = build_singbox_json({"vless://uuid@host.com:443?security=tls&sni=x.com"}, _extra)
         _parsed = json.loads(_json)
         assert 'outbounds' in _parsed and 'Hello' in _parsed['outbounds'][0]['tag']
+
+        # TCP 2-pass: пустой вход = пустой выход
+        assert asyncio.run(check_tcp_two_pass(set())) == set()
 
         print("✅ Все self-tests OK")
         raise SystemExit(0)
