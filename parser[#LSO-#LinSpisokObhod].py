@@ -25,6 +25,11 @@ GEOIP_PARALLEL = 10
 GEOIP_DELAY = 0.1
 REQUEST_TIMEOUT = int(os.environ.get("REQUEST_TIMEOUT", "15"))
 
+# INSECURE_SSL=1 (по умолчанию) — игнорируем ошибки SSL-сертификата
+# (self-signed, hostname mismatch, expired и т.п.)
+# INSECURE_SSL=0 — строгая проверка сертификатов
+INSECURE_SSL = os.environ.get("INSECURE_SSL", "1") != "0"
+
 _env_tokens = [t.strip() for t in os.environ.get("IPINFO_TOKEN", "").split(",") if t.strip()]
 IPINFO_TOKENS = _env_tokens or ["a94d8c011ca891"]
 if not IPINFO_TOKENS:
@@ -113,7 +118,6 @@ def decode_base64_if_needed(content: str) -> str:
     """
     Декодирует base64 ТОЛЬКО если результат содержит '://'.
     Иначе возвращает исходную строку нетронутой.
-    Это защита от декодирования обычного текста в мусор.
     """
     content = content.strip()
     if len(content) < 20:
@@ -133,7 +137,6 @@ def decode_base64_if_needed(content: str) -> str:
         if not s:
             return None
         s = s.replace('-', '+').replace('_', '/')
-        # Строгая проверка: только base64-символы (никаких точек, дефисов и пр.)
         if not re.match(r'^[A-Za-z0-9+/]+={0,2}$', s):
             return None
         s += '=' * ((-len(s)) % 4)
@@ -147,13 +150,11 @@ def decode_base64_if_needed(content: str) -> str:
     if decoded_str is not None and '://' in decoded_str:
         return decoded_str
 
-    # double-encoded (base64 от base64)
     if decoded_str is not None and len(decoded_str) >= 20:
         nested = _try_decode(decoded_str)
         if nested is not None and '://' in nested:
             return nested
 
-    # Если не удалось получить текст с протоколом — НЕ ДЕКОДИРУЕМ
     return content
 
 
@@ -190,7 +191,10 @@ async def fetch_url_content(session: aiohttp.ClientSession, url: str,
 
 
 async def fetch_all_sources(sources: List[str]):
-    async with aiohttp.ClientSession() as session:
+    if INSECURE_SSL:
+        logger.info("🔓 SSL-верификация ОТКЛЮЧЕНА (INSECURE_SSL=1) — сертификаты не проверяются")
+    connector = aiohttp.TCPConnector(ssl=not INSECURE_SSL)
+    async with aiohttp.ClientSession(connector=connector) as session:
         tasks = [fetch_url_content(session, url) for url in sources]
         results = await asyncio.gather(*tasks)
     return dict(zip(sources, results))
@@ -224,7 +228,6 @@ def _vmess_b64_normalize(s: str) -> str:
             pass
     s = s.replace('-', '+').replace('_', '/')
     s = re.sub(r'[^A-Za-z0-9+/=]', '', s)
-    # Убираем лишние '=' в середине и восстанавливаем padding
     s = s.rstrip('=')
     pad = (-len(s)) % 4
     if pad:
@@ -338,7 +341,6 @@ def extract_sni_domain(config: str) -> Optional[str]:
         query_part = body.split('?', 1)[1].split('#', 1)[0]
         params = parse_qs(query_part)
         # 'peer' — стандартный ключ SNI ТОЛЬКО в hysteria2
-        # для vless/trojan используем только sni/host
         keys = ['sni', 'host']
         if protocol == 'hysteria2':
             keys.append('peer')
@@ -418,7 +420,6 @@ def replace_fp_chrome(config: str) -> str:
 
 
 def _url_replace_fp_chrome(config: str) -> str:
-    # Отделяем фрагмент (комментарий)
     if '#' in config:
         base, frag = config.split('#', 1)
         fragment = '#' + frag
@@ -438,7 +439,6 @@ def _url_replace_fp_chrome(config: str) -> str:
     for i, part in enumerate(parts):
         if '=' in part:
             k, _, v = part.partition('=')
-            # k должен быть строго 'fp' (без 'fpX' и пр.)
             if k == 'fp' and unquote(v).strip().lower() == 'chrome':
                 parts[i] = k + '=firefox'
                 changed = True
@@ -458,12 +458,10 @@ def _vmess_replace_fp_chrome(config: str) -> str:
     if not isinstance(fp, str) or fp.strip().lower() != 'chrome':
         return config
 
-    # Отделяем фрагмент (комментарий)
     fragment = ''
     if '#' in config:
         _, fragment = config.rsplit('#', 1)
 
-    # Определяем формат оригинального payload — чтобы сохранить его
     orig_payload = config[8:]
     if '#' in orig_payload:
         orig_payload = orig_payload.split('#', 1)[0]
@@ -483,7 +481,6 @@ def _vmess_replace_fp_chrome(config: str) -> str:
     except Exception:
         return config
 
-    # Приводим к формату оригинала
     if orig_was_urlsafe:
         payload = payload.replace('+', '-').replace('/', '_')
     if not orig_was_padded:
@@ -511,7 +508,6 @@ def _vmess_canonical_key(data: Dict) -> str:
         if v is None:
             v = ''
         if k in ('port', 'aid'):
-            # Нормализуем к строке без ведущих нулей (не теряя значения)
             try:
                 v = str(int(v))
             except (TypeError, ValueError):
@@ -562,7 +558,8 @@ def _url_config_canonical_key(config: str, protocol: str) -> str:
             k = k.strip()
             if not k or k.lower() in _URL_IGNORED_PARAMS:
                 continue
-            params[k] = v
+            # URL-декодируем, чтобы path=%2Fws == path=/ws
+            params[k] = unquote(v)
     sorted_params = '&'.join(f"{k}={params[k]}" for k in sorted(params))
 
     proto_key = 'hysteria2' if protocol == 'hysteria2' else protocol
@@ -599,6 +596,31 @@ def deduplicate_configs(configs: List[str]) -> List[str]:
     if duplicates_count > 0:
         logger.info(f"🔁 Удалено дубликатов: {duplicates_count} (осталось {len(unique_configs)})")
     return unique_configs
+
+
+# === ОПРЕДЕЛЕНИЕ БЕЗОПАСНОСТИ КОНФИГА ===
+def is_config_secure(config: str) -> bool:
+    """
+    True — если конфиг использует шифрование без небезопасных опций.
+    """
+    low = config.lower()
+
+    if 'security=reality' in low:
+        return True
+
+    if 'security=tls' in low:
+        if 'allowinsecure=1' in low or 'allowinsecure=true' in low:
+            return False
+        if 'insecure=1' in low or 'insecure=true' in low:
+            return False
+        return True
+
+    if low.startswith(('hysteria2://', 'hy2://')):
+        if 'insecure=1' in low or 'insecure=true' in low:
+            return False
+        return True
+
+    return False
 
 
 # === ГЕОЛОКАЦИЯ ===
@@ -646,7 +668,8 @@ async def resolve_countries_parallel(ips: List[str]) -> Dict[str, str]:
     total = len(unique_ips)
     logger.info(f"🌍 Определяю страны для {total} уникальных IP через IPinfo")
     processed = 0
-    async with aiohttp.ClientSession() as session:
+    connector = aiohttp.TCPConnector(ssl=not INSECURE_SSL)
+    async with aiohttp.ClientSession(connector=connector) as session:
         tasks = [resolve_country(ip, session) for ip in unique_ips]
         for future in asyncio.as_completed(tasks):
             await future
@@ -1480,7 +1503,10 @@ def save_configs(configs_map: Dict[str, Tuple[str, str]]):
     with open(all_path, 'w', encoding='utf-8') as f:
         f.write(header_all)
         f.write("\n".join(all_extra) + "\n")
-        f.write("\n".join(sorted(tagged_set)) + "\n")
+        # Secure сверху, небезопасные снизу
+        def _all_sort_key(cfg: str):
+            return (0 if is_config_secure(cfg) else 1, cfg)
+        f.write("\n".join(sorted(tagged_set, key=_all_sort_key)) + "\n")
     logger.info(f"💾 ALL.txt: {len(tagged_set)}")
 
     # ---- LTE / WIFI ----
@@ -1495,8 +1521,14 @@ def save_configs(configs_map: Dict[str, Tuple[str, str]]):
         else:
             wifi_set.add(line)
 
-    lte_list = sorted(lte_set, key=lambda x: get_config_priority(x, whitelist, cidr_list))
-    wifi_list = sorted(wifi_set)
+    # Приоритет: whitelist/CIDR (0/1/2), затем secure (0/1), затем строкой
+    def _sort_key(cfg: str):
+        prio = get_config_priority(cfg, whitelist, cidr_list)
+        sec  = 0 if is_config_secure(cfg) else 1
+        return (prio, sec, cfg)
+
+    lte_list  = sorted(lte_set,  key=_sort_key)
+    wifi_list = sorted(wifi_set, key=_sort_key)
 
     protocol_counts_lte = count_protocols(lte_set)
     protocol_counts_wifi = count_protocols(wifi_set)
@@ -1584,6 +1616,7 @@ async def main_async():
     print(f"📋 Источников загружено из source.txt: {len(sources)}")
     print(f"📁 Результаты в папке: {CONFIG_DIR}")
     print(f"🌍 Геолокация: ВКЛЮЧЕНА (IPinfo, токенов: {len(IPINFO_TOKENS)})")
+    print(f"🔓 SSL-верификация: {'ОТКЛЮЧЕНА (INSECURE_SSL=1)' if INSECURE_SSL else 'включена'}")
     print(f"🔧 Трансформация: fp=chrome → fp=firefox")
     print(f"📦 Форматы: .txt (URI), .yml (Clash Meta), .json (sing-box)")
     print(f"🔐 Base64: только .64.txt (yml/json — plain)")
@@ -1630,6 +1663,9 @@ if __name__ == "__main__":
         ]
         assert len({get_config_key(s) for s in _samples}) == 1
         assert get_config_key("hy2://u@h:443?x=1") == get_config_key("hysteria2://u@h:443?x=1")
+        # unquote в path
+        assert get_config_key("vless://u@h:443?type=ws&path=%2Fws") == \
+               get_config_key("vless://u@h:443?type=ws&path=/ws")
 
         assert is_fp_chrome("vless://u@h:443?security=reality&fp=chrome&sni=x.com")
         assert not is_fp_chrome("vless://u@h:443?security=reality&fp=firefox&sni=x.com")
@@ -1653,28 +1689,34 @@ if __name__ == "__main__":
         _vm_r = replace_fp_chrome(_cfg_c)
         _d_r = decode_vmess_config(_vm_r)
         assert _d_r and _d_r.get("fp") == "firefox"
-        # padded — padding на месте
         assert _vm_r.split('#', 1)[0][8:].endswith('=')
-        # unpadded — без padding
         _cfg_c_nopad = _cfg_c.rstrip('=')
         _vm_r_nopad = replace_fp_chrome(_cfg_c_nopad)
         assert not _vm_r_nopad.split('#', 1)[0][8:].endswith('=')
-        # no-op
         assert replace_fp_chrome(_cfg_f) == _cfg_f
 
         # decode_base64_if_needed — не должен ломать обычный текст
         assert decode_base64_if_needed("Hello, this is a regular text with no protocols at all") == "Hello, this is a regular text with no protocols at all"
-        # должен декодировать реальный base64 конфига
         _real_cfg = "vless://uuid@host.com:443?security=tls&sni=x.com"
         _b64 = base64.b64encode(_real_cfg.encode()).decode()
         assert _real_cfg in decode_base64_if_needed(_b64)
-        # unpadded
         _b64_nopad = _b64.rstrip('=')
         assert _real_cfg in decode_base64_if_needed(_b64_nopad)
 
         # extract_sni_domain — peer только для hy2
         assert extract_sni_domain("vless://u@h:443?peer=api.example.com") is None
         assert extract_sni_domain("hy2://u@h:443?peer=api.example.com") == "api.example.com"
+
+        # is_config_secure
+        assert is_config_secure("vless://u@h:443?security=reality&sni=x.com")
+        assert is_config_secure("vless://u@h:443?security=tls&sni=x.com")
+        assert not is_config_secure("vless://u@h:443?security=tls&allowInsecure=1&sni=x.com")
+        assert not is_config_secure("vless://u@h:443?security=none")
+        assert not is_config_secure("vless://u@h:443")
+        assert is_config_secure("hy2://u@h:443?insecure=0")
+        assert not is_config_secure("hy2://u@h:443?insecure=1")
+        assert not is_config_secure("hy2://u@h:443")
+        assert is_config_secure("trojan://u@h:443?security=tls&sni=x.com")
 
         _clash = parse_uri_to_clash("vless://uuid@host.com:443?security=tls&sni=x.com&type=ws&path=%2Fws&host=x.com")
         assert _clash and _clash['type'] == 'vless'
