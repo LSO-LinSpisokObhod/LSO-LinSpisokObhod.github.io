@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-13 08:15:25 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-13 08:26:05 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 58 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 53 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 46 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 41 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -322,6 +322,16 @@ proxies:
   servername: cdp.x5.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Russia | tgg.fastcon.cc | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 178.176.128.128
+  port: 443
+  uuid: 50b95deb-6394-46c5-b88a-583e5b3ca7ee
+  udp: true
+  tls: true
+  servername: tgg.fastcon.cc
+  client-fingerprint: firefox
+  network: xhttp
 - name: 'Russia | tgp.fastcon.cc | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.176.128.128
@@ -345,26 +355,6 @@ proxies:
   servername: video.yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | origin.mtrxnet.click | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.86.145.190
-  port: 52831
-  uuid: 5bf3f594-8a5d-47e4-8911-911952b2443f
-  udp: true
-  tls: true
-  servername: origin.mtrxnet.click
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | cdn.yccdn.cloud.yandex.net | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 188.72.112.1
-  port: 443
-  uuid: 5bf3f594-8a5d-47e4-8911-911952b2443f
-  udp: true
-  tls: true
-  servername: cdn.yccdn.cloud.yandex.net
-  client-fingerprint: firefox
-  network: xhttp
 - name: 'Russia | dzen.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 91.222.237.113
@@ -469,28 +459,6 @@ proxies:
     public-key: 1DFPjPAr5meUaXBdTX2WMZu9BWV39TXV5N36Ske6_A0
     short-id: a7df9e0cde3e1d79
   servername: base.syoknew.online
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
-- name: 'Russia | unokesufayim.begetcdn.cloud | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 91.240.169.224
-  port: 443
-  uuid: 835854ab-6aa9-4f7e-8ac9-22ce704b7022
-  udp: true
-  tls: true
-  servername: unokesufayim.begetcdn.cloud
-  client-fingerprint: firefox
-  network: xhttp
-- name: 'Russia | passport.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 185.86.145.223
-  port: 8445
-  uuid: 84a56b88-2f89-4a57-b925-74abd5b7fd87
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: I_0JD13_bJuD6bNhTfb1PFPJUQqEVHl-YFluNwHAPD4
-  servername: passport.yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'Russia | passport.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
@@ -598,18 +566,6 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: api
-- name: 'Hong Kong | www.mtr.com.hk | unknown | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 82.29.36.252
-  port: 443
-  uuid: b6058894-f212-4926-9e19-f65713cca4a4
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: N-fcZsehZk3eIoo3bfjCdtYXsy1luM9Iz6LscVEr33U
-  servername: www.mtr.com.hk
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
 - name: 'France | passport.yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 161.97.160.224
@@ -714,16 +670,6 @@ proxies:
   servername: cdp.x5.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Luxembourg | gcore.com | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 92.223.84.84
-  port: 443
-  uuid: e10fe991-c249-4eba-9140-e6c4ed642683
-  udp: true
-  tls: true
-  servername: gcore.com
-  client-fingerprint: firefox
-  network: xhttp
 - name: 'United Kingdom | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 138.124.125.193
