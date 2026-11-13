@@ -26,12 +26,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
           ref: main
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
@@ -188,8 +188,6 @@ jobs:
           }
           trap cleanup_tunnel EXIT
 
-          # -M включает ControlMaster, -S кладёт сокет в /tmp,
-          # -O check / -O exit далее работают с конкретно этим PID.
           ssh "${O[@]}" -M -S "$SOCK" -f -N -D 127.0.0.1:1080 "$VPS_USER@$VPS_HOST"
           sleep 2
 
@@ -351,7 +349,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout latest main
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: main
           fetch-depth: 1
@@ -400,7 +398,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: '_site'
 
