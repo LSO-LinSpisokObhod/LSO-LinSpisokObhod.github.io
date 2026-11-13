@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-12 23:38:41 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-13 03:22:32 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 15 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 19 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 14 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 18 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -105,30 +105,18 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: safari
   flow: xtls-rprx-vision
-- name: 'Russia | mbr.rkn-pediki.site | WebSocket | [#LSO - #LinSpisokObhod]'
+- name: 'Russia | my.guardora.pro | WebSocket | [#LSO - #LinSpisokObhod]'
   type: vless
-  server: 185.178.208.167
+  server: 95.129.236.90
   port: 443
-  uuid: 2b5962e8-1ec2-0001-bdab-cefa57555d2a
+  uuid: 4dde246a-3704-4b3e-9cea-54a3fc1260d5
   udp: true
   tls: true
-  servername: mbr.rkn-pediki.site
-  client-fingerprint: ios
+  servername: my.guardora.pro
+  client-fingerprint: firefox
   network: ws
   ws-opts:
-    path: /session
-    headers:
-      Host: mbr.rkn-pediki.site
-- name: 'Russia | tgg.fastcon.cc | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 178.176.128.128
-  port: 443
-  uuid: 50b95deb-6394-46c5-b88a-583e5b3ca7ee
-  udp: true
-  tls: true
-  servername: tgg.fastcon.cc
-  client-fingerprint: firefox
-  network: xhttp
+    path: /api/v3/stream/769881e30b87/
 - name: 'Finland | video.yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 193.188.21.253
@@ -140,6 +128,54 @@ proxies:
     public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
     short-id: 8debcf36f1cc69ff
   servername: video.yandex.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'Germany | club9-92547542c194d0.rambler.ru | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 194.135.32.20
+  port: 443
+  uuid: 5b2f074c-6f61-4faa-8bea-dbe8f0a90021
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: CMkW1axrhEXoiJ6anMz9XEjlfqlAtEZya7L0b5ZPMyw
+    short-id: 7869890bd66a9f3d
+  servername: club9-92547542c194d0.rambler.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'Germany | ww3-378a6c903e42c4.rbc.ru | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 194.135.32.92
+  port: 443
+  uuid: 5b2f074c-6f61-4faa-8bea-dbe8f0a90021
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: CMkW1axrhEXoiJ6anMz9XEjlfqlAtEZya7L0b5ZPMyw
+    short-id: d6816b10d545df54
+  servername: ww3-378a6c903e42c4.rbc.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'Russia | origin.mtrxnet.click | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.86.145.190
+  port: 52831
+  uuid: 5bf3f594-8a5d-47e4-8911-911952b2443f
+  udp: true
+  tls: true
+  servername: origin.mtrxnet.click
+  client-fingerprint: firefox
+  network: xhttp
+- name: 'Russia | passport.yandex.ru | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 95.167.57.129
+  port: 8445
+  uuid: 84a56b88-2f89-4a57-b925-74abd5b7fd87
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: I_0JD13_bJuD6bNhTfb1PFPJUQqEVHl-YFluNwHAPD4
+  servername: passport.yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
 - name: 'Estonia | 185.215.184.50 | unknown | [#LSO - #LinSpisokObhod]'
@@ -207,6 +243,19 @@ proxies:
   servername: 185.215.184.86
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Austria | user-231312.appstop.link | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.104.63.62
+  port: 8443
+  uuid: a02525d9-d37a-4415-9aaa-5df1a89a36ec
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: 6dG1bo9e5DGPopbivweFyK1Uc_730aXqujS_f9gOfD4
+    short-id: db01231f502fe591
+  servername: user-231312.appstop.link
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
 - name: 'Hong Kong | www.mtr.com.hk | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 82.29.36.252
@@ -232,19 +281,6 @@ proxies:
   servername: passport.yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | ya.ru | XHTTP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 77.232.36.228
-  port: 443
-  uuid: c059d2b8-d7d6-4873-b5e8-2c5f6cd908bb
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: nGTRCnoPVEFz6M7S-dr3rfnfuZONPtCgEczaxy53-XQ
-    short-id: b997e34399a919f3
-  servername: ya.ru
-  client-fingerprint: firefox
-  network: xhttp
 - name: 'United Kingdom | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 138.124.125.193
@@ -258,6 +294,18 @@ proxies:
   servername: ads.x5.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Sweden | tcpswed1.figurapn.ru | unknown | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 88.216.130.236
+  port: 443
+  uuid: fa081e9f-7574-4e18-8928-31aa5ac923c7
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: drl7nndYdfzZY1aQ0eUAWmNV0nsHig2uDnu9siy9biQ
+    short-id: 868419504747f6de
+  servername: tcpswed1.figurapn.ru
+  client-fingerprint: firefox
 - name: 'Germany | xmfhlpy.com | TCP | [#LSO - #LinSpisokObhod]'
   type: vmess
   server: 185.177.229.95
