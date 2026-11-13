@@ -25,7 +25,6 @@ GEOIP_PARALLEL = 10
 GEOIP_DELAY = 0.1
 REQUEST_TIMEOUT = int(os.environ.get("REQUEST_TIMEOUT", "15"))
 
-# INSECURE_SSL=1 (по умолчанию) — игнорируем ошибки SSL-сертификата
 INSECURE_SSL = os.environ.get("INSECURE_SSL", "1") != "0"
 
 _env_tokens = [t.strip() for t in os.environ.get("IPINFO_TOKEN", "").split(",") if t.strip()]
@@ -47,10 +46,10 @@ GLOBAL_TAG = "[#LSO - #LinSpisokObhod]"
 # TCP-тест: двухпроходный
 TCP_FAST_TIMEOUT = float(os.environ.get("TCP_FAST_TIMEOUT", "5"))
 TCP_FAST_CONC = int(os.environ.get("TCP_FAST_CONC", "150"))
-TCP_SLOW_TIMEOUT = float(os.environ.get("TCP_SLOW_TIMEOUT", "30"))
+TCP_SLOW_TIMEOUT = float(os.environ.get("TCP_SLOW_TIMEOUT", "15"))
 TCP_SLOW_CONC = int(os.environ.get("TCP_SLOW_CONC", "40"))
 TCP_DNS_CONC = int(os.environ.get("TCP_DNS_CONC", "100"))
-TCP_PROGRESS_INTERVAL = float(os.environ.get("TCP_PROGRESS_INTERVAL", "2.0"))
+TCP_PROGRESS_INTERVAL = float(os.environ.get("TCP_PROGRESS_INTERVAL", "5.0"))
 
 PROTOCOL_PATTERNS = {
     'vless':     re.compile(r'vless://[A-Za-z0-9+/=@:;,\?&%#\.\-_~!$*()]+', re.IGNORECASE),
@@ -101,12 +100,11 @@ def load_sources_from_file(path: str = "source.txt") -> List[str]:
     return sources
 
 
-# === TCP: ФОНОВЫЙ ЛОГГЕР ПРОГРЕССА ===
+# === TCP: ФОНОВЫЙ ЛОГГЕР ===
 async def _log_progress_periodically(name: str, total: int,
                                      counter: List[int], alive_counter: List[int],
                                      start_time: float, stop_event: asyncio.Event,
                                      interval: float = TCP_PROGRESS_INTERVAL):
-    """Фоновая задача: логирует прогресс каждые `interval` секунд."""
     while not stop_event.is_set():
         try:
             await asyncio.wait_for(stop_event.wait(), timeout=interval)
@@ -132,7 +130,6 @@ async def _tcp_check_one(host: str, port: int, timeout: float,
                           counter: Optional[List[int]] = None,
                           alive_counter: Optional[List[int]] = None
                           ) -> Tuple[str, int, bool]:
-    """Одна TCP-проверка. Для доменов форсирует IPv4 (не ждём IPv6)."""
     async with sem:
         try:
             ipaddress.ip_address(host.strip('[]'))
@@ -173,7 +170,6 @@ async def _tcp_check_one(host: str, port: int, timeout: float,
 
 # === TCP: DNS PRE-RESOLVE ===
 async def _pre_resolve_hosts(endpoints: Set[Tuple[str, int]]) -> Dict[str, str]:
-    """Параллельно резолвит все не-IP hosts в IPv4. Возвращает {hostname: ipv4}."""
     loop = asyncio.get_running_loop()
     hosts = {h for h, _ in endpoints}
 
@@ -224,18 +220,12 @@ async def check_tcp_two_pass(
     slow_timeout: float = TCP_SLOW_TIMEOUT,
     slow_conc: int = TCP_SLOW_CONC,
 ) -> Set[Tuple[str, int]]:
-    """
-    Двухпроходная TCP-проверка.
-    Pass 1: fast_timeout + fast_conc → быстро подтверждаем большинство живых.
-    Pass 2: slow_timeout + slow_conc → для тех, кто не ответил в Pass 1.
-    """
     overall_t0 = time.time()
     endpoints = list(endpoints)
     total = len(endpoints)
     if total == 0:
         return set()
 
-    # ── Pre-TCP stats ──
     unique_hosts = {h for h, _ in endpoints}
     ip_count = 0
     for h in unique_hosts:
@@ -250,7 +240,6 @@ async def check_tcp_two_pass(
         f"(IP: {ip_count}, домены: {domain_count})"
     )
 
-    # ── DNS pre-resolve ──
     dns_map = await _pre_resolve_hosts(set(endpoints))
 
     resolved_to_check: List[Tuple[str, int, str]] = []
@@ -258,7 +247,7 @@ async def check_tcp_two_pass(
         ip = dns_map.get(h, h)
         resolved_to_check.append((ip, p, h))
 
-    # ── Pass 1: быстрый ──
+    # ── Pass 1 ──
     logger.info(
         f"⚡ Pass 1: {len(resolved_to_check)} endpoints, "
         f"timeout {fast_timeout}s, conc {fast_conc}"
@@ -304,7 +293,7 @@ async def check_tcp_two_pass(
         f"скорость {speed1:.0f}/сек"
     )
 
-    # ── Pass 2: медленный ──
+    # ── Pass 2 ──
     if need_retry:
         logger.info(
             f"🐢 Pass 2: {len(need_retry)} endpoints, "
@@ -351,7 +340,6 @@ async def check_tcp_two_pass(
     else:
         logger.info("✅ Pass 2 пропущен — все endpoints подтверждены в Pass 1")
 
-    # ── Итог ──
     total_alive = len(alive)
     total_dead = total - total_alive
     elapsed_total = time.time() - overall_t0
@@ -545,7 +533,7 @@ def _vmess_transport(data: Dict) -> str:
     return net.upper() if net else 'unknown'
 
 
-# === ИЗВЛЕЧЕНИЕ HOST / IP / SNI ===
+# === ИЗВЛЕЧЕНИЕ ===
 def extract_host_from_config(config: str) -> Optional[str]:
     protocol = detect_protocol(config)
     if not protocol:
@@ -621,7 +609,7 @@ def get_endpoint(cfg: str) -> Optional[Tuple[str, int]]:
     return host, port
 
 
-# === ФИЛЬТР: fp=chrome → firefox ===
+# === FP ===
 def _url_fp(config: str) -> Optional[str]:
     body = strip_protocol(config)
     if '?' not in body:
@@ -653,7 +641,6 @@ def is_fp_chrome(config: str) -> bool:
     return _url_fp(config) == 'chrome'
 
 
-# === ЗАМЕНА fp=chrome → fp=firefox ===
 def replace_fp_chrome(config: str) -> str:
     protocol = detect_protocol(config)
     if not protocol:
@@ -723,7 +710,7 @@ def _vmess_replace_fp_chrome(config: str) -> str:
     return result
 
 
-# === ДЕДУБЛИКАЦИЯ ===
+# === ДЕДУП ===
 _VMESS_IDENTITY_KEYS = (
     'add', 'port', 'id', 'aid', 'scy',
     'net', 'type', 'host', 'path',
@@ -824,7 +811,7 @@ def deduplicate_configs(configs: List[str]) -> List[str]:
     return unique_configs
 
 
-# === БЕЗОПАСНОСТЬ КОНФИГА ===
+# === БЕЗОПАСНОСТЬ ===
 def is_config_secure(config: str) -> bool:
     low = config.lower()
     if 'security=reality' in low:
@@ -1030,7 +1017,7 @@ def count_protocols(configs) -> Dict[str, int]:
     return counts
 
 
-# === YAML (Clash Meta) ===
+# === YAML ===
 def _url_params(config: str) -> Dict[str, str]:
     body = strip_protocol(config)
     if '?' not in body:
@@ -1447,6 +1434,7 @@ async def collect_configs_async(contents: Dict[str, Optional[str]]) -> Dict[str,
     total_raw = len(raw_configs)
     logger.info(f"🔄 Всего конфигов (до дедубликации): {total_raw}")
 
+    # fp=chrome → firefox
     _fp_replaced = 0
     _new_configs = []
     for c in raw_configs:
@@ -1479,24 +1467,33 @@ async def collect_configs_async(contents: Dict[str, Optional[str]]) -> Dict[str,
                 if ep and ep in alive_endpoints:
                     filtered_configs.append(cfg)
 
-            # Per-protocol breakdown: до/после
             before_counts = count_protocols(raw_configs)
             after_counts = count_protocols(filtered_configs)
 
+            total_before = len(raw_configs)
+            total_after = len(filtered_configs)
+            deleted_count = total_before - total_after
+            pct_alive = 100 * total_after / total_before if total_before else 0
+
+            # ── УДАЛЯЕМ мёртвые: raw_configs полностью заменяется ──
             raw_configs = filtered_configs
+
+            logger.info(
+                f"🗑️ Удалено нерабочих конфигов: {deleted_count} из {total_before} "
+                f"— они НЕ попадут ни в один файл"
+            )
             logger.info(
                 f"✅ TCP-фильтр готов за {t_total:.1f}s: "
-                f"{len(raw_configs)} конфигов живы из {total_raw} "
-                f"({100*len(raw_configs)/total_raw:.1f}%)"
+                f"оставлено {total_after} конфигов ({pct_alive:.1f}%)"
             )
             for proto in PROTOCOL_PATTERNS:
                 b = before_counts.get(proto, 0)
                 a = after_counts.get(proto, 0)
                 if b > 0:
-                    pct = 100 * a / b
+                    p = 100 * a / b
                     logger.info(
-                        f"   {proto.upper():<10}: {a}/{b} ({pct:.0f}%) — "
-                        f"потеряно {b - a}"
+                        f"   {proto.upper():<10}: {a}/{b} ({p:.0f}%) — "
+                        f"удалено {b - a}"
                     )
         else:
             logger.info("⚠️ Не найдено эндпоинтов для TCP-тестирования")
@@ -1581,7 +1578,7 @@ def update_readme(total: int, lte: int, wifi: int,
 ## 🗂️ Фильтрация
 
 1. **fp=chrome → fp=firefox** — все конфиги с `fp=chrome` автоматически переписываются на `fp=firefox` (без удаления).
-2. **TCP-проверка** — двухпроходная (5s быстрая + 30s медленная).
+2. **TCP-проверка** — двухпроходная (5s быстрая + 15s медленная). **Нерабочие конфиги удаляются полностью** — не попадают ни в один файл.
 3. **LTE** — SNI домен есть в `whitelist.txt` **ИЛИ** IP входит в CIDR из `cidrwhitelist.txt`.
 4. **WIFI** — все остальные рабочие конфиги.
 5. **ALL** — все конфиги из всех источников.
@@ -1806,7 +1803,7 @@ async def main_async():
     print(f"🔓 SSL-верификация: {'ОТКЛЮЧЕНА (INSECURE_SSL=1)' if INSECURE_SSL else 'включена'}")
     print(f"🔧 Трансформация: fp=chrome → fp=firefox")
     print(f"⚡ TCP: 2-pass ({TCP_FAST_TIMEOUT:.0f}s×{TCP_FAST_CONC} → "
-          f"{TCP_SLOW_TIMEOUT:.0f}s×{TCP_SLOW_CONC}), без кэша")
+          f"{TCP_SLOW_TIMEOUT:.0f}s×{TCP_SLOW_CONC}), прогресс каждые {TCP_PROGRESS_INTERVAL:.0f}s")
     print(f"📦 Форматы: .txt (URI), .yml (Clash Meta), .json (sing-box)")
     print(f"🔐 Base64: только .64.txt (yml/json — plain)")
     print("=" * 60)
