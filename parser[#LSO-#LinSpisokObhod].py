@@ -26,7 +26,6 @@ GEOIP_DELAY = 0.1
 REQUEST_TIMEOUT = int(os.environ.get("REQUEST_TIMEOUT", "15"))
 
 # INSECURE_SSL=1 (по умолчанию) — игнорируем ошибки SSL-сертификата
-# INSECURE_SSL=0 — строгая проверка сертификатов
 INSECURE_SSL = os.environ.get("INSECURE_SSL", "1") != "0"
 
 _env_tokens = [t.strip() for t in os.environ.get("IPINFO_TOKEN", "").split(",") if t.strip()]
@@ -45,12 +44,13 @@ WHITELIST_FILE = os.path.join(LISTS_DIR, "whitelist.txt")
 CIDR_WHITELIST_FILE = os.path.join(LISTS_DIR, "cidrwhitelist.txt")
 GLOBAL_TAG = "[#LSO - #LinSpisokObhod]"
 
-# TCP-тест: двухпроходный (быстрый + медленный)
+# TCP-тест: двухпроходный
 TCP_FAST_TIMEOUT = float(os.environ.get("TCP_FAST_TIMEOUT", "5"))
 TCP_FAST_CONC = int(os.environ.get("TCP_FAST_CONC", "150"))
 TCP_SLOW_TIMEOUT = float(os.environ.get("TCP_SLOW_TIMEOUT", "30"))
 TCP_SLOW_CONC = int(os.environ.get("TCP_SLOW_CONC", "40"))
 TCP_DNS_CONC = int(os.environ.get("TCP_DNS_CONC", "100"))
+TCP_PROGRESS_INTERVAL = float(os.environ.get("TCP_PROGRESS_INTERVAL", "2.0"))
 
 PROTOCOL_PATTERNS = {
     'vless':     re.compile(r'vless://[A-Za-z0-9+/=@:;,\?&%#\.\-_~!$*()]+', re.IGNORECASE),
@@ -101,23 +101,50 @@ def load_sources_from_file(path: str = "source.txt") -> List[str]:
     return sources
 
 
-# === TCP-ПРОВЕРКА: ОДИН ЭНДПОИНТ ===
+# === TCP: ФОНОВЫЙ ЛОГГЕР ПРОГРЕССА ===
+async def _log_progress_periodically(name: str, total: int,
+                                     counter: List[int], alive_counter: List[int],
+                                     start_time: float, stop_event: asyncio.Event,
+                                     interval: float = TCP_PROGRESS_INTERVAL):
+    """Фоновая задача: логирует прогресс каждые `interval` секунд."""
+    while not stop_event.is_set():
+        try:
+            await asyncio.wait_for(stop_event.wait(), timeout=interval)
+            return
+        except asyncio.TimeoutError:
+            pass
+        done = counter[0]
+        if done >= total:
+            return
+        elapsed = time.time() - start_time
+        speed = done / elapsed if elapsed > 0 else 0
+        eta = (total - done) / speed if speed > 0 else 0
+        pct = 100 * done / total if total else 0
+        logger.info(
+            f"   {name}: {done}/{total} ({pct:.0f}%) | "
+            f"живых {alive_counter[0]} | {speed:.0f}/сек | ETA {eta:.0f}s"
+        )
+
+
+# === TCP: ОДИН ЭНДПОИНТ ===
 async def _tcp_check_one(host: str, port: int, timeout: float,
-                          sem: asyncio.Semaphore) -> Tuple[str, int, bool]:
+                          sem: asyncio.Semaphore,
+                          counter: Optional[List[int]] = None,
+                          alive_counter: Optional[List[int]] = None
+                          ) -> Tuple[str, int, bool]:
     """Одна TCP-проверка. Для доменов форсирует IPv4 (не ждём IPv6)."""
     async with sem:
-        # Если host — уже IP, family=0 (пусть система решает).
-        # Если домен — AF_INET (IPv4), чтобы не было 10-15s IPv6-фолбэка.
         try:
             ipaddress.ip_address(host.strip('[]'))
             family = 0
         except ValueError:
             family = socket.AF_INET
 
+        ok = False
         try:
             loop = asyncio.get_running_loop()
             try:
-                reader, writer = await asyncio.wait_for(
+                _reader, writer = await asyncio.wait_for(
                     loop.create_connection(
                         asyncio.Protocol, host, port, family=family,
                     ),
@@ -127,17 +154,24 @@ async def _tcp_check_one(host: str, port: int, timeout: float,
                     writer.close()
                 except Exception:
                     pass
-                return host, port, True
+                ok = True
             except (asyncio.TimeoutError, OSError,
                     socket.gaierror, ConnectionRefusedError, ConnectionResetError):
-                return host, port, False
+                ok = False
             except Exception:
-                return host, port, False
+                ok = False
         except Exception:
-            return host, port, False
+            ok = False
+
+        if counter is not None:
+            counter[0] += 1
+        if ok and alive_counter is not None:
+            alive_counter[0] += 1
+
+        return host, port, ok
 
 
-# === TCP-ПРОВЕРКА: DNS PRE-RESOLVE ===
+# === TCP: DNS PRE-RESOLVE ===
 async def _pre_resolve_hosts(endpoints: Set[Tuple[str, int]]) -> Dict[str, str]:
     """Параллельно резолвит все не-IP hosts в IPv4. Возвращает {hostname: ipv4}."""
     loop = asyncio.get_running_loop()
@@ -172,10 +206,17 @@ async def _pre_resolve_hosts(endpoints: Set[Tuple[str, int]]) -> Dict[str, str]:
     results = await asyncio.gather(*[_resolve_one(h) for h in targets])
     resolved = {h: ip for r in results if r for h, ip in [r]}
     logger.info(f"✅ DNS pre-resolve: {len(resolved)}/{len(targets)} за {time.time()-t0:.1f}s")
+
+    failed = [h for h in targets if h not in resolved]
+    if failed:
+        preview = ', '.join(failed[:5])
+        suffix = '...' if len(failed) > 5 else ''
+        logger.info(f"⚠️ DNS не разрешились: {len(failed)} host(s): {preview}{suffix}")
+
     return resolved
 
 
-# === TCP-ПРОВЕРКА: ДВУХПРОХОДНАЯ ===
+# === TCP: ДВУХПРОХОДНАЯ ПРОВЕРКА ===
 async def check_tcp_two_pass(
     endpoints: Set[Tuple[str, int]],
     fast_timeout: float = TCP_FAST_TIMEOUT,
@@ -185,37 +226,65 @@ async def check_tcp_two_pass(
 ) -> Set[Tuple[str, int]]:
     """
     Двухпроходная TCP-проверка.
-
     Pass 1: fast_timeout + fast_conc → быстро подтверждаем большинство живых.
     Pass 2: slow_timeout + slow_conc → для тех, кто не ответил в Pass 1.
-
-    + DNS pre-resolve — не резолвим один и тот же hostname 100 раз.
-    + IPv4 forced — не ждём IPv6-фолбэк.
-
-    Возвращает множество ЖИВЫХ эндпоинтов (в исходных именах, не IP).
     """
+    overall_t0 = time.time()
     endpoints = list(endpoints)
     total = len(endpoints)
     if total == 0:
         return set()
 
-    # ── 1. DNS pre-resolve ──
+    # ── Pre-TCP stats ──
+    unique_hosts = {h for h, _ in endpoints}
+    ip_count = 0
+    for h in unique_hosts:
+        try:
+            ipaddress.ip_address(h.strip('[]'))
+            ip_count += 1
+        except ValueError:
+            pass
+    domain_count = len(unique_hosts) - ip_count
+    logger.info(
+        f"🔍 TCP-тест: {total} endpoints, {len(unique_hosts)} уникальных hosts "
+        f"(IP: {ip_count}, домены: {domain_count})"
+    )
+
+    # ── DNS pre-resolve ──
     dns_map = await _pre_resolve_hosts(set(endpoints))
 
-    # Готовим список (ip, port, orig_host)
     resolved_to_check: List[Tuple[str, int, str]] = []
     for h, p in endpoints:
         ip = dns_map.get(h, h)
         resolved_to_check.append((ip, p, h))
 
-    # ── 2. Pass 1: быстрый ──
-    logger.info(f"⚡ Pass 1: {len(resolved_to_check)} endpoints, "
-                f"timeout {fast_timeout}s, conc {fast_conc}")
+    # ── Pass 1: быстрый ──
+    logger.info(
+        f"⚡ Pass 1: {len(resolved_to_check)} endpoints, "
+        f"timeout {fast_timeout}s, conc {fast_conc}"
+    )
     sem_fast = asyncio.Semaphore(fast_conc)
-    t0 = time.time()
-    tasks = [_tcp_check_one(ip, p, fast_timeout, sem_fast)
-             for ip, p, _ in resolved_to_check]
-    results1 = await asyncio.gather(*tasks)
+    counter1 = [0]
+    alive_counter1 = [0]
+    stop1 = asyncio.Event()
+    t1 = time.time()
+    progress1 = asyncio.create_task(
+        _log_progress_periodically(
+            "Pass 1", len(resolved_to_check), counter1, alive_counter1, t1, stop1
+        )
+    )
+    try:
+        tasks = [
+            _tcp_check_one(ip, p, fast_timeout, sem_fast, counter1, alive_counter1)
+            for ip, p, _ in resolved_to_check
+        ]
+        results1 = await asyncio.gather(*tasks)
+    finally:
+        stop1.set()
+        try:
+            await progress1
+        except Exception:
+            pass
 
     alive: Set[Tuple[str, int]] = set()
     need_retry: List[Tuple[str, int]] = []
@@ -225,49 +294,86 @@ async def check_tcp_two_pass(
         else:
             need_retry.append((orig_h, p))
 
-    elapsed1 = time.time() - t0
-    logger.info(f"✅ Pass 1: {elapsed1:.1f}s — "
-                f"живых {len(alive)}, "
-                f"в retry {len(need_retry)}")
+    elapsed1 = time.time() - t1
+    pct1 = 100 * len(alive) / total if total else 0
+    speed1 = len(resolved_to_check) / elapsed1 if elapsed1 > 0 else 0
+    logger.info(
+        f"✅ Pass 1 завершён за {elapsed1:.1f}s: "
+        f"живых {len(alive)}/{total} ({pct1:.1f}%), "
+        f"в retry {len(need_retry)}, "
+        f"скорость {speed1:.0f}/сек"
+    )
 
-    # ── 3. Pass 2: медленный ──
+    # ── Pass 2: медленный ──
     if need_retry:
-        logger.info(f"🐢 Pass 2: {len(need_retry)} endpoints, "
-                    f"timeout {slow_timeout}s, conc {slow_conc}")
+        logger.info(
+            f"🐢 Pass 2: {len(need_retry)} endpoints, "
+            f"timeout {slow_timeout}s, conc {slow_conc}"
+        )
         sem_slow = asyncio.Semaphore(slow_conc)
-        t0 = time.time()
+        counter2 = [0]
+        alive_counter2 = [0]
+        stop2 = asyncio.Event()
+        t2 = time.time()
+        progress2 = asyncio.create_task(
+            _log_progress_periodically(
+                "Pass 2", len(need_retry), counter2, alive_counter2, t2, stop2
+            )
+        )
+        try:
+            tasks2 = []
+            for h, p in need_retry:
+                ip = dns_map.get(h, h)
+                tasks2.append(_tcp_check_one(ip, p, slow_timeout, sem_slow,
+                                             counter2, alive_counter2))
+            results2 = await asyncio.gather(*tasks2)
+        finally:
+            stop2.set()
+            try:
+                await progress2
+            except Exception:
+                pass
 
-        # Re-use dns_map из Pass 1 (не резолвим заново)
-        tasks2 = []
-        for h, p in need_retry:
-            ip = dns_map.get(h, h)
-            tasks2.append(_tcp_check_one(ip, p, slow_timeout, sem_slow))
-
-        results2 = await asyncio.gather(*tasks2)
+        alive_before_p2 = len(alive)
         for (_, p, ok), (orig_h, orig_p) in zip(results2, need_retry):
             if ok:
                 alive.add((orig_h, orig_p))
 
-        elapsed2 = time.time() - t0
-        logger.info(f"✅ Pass 2: {elapsed2:.1f}s — "
-                    f"итого {len(alive)}/{total}")
+        elapsed2 = time.time() - t2
+        newly_alive = len(alive) - alive_before_p2
+        pct2 = 100 * newly_alive / len(need_retry) if need_retry else 0
+        speed2 = len(need_retry) / elapsed2 if elapsed2 > 0 else 0
+        logger.info(
+            f"✅ Pass 2 завершён за {elapsed2:.1f}s: "
+            f"подтверждено {newly_alive}/{len(need_retry)} ({pct2:.1f}%), "
+            f"скорость {speed2:.0f}/сек"
+        )
+    else:
+        logger.info("✅ Pass 2 пропущен — все endpoints подтверждены в Pass 1")
+
+    # ── Итог ──
+    total_alive = len(alive)
+    total_dead = total - total_alive
+    elapsed_total = time.time() - overall_t0
+    pct_alive = 100 * total_alive / total if total else 0
+    pct_dead = 100 * total_dead / total if total else 0
+    logger.info(
+        f"📊 TCP-итог: {total} endpoints | "
+        f"✅ живых {total_alive} ({pct_alive:.1f}%) | "
+        f"❌ мёртвых {total_dead} ({pct_dead:.1f}%) | "
+        f"⏱️ всего {elapsed_total:.1f}s"
+    )
 
     return alive
 
 
-# === BASE64 (безопасная версия) ===
+# === BASE64 ===
 def decode_base64_if_needed(content: str) -> str:
-    """
-    Декодирует base64 ТОЛЬКО если результат содержит '://'.
-    Иначе возвращает исходную строку нетронутой.
-    """
     content = content.strip()
     if len(content) < 20:
         return content
-
     if '://' in content:
         return content
-
     if '%' in content:
         try:
             content = unquote(content)
@@ -291,12 +397,10 @@ def decode_base64_if_needed(content: str) -> str:
     decoded_str = _try_decode(content)
     if decoded_str is not None and '://' in decoded_str:
         return decoded_str
-
     if decoded_str is not None and len(decoded_str) >= 20:
         nested = _try_decode(decoded_str)
         if nested is not None and '://' in nested:
             return nested
-
     return content
 
 
@@ -482,7 +586,6 @@ def extract_sni_domain(config: str) -> Optional[str]:
     if '?' in body:
         query_part = body.split('?', 1)[1].split('#', 1)[0]
         params = parse_qs(query_part)
-        # 'peer' — стандартный ключ SNI ТОЛЬКО в hysteria2
         keys = ['sni', 'host']
         if protocol == 'hysteria2':
             keys.append('peer')
@@ -550,9 +653,8 @@ def is_fp_chrome(config: str) -> bool:
     return _url_fp(config) == 'chrome'
 
 
-# === ЗАМЕНА fp=chrome → fp=firefox (сохраняя формат) ===
+# === ЗАМЕНА fp=chrome → fp=firefox ===
 def replace_fp_chrome(config: str) -> str:
-    """Заменяет fp=chrome на fp=firefox. Возвращает исходный конфиг, если fp=chrome нет."""
     protocol = detect_protocol(config)
     if not protocol:
         return config
@@ -568,14 +670,11 @@ def _url_replace_fp_chrome(config: str) -> str:
     else:
         base = config
         fragment = ''
-
     if '?' not in base:
         return config
-
     body_main, query = base.split('?', 1)
     if not query:
         return config
-
     parts = query.split('&')
     changed = False
     for i, part in enumerate(parts):
@@ -584,10 +683,8 @@ def _url_replace_fp_chrome(config: str) -> str:
             if k == 'fp' and unquote(v).strip().lower() == 'chrome':
                 parts[i] = k + '=firefox'
                 changed = True
-
     if not changed:
         return config
-
     return body_main + '?' + '&'.join(parts) + fragment
 
 
@@ -595,39 +692,31 @@ def _vmess_replace_fp_chrome(config: str) -> str:
     data = decode_vmess_config(config)
     if not data:
         return config
-
     fp = data.get('fp')
     if not isinstance(fp, str) or fp.strip().lower() != 'chrome':
         return config
-
     fragment = ''
     if '#' in config:
         _, fragment = config.rsplit('#', 1)
-
     orig_payload = config[8:]
     if '#' in orig_payload:
         orig_payload = orig_payload.split('#', 1)[0]
     if '?' in orig_payload:
         orig_payload = orig_payload.split('?', 1)[0]
     orig_payload = orig_payload.strip()
-
     orig_was_padded = orig_payload.endswith('=')
     orig_was_urlsafe = ('-' in orig_payload or '_' in orig_payload)
-
     data['fp'] = 'firefox'
-
     try:
         payload_str = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
         raw_bytes = payload_str.encode('utf-8')
         payload = base64.b64encode(raw_bytes).decode('ascii')
     except Exception:
         return config
-
     if orig_was_urlsafe:
         payload = payload.replace('+', '-').replace('/', '_')
     if not orig_was_padded:
         payload = payload.rstrip('=')
-
     result = 'vmess://' + payload
     if fragment:
         result += '#' + fragment
@@ -670,7 +759,6 @@ def _url_config_canonical_key(config: str, protocol: str) -> str:
         body_main, query = body.split('?', 1)
     else:
         body_main, query = body, ''
-
     user = ''
     host = ''
     port = ''
@@ -678,7 +766,6 @@ def _url_config_canonical_key(config: str, protocol: str) -> str:
         user, hostport = body_main.split('@', 1)
     else:
         hostport = body_main
-
     if hostport.startswith('['):
         end = hostport.find(']')
         host = hostport[1:end].lower()
@@ -690,7 +777,6 @@ def _url_config_canonical_key(config: str, protocol: str) -> str:
         host = host.lower()
     else:
         host = hostport.lower()
-
     params = {}
     if query:
         for pair in query.split('&'):
@@ -700,10 +786,8 @@ def _url_config_canonical_key(config: str, protocol: str) -> str:
             k = k.strip()
             if not k or k.lower() in _URL_IGNORED_PARAMS:
                 continue
-            # URL-декодируем, чтобы path=%2Fws == path=/ws
             params[k] = unquote(v)
     sorted_params = '&'.join(f"{k}={params[k]}" for k in sorted(params))
-
     proto_key = 'hysteria2' if protocol == 'hysteria2' else protocol
     return f"{proto_key}://{user}@{host}:{port}?{sorted_params}"
 
@@ -740,28 +824,21 @@ def deduplicate_configs(configs: List[str]) -> List[str]:
     return unique_configs
 
 
-# === ОПРЕДЕЛЕНИЕ БЕЗОПАСНОСТИ КОНФИГА ===
+# === БЕЗОПАСНОСТЬ КОНФИГА ===
 def is_config_secure(config: str) -> bool:
-    """
-    True — если конфиг использует шифрование без небезопасных опций.
-    """
     low = config.lower()
-
     if 'security=reality' in low:
         return True
-
     if 'security=tls' in low:
         if 'allowinsecure=1' in low or 'allowinsecure=true' in low:
             return False
         if 'insecure=1' in low or 'insecure=true' in low:
             return False
         return True
-
     if low.startswith(('hysteria2://', 'hy2://')):
         if 'insecure=1' in low or 'insecure=true' in low:
             return False
         return True
-
     return False
 
 
@@ -830,11 +907,9 @@ def rename_config(config: str, country: str = '', tag: str = GLOBAL_TAG) -> str:
         return config
     if '#' in config:
         config = config.rsplit('#', 1)[0].rstrip()
-
     sni = extract_sni_domain(config)
     host = extract_host_from_config(config)
     ip = extract_ip_from_config(config)
-
     conn_type = "unknown"
     if protocol == 'vmess':
         data = decode_vmess_config(config)
@@ -850,7 +925,6 @@ def rename_config(config: str, country: str = '', tag: str = GLOBAL_TAG) -> str:
                 conn_type = "WebSocket" if t == 'ws' else t.upper()
     if protocol == 'hysteria2':
         conn_type = "HYSTERIA2"
-
     parts = [
         country if (ip and country and country != 'XX') else "unknown",
         sni or host or "unknown",
@@ -872,10 +946,6 @@ def load_whitelist() -> Set[str]:
     if not os.path.exists(WHITELIST_FILE):
         with open(WHITELIST_FILE, 'w', encoding='utf-8') as f:
             f.write("# Домены/зоны для LTE (приоритет 1)\n")
-            f.write("# Формат:\n")
-            f.write("#   example.com    — домен и его субдомены\n")
-            f.write("#   .example.com   — только субдомены example.com\n")
-            f.write("#   .yandex        — любой домен с лейблом 'yandex'\n")
             f.write("example.com\n")
             f.write(".yandex\n")
         logger.info(f"📝 Создан пример {WHITELIST_FILE}")
@@ -896,8 +966,6 @@ def load_cidr_whitelist() -> List[ipaddress.ip_network]:
         with open(CIDR_WHITELIST_FILE, 'w', encoding='utf-8') as f:
             f.write("# CIDR сети для LTE (приоритет 2)\n")
             f.write("1.1.1.0/24\n")
-            f.write("2.2.2.2/32\n")
-            f.write("192.168.0.0/16\n")
         logger.info(f"📝 Создан пример {CIDR_WHITELIST_FILE}")
         return cidr_list
     with open(CIDR_WHITELIST_FILE, 'r', encoding='utf-8') as f:
@@ -1159,25 +1227,20 @@ def build_clash_yaml(configs: Set[str], extra_lines: List[str] = None) -> str:
             p = parse_uri_to_clash(cfg)
             if p:
                 proxies.append(p)
-                
     for cfg in sorted(configs):
         p = parse_uri_to_clash(cfg)
         if p:
             proxies.append(p)
-            
     doc = {'proxies': proxies}
     if _pyyaml is None:
         return json.dumps(doc, ensure_ascii=False, indent=2)
     return _pyyaml.safe_dump(
-        doc,
-        allow_unicode=True,
-        sort_keys=False,
-        default_flow_style=False,
-        width=10000,
+        doc, allow_unicode=True, sort_keys=False,
+        default_flow_style=False, width=10000,
     )
 
 
-# === sing-box (JSON) ===
+# === sing-box ===
 def _vless_to_singbox(config: str) -> Optional[Dict]:
     host = extract_host_from_config(config)
     if not host:
@@ -1331,21 +1394,17 @@ def parse_uri_to_singbox(config: str) -> Optional[Dict]:
 
 def build_singbox_json(configs: Set[str], extra_lines: List[str] = None) -> str:
     outbounds = []
-    
     if extra_lines:
         for cfg in extra_lines:
             ob = parse_uri_to_singbox(cfg)
             if ob:
                 outbounds.append(ob)
-                
     for cfg in sorted(configs):
         ob = parse_uri_to_singbox(cfg)
         if ob:
             outbounds.append(ob)
-            
     outbounds.append({'type': 'direct', 'tag': 'direct'})
     outbounds.append({'type': 'block', 'tag': 'block'})
-
     doc = {
         'log': {'level': 'info', 'timestamp': True},
         'dns': {
@@ -1361,11 +1420,7 @@ def build_singbox_json(configs: Set[str], extra_lines: List[str] = None) -> str:
             {'type': 'mixed', 'tag': 'mixed-in', 'listen': '127.0.0.1', 'listen_port': 2080},
         ],
         'outbounds': outbounds,
-        'route': {
-            'rules': [],
-            'final': 'direct',
-            'auto_detect_interface': True,
-        },
+        'route': {'rules': [], 'final': 'direct', 'auto_detect_interface': True},
     }
     return json.dumps(doc, ensure_ascii=False, indent=2)
 
@@ -1392,7 +1447,6 @@ async def collect_configs_async(contents: Dict[str, Optional[str]]) -> Dict[str,
     total_raw = len(raw_configs)
     logger.info(f"🔄 Всего конфигов (до дедубликации): {total_raw}")
 
-    # Замена fp=chrome → fp=firefox (до дедубликации)
     _fp_replaced = 0
     _new_configs = []
     for c in raw_configs:
@@ -1425,12 +1479,25 @@ async def collect_configs_async(contents: Dict[str, Optional[str]]) -> Dict[str,
                 if ep and ep in alive_endpoints:
                     filtered_configs.append(cfg)
 
+            # Per-protocol breakdown: до/после
+            before_counts = count_protocols(raw_configs)
+            after_counts = count_protocols(filtered_configs)
+
             raw_configs = filtered_configs
             logger.info(
-                f"✅ TCP-тест завершён за {t_total:.1f}s — "
-                f"осталось {len(raw_configs)} конфигов "
-                f"({len(alive_endpoints)}/{len(unique_endpoints)} эндпоинтов живы)"
+                f"✅ TCP-фильтр готов за {t_total:.1f}s: "
+                f"{len(raw_configs)} конфигов живы из {total_raw} "
+                f"({100*len(raw_configs)/total_raw:.1f}%)"
             )
+            for proto in PROTOCOL_PATTERNS:
+                b = before_counts.get(proto, 0)
+                a = after_counts.get(proto, 0)
+                if b > 0:
+                    pct = 100 * a / b
+                    logger.info(
+                        f"   {proto.upper():<10}: {a}/{b} ({pct:.0f}%) — "
+                        f"потеряно {b - a}"
+                    )
         else:
             logger.info("⚠️ Не найдено эндпоинтов для TCP-тестирования")
 
@@ -1459,7 +1526,6 @@ def update_readme(total: int, lte: int, wifi: int,
                  protocols_lte: Dict[str, int],
                  protocols_wifi: Dict[str, int]):
     moscow_time = get_moscow_time()
-
     readme_content = f"""# 🚀 LinSpisokObhod
 
 ## 📅 Время последнего сбора
@@ -1552,10 +1618,9 @@ def get_moscow_time() -> str:
     return now_msk.strftime("%Y-%m-%d %H:%M:%S")
 
 
-# === ЗАГЛУШКИ (INFO-НОДЫ) ===
+# === INFO-НОДЫ ===
 def generate_extra_lines(total: int, protocols: Dict[str, int], update_time: str, sub_type: str = "ALL") -> List[str]:
     lines = []
-
     comment = f"подписка #LSO© обновлена {update_time} {GLOBAL_TAG}"
     lines.append(f"vless://update@update.lso:443?security=tls&encryption=none&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=update.lso#{quote(comment, safe='')}")
 
@@ -1590,7 +1655,6 @@ def generate_extra_lines(total: int, protocols: Dict[str, int], update_time: str
 
     comment = f"ТЕХПОДДЕРЖКА #LSO©: t.me/Kepochka_Miside {GLOBAL_TAG}"
     lines.append(f"vless://support@support.lso:443?security=tls&encryption=none&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=support.lso#{quote(comment, safe='')}")
-
     return lines
 
 
@@ -1627,20 +1691,17 @@ def save_configs(configs_map: Dict[str, Tuple[str, str]]):
 
 """
 
-    # ---- ALL ----
     protocol_counts_all = count_protocols(tagged_set)
     all_extra = generate_extra_lines(len(tagged_set), protocol_counts_all, update_time, "ALL")
     all_path = os.path.join(CONFIG_DIR, "ALL.txt")
     with open(all_path, 'w', encoding='utf-8') as f:
         f.write(header_all)
         f.write("\n".join(all_extra) + "\n")
-        # Secure сверху, небезопасные снизу
         def _all_sort_key(cfg: str):
             return (0 if is_config_secure(cfg) else 1, cfg)
         f.write("\n".join(sorted(tagged_set, key=_all_sort_key)) + "\n")
     logger.info(f"💾 ALL.txt: {len(tagged_set)}")
 
-    # ---- LTE / WIFI ----
     whitelist = load_whitelist()
     cidr_list = load_cidr_whitelist()
 
@@ -1652,7 +1713,6 @@ def save_configs(configs_map: Dict[str, Tuple[str, str]]):
         else:
             wifi_set.add(line)
 
-    # Приоритет: whitelist/CIDR (0/1/2), затем secure (0/1), затем строкой
     def _sort_key(cfg: str):
         prio = get_config_priority(cfg, whitelist, cidr_list)
         sec  = 0 if is_config_secure(cfg) else 1
@@ -1680,7 +1740,6 @@ def save_configs(configs_map: Dict[str, Tuple[str, str]]):
         f.write("\n".join(wifi_list) + "\n")
     logger.info(f"📶 WIFI.txt: {len(wifi_list)}")
 
-    # ---- BASE64 (только .txt) ----
     def save_b64(original_path, suffix):
         b64_path = original_path.replace('.txt', f'.{suffix}.txt')
         with open(original_path, 'rb') as f:
@@ -1694,7 +1753,6 @@ def save_configs(configs_map: Dict[str, Tuple[str, str]]):
     save_b64(lte_path, '64')
     save_b64(wifi_path, '64')
 
-    # ---- YAML (Clash Meta) - plain only ----
     def save_yaml(configs_set: Set[str], extra_lines: List[str], base_name: str) -> str:
         content = build_clash_yaml(configs_set, extra_lines)
         yml_path = os.path.join(CONFIG_DIR, f"{base_name}.yml")
@@ -1707,7 +1765,6 @@ def save_configs(configs_map: Dict[str, Tuple[str, str]]):
     save_yaml(lte_set, lte_extra, "LTE")
     save_yaml(wifi_set, wifi_extra, "WIFI")
 
-    # ---- sing-box JSON - plain only ----
     def save_singbox(configs_set: Set[str], extra_lines: List[str], base_name: str) -> str:
         content = build_singbox_json(configs_set, extra_lines)
         json_path = os.path.join(CONFIG_DIR, f"{base_name}.json")
@@ -1720,7 +1777,6 @@ def save_configs(configs_map: Dict[str, Tuple[str, str]]):
     save_singbox(lte_set, lte_extra, "LTE")
     save_singbox(wifi_set, wifi_extra, "WIFI")
 
-    # ---- README ----
     update_readme(
         total=len(tagged_set),
         lte=len(lte_list),
@@ -1861,7 +1917,6 @@ if __name__ == "__main__":
         _parsed = json.loads(_json)
         assert 'outbounds' in _parsed and 'Hello' in _parsed['outbounds'][0]['tag']
 
-        # TCP 2-pass: пустой вход = пустой выход
         assert asyncio.run(check_tcp_two_pass(set())) == set()
 
         print("✅ Все self-tests OK")
