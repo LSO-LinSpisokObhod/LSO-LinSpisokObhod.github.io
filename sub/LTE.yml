@@ -1,5 +1,5 @@
 proxies:
-- name: 'подписка #LSO© обновлена 2026-11-15 00:29:46 [#LSO - #LinSpisokObhod]'
+- name: 'подписка #LSO© обновлена 2026-11-15 04:55:06 [#LSO - #LinSpisokObhod]'
   type: vless
   server: update.lso
   port: 443
@@ -21,7 +21,7 @@ proxies:
   port: 443
   uuid: about2
   udp: true
-- name: 'Подписка #LSO© Всего конфигов: 85 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Всего конфигов: 89 [#LSO - #LinSpisokObhod]'
   type: vless
   server: all.lso
   port: 443
@@ -29,7 +29,7 @@ proxies:
   udp: true
   tls: true
   servername: all.lso
-- name: 'Подписка #LSO© Vless: 59 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Vless: 65 [#LSO - #LinSpisokObhod]'
   type: vless
   server: vless.about.lso
   port: 443
@@ -37,7 +37,7 @@ proxies:
   udp: true
   tls: true
   servername: vless.about.lso
-- name: 'Подписка #LSO© Trojan: 24 [#LSO - #LinSpisokObhod]'
+- name: 'Подписка #LSO© Trojan: 22 [#LSO - #LinSpisokObhod]'
   type: trojan
   server: trojan.about.lso
   port: 443
@@ -131,23 +131,6 @@ proxies:
   udp: true
   skip-cert-verify: false
   sni: blog.nextjobopportunityandclaimyouridealrole.com
-  client-fingerprint: firefox
-- name: 'United States | courses.nextjobopportunityandclaimyouridealrole.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: trojan
-  server: 216.152.155.23
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  skip-cert-verify: false
-  sni: courses.nextjobopportunityandclaimyouridealrole.com
-- name: 'United States | courses.nextjobopportunityandclaimyouridealrole.com | TCP | [#LSO - #LinSpisokObhod]'
-  type: trojan
-  server: 216.152.155.23
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  skip-cert-verify: false
-  sni: courses.nextjobopportunityandclaimyouridealrole.com
   client-fingerprint: firefox
 - name: 'United States | cdn.nextjobopportunityandclaimyouridealrole.com | TCP | [#LSO - #LinSpisokObhod]'
   type: trojan
@@ -437,6 +420,19 @@ proxies:
   servername: video.yandex.ru
   client-fingerprint: safari
   flow: xtls-rprx-vision
+- name: 'unknown | onf.ru | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: sub-edge-14-1g.whitenw.net
+  port: 10454
+  uuid: 3e1e0b5e-554d-4513-a5e9-14649033cf19
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: MAQju7q8wIeEznBQoDXP9l4SpuAkEs8CGDKaNNpKlHI
+    short-id: '4326'
+  servername: onf.ru
+  client-fingerprint: qq
+  flow: xtls-rprx-vision
 - name: 'Russia | wn-pl4.static-s3.org | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.86.145.55
@@ -500,6 +496,20 @@ proxies:
     path: /player/collect/9c8514f9552d/
     headers:
       Host: speakpro.lol
+- name: 'Russia | uwugirl.dev | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 185.178.208.167
+  port: 443
+  uuid: 4eebdec5-08eb-4772-a0e6-35fec4c91cb0
+  udp: true
+  tls: true
+  servername: uwugirl.dev
+  client-fingerprint: qq
+  network: ws
+  ws-opts:
+    path: /player/collect/9c8514f9552d/
+    headers:
+      Host: speakpro.lol
 - name: 'The Netherlands | vkvd754.okcdn.ru | RAW | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 87.199.205.28
@@ -514,6 +524,20 @@ proxies:
   client-fingerprint: firefox
   flow: xtls-rprx-vision
   network: raw
+- name: 'Curacao | 52z4vtewuass.game4090taking.workers.dev | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 88.216.67.54
+  port: 443
+  uuid: 50414e45-4c5f-5a45-5553-47be357e54da
+  udp: true
+  tls: true
+  servername: 52z4vtewuass.game4090taking.workers.dev
+  client-fingerprint: firefox
+  network: ws
+  ws-opts:
+    path: /stream/PANEL_ZEUS/47be357e54da/loc-0
+    headers:
+      Host: 52z4vtewuass.game4090taking.workers.dev
 - name: 'Russia | tgg.fastcon.cc | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.176.128.128
@@ -617,21 +641,21 @@ proxies:
     public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
     short-id: 8debcf36f1cc69ff
   servername: video.yandex.ru
-  client-fingerprint: safari
-  flow: xtls-rprx-vision
-- name: 'The Netherlands | platform-api.max.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 213.165.39.134
-  port: 443
-  uuid: 6a251a93-8eee-43b5-92ed-ecadedcfd0a8
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: Gtz3xOdQdWSocdx4NNie6s-bsa9VDiG6thqanJ4h31s
-    short-id: 6f3332a09b0ab6d1
-  servername: platform-api.max.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Germany | parsa-panel-dy55x.railway1385-2a46.workers.dev | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 178.104.70.11
+  port: 443
+  uuid: 64726966-0000-4000-8000-740000000000
+  udp: true
+  tls: true
+  servername: parsa-panel-dy55x.railway1385-2a46.workers.dev
+  network: ws
+  ws-opts:
+    path: /fp=firefox
+    headers:
+      Host: parsa-panel-dy55x.railway1385-2a46.workers.dev
 - name: 'Finland | cedar-lantern.justext.space | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.242.247.177
@@ -655,16 +679,6 @@ proxies:
   servername: vk.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
-- name: 'Russia | jissa-ru-wl-47sel.my-fade.cloud | RAW | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 81.163.22.103
-  port: 443
-  uuid: 7ecca004-f8ae-fade-80c1-1638f730d4f9
-  udp: true
-  tls: true
-  servername: jissa-ru-wl-47sel.my-fade.cloud
-  client-fingerprint: qq
-  network: raw
 - name: 'The Netherlands | rbc.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 195.123.221.39
@@ -678,6 +692,20 @@ proxies:
   servername: rbc.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'Moldova | shin-ra.ccwu.cc | WebSocket | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 194.180.191.249
+  port: 443
+  uuid: 817b61c8-9bf0-4365-8a52-e43dfad274a6
+  udp: true
+  tls: true
+  servername: shin-ra.ccwu.cc
+  client-fingerprint: unsafe
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: shin-ra.ccwu.cc
 - name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 95.128.71.79
@@ -689,7 +717,7 @@ proxies:
     public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
     short-id: 8debcf36f1cc69ff
   servername: ads.x5.ru
-  client-fingerprint: safari
+  client-fingerprint: random
   flow: xtls-rprx-vision
 - name: 'Russia | yandex.ru | GRPC | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -778,7 +806,7 @@ proxies:
   client-fingerprint: ios
   flow: xtls-rprx-vision
   network: raw
-- name: 'Belarus | ads.x5.ru | RAW | [#LSO - #LinSpisokObhod]'
+- name: 'Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 178.172.227.228
   port: 10444
@@ -789,21 +817,7 @@ proxies:
     public-key: 0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo
     short-id: 8debcf36f1cc69ff
   servername: ads.x5.ru
-  client-fingerprint: ios
-  flow: xtls-rprx-vision
-  network: raw
-- name: 'France | passport.yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
-  type: vless
-  server: 161.97.160.224
-  port: 443
-  uuid: b81b4d1b-7f20-48f1-82dc-d24bef898cab
-  udp: true
-  tls: true
-  reality-opts:
-    public-key: 33zaT3jHXjtynSQ0Ucw9bK92-XH2zolJmuIeZ1XyZB0
-    short-id: e6
-  servername: passport.yandex.ru
-  client-fingerprint: firefox
+  client-fingerprint: safari
   flow: xtls-rprx-vision
 - name: 'France | passport.yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -818,6 +832,45 @@ proxies:
   servername: passport.yandex.ru
   client-fingerprint: firefox
   flow: xtls-rprx-vision
+- name: 'France | passport.yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 161.97.160.224
+  port: 443
+  uuid: b81b4d1b-7f20-48f1-82dc-d24bef898cab
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: 33zaT3jHXjtynSQ0Ucw9bK92-XH2zolJmuIeZ1XyZB0
+    short-id: e6
+  servername: passport.yandex.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision-udp443
+- name: 'France | passport.yandex.ru | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 161.97.160.224
+  port: 443
+  uuid: b81b4d1b-7f20-48f1-82dc-d24bef898cab
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: 33zaT3jHXjtynSQ0Ucw9bK92-XH2zolJmuIeZ1XyZB0
+    short-id: e6
+  servername: passport.yandex.ru
+  client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'France | yandex.ru | XHTTP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 85.208.69.43
+  port: 33055
+  uuid: ce8faf30-b1d6-4a53-95a0-8520dc609db3
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: 1rvxGeCvBMccFM2LKGJ4SqezdkMxS4ZZagHR1MGdCgo
+    short-id: '77'
+  servername: yandex.ru
+  client-fingerprint: firefox
+  network: xhttp
 - name: 'France | yandex.ru | XHTTP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 85.208.69.43
@@ -972,8 +1025,8 @@ proxies:
     public-key: Adzk6YXb3MU4kN8PgDQjY_4GfQgMUhRy_2LOGmiFHCg
     short-id: c48282c0acf92721
   servername: st.ozone.ru
-  client-fingerprint: firefox
-  flow: xtls-rprx-vision
+  client-fingerprint: safari
+  flow: xtls-rprx-vision-udp443
 - name: 'Russia | st.ozone.ru | TCP | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 147.45.214.143
@@ -986,6 +1039,19 @@ proxies:
     short-id: c48282c0acf92721
   servername: st.ozone.ru
   client-fingerprint: firefox
+  flow: xtls-rprx-vision
+- name: 'Russia | st.ozone.ru | TCP | [#LSO - #LinSpisokObhod]'
+  type: vless
+  server: 93.183.83.53
+  port: 443
+  uuid: fb9b439d-e5d2-4337-a781-b18a67b8127e
+  udp: true
+  tls: true
+  reality-opts:
+    public-key: Adzk6YXb3MU4kN8PgDQjY_4GfQgMUhRy_2LOGmiFHCg
+    short-id: c48282c0acf92721
+  servername: st.ozone.ru
+  client-fingerprint: safari
   flow: xtls-rprx-vision-udp443
 - name: 'Russia | st.ozone.ru | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
@@ -1012,7 +1078,7 @@ proxies:
     short-id: c48282c0acf92721
   servername: st.ozone.ru
   client-fingerprint: firefox
-  flow: xtls-rprx-vision-udp443
+  flow: xtls-rprx-vision
 - name: 'Finland | cedar-lantern.justext.space | unknown | [#LSO - #LinSpisokObhod]'
   type: vless
   server: 185.242.247.177
