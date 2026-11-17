@@ -33,7 +33,7 @@
   "outbounds": [
     {
       "type": "vless",
-      "tag": "подписка #LSO© обновлена 2026-11-17 06:53:57 [#LSO - #LinSpisokObhod]",
+      "tag": "подписка #LSO© обновлена 2026-11-17 16:24:11 [#LSO - #LinSpisokObhod]",
       "server": "update.lso",
       "server_port": 443,
       "uuid": "update",
@@ -62,7 +62,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Всего конфигов: 96 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Всего конфигов: 86 [#LSO - #LinSpisokObhod]",
       "server": "all.lso",
       "server_port": 443,
       "uuid": "all",
@@ -73,7 +73,7 @@
     },
     {
       "type": "vless",
-      "tag": "Подписка #LSO© Vless: 67 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Vless: 58 [#LSO - #LinSpisokObhod]",
       "server": "vless.about.lso",
       "server_port": 443,
       "uuid": "vless",
@@ -84,7 +84,7 @@
     },
     {
       "type": "trojan",
-      "tag": "Подписка #LSO© Trojan: 28 [#LSO - #LinSpisokObhod]",
+      "tag": "Подписка #LSO© Trojan: 27 [#LSO - #LinSpisokObhod]",
       "server": "trojan.about.lso",
       "server_port": 443,
       "password": "trojan",
@@ -179,7 +179,11 @@
       "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
       "tls": {
         "enabled": true,
-        "server_name": "resources.nextjobopportunityandclaimyouridealrole.com"
+        "server_name": "resources.nextjobopportunityandclaimyouridealrole.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
       }
     },
     {
@@ -309,7 +313,11 @@
       "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
       "tls": {
         "enabled": true,
-        "server_name": "api.nextjobopportunityandclaimyouridealrole.com"
+        "server_name": "api.nextjobopportunityandclaimyouridealrole.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
       }
     },
     {
@@ -335,11 +343,7 @@
       "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
       "tls": {
         "enabled": true,
-        "server_name": "resources.healthcarejobshubenhancemedicalprofessionalskillstoday.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
+        "server_name": "resources.healthcarejobshubenhancemedicalprofessionalskillstoday.com"
       }
     },
     {
@@ -436,7 +440,11 @@
       "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
       "tls": {
         "enabled": true,
-        "server_name": "learn.healthcarejobshubenhancemedicalprofessionalskillstoday.com"
+        "server_name": "learn.healthcarejobshubenhancemedicalprofessionalskillstoday.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
       }
     },
     {
@@ -503,126 +511,88 @@
       }
     },
     {
-      "type": "trojan",
-      "tag": "India | likejennie.pages.dev | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "103.111.114.87",
-      "server_port": 443,
-      "password": "f426d3c9-fb43-43c0-868b-898dfa451a74",
-      "tls": {
-        "enabled": true,
-        "server_name": "likejennie.pages.dev",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/"
-      }
-    },
-    {
       "type": "vless",
-      "tag": "Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "193.163.203.170",
+      "tag": "unknown | id.vk.com | GRPC | [#LSO - #LinSpisokObhod]",
+      "server": "ns.uu.1omg1.click",
       "server_port": 443,
-      "uuid": "11aabba0-5fd1-4f15-8068-74c1a466cefc",
-      "flow": "xtls-rprx-vision",
+      "uuid": "02ac275e-7604-4f62-b8cf-5045a8227ec9",
       "tls": {
         "enabled": true,
-        "server_name": "yandex.ru",
+        "server_name": "id.vk.com",
         "reality": {
           "enabled": true,
-          "public_key": "GCCZ1ZZjB_nj7yxqFi22bIIWWr_G6rnWUzDcssN_40o",
-          "short_id": "b28db60d77c50b4f"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "193.163.203.170",
-      "server_port": 443,
-      "uuid": "11aabba0-5fd1-4f15-8068-74c1a466cefc",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "GCCZ1ZZjB_nj7yxqFi22bIIWWr_G6rnWUzDcssN_40o",
-          "short_id": "b28db60d77c50b4f"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Armenia | sadas.jugoslavija.uk | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "88.218.92.185",
-      "server_port": 443,
-      "uuid": "128ce9ab-63bc-48dc-92ca-1b5426a9eb46",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "sadas.jugoslavija.uk",
-        "reality": {
-          "enabled": true,
-          "public_key": "0L0a22tcISNd3pY2Le6DS9vrW1ughjmzhjj5ec8iBHo",
-          "short_id": "a51a6973d7d358d6"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Armenia | sadas.jugoslavija.uk | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "88.218.92.185",
-      "server_port": 443,
-      "uuid": "128ce9ab-63bc-48dc-92ca-1b5426a9eb46",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "sadas.jugoslavija.uk",
-        "reality": {
-          "enabled": true,
-          "public_key": "0L0a22tcISNd3pY2Le6DS9vrW1ughjmzhjj5ec8iBHo",
-          "short_id": "a51a6973d7d358d6"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "178.172.227.124",
-      "server_port": 10444,
-      "uuid": "1af36694-b548-4b18-89a0-bc076eab4ed7",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo",
-          "short_id": "8debcf36f1cc69ff"
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
         },
         "utls": {
           "enabled": true,
           "fingerprint": "safari"
+        }
+      },
+      "transport": {
+        "type": "grpc",
+        "service_name": "vless-grpc-reality"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "193.163.203.170",
+      "server_port": 443,
+      "uuid": "11aabba0-5fd1-4f15-8068-74c1a466cefc",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "GCCZ1ZZjB_nj7yxqFi22bIIWWr_G6rnWUzDcssN_40o",
+          "short_id": "b28db60d77c50b4f"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "193.163.203.170",
+      "server_port": 443,
+      "uuid": "11aabba0-5fd1-4f15-8068-74c1a466cefc",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "GCCZ1ZZjB_nj7yxqFi22bIIWWr_G6rnWUzDcssN_40o",
+          "short_id": "b28db60d77c50b4f"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Armenia | sadas.jugoslavija.uk | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "88.218.92.185",
+      "server_port": 443,
+      "uuid": "128ce9ab-63bc-48dc-92ca-1b5426a9eb46",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "sadas.jugoslavija.uk",
+        "reality": {
+          "enabled": true,
+          "public_key": "0L0a22tcISNd3pY2Le6DS9vrW1ughjmzhjj5ec8iBHo",
+          "short_id": "a51a6973d7d358d6"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
         }
       }
     },
@@ -649,6 +619,48 @@
     },
     {
       "type": "vless",
+      "tag": "Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "178.172.227.124",
+      "server_port": 10444,
+      "uuid": "1af36694-b548-4b18-89a0-bc076eab4ed7",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo",
+          "short_id": "8debcf36f1cc69ff"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | joinerylane.net | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "185.86.147.15",
+      "server_port": 443,
+      "uuid": "1b7b37e0-d8bc-4feb-9e82-f81dea94cb51",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "joinerylane.net",
+        "reality": {
+          "enabled": true,
+          "public_key": "RwtMzZtTCmy9WRq3_27xeGF8-1l_qPXRVG3yIFp-6Go",
+          "short_id": "c0d1d1776fed0f6d"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "United States | www.apple.com | TCP | [#LSO - #LinSpisokObhod]",
       "server": "185.95.231.156",
       "server_port": 443,
@@ -661,26 +673,6 @@
           "enabled": true,
           "public_key": "8eXftARun6KH38UZhuqIfPR1VF2DLS9RMBZEnF5k6To",
           "short_id": "a3a578ab"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Denmark | api-maps.yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "193.180.211.245",
-      "server_port": 8443,
-      "uuid": "35dc3ea6-2cdf-4f6e-95ea-ce786ac2947a",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "api-maps.yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "pbLP4dV9Nx4aHWf35QFadbjOCdP_klwS9fvKSszlr3Q"
         },
         "utls": {
           "enabled": true,
@@ -810,6 +802,24 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | tgp.fastcon.cc | XHTTP | [#LSO - #LinSpisokObhod]",
+      "server": "178.176.128.128",
+      "server_port": 443,
+      "uuid": "50b95deb-6394-46c5-b88a-583e5b3ca7ee",
+      "tls": {
+        "enabled": true,
+        "server_name": "tgp.fastcon.cc",
+        "alpn": [
+          "h2"
+        ],
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Finland | video.yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
       "server": "193.188.21.253",
       "server_port": 10444,
@@ -826,50 +836,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Germany | vp4.1145678.xyz | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "185.110.188.50",
-      "server_port": 443,
-      "uuid": "5d7b401c-78fa-4254-872e-6d42bf7e75ec",
-      "tls": {
-        "enabled": true,
-        "server_name": "vp4.1145678.xyz",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/wenku/comics",
-        "headers": {
-          "Host": "vp4.1145678.xyz"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Switzerland | vp4.1145678.xyz | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "185.234.213.169",
-      "server_port": 443,
-      "uuid": "5d7b401c-78fa-4254-872e-6d42bf7e75ec",
-      "tls": {
-        "enabled": true,
-        "server_name": "vp4.1145678.xyz",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/wenku/comics",
-        "headers": {
-          "Host": "vp4.1145678.xyz"
         }
       }
     },
@@ -896,13 +862,16 @@
     },
     {
       "type": "vless",
-      "tag": "The Netherlands | cf-1rm.pages.dev | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "185.92.74.108",
+      "tag": "Russia | uwugirl.dev | WebSocket | [#LSO - #LinSpisokObhod]",
+      "server": "185.178.208.167",
       "server_port": 443,
-      "uuid": "5e610f80-fc6a-479d-8621-b672355b96a1",
+      "uuid": "6eeb6e0e-5efd-400d-851e-60fc2bfb1eaa",
       "tls": {
         "enabled": true,
-        "server_name": "cf-1rm.pages.dev",
+        "server_name": "uwugirl.dev",
+        "alpn": [
+          "http/1.1"
+        ],
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
@@ -910,70 +879,9 @@
       },
       "transport": {
         "type": "ws",
-        "path": "/",
+        "path": "/player/collect/9c8514f9552d/",
         "headers": {
-          "Host": "cf-1rm.pages.dev"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Germany | parsa-panel-dy55x.railway1385-2a46.workers.dev | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "178.104.70.11",
-      "server_port": 443,
-      "uuid": "64726966-0000-4000-8000-740000000000",
-      "tls": {
-        "enabled": true,
-        "server_name": "parsa-panel-dy55x.railway1385-2a46.workers.dev",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "parsa-panel-dy55x.railway1385-2a46.workers.dev"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Germany | parsa-panel-dy55x.railway1385-2a46.workers.dev | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "178.104.70.11",
-      "server_port": 443,
-      "uuid": "64726966-0000-4000-8000-740000000000",
-      "tls": {
-        "enabled": true,
-        "server_name": "parsa-panel-dy55x.railway1385-2a46.workers.dev"
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/fp=firefox",
-        "headers": {
-          "Host": "parsa-panel-dy55x.railway1385-2a46.workers.dev"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "The Netherlands | platform-api.max.ru | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "213.165.39.134",
-      "server_port": 443,
-      "uuid": "6a251a93-8eee-43b5-92ed-ecadedcfd0a8",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "platform-api.max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "Gtz3xOdQdWSocdx4NNie6s-bsa9VDiG6thqanJ4h31s",
-          "short_id": "6f3332a09b0ab6d1"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
+          "Host": "speakpro.lol"
         }
       }
     },
@@ -1012,47 +920,6 @@
           "enabled": true,
           "public_key": "0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo",
           "short_id": "8debcf36f1cc69ff"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "safari"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "The Netherlands | cdn.bobrui.ca | XHTTP | [#LSO - #LinSpisokObhod]",
-      "server": "185.62.58.37",
-      "server_port": 2053,
-      "uuid": "76110fbf-c291-4a30-8d19-bd4d42609562",
-      "tls": {
-        "enabled": true,
-        "server_name": "cdn.bobrui.ca",
-        "reality": {
-          "enabled": true,
-          "public_key": "XwaezAKw_APVi8TnZZK5awWzIQolSuXU_lChaXdY1yQ",
-          "short_id": "fa4d4384c8965775"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "The Netherlands | cdn.bobrui.ca | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "185.62.58.37",
-      "server_port": 8443,
-      "uuid": "76110fbf-c291-4a30-8d19-bd4d42609562",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "cdn.bobrui.ca",
-        "reality": {
-          "enabled": true,
-          "public_key": "XwaezAKw_APVi8TnZZK5awWzIQolSuXU_lChaXdY1yQ",
-          "short_id": "fa4d4384c8965775"
         },
         "utls": {
           "enabled": true,
@@ -1084,6 +951,30 @@
     },
     {
       "type": "vless",
+      "tag": "Russia | i0.photo.2gis.com | GRPC | [#LSO - #LinSpisokObhod]",
+      "server": "31.129.42.97",
+      "server_port": 8443,
+      "uuid": "7a8f716f-37ee-4af3-84c3-67e9a1b17d08",
+      "tls": {
+        "enabled": true,
+        "server_name": "i0.photo.2gis.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "WV58fGQd270mAtuAYhep9LXoVKTI0kiF4rCRaXAumWc",
+          "short_id": "16ee3a5f0387c553"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      },
+      "transport": {
+        "type": "grpc",
+        "service_name": "grpc"
+      }
+    },
+    {
+      "type": "vless",
       "tag": "Armenia | base.syoknew.online | TCP | [#LSO - #LinSpisokObhod]",
       "server": "178.160.228.139",
       "server_port": 443,
@@ -1100,71 +991,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Germany | 666-7sf.pages.dev | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "5.45.103.67",
-      "server_port": 443,
-      "uuid": "7c03538c-c6dd-4dc1-b35c-5fc0e2a43271",
-      "tls": {
-        "enabled": true,
-        "server_name": "666-7sf.pages.dev",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "666-7sf.pages.dev"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Poland | clover.filnex.baby | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "185.253.7.22",
-      "server_port": 443,
-      "uuid": "80a06811-f74b-4b82-ac99-7e66c2a98e1c",
-      "tls": {
-        "enabled": true,
-        "server_name": "clover.filnex.baby",
-        "alpn": [
-          "http/1.1"
-        ],
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/api/de6/stream",
-        "headers": {
-          "Host": "clover.filnex.baby"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Moldova | shin-ra.ccwu.cc | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "194.180.191.249",
-      "server_port": 443,
-      "uuid": "817b61c8-9bf0-4365-8a52-e43dfad274a6",
-      "tls": {
-        "enabled": true,
-        "server_name": "shin-ra.ccwu.cc"
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/fp=unsafe",
-        "headers": {
-          "Host": "shin-ra.ccwu.cc"
         }
       }
     },
@@ -1191,7 +1017,7 @@
     },
     {
       "type": "vless",
-      "tag": "Germany | fazuno.net | RAW | [#LSO - #LinSpisokObhod]",
+      "tag": "Germany | fazuno.net | TCP | [#LSO - #LinSpisokObhod]",
       "server": "185.79.19.8",
       "server_port": 443,
       "uuid": "8197b9b9-8945-460f-99c9-325ef8a8a7c3",
@@ -1206,7 +1032,28 @@
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "edge"
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "France | fr1.gofizzin.com | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "88.214.24.247",
+      "server_port": 443,
+      "uuid": "8197b9b9-8945-460f-99c9-325ef8a8a7c3",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "fr1.gofizzin.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "uvYdcBw9FFSxYXpZy5Pr5gzgXan7PWkWJKg940ogxSU",
+          "short_id": "50ea8dd3"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
         }
       }
     },
@@ -1233,18 +1080,18 @@
     },
     {
       "type": "vless",
-      "tag": "France | fr1.gofizzin.com | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "88.214.24.247",
-      "server_port": 443,
-      "uuid": "8197b9b9-8945-460f-99c9-325ef8a8a7c3",
+      "tag": "Brazil | www.mercadolivre.com.br | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "178.92.205.63",
+      "server_port": 11167,
+      "uuid": "85eb8466-aff9-4643-88f4-32b25701ea77",
       "flow": "xtls-rprx-vision",
       "tls": {
         "enabled": true,
-        "server_name": "fr1.gofizzin.com",
+        "server_name": "www.mercadolivre.com.br",
         "reality": {
           "enabled": true,
-          "public_key": "uvYdcBw9FFSxYXpZy5Pr5gzgXan7PWkWJKg940ogxSU",
-          "short_id": "50ea8dd3"
+          "public_key": "zrwJjaWEAfAZ3QCgnLnLoPE-edB_3wvKCqIz9maP02g",
+          "short_id": "ac"
         },
         "utls": {
           "enabled": true,
@@ -1316,6 +1163,30 @@
         },
         "utls": {
           "enabled": true,
+          "fingerprint": "ios"
+        }
+      },
+      "transport": {
+        "type": "grpc",
+        "service_name": ""
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | emberworks.cloud | GRPC | [#LSO - #LinSpisokObhod]",
+      "server": "185.86.145.78",
+      "server_port": 443,
+      "uuid": "88e79aa6-f431-4453-8dcc-652a0c747198",
+      "tls": {
+        "enabled": true,
+        "server_name": "emberworks.cloud",
+        "reality": {
+          "enabled": true,
+          "public_key": "2l0y-Mp5wtklY4jS6KOee3eq2XdWiXYqOxzrOi_CeB4",
+          "short_id": "ea322b8b5b015812"
+        },
+        "utls": {
+          "enabled": true,
           "fingerprint": "firefox"
         }
       },
@@ -1364,7 +1235,7 @@
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "ios"
+          "fingerprint": "edge"
         }
       },
       "transport": {
@@ -1396,74 +1267,7 @@
     },
     {
       "type": "vless",
-      "tag": "Russia | uwugirl.dev | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "185.178.208.167",
-      "server_port": 443,
-      "uuid": "89e2dc6c-dd20-43e6-aac2-d8c482d9cc36",
-      "tls": {
-        "enabled": true,
-        "server_name": "uwugirl.dev",
-        "alpn": [
-          "http/1.1"
-        ],
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/player/collect/9c8514f9552d/",
-        "headers": {
-          "Host": "speakpro.lol"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Belarus | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "95.128.71.79",
-      "server_port": 10444,
-      "uuid": "8cef7621-c6f0-486e-b51d-59c30c5b0b25",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "0oTkcqwLTUNLnSOP-VUWErmy6usAIg-biBE6ioZO-Vo",
-          "short_id": "8debcf36f1cc69ff"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "safari"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Russia | tmuk1.trust.rumost.top | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "185.86.145.223",
-      "server_port": 9449,
-      "uuid": "96c760c3-6949-4a00-b603-16173b9b1a66",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "tmuk1.trust.rumost.top",
-        "reality": {
-          "enabled": true,
-          "public_key": "VB9m1gQWzJWBXa49PMVGKkI94KN0XRCpC1BSpQP7yzk",
-          "short_id": "0cc15b71a8a6a380"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Poland | api-net-ctl.galioncc.com | TCP | [#LSO - #LinSpisokObhod]",
+      "tag": "Poland | api-net-ctl.galioncc.com | RAW | [#LSO - #LinSpisokObhod]",
       "server": "195.3.223.125",
       "server_port": 443,
       "uuid": "a30903dc-1bf0-4be5-8b1b-603a3a56211c",
@@ -1497,7 +1301,7 @@
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "ios"
+          "fingerprint": "firefox"
         }
       }
     },
@@ -1563,23 +1367,26 @@
     },
     {
       "type": "vless",
-      "tag": "Bulgaria | yabs.yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
-      "server": "131.123.41.146",
+      "tag": "Russia | get.videostreamer.ru | GRPC | [#LSO - #LinSpisokObhod]",
+      "server": "81.163.22.118",
       "server_port": 443,
-      "uuid": "a66c53b7-4ac7-4d61-abd7-42fade426123",
-      "flow": "xtls-rprx-vision",
+      "uuid": "ab698db1-25d1-4e70-838c-5a79c9cf6c12",
       "tls": {
         "enabled": true,
-        "server_name": "yabs.yandex.ru",
+        "server_name": "get.videostreamer.ru",
         "reality": {
           "enabled": true,
-          "public_key": "QBdNaEKW772qSR7mxLOS0d7HUOWPV2Ek3Ku8ju53vWw",
-          "short_id": "70e44abe428e676c"
+          "public_key": "r3YuHAE5GxO2URYSEJGfOmS8gB2alPns-dKg1vFp1So",
+          "short_id": "a179"
         },
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
         }
+      },
+      "transport": {
+        "type": "grpc",
+        "service_name": ""
       }
     },
     {
@@ -1599,7 +1406,7 @@
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "safari"
+          "fingerprint": "firefox"
         }
       }
     },
@@ -1626,30 +1433,6 @@
     },
     {
       "type": "vless",
-      "tag": "France | passport.yandex.ru | RAW | [#LSO - #LinSpisokObhod]",
-      "server": "161.97.160.224",
-      "server_port": 443,
-      "uuid": "b81b4d1b-7f20-48f1-82dc-d24bef898cab",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "passport.yandex.ru",
-        "alpn": [
-          "http/1.1"
-        ],
-        "reality": {
-          "enabled": true,
-          "public_key": "33zaT3jHXjtynSQ0Ucw9bK92-XH2zolJmuIeZ1XyZB0",
-          "short_id": "e6"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "Finland | video.yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
       "server": "213.176.92.168",
       "server_port": 10444,
@@ -1671,23 +1454,21 @@
     },
     {
       "type": "vless",
-      "tag": "Latvia | v5-4b5.pages.dev | WebSocket | [#LSO - #LinSpisokObhod]",
-      "server": "185.237.219.224",
-      "server_port": 8443,
-      "uuid": "bf14dc50-e9f2-49fd-8642-620446edeafb",
+      "tag": "Germany | 04535dt.us8.h1clayd.click | RAW | [#LSO - #LinSpisokObhod]",
+      "server": "91.238.123.9",
+      "server_port": 443,
+      "uuid": "cda0862a-0f87-4be9-8ed8-1d0c9e382839",
       "tls": {
         "enabled": true,
-        "server_name": "v5-4b5.pages.dev",
+        "server_name": "04535dt.us8.h1clayd.click",
+        "reality": {
+          "enabled": true,
+          "public_key": "UoS8qZ74hP_ECcncCz55lzvlcVss3R7VA0WYZE0YQCY",
+          "short_id": "ba2a3dce62b99092"
+        },
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "v5-4b5.pages.dev"
         }
       }
     },
@@ -1705,36 +1486,6 @@
           "public_key": "1rvxGeCvBMccFM2LKGJ4SqezdkMxS4ZZagHR1MGdCgo",
           "short_id": "77"
         },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Russia | login.alfatrud.ru | XHTTP | [#LSO - #LinSpisokObhod]",
-      "server": "94.228.117.93",
-      "server_port": 443,
-      "uuid": "ceab5251-eaa3-4a2f-bdd4-ce9df24d9edd",
-      "tls": {
-        "enabled": true,
-        "server_name": "login.alfatrud.ru",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Russia | login.alfatrud.ru | XHTTP | [#LSO - #LinSpisokObhod]",
-      "server": "94.228.117.93",
-      "server_port": 443,
-      "uuid": "ceab5251-eaa3-4a2f-bdd4-ce9df24d9edd",
-      "tls": {
-        "enabled": true,
-        "server_name": "login.alfatrud.ru",
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
@@ -1868,6 +1619,48 @@
     },
     {
       "type": "vless",
+      "tag": "Poland | passport.yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "31.76.125.19",
+      "server_port": 8443,
+      "uuid": "e40b2b8e-492b-4982-aaaf-59e76c52a7fe",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "passport.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "-WS9_PoYmJybZfepl6md_S2kbIWphQMMXap5MySgu3c",
+          "short_id": "ae040cf4656c2be9"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Germany | passport.yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "31.77.237.165",
+      "server_port": 443,
+      "uuid": "e40b2b8e-492b-4982-aaaf-59e76c52a7fe",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "passport.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "dh8czg12AdXJyLQSzSNI7fNWnFCbbDnkOsRx02_eUmk",
+          "short_id": "536c2528b834d390"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "United Kingdom | ads.x5.ru | TCP | [#LSO - #LinSpisokObhod]",
       "server": "138.124.125.193",
       "server_port": 10444,
@@ -1904,7 +1697,28 @@
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "random"
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Russia | www.yandex.ru | TCP | [#LSO - #LinSpisokObhod]",
+      "server": "109.71.245.99",
+      "server_port": 443,
+      "uuid": "f09ca6e3-c547-4f91-95f5-77f34c4282ac",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "zICjcFkqI720WzWpHXRLjSFYmcu4Hd0jk1iDEo1nUAU",
+          "short_id": "c27a26812e5d2208"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
         }
       }
     },
